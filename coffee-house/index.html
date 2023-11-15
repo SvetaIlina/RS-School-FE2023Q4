@@ -4,32 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coffee House</title>
+    <link rel="icon" href="coffee-cup.svg" type="image/svg+xml">
 </head>
 <body>
     <div class="wrapper">
         <header class="header">
             <div class="container">
                 <div class="header__inner">
-                    <a class="logo" href="#" >
+                    <a class="logo" href="index.html" >
                         <img src="images/logo.png" alt="logo" class="logo__img">
                     </a>
                     <nav class="menu">
                         <ul class="menu__list">
                             <li class="menu__list-item">
-                                <a href="#" class="menu__list-link">Favorite coffee</a>
+                                <a href="#favor" class="menu__list-link">Favorite coffee</a>
                             </li>
                             <li class="menu__list-item">
-                                <a href="#" class="menu__list-link">About</a>
+                                <a href="#ab" class="menu__list-link">About</a>
                             </li>
                             <li class="menu__list-item">
-                                <a href="#" class="menu__list-link">Mobile app</a>
+                                <a href="#mobapp" class="menu__list-link">Mobile app</a>
                             </li>
                             <li class="menu__list-item">
-                                <a href="#" class="menu__list-link">Contact us</a>
+                                <a href="#footer-home" class="menu__list-link">Contact us</a>
                             </li>
                         </ul>
                     </nav>
-                    <a href="#" class="products">Menu</a>
+                    <a href="menu.html" class="products">Menu</a>
                 </div>
             </div>
         </header>
@@ -45,12 +46,12 @@
                                 <span class="accent-text">Enjoy</span>
                                  premium coffee at our charming cafe</h1>
                             <p class="section-text">With its inviting atmosphere and delicious coffee options, the Coffee House Resource is a popular destination for coffee lovers and those seeking a warm and inviting space to enjoy their favorite beverage.</p>
-                            <a  class="top__enjoy-link" href="#">Menu</a>
+                            <a  class="top__enjoy-link" href="menu.html">Menu</a>
                         </div>
                      </div>
                 </div>
             </section>
-            <section class="slider">
+            <section class="slider" id="favor">
                 <div class="container">
                     <h2 class="section-title">Choose your 
                        <span class="accent-text">favorite</span> coffee</h2>
@@ -66,7 +67,7 @@
                                 <img class="slider__item-img" src="images/coffee-slider-1.png" alt="S’mores Frappuccino" >
                                 <div class="slider__item-descr">
                                     <h4 class="slider__item-title">S’mores Frappuccino</h4>
-                                    <p class="slider__item-text">This new drink takes an espresso and mixes it with brown sugar and cinnamon before being topped with oat milk.</p>
+                                    <p class="section-text">This new drink takes an espresso and mixes it with brown sugar and cinnamon before being topped with oat milk.</p>
                                     <p class="slider__item-price">$5.50</p>
                                 </div>
                             </div>
@@ -74,7 +75,7 @@
                                 <img class="slider__item-img" src="images/coffee-slider-2.png" alt="Caramel Macchiato" >
                                 <div class="slider__item-descr">
                                     <h4 class="slider__item-title">Caramel Macchiato</h4>
-                                    <p class="slider__item-text">Fragrant and unique classic espresso with rich caramel-peanut syrup, with cream under whipped thick foam.</p>
+                                    <p class="section-text">Fragrant and unique classic espresso with rich caramel-peanut syrup, with cream under whipped thick foam.</p>
                                     <p class="slider__item-price">$5.00</p>
                                 </div>
                             </div>
@@ -82,7 +83,7 @@
                                 <img class="slider__item-img" src="images/coffee-slider-3.png" alt="Ice coffee" >
                                 <div class="slider__item-descr">
                                     <h4 class="slider__item-title">Ice coffee</h4>
-                                    <p class="slider__item-text">Ice coffee</p>
+                                    <p class="section-text">Ice coffee</p>
                                     <p class="slider__item-price">$4.50</p>
                                 </div>
                             </div>
@@ -95,8 +96,52 @@
                     </div>
                 </div>
             </section>
+            <section class="about" id="ab">
+                <div class="wrapper">
+                    <h2 class="section-title">Resource is 
+                       <span class="accent-text">the perfect and cozy place</span>  where you can enjoy a variety of hot beverages, relax, catch up with friends, or get some work done.</h2>
+                    <div class="about__img-wrapper">
+                        <div class="about__img">
+                            <img class="about__img-content" src="images/about-1.jpg" alt="about1" >
+                        </div>
+                        <div class="about__img">
+                            <img class="about__img-content" src="images/about-2.jpg" alt="about2" >
+                        </div>
+                        <div class="about__img">
+                            <img class="about__img-content" src="images/about-3.jpg" alt="about3" >
+                        </div>
+                        <div class="about__img">
+                            <img class="about__img-content" src="images/about-4.jpg" alt="about4" >
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="app" id="mobapp">
+                <div class="wrapper">
+                    <div class="app__inner">
+                        <div class="app__content">
+                            <h2 class="section-title">
+                                <span class="accent-text">Download</span> our apps to start ordering</h2>
+                            <p class="section-text">Download the Resource app today and experience the comfort of ordering your favorite coffee from wherever you are</p>
+                            <ul class="app__list">
+                                <li class="app__list-item">
+                                    <a class="app__list-link" href="#" >
+                                        <img class="app__item-img" src="images/appstore.svg" alt="App Store" >
+                                    </a>
+                                </li>
+                                <li class="app__list-item">
+                                    <a class="app__list-link" href="#" >
+                                        <img class="app__item-img" src="images/gplay.svg" alt="Google Play" >
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <img class="app-img" src="images/mobile-screens.png" alt="mobile">
+                    </div>
+                </div>
+            </section>
         </main>
-        <footer class="footer">
+        <footer class="footer" id="footer-home">
             <div class="container">
                 <div class="footer__inner">
                     <div class="socials">
