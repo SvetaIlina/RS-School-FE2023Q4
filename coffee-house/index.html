@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coffee House</title>
     <link rel="icon" href="coffee-cup.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="wrapper">
@@ -12,7 +16,7 @@
             <div class="container">
                 <div class="header__inner">
                     <a class="logo" href="index.html" >
-                        <img src="images/logo.png" alt="logo" class="logo__img">
+                        <img class="logo__img" src="images/logo.png" alt="logo" >
                     </a>
                     <nav class="menu">
                         <ul class="menu__list">
@@ -41,18 +45,17 @@
             <section class="top">
                 <div class="container">
                     <div class="top__inner">
-                        <video class="top__video" autoplay loop muted width="1000" height="500">
+                        <!-- <video class="top__video" autoplay loop muted>
                             <source src="images/video(2160p).mp4" type="video/mp4" >
-                        </video>
-                        <div class="top__enjoy">
+                        </video> -->
+                         <div class="top__enjoy">
                             <h1 class="top__enjoy-title">
                                 <span class="accent-text">Enjoy</span>
                                  premium coffee at our charming cafe</h1>
                             <p class="section-text">With its inviting atmosphere and delicious coffee options, the Coffee House Resource is a popular destination for coffee lovers and those seeking a warm and inviting space to enjoy their favorite beverage.</p>
                             <a  class="top__enjoy-link" href="menu.html">
                                 <span class="link-text">Menu</span>
-                                <img class="enjoy__link-img" src="coffee-cup.svg" alt="cup of coffee" >
-                            </a>
+                             </a>
                         </div>
                      </div>
                 </div>
@@ -72,7 +75,7 @@
                             <div class="slider__item">
                                 <img class="slider__item-img" src="images/coffee-slider-1.png" alt="S’mores Frappuccino" >
                                 <div class="slider__item-descr">
-                                    <h4 class="item-title">S’mores Frappuccino</h4>
+                                    <h3 class="item-title">S’mores Frappuccino</h3>
                                     <p class="section-text">This new drink takes an espresso and mixes it with brown sugar and cinnamon before being topped with oat milk.</p>
                                     <p class="item-price">$5.50</p>
                                 </div>
@@ -80,7 +83,7 @@
                             <div class="slider__item">
                                 <img class="slider__item-img" src="images/coffee-slider-2.png" alt="Caramel Macchiato" >
                                 <div class="slider__item-descr">
-                                    <h4 class="item-title">Caramel Macchiato</h4>
+                                    <h3 class="item-title">Caramel Macchiato</h3>
                                     <p class="section-text">Fragrant and unique classic espresso with rich caramel-peanut syrup, with cream under whipped thick foam.</p>
                                     <p class="item-price">$5.00</p>
                                 </div>
@@ -88,14 +91,14 @@
                             <div class="slider__item">
                                 <img class="slider__item-img" src="images/coffee-slider-3.png" alt="Ice coffee" >
                                 <div class="slider__item-descr">
-                                    <h4 class="item-title">Ice coffee</h4>
-                                    <p class="section-text">Ice coffee</p>
+                                    <h3 class="item-title">Ice coffee</h3>
+                                    <p class="section-text">A popular summer drink that tones and invigorates. Prepared from coffee, milk and ice.</p>
                                     <p class="item-price">$4.50</p>
                                 </div>
                             </div>
                         </div>
                         <div class="slider__control">
-                            <button class="slider__control-btn"></button>
+                            <button class="slider__control-btn slider__control-btn--active"></button>
                             <button class="slider__control-btn"></button>
                             <button class="slider__control-btn"></button>
                         </div>
@@ -103,54 +106,58 @@
                 </div>
             </section>
             <section class="about" id="ab">
-                <div class="wrapper">
+                <div class="container">
                     <h2 class="section-title">Resource is 
                        <span class="accent-text">the perfect and cozy place</span>  where you can enjoy a variety of hot beverages, relax, catch up with friends, or get some work done.</h2>
                     <div class="about__img-wrapper">
-                        <div class="about__img">
+                        <div class="about__cell1 about__img">
                             <img class="about__img-content" src="images/about-1.jpg" alt="about1" >
                         </div>
-                        <div class="about__img">
-                            <img class="about__img-content" src="images/about-2.jpg" alt="about2" >
+                        <div class="about__cell2 about__img">
+                            <img class="about__img-content" src="images/about-3.jpg" alt="about2" >
                         </div>
-                        <div class="about__img">
-                            <img class="about__img-content" src="images/about-3.jpg" alt="about3" >
+                        <div class="about__cell3 about__img">
+                            <img class="about__img-content" src="images/about-2.jpg" alt="about3" >
                         </div>
-                        <div class="about__img">
+                        <div class="about__cell4 about__img">
                             <img class="about__img-content" src="images/about-4.jpg" alt="about4" >
                         </div>
                     </div>
                 </div>
             </section>
             <section class="app" id="mobapp">
-                <div class="wrapper">
+                <div class="container">
                     <div class="app__inner">
                         <div class="app__content">
-                            <h2 class="section-title">
-                                <span class="accent-text">Download</span> our apps to start ordering</h2>
-                            <p class="section-text">Download the Resource app today and experience the comfort of ordering your favorite coffee from wherever you are</p>
-                            <ul class="app__list">
-                                <li class="app__list-item">
-                                    <a class="app__list-link" href="#" >
-                                        <img class="app__item-img" src="images/appstore.svg" alt="App Store">
-                                        <span class="app__item-inner">
-                                            <p class="app__item-text">Available on the</p>
-                                            <p class="app__item-name">App Store</p>
-                                        </span>
-                                    </a>
-                                </li>
-                                <li class="app__list-item">
-                                    <a class="app__list-link" href="#" >
-                                        <img class="app__item-img" src="images/gplay.svg" alt="Google Play">
-                                        <span class="app__item-inner">
-                                            <p class="item-text">Available on</p>
-                                            <p class="app__item-name">Google Play</p>
-                                        </span>
-                                    </a>
-                                </li>
-                            </ul>
+                            <div class="app__content-inner">
+                                <h2 class="section-title">
+                                    <span class="accent-text">Download</span> our apps to start ordering</h2>
+                                <p class="section-text">Download the Resource app today and experience the comfort of ordering your favorite coffee from wherever you are</p>
+                                <ul class="app__list">
+                                    <li class="app__list-item">
+                                        <a class="app__list-link" href="#" >
+                                            <img class="app__item-img" src="images/appstore.svg" alt="App Store">
+                                            <div class="app__item-inner">
+                                                <p class="app__item-text">Available on the</p>
+                                                <p class="app__item-name">App Store</p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="app__list-item">
+                                        <a class="app__list-link" href="#" >
+                                            <img class="app__item-img" src="images/gplay.svg" alt="Google Play">
+                                            <div class="app__item-inner">
+                                                <p class="app__item-text">Available on</p>
+                                                <p class="app__item-name">Google Play</p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                        <img class="app-img" src="images/mobile-screens.png" alt="mobile">
+                        <div class="app__img-wrapper">
+                            <img class="app-img" src="images/mobile-screens.png" alt="mobile">
+                        </div>
                     </div>
                 </div>
             </section>
@@ -159,8 +166,7 @@
             <div class="container">
                 <div class="footer__inner">
                     <div class="socials">
-                        <h2 class="section-title">Sip, Savor, Smile.</h2>
-                        <h2 class="section-title">
+                        <h2 class="section-title">Sip, Savor, Smile.
                             <span class="accent-text">It’s coffee time!</span>
                         </h2>
                         <ul class="socials__list">
@@ -184,15 +190,15 @@
                     <div class="contacts">
                         <ul class="contacts__list">
                             <li class="contacts__list-item">
-                                <p class="contacts__title">Contact us</p>
+                                <h3 class="contacts__title">Contact us</h3>
                             </li>
-                            <li class="contacts__list-item">
+                            <li class="contacts__list-item contacts__list-adress ">
                                 <a class="contacts__list-link" href="https://maps.app.goo.gl/R94WUma43gbUTWSr6" target="_blank" >8558 Green Rd.,  LA</a>
                             </li>
-                            <li class="contacts__list-item">
+                            <li class="contacts__list-item contacts__list-phone">
                                 <a class="contacts__list-link" href="tel:+16035550123" >+1 (603) 555-0123</a>
                             </li>
-                            <li class="contacts__list-item">
+                            <li class="contacts__list-item contacts__list-hours">
                                 Mon-Sat: 9:00 AM – 23:00 PM
                             </li>
                         </ul>
