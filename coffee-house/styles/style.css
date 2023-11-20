@@ -157,7 +157,7 @@ body {
     border-radius: 40px;
     overflow: hidden;
     padding: 100px;
-    background-image: url(../coffee-house/images/img-hero.jpg);
+    background-image: url(../images/img-hero.jpg);
     background-position: center;
     background-size: cover;
     }
@@ -211,7 +211,7 @@ body {
 
 
 .top__enjoy-link:after {
-    content:url(../coffee-house/coffee-cup.svg);
+    content:url(../coffee-cup.svg);
     position: absolute;
     opacity: 0;
     transition: opacity, 0.5s;
@@ -526,15 +526,15 @@ body {
 }
 
 .contacts__list-adress::before {
-    content: url(../coffee-house/images/pin-adress.svg);
+    content: url(../images/pin-adress.svg);
     margin-right: 8px;
 }
 .contacts__list-phone::before {
-    content: url(../coffee-house/images/phone.svg);
+    content: url(../images/phone.svg);
     margin-right: 8px;
 }
 .contacts__list-hours::before {
-    content: url(../coffee-house/images/clock.svg);
+    content: url(../images/clock.svg);
     margin-right: 8px;
 }
 
