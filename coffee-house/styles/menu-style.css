@@ -347,14 +347,14 @@ body {
 }
 
 .contacts__list-adress::before {
-    content: url(../coffee-house/images/pin-adress.svg);
+    content: url(../images/pin-adress.svg);
     margin-right: 8px;
 }
 .contacts__list-phone::before {
-    content: url(../coffee-house/images/phone.svg);
+    content: url(../images/phone.svg);
     margin-right: 8px;
 }
 .contacts__list-hours::before {
-    content: url(../coffee-house/images/clock.svg);
+    content: url(../images/clock.svg);
     margin-right: 8px;
 }
