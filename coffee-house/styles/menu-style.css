@@ -164,12 +164,12 @@ body {
     gap: 16px;
 }
 
-.tabs__btn-item {
+.tabs__btn-item,.modal__item-btn  {
     color: #403F3D;
     cursor: pointer;
     border-radius: 100px;
     border: 1px solid #C1B6AD;
-    display: flex;
+    display: inline-flex;
     gap: 8px;
     align-items: center;
     padding: 7px 16px 7px 7px;
@@ -178,7 +178,7 @@ body {
 
 
 
-.tabs__btn-item--active  {
+.tabs__btn-item--active, .modal__item-btn--active  {
     background-color: #665F55;
     color: #E1D4C9;
     border: 1px solid #665F55;
@@ -355,6 +355,121 @@ body {
     margin-right: 8px;
 }
 
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background-color:rgba(64, 63, 61, 0.80);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal button {
+   color: #403F3D;
+   font-size: 16px;
+   font-weight: 600;
+   line-height: 150%;
+   
+}
+
+.modal__inner {
+    width: 800px;
+    display: flex;
+    gap: 20px;
+    background-color: #E1D4C9;
+    padding: 16px;
+    border-radius: 40px;
+}
+
+.modal-img {
+    display: flex;
+    align-items: start;
+}
+
+.modal-img__wrapper {
+    max-width: 310px;
+    max-height: 310px;
+    overflow: hidden;
+    border-radius:40px;
+}
+
+.modal-content {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+   
+}
+
+.modal-title {
+    margin-bottom: 12px;
+}
+
+.modal__item-btn+.modal__item-btn{
+    margin-left: 8px;
+}
+
+h5 {
+    margin-bottom: 8px;
+}
+
+.choose {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius:100%;
+    background-color:#C1B6AD;
+    padding: 3px;;
+}
+
+.item__total {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.item__total::after {
+    content: '';
+    position: absolute;
+    bottom: -14px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #C1B6AD;
+}
+
+.warning {
+    padding: 12px 0 12px 24px;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 140%;
+    position: relative;
+}
+
+.warning::before {
+    content: "i";
+    display: block;
+    text-align: center;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #403F3D;
+    border-radius: 100%;
+    position: absolute;
+    top: 12px;
+    left: 0;
+}
+
+.close-modal {
+    padding: 10px 78px;
+    width: 100%;
+    border: 1px solid #665F55;
+    border-radius:100px;
+}
 
 @media (hover: hover) {
     .menu__list-item:hover:after {
