@@ -364,7 +364,7 @@ body {
     height: 100%;
     z-index: 100;
     background-color:rgba(64, 63, 61, 0.80);
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
 }
