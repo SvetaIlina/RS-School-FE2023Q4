@@ -211,7 +211,8 @@ mediaQuery.addListener(handleTabletChange)
 
 function handleTabletChange(e) {
   
-  if (e.matches) {
+  if (e.matches && document.querySelector('show').childNodes.length > 4) {
+
     hideExtraCard ();
     
   }
