@@ -76,10 +76,14 @@ class MenuCard {
 }
 
 
-const parentTab = document.querySelector('.tabs__content');
+
+const loadMoreButton = document.querySelector('.add-btn');
+
+
 
 renderMenu();
 hideExtraCard ();
+
 
 
 
@@ -87,16 +91,23 @@ hideExtraCard ();
 function hideExtraCard () {
   const activeTab = document.querySelector('.show')
   const shownCards = activeTab.childNodes;
-
+ 
   for(let i=4; i <shownCards.length; i++ ){
     shownCards[i].classList.add('hideCard');
     }
+
+    if(!loadMoreButton.classList.contains('add-btn--activ')) {
+      toggleMoreBtn ()
+    }
+
+    
  
    
 }
 
   function renderMenu() {
-  parentTab.innerHTML = ''
+const parentTab = document.querySelector('.tabs__content');
+    parentTab.innerHTML = ''
   const cardsArray = createMenuCard(myData);
   const tabsCont = createMenuTab(cardsArray);
   
@@ -157,21 +168,57 @@ function showSelectMenuTab(e) {
       tab.classList.remove('show');
     })
     const taabAttribute = e.currentTarget.innerText.toLowerCase();
-    document.querySelector(`[data-menu=${taabAttribute}]`).classList.add('show');
-    hideExtraCard ()
+    const shownTab = document.querySelector(`[data-menu=${taabAttribute}]`);
+    shownTab.classList.add('show');
+
+    
+
+    if(shownTab.childNodes.length >4 ) {
+      hideExtraCard (); 
+        }
+
+    if(shownTab.childNodes.length <=4 && loadMoreButton.classList.contains('add-btn--activ')){
+      toggleMoreBtn ()
+    }
+   
+    
     
 }
 
 
 //Load More button
 
-const loadMoreButton = document.querySelector('.add-btn');
+
 
 loadMoreButton.addEventListener('click', showMoreItems);
 
-function showMoreItems (e) {
-  document.querySelectorAll('.hideCard').forEach(i => i.classList.remove('.hideCard'))
+function showMoreItems () {
+
+  const hideCard= document.querySelectorAll('.hideCard');
+  hideCard.forEach(card => card.classList.remove('hideCard'));
+  toggleMoreBtn ()
+   
 }
+
+function toggleMoreBtn () {
+  loadMoreButton.classList.toggle('add-btn--activ')
+}
+
+
+
+const mediaQuery = window.matchMedia('(max-width: 768px)')
+mediaQuery.addListener(handleTabletChange)
+
+function handleTabletChange(e) {
+  
+  if (e.matches) {
+    hideExtraCard ();
+    
+  }
+}
+
+
+
 
 
 
