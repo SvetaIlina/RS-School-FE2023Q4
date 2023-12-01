@@ -1,3 +1,6 @@
+'use strict'
+import myData from "./product.json" assert { type: "json" };
+
 //Burger
 
 const burgerBtn = document.querySelector('.burger');
@@ -35,7 +38,9 @@ function showBurgerMenu () {
   }
 
 
-// render card
+// render Menu
+
+
 
 class MenuCard {
   constructor ({id, url, name, description, price, category}) {
@@ -70,43 +75,52 @@ class MenuCard {
 
 }
 
- getData('js/product.json')
-    .then(data => createMenuCard(data))
-    .then(cards => renderMenu(cards))
+
+const parentTab = document.querySelector('.tabs__content');
+
+renderMenu();
+hideExtraCard ();
 
 
 
-  async function getData (url) {
-    const response = await fetch(url);
-    return await response.json();
  
-  }
+function hideExtraCard () {
+  const activeTab = document.querySelector('.show')
+  const shownCards = activeTab.childNodes;
 
-  function createMenuCard(data) {
-  const menuCards = [];
-  data.forEach(card => {
-    menuCards.push(new MenuCard(card))
-  })
-    return menuCards;
-  }
+  for(let i=4; i <shownCards.length; i++ ){
+    shownCards[i].classList.add('hideCard');
+    }
+ 
+   
+}
 
+  function renderMenu() {
+  parentTab.innerHTML = ''
+  const cardsArray = createMenuCard(myData);
+  const tabsCont = createMenuTab(cardsArray);
+  
 
-function renderMenu(cardsArr) {
-  const menuContent = document.querySelector('.tabs__content');
-  menuContent.innerHTML = ''
-  const divs = createMenuTab(cardsArr);
-
-  cardsArr.forEach(i => {
+  cardsArray.forEach(i => {
     let type = i.category;
-    divs.forEach(div => {
+    tabsCont.forEach(div => {
       if (div.getAttribute('data-menu') == type) {
         div.append(i.generateMenuCard())
       }
     })
   })
 
-  divs.forEach(i => menuContent.append(i))
+  tabsCont.forEach(i => parentTab.append(i));
+  
 }
+
+function createMenuCard(data) {
+  const menuCards = [];
+  data.forEach(card => {
+    menuCards.push(new MenuCard(card))
+  })
+    return menuCards;
+  }
 
 
 function createMenuTab(obj) {
@@ -116,9 +130,7 @@ function createMenuTab(obj) {
   categorySet.forEach(i => {
     const tab = document.createElement('div');
     tab.classList.add("tabs__content-item");
-    if(!(i === 'coffee')) {
-      tab.classList.add('hidden')
-    } else {
+    if(i === 'coffee') {
       tab.classList.add('show')
     }
     tab.setAttribute('data-menu', i);
@@ -128,17 +140,47 @@ function createMenuTab(obj) {
 }
 
 
-const y = document.querySelectorAll('.products-menu')
+/// Tabs
 
-console.log(y.parentElement);
+const tabsBtns = document.querySelectorAll('.tabs__btn-item');
+const tabs = document.querySelectorAll('.tabs__content-item');
 
-// const mediaQuery = window.matchMedia('(max-width: 768px)')
+tabsBtns.forEach( btn => btn.addEventListener('click', showSelectMenuTab))
 
-// function handleTabletChange(e) {
-//   if (e.matches) {
-//     console.log('Media Query Matched!')
-//   }
-// }
+function showSelectMenuTab(e) {
+  tabsBtns.forEach( btn => {
+      btn.classList.remove('tabs__btn-item--active');
+      e.currentTarget.classList.add('tabs__btn-item--active');
+    })
 
-// mediaQuery.addListener(handleTabletChange)
-// handleTabletChange(mediaQuery)
+    tabs.forEach(tab => {
+      tab.classList.remove('show');
+    })
+    const taabAttribute = e.currentTarget.innerText.toLowerCase();
+    document.querySelector(`[data-menu=${taabAttribute}]`).classList.add('show');
+    hideExtraCard ()
+    
+}
+
+
+//Load More button
+
+const loadMoreButton = document.querySelector('.add-btn');
+
+loadMoreButton.addEventListener('click', showMoreItems);
+
+function showMoreItems (e) {
+  document.querySelectorAll('.hideCard').forEach(i => i.classList.remove('.hideCard'))
+}
+
+
+
+
+
+
+
+
+
+
+
+

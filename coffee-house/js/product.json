@@ -1,4 +1,5 @@
-[
+    
+  [
     { 
       "id": "coffee1",
       "url": "images/coffee-item1.jpg",
@@ -738,4 +739,7 @@
         }
       ]
     }
-  ]
+  ] 
+    
+  
+

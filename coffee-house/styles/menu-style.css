@@ -194,8 +194,10 @@ body {
     height: 30px;
 }
 
-
-.tabs__content-item {
+.tabs__content-item{
+    display: none;
+}
+.tabs__content-item.show{
     
     flex-wrap: wrap;
     gap: 38px 40px;
@@ -540,7 +542,9 @@ h5 {
         display: none;
     }
 
-    
+    .hideCard{
+        display: none;
+    }
 
 
     .menu__list {
@@ -667,6 +671,7 @@ h5 {
         border-radius: 100%;
         border: 1px solid #665F55;
         margin: 0 auto;
+        cursor: pointer;
     }
 
     .socials {
