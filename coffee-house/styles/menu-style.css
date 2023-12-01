@@ -196,10 +196,18 @@ body {
 
 
 .tabs__content-item {
-    display: flex;
+    
     flex-wrap: wrap;
     gap: 38px 40px;
     justify-content: center;
+}
+
+.hidden{
+    display: none;
+}
+
+.show{
+    display: flex;
 }
 
 .item-card {
