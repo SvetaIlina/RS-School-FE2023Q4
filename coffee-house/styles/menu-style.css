@@ -460,6 +460,7 @@ body {
         border-radius: 100%;
         border: 1px solid #665F55;
         margin: 0 auto;
+        cursor: pointer;
     }
 
     .socials {
