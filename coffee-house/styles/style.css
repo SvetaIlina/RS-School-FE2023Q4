@@ -477,10 +477,10 @@ body {
 .contacts__list-link:after {
     content:"";
     position: absolute;
-    left: -28px;
+    left: 0;
     bottom: -2px;
     height: 2px;
-    width: 120%;
+    width: 100%;
     background-color:#E1D4C9;
     transform: scaleX(0);
     opacity: 0;
