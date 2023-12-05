@@ -243,7 +243,8 @@ class Modal {
   modalCard.append(this.createImgContent());
   modalCard.append(this.createContent());
 
-  modalCard.addEventListener('click', this.showTotalSum)
+  modalCard.addEventListener('click', this.showTotalSum);
+
 return modalCard;
 
 
@@ -274,12 +275,12 @@ createContent() {
                             <h3 class="item-title modal-title">${this.name}</h3>
                             <p class="section-text">${this.description}</p>
                         </div>
+                       
   `
   content.append(this.createSizeBtn())
   content.append(this.createAdditivesBtn())
 
-  content.innerHTML += `
-  <div class="item__total">
+  content.innerHTML += ` <div class="item__total">
   <h3 class="item-title">Total:</h3>
   <p class="item-price" id="total" data-price=${this.price}>$${this.price}</p>
   </div>
@@ -291,7 +292,8 @@ createContent() {
 
 
  createSizeBtn() {
-  const itemSizes = this.createDomNode('div', 'item__size')
+  const itemSizes = this.createDomNode('div', 'item__size');
+  const btnWrap = this.createDomNode('div', 'btn__wrapper' );
   const sizeBtns = []
   itemSizes.innerHTML = '<h5 class="section-text">Size</h5>'
 
@@ -309,13 +311,14 @@ createContent() {
 
   }
 
-  sizeBtns.forEach( size => itemSizes.append(size));
+  sizeBtns.forEach( size => btnWrap.append(size));
+  itemSizes.append(btnWrap)
   return itemSizes;
 }
 
  createAdditivesBtn() {
-
-  const itemAdditives = this.createDomNode('div', 'item__Additives')
+  const itemAdditives = this.createDomNode('div', 'item__additives');
+  const btnWrap = this.createDomNode('div', 'btn__wrapper' );
   const additivesBtns = []
   itemAdditives.innerHTML = '<h5 class="section-text">Additives</h5>'
 
@@ -329,7 +332,9 @@ createContent() {
     additivesBtns.push(btn)
   })
 
-  additivesBtns.forEach (add => itemAdditives.append(add));
+  additivesBtns.forEach (add => btnWrap.append(add));
+
+  itemAdditives.append(btnWrap)
  
    return itemAdditives;
 }
@@ -340,12 +345,9 @@ createContent() {
   if(btn) {
     showCheckedBtn (btn);
     changeSum(btn);
+         }
+
   }
-
-  
-}
-
-
 
 }
 
@@ -366,14 +368,16 @@ function showCheckedBtn (btn) {
     const parentItem = btn.parentElement
     const allBtns = parentItem.querySelectorAll('.modal__item-btn');
 
-  if (parentItem.classList.contains('item__size')) {
+  if (parentItem.parentElement.classList.contains('item__size')) {
     allBtns.forEach (btn => btn.classList.remove('modal__item-btn--active'));
     btn.classList.add('modal__item-btn--active')
   }
 
-  if (parentItem.classList.contains('item__Additives')) {
+  if (parentItem.parentElement.classList.contains('item__additives')) {
     btn.classList.toggle('modal__item-btn--active');
   }
+
+ 
   }
 }
 
