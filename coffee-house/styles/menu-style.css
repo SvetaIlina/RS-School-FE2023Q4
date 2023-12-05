@@ -97,7 +97,11 @@ body {
 
 .menu__list-link,
 .link-text,
-.tabs__btn-item   {
+.tabs__btn-item,
+.close-modal,
+.contacts__list-link,
+.contacts__lis,
+.modal__item-btn  {
     font-size: 16px;
     font-weight: 600;
     line-height: 150%;
@@ -178,10 +182,17 @@ body {
 
 
 
+
+
+
 .tabs__btn-item--active, .modal__item-btn--active  {
     background-color: #665F55;
     color: #E1D4C9;
     border: 1px solid #665F55;
+    
+}
+
+.tabs__btn-item--active{
     pointer-events: none;
 }
 
@@ -327,9 +338,6 @@ body {
 .contacts__list-link,
 .contacts__list  {
     color: #E1D4C9;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 150%;
     position: relative;
     
 }
@@ -374,17 +382,37 @@ body {
     height: 100%;
     z-index: 100;
     background-color:rgba(64, 63, 61, 0.80);
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.modal button {
-   color: #403F3D;
-   font-size: 16px;
-   font-weight: 600;
-   line-height: 150%;
+.modal__item-btn 
+{
+    color: #403F3D;
    
+}
+
+.modal__item-btn.modal__item-btn--active {
+    background-color: #665F55;
+    color: #E1D4C9;
+    border: 1px solid #665F55;
+}
+
+.choose {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius:100%;
+    background-color:#C1B6AD;
+    padding: 3px;
+    text-transform: uppercase;
+    transition: all 0.3s;
+}
+
+.modal__item-btn.modal__item-btn--active>.choose{
+    color: #403F3D;
+    background-color:#E1D4C9;
 }
 
 .modal__inner {
@@ -427,14 +455,7 @@ h5 {
     margin-bottom: 8px;
 }
 
-.choose {
-    display: inline-block;
-    width: 30px;
-    height: 30px;
-    border-radius:100%;
-    background-color:#C1B6AD;
-    padding: 3px;;
-}
+
 
 .item__total {
     position: relative;
@@ -475,10 +496,14 @@ h5 {
 }
 
 .close-modal {
+    font-family: Inter;
     padding: 10px 78px;
     width: 100%;
     border: 1px solid #665F55;
     border-radius:100px;
+    cursor: pointer;
+    color: #403F3D;
+    transition: all 0.3s;
 }
 
 @media (hover: hover) {
@@ -487,7 +512,16 @@ h5 {
         opacity: 1;
     }
 
-    .tabs__btn-item:hover {
+    .modal__item-btn:hover .choose{
+        color: #403F3D;
+        background-color:#E1D4C9;
+    }
+
+    .tabs__btn-item:hover,
+    .close-modal:hover,
+    .modal__item-btn:hover
+    
+     {
         background-color: #665F55;
         color: #E1D4C9;
         border: 1px solid #665F55;
