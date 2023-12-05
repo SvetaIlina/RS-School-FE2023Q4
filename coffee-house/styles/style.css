@@ -163,20 +163,22 @@ body {
     border-radius: 40px;
     overflow: hidden;
     padding: 100px;
-    background-image: url(../images/img-hero.jpg);
+    /* background-image: url(../images/img-hero.jpg);
     background-position: center;
-    background-size: cover;
+    background-size: cover; */
     }
 
-/* .top__video {
+.top__video {
     position: absolute;
     width: 100%;
+    height: 100%;
     top: 0;
     right: 0;
     left: 0;
     bottom: 0;
+    object-fit: cover;
        
-} */
+}
 
 .top__enjoy{
     max-width: 530px;
