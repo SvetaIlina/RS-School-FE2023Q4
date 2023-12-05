@@ -237,27 +237,38 @@ class Modal {
 }
 
  generateModal () {
-  const modalCard = document.createElement('div');
+   const modalCard = this.createDomNode('div', 'modal__inner');
+   modalCard.setAttribute('data-idmodal', this.id)
   
-  modalCard.classList.add('modal__inner');
-  modalCard.innerHTML = `
-                    <div class="modal-img">
-                        <div class="modal-img__wrapper">
-                          <img src=${this.url} alt=${this.name}>
-                        </div>
-                    </div>
-  `
-  
+  modalCard.append(this.createImgContent());
   modalCard.append(this.createContent());
-  modalCard.addEventListener('click', this.changeSum)
+
+  modalCard.addEventListener('click', this.showTotalSum)
 return modalCard;
 
 
 }
 
+createDomNode(element, ...classes) {
+  const node = document.createElement(element);
+  node.classList.add(...classes);
+  return node
+}
+
+createImgContent () {
+  const modalImg = this.createDomNode('div', 'modal-img');
+  modalImg.innerHTML = `
+  <div class="modal-img__wrapper">
+      <img src=${this.url} alt=${this.name}>
+  </div>
+  `
+  return modalImg
+}
+
+
+
 createContent() {
-  const content = document.createElement('div');
-  content.classList.add('modal-content');
+  const content = this.createDomNode('div', 'modal-content');
   content.innerHTML = `
                         <div class="item__descr">
                             <h3 class="item-title modal-title">${this.name}</h3>
@@ -270,25 +281,23 @@ createContent() {
   content.innerHTML += `
   <div class="item__total">
   <h3 class="item-title">Total:</h3>
-  <p class="item-price">$${this.price}</p>
+  <p class="item-price" id="total" data-price=${this.price}>$${this.price}</p>
   </div>
   <p class="warning">The cost is not final. Download our mobile app to see the final price and place your order. Earn loyalty points and enjoy your favorite coffee with up to 20% discount.</p>
   <button class="close-modal">Close</button>
   `
-    
-  return content
+   return content
 }
 
 
  createSizeBtn() {
-  const itemSizes = document.createElement('div')
-  itemSizes.classList.add('item__size')
-  itemSizes.innerHTML = '<h5 class="section-text">Size</h5>'
+  const itemSizes = this.createDomNode('div', 'item__size')
   const sizeBtns = []
+  itemSizes.innerHTML = '<h5 class="section-text">Size</h5>'
 
   for ( let key in this.sizes) {
-       const btn =  document.createElement('button');
-       btn.classList.add('modal__item-btn');
+      const btn =  this.createDomNode('button', 'modal__item-btn');
+      btn.setAttribute('data-addprice', this.sizes[key]["add-price"]);
        if(key == "s") {
         btn.classList.add('modal__item-btn--active');
        }
@@ -306,14 +315,13 @@ createContent() {
 
  createAdditivesBtn() {
 
-  const itemAdditives = document.createElement('div')
-  itemAdditives.classList.add('item__Additives')
-  itemAdditives.innerHTML = '<h5 class="section-text">Additives</h5>'
+  const itemAdditives = this.createDomNode('div', 'item__Additives')
   const additivesBtns = []
+  itemAdditives.innerHTML = '<h5 class="section-text">Additives</h5>'
 
   this.additives.forEach ((item, i) => {
-    const btn =  document.createElement('button');
-    btn.classList.add('modal__item-btn');
+    const btn =  this.createDomNode('button', 'modal__item-btn');
+    btn.setAttribute('data-addprice', item["add-price"]);
     btn.innerHTML = `
     <span class="choose">${i+1}</span>
     ${item["name"]}
@@ -323,18 +331,50 @@ createContent() {
 
   additivesBtns.forEach (add => itemAdditives.append(add));
  
-
-
-  return itemAdditives;
+   return itemAdditives;
 }
 
 
- changeSum (e) {
-  const targetBtn = e.target.closest('.modal__item-btn');
- 
+ showTotalSum (e) {
+   const btn = e.target.closest('.modal__item-btn');
+  if(btn) {
+    showCheckedBtn (btn);
+    changeSum(btn);
+  }
+
+  
+}
+
+
 
 }
 
+function changeSum (btn) {
+  const parentContent = btn.closest('.modal-content');
+  const activeBtns = parentContent.querySelectorAll('.modal__item-btn--active');
+  const total = document.querySelector('#total');
+  const baseSum = +total.getAttribute('data-price');
+  let addPrice = 0;
+  activeBtns.forEach(i => addPrice += +i.getAttribute('data-addprice'))
+  total.innerText =`$${(baseSum + addPrice).toFixed(2)}`;
+
+}
+
+
+function showCheckedBtn (btn) {
+    if (btn) {
+    const parentItem = btn.parentElement
+    const allBtns = parentItem.querySelectorAll('.modal__item-btn');
+
+  if (parentItem.classList.contains('item__size')) {
+    allBtns.forEach (btn => btn.classList.remove('modal__item-btn--active'));
+    btn.classList.add('modal__item-btn--active')
+  }
+
+  if (parentItem.classList.contains('item__Additives')) {
+    btn.classList.toggle('modal__item-btn--active');
+  }
+  }
 }
 
 function showModal (e) {
