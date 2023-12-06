@@ -651,7 +651,9 @@ body {
     .slider__prev {
         left: 0;
     }
-
+    .slider__item-img {
+        max-width: 100%;
+    }
 
     .about__cell2, .about__cell3 {
         display: none;
@@ -686,7 +688,11 @@ body {
     .slider__prev, .slider__next {
         display: none;
     }
+
+    .slider__item {
+        max-width: calc(100% / 3);
  }
+}
 
 
  @media (max-width: 496px) {
@@ -723,9 +729,7 @@ body {
         max-width: 347px;
     }
 
-    .slider__item-img {
-        max-width: 100%;
-    }
+    
 
    
    
