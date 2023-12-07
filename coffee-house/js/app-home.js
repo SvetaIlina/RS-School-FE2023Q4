@@ -7,8 +7,11 @@ const indicators = document.querySelectorAll('.progress');
 
 
 
+
 let slideWidth;
 let slideIndex = 0;
+let x1;
+let y1;
 
 
 setSliderSize();
@@ -18,7 +21,10 @@ window.addEventListener('resize', setSliderSize);
 btnNext.addEventListener('click', showNextSlide);
 btnPrev.addEventListener('click', showPrevSlide);
 
-handleEvent (slidesWrapper, 'mouseover mouseout touchstart touchend', slidePause)
+handleEvent (slidesWrapper, 'mouseover mouseout touchstart touchend', slidePause);
+
+document.querySelector('.slider__inner').addEventListener('touchstart', getTouchStart)
+document.querySelector('.slider__inner').addEventListener('touchmove', getTouchMove)
 
 
 function setSliderSize() {
@@ -83,6 +89,30 @@ function handleEvent (obj, eventList, func) {
         obj.addEventListener(event, func)
     })
 
+}
+
+function getTouchStart (e) {
+    const startTouch = e.touches[0];
+    x1 = startTouch.clientX;
+    y1 = startTouch.clientY;
+    
+}
+
+function getTouchMove (e) {
+    const moveTouch = e.touches[0];
+    let x2 = moveTouch.clientX;
+    let y2 = moveTouch.clientY;
+    let diffX = x2 - x1;
+    let diffY = y2 - y1;
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+        if(diffX > 0) {
+            showPrevSlide()
+        } else {
+            showNextSlide() }
+    }
+
+    x1=null;
+    y1=null;
 }
 
 
