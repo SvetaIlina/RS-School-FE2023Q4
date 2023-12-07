@@ -3,6 +3,8 @@ const btnPrev = document.querySelector('.slider__prev');
 const slidesWrapper = document.querySelector('.slider__wrapper');
 const slider = document.querySelector('.slider-content');
 const slides = document.querySelectorAll('.slider__item');
+const indicators = document.querySelectorAll('.progress');
+
 
 
 let slideWidth;
@@ -10,10 +12,14 @@ let slideIndex = 0;
 
 
 setSliderSize();
+coloredIndicator();
 
-window.addEventListener('resize', setSliderSize)
-btnNext.addEventListener('click', showNextSlide)
-btnPrev.addEventListener('click', showPrevSlide)
+window.addEventListener('resize', setSliderSize);
+btnNext.addEventListener('click', showNextSlide);
+btnPrev.addEventListener('click', showPrevSlide);
+slidesWrapper.addEventListener('mouseover', slidePause);
+slidesWrapper.addEventListener('mouseout', slidePause);
+
 
 function setSliderSize() {
 
@@ -32,6 +38,9 @@ function showNextSlide() {
     }
 
     slider.style.transform = `translateX(-${parseFloat(slideWidth) * slideIndex}px)`;
+    coloredIndicator();
+   
+
 }
 
 function showPrevSlide() {
@@ -42,7 +51,28 @@ function showPrevSlide() {
         slideIndex--;
     }
     slider.style.transform = `translateX(-${parseFloat(slideWidth) * slideIndex}px)`;
+    coloredIndicator();
 }
 
 
+function coloredIndicator() {
+    indicators.forEach ( (item) => {
+        item.classList.remove('progress--active');
+        item.addEventListener("animationend", showNextSlide);
+    })
+   
+    indicators[slideIndex].classList.add('progress--active');
+    
+}
+
+function slidePause (e) {
+    const activeBar = document.querySelector('.progress--active');
+    if(e.type == 'mouseover' ) {
+        activeBar.style.animationPlayState = 'paused'
+    }
+    if(e.type == 'mouseout') {
+        activeBar.style.animationPlayState = 'running'
+    }
+   
+}
 

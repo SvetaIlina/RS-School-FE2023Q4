@@ -273,9 +273,9 @@ body {
 
 .slider__wrapper {
     overflow: hidden;
-    margin-bottom: 40px;
-    max-width: 100%;
-    /* height: 640px; */
+    margin: 0 auto 40px;
+    max-width: 480px;
+    
 }
 
 .slider-content {
@@ -322,11 +322,33 @@ body {
     height: 4px;
     border-radius: 100px;
     background-color: #C1B6AD;
+    position: relative;
+    overflow: hidden;
+    
+    
 }
 
-.slider__control-btn.slider__control-btn--active{
-    background-color:#665F55;  
+@keyframes progress {
+    0% {width: 0;}
+    100%{width: 100%;}
+   
 }
+
+.progress {
+    display: block;
+    background-color:#665F55; 
+    height: 100%;
+    width: 0;
+    
+}
+
+
+.progress.progress--active {
+    animation: progress 5s linear;
+}
+
+
+
 
 .about {
     margin-bottom: 100px;
