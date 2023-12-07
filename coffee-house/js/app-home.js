@@ -17,8 +17,8 @@ coloredIndicator();
 window.addEventListener('resize', setSliderSize);
 btnNext.addEventListener('click', showNextSlide);
 btnPrev.addEventListener('click', showPrevSlide);
-slidesWrapper.addEventListener('mouseover', slidePause);
-slidesWrapper.addEventListener('mouseout', slidePause);
+
+handleEvent (slidesWrapper, 'mouseover mouseout touchstart touchend', slidePause)
 
 
 function setSliderSize() {
@@ -66,13 +66,24 @@ function coloredIndicator() {
 }
 
 function slidePause (e) {
+    e.preventDefault();
     const activeBar = document.querySelector('.progress--active');
-    if(e.type == 'mouseover' ) {
+    if(e.type == 'mouseover' || e.type == 'touchstart') {
         activeBar.style.animationPlayState = 'paused'
     }
-    if(e.type == 'mouseout') {
+    if(e.type == 'mouseout' || e.type == 'touchend') {
         activeBar.style.animationPlayState = 'running'
     }
-   
+
 }
+
+function handleEvent (obj, eventList, func) {
+    const events = eventList.split(' ');
+    events.forEach (event => {
+        obj.addEventListener(event, func)
+    })
+
+}
+
+
 
