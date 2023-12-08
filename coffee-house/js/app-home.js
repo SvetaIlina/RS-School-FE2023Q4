@@ -113,22 +113,39 @@ function getTouchStart (e) {
     const startTouch = e.touches[0];
     x1 = startTouch.clientX;
     y1 = startTouch.clientY;
+ 
     
 }
 
 function getTouchMove (e) {
+    if (!x1 || !y1) {
+        return 
+    }
     const moveTouch = e.touches[0];
+
     let x2 = moveTouch.clientX;
     let y2 = moveTouch.clientY;
+
     let diffX = x2 - x1;
     let diffY = y2 - y1;
+
     if (Math.abs(diffX) > Math.abs(diffY)) {
         if(diffX > 0) {
-            showPrevSlide()
+            showPrevSlide() 
+           
         } else {
             showNextSlide() }
-    }
 
+    } else {
+        if (diffY > 0) {
+            window.scrollBy(0, -100)
+          
+        } else {
+            window.scrollBy(0, 100)
+           
+        }
+    }
+   
     x1=null;
     y1=null;
 }
