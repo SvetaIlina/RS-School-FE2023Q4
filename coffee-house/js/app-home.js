@@ -8,6 +8,8 @@ const indicators = document.querySelectorAll('.progress');
 
 
 
+
+let hightToSlider = document.querySelector('.header').offsetHeight +  document.querySelector('.top').offsetHeight;
 let slideWidth;
 let slideIndex = 0;
 let x1;
@@ -15,9 +17,22 @@ let y1;
 
 
 setSliderSize();
-coloredIndicator();
+
 
 window.addEventListener('resize', setSliderSize);
+window.addEventListener('resize', () => {
+         hightToSlider = document.querySelector('.header').offsetHeight +  document.querySelector('.top').offsetHeight;
+    
+});
+
+window.addEventListener('scroll', () => {
+    if(window.scrollY >= hightToSlider) {
+        coloredIndicator();
+    }
+
+    
+});
+
 btnNext.addEventListener('click', showNextSlide);
 btnPrev.addEventListener('click', showPrevSlide);
 
