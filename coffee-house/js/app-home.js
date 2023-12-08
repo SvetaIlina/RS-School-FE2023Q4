@@ -1,3 +1,6 @@
+'use strict'
+import displayBurger from "./burger.js"
+
 const btnNext = document.querySelector('.slider__next');
 const btnPrev = document.querySelector('.slider__prev');
 const slidesWrapper = document.querySelector('.slider__wrapper');
@@ -15,7 +18,7 @@ let slideIndex = 0;
 let x1;
 let y1;
 
-
+displayBurger ();
 setSliderSize();
 
 
