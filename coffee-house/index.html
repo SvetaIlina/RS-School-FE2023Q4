@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="wrapper">
-        <header class="header">
+        <header class="header ">
             <div class="container">
                 <div class="header__inner">
                     <a class="logo" href="index.html" >
@@ -32,8 +32,16 @@
                             <li class="menu__list-item">
                                 <a href="#footer-home" class="menu__list-link">Contact us</a>
                             </li>
+                            <li class="burger__link-item">
+                                <a href="menu.html" class="menu__list-link  header__menu-link burger-link">
+                                    <span class="link-text">Menu</span>
+                                    <span class="burger-cup"></span>
+                                </a>
+                            </li>
                         </ul>
+                        
                     </nav>
+                   
                     <a href="menu.html" class="header__menu-link">
                         <span class="link-text">Menu</span>
                         <img class="menu__link-img" src="coffee-cup.svg" alt="cup of coffee" >
@@ -48,9 +56,9 @@
             <section class="top">
                 <div class="container">
                     <div class="top__inner">
-                        <!-- <video class="top__video" autoplay loop muted>
+                        <video class="top__video" autoplay loop muted>
                             <source src="images/video(2160p).mp4" type="video/mp4" >
-                        </video> -->
+                        </video>
                          <div class="top__enjoy">
                             <h1 class="top__enjoy-title">
                                 <span class="accent-text">Enjoy</span>
@@ -109,9 +117,15 @@
                             </div>
                         </div>
                         <div class="slider__control">
-                            <button class="slider__control-btn slider__control-btn--active"></button>
-                            <button class="slider__control-btn"></button>
-                            <button class="slider__control-btn"></button>
+                            <button class="slider__control-btn ">
+                                <span class="progress"></span>
+                            </button>
+                            <button class="slider__control-btn">
+                                <span class="progress"></span>
+                            </button>
+                            <button class="slider__control-btn">
+                                <span class="progress"></span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -238,5 +252,7 @@
             </div>
         </footer>
     </div>
+   
+   <script  src="js/app-home.js"></script> 
 </body>
 </html>
