@@ -389,6 +389,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 20px;
 }
 
 .modal__item-btn 
@@ -732,8 +733,18 @@ body {
     }
 }
 
+@media (max-width: 675px) {
+    .modal-content {
+        flex-shrink: 2;
+    }
+    .modal-img__wrapper > img {
+        max-width: 100%;
+    }
+}
 
 @media (max-width: 647px) {
+
+
     .footer__inner {
        padding: 80px 40px;
    }
@@ -743,6 +754,12 @@ body {
    }
    
 
+}
+
+@media (max-width: 566px) {
+    .modal-img {
+        display: none;
+    }
 }
 
 @media (max-width: 380px) {
@@ -775,7 +792,5 @@ body {
         max-width: 342px;
     }
 
-    .modal-img {
-        display: none;
-    }
+  
 }
