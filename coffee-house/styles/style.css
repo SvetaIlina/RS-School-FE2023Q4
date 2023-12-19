@@ -637,11 +637,12 @@ body {
         right: 0;
         top: 0;
         bottom: 0;
-        padding-top: 140px;
+        margin-top: 100px;
         background: #E1D4C9;
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: flex-start;
         transform: translateX(100%);
         transition: transform 0.7s;
        
@@ -652,6 +653,7 @@ body {
      .menu__list.menu__list--active{
         transform: translateX(0);
         z-index: -1;
+        overflow-y: scroll;
        }
 
      

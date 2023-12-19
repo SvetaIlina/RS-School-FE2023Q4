@@ -36,14 +36,6 @@ window.addEventListener('scroll', () => {
     
 });
 
-window.addEventListener('keydown', (e) => {
-    if(e.key === 'ArrowRight') {
-        showNextSlide()
-    } else if (e.key === 'ArrowLeft') {
-        showPrevSlide ()
-    }
-});
-
 btnNext.addEventListener('click', showNextSlide);
 btnPrev.addEventListener('click', showPrevSlide);
 
