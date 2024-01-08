@@ -49,6 +49,26 @@ function generateSecretWord(parentSelector) {
   });
 }
 
+function generateModal(isWin) {
+  let message;
+  const modal = createDomNode('div', 'modal');
+  const content = createDomNode('div', 'modal__content');
+  const btn = createDomNode('button', 'keybtn');
+  btn.addEventListener('click', () => document.location.reload());
+  if (isWin) {
+    message = "Congratulations, you've won!!!";
+  } else {
+    message = 'Unfortunately, you lost...';
+  }
+  content.innerHTML = `<h3 class="modal__mes">${message}</h3><h4 class="modal__answer">The correct word was <span class="correct-word">${secretWord.join(
+    '',
+  )}</span></h4>`;
+  btn.innerText = 'Play again';
+  content.append(btn);
+  modal.append(content);
+  document.body.append(modal);
+}
+
 document.body.append(generateMainContent());
 createKeyboard('.keyboard');
 selectQuestion('.hint');
