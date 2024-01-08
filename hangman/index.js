@@ -1,9 +1,11 @@
 // eslint-disable-next-line import/extensions
 import wordList from './js/WordList.js';
 
-let secretWord;
 const maxAttempt = 6;
+const hiddenLetters = [];
+let rightattempt = 0;
 let attempts = 0;
+let secretWord;
 
 function createDomNode(element, ...classes) {
   const node = document.createElement(element);
@@ -49,7 +51,38 @@ function generateSecretWord(parentSelector) {
   secretWord.forEach(() => {
     const letter = createDomNode('li', 'letter');
     document.querySelector(parentSelector).append(letter);
+    hiddenLetters.push(letter);
   });
+}
+
+function startGame(e) {
+  if (
+    !e.target.classList.contains('keybtn--disabled') &&
+    e.target.classList.contains('keybtn')
+  ) {
+    const clickedBtn = e.target.innerText.toLowerCase();
+    const bodyParts = document.querySelectorAll('.body-part');
+    if (secretWord.includes(clickedBtn)) {
+      secretWord.forEach((item, i) => {
+        if (item === clickedBtn) {
+          hiddenLetters[i].innerText = clickedBtn;
+          hiddenLetters[i].classList.add('letter--guessed');
+          rightattempt += 1;
+        }
+      });
+    } else {
+      bodyParts[attempts].classList.add('body-part--opened');
+      attempts++;
+      document.querySelector('.attempt__incorrect').innerText = attempts;
+    }
+    e.target.classList.add('keybtn--disabled');
+  }
+  if (attempts === maxAttempt) {
+    setTimeout(() => generateModal(false), 1000);
+  }
+  if (rightattempt === secretWord.length) {
+    setTimeout(() => generateModal(true), 1000);
+  }
 }
 
 function generateModal(isWin) {
@@ -70,25 +103,7 @@ function generateModal(isWin) {
   content.append(btn);
   modal.append(content);
   document.body.append(modal);
-}
-
-function startGame(e) {
-  const hiddenLetters = document.querySelectorAll('.letter');
-  const clickedBtn = e.target.innerText.toLowerCase();
-  const bodyParts = document.querySelectorAll('.body-part');
-  if (secretWord.includes(clickedBtn)) {
-    secretWord.forEach((item, i) => {
-      if (item === clickedBtn) {
-        hiddenLetters[i].innerText = clickedBtn;
-        hiddenLetters[i].classList.add('letter--guessed');
-      }
-    });
-  } else {
-    bodyParts[attempts].classList.add('body-part--opened');
-    attempts++;
-    document.querySelector('.attempt__incorrect').innerText = attempts;
-  }
-  e.target.classList.add('keybtn--disabled');
+  document.querySelector('.container').style.display = 'none';
 }
 
 document.body.append(generateMainContent());
