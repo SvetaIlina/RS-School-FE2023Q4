@@ -24,3 +24,15 @@ function generateMainContent() {
   container.append(gallows);
   return container;
 }
+
+function createKeyboard(parentSelector) {
+  const parent = document.querySelector(parentSelector);
+  for (let i = 97; i <= 122; i++) {
+    const btn = createDomNode('button', 'keybtn');
+    btn.innerText = String.fromCharCode(i);
+    parent.append(btn);
+  }
+}
+
+document.body.append(generateMainContent());
+createKeyboard('.keyboard');
