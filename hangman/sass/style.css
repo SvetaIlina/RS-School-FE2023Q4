@@ -114,7 +114,7 @@ body {
   opacity: 0;
   transform: opacity 0.3s;
 }
-.gallows .body-part__opened {
+.gallows .body-part--opened {
   opacity: 1;
 }
 

@@ -45,7 +45,7 @@
     position: absolute;
     opacity: 0;
     transform: opacity 0.3s;
-    &__opened {
+    &--opened {
       opacity: 1;
     }
   }

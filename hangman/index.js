@@ -2,6 +2,8 @@
 import wordList from './js/WordList.js';
 
 let secretWord;
+const maxAttempt = 6;
+let attempts = 0;
 
 function createDomNode(element, ...classes) {
   const node = document.createElement(element);
@@ -17,6 +19,7 @@ function generateMainContent() {
   quiz.innerHTML =
     '<ul class="secret-word"></ul><p class="hint"><span class="strong">HINT: </span></p><p class="attempt">Incorrect guesses: <span class="attempt__incorrect">0</span> / 6</p>';
   const keyboard = createDomNode('div', 'keyboard');
+  keyboard.addEventListener('click', (event) => startGame(event));
   quiz.append(keyboard);
   const gallows = createDomNode('div', 'gallows');
   gallows.innerHTML =
@@ -67,6 +70,25 @@ function generateModal(isWin) {
   content.append(btn);
   modal.append(content);
   document.body.append(modal);
+}
+
+function startGame(e) {
+  const hiddenLetters = document.querySelectorAll('.letter');
+  const clickedBtn = e.target.innerText.toLowerCase();
+  const bodyParts = document.querySelectorAll('.body-part');
+  if (secretWord.includes(clickedBtn)) {
+    secretWord.forEach((item, i) => {
+      if (item === clickedBtn) {
+        hiddenLetters[i].innerText = clickedBtn;
+        hiddenLetters[i].classList.add('letter--guessed');
+      }
+    });
+  } else {
+    bodyParts[attempts].classList.add('body-part--opened');
+    attempts++;
+    document.querySelector('.attempt__incorrect').innerText = attempts;
+  }
+  e.target.classList.add('keybtn--disabled');
 }
 
 document.body.append(generateMainContent());
