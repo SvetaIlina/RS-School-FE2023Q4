@@ -1,5 +1,15 @@
 html {
   box-sizing: border-box;
+  font-size: 10px;
+  @media (max-width: 930px) {
+    font-size: 9px;
+  }
+  @media (max-width: 768px) {
+    font-size: 8px;
+  }
+  @media (max-width: 500px) {
+    font-size: 7px;
+  }
 }
 
 *,
@@ -9,7 +19,8 @@ html {
 }
 
 ul,
-li {
+li,
+p {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -39,5 +50,4 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 10px;
 }
