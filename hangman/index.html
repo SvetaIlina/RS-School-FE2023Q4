@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="sass/style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="quiz">
+        <ul class="secret-word">
+          <li class="letter letter--guessed">A</li>
+          <li class="letter"></li>
+          <li class="letter"></li>
+          <li class="letter"></li>
+          <li class="letter"></li>
+        </ul>
+        <p class="hint">
+          <span class="strong">HINT:</span> Lorem ipsum dolor sit, amet
+          consectetur adipisicing elit.
+        </p>
+        <p class="attempt">
+          Incorrect guesses: <span class="attempt__incorrect">0</span>/ 6
+        </p>
+        <div class="keyboard">
+          <button class="keybtn keybtn--disabled">a</button>
+          <button class="keybtn">d</button>
+          <button class="keybtn">d</button>
+          <button class="keybtn">d</button>
+          <button class="keybtn">d</button>
+          <button class="keybtn">d</button>
+          <button class="keybtn">d</button>
+          <button class="keybtn">d</button>
+          <button class="keybtn">d</button>
+          <button class="keybtn">d</button>
+          <button class="keybtn">d</button>
+          <button class="keybtn">d</button>
+          <button class="keybtn">d</button>
+          <button class="keybtn">d</button>
+          <button class="keybtn">d</button>
+          <button class="keybtn">r</button>
+          <button class="keybtn">r</button>
+          <button class="keybtn">r</button>
+          <button class="keybtn">r</button>
+          <button class="keybtn">r</button>
+          <button class="keybtn">r</button>
+          <button class="keybtn">r</button>
+          <button class="keybtn">r</button>
+          <button class="keybtn">r</button>
+          <button class="keybtn">r</button>
+          <button class="keybtn">r</button>
+        </div>
+      </div>
+      <div class="gallows">
+        <h4 class="gallows__title">Let's play the GAME...</h4>
+        <img class="gallows__image" src="images/gallows.png" alt="gallows" />
+        <img src="images/head.png" class="body-part head" alt="head" />
+        <img src="images/body.png" class="body-part body" alt="body" />
+        <img src="images/leftarm.png" class="body-part leftarm" alt="leftarm" />
+        <img
+          src="images/rightarm.png"
+          class="body-part rightarm"
+          alt="rightarm"
+        />
+        <img src="images/leftleg.png" class="body-part leftleg" alt="leftleg" />
+        <img
+          src="images/rightleg.png"
+          class="body-part rightleg"
+          alt="rightleg"
+        />
+      </div>
+    </div>
+    <div class="modal">
+      <div class="modal__content">
+        <h3 class="modal__mes">Congratulations, you've won!!!</h3>
+        <h4 class="modal__answer">
+          The correct word was <span class="correct-word">novel</span>
+        </h4>
+        <button class="keybtn">Play again</button>
+      </div>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>

@@ -1,0 +1,164 @@
+@import '_global.scss';
+@import '_abstract.scss';
+
+.container {
+  width: 1200px;
+  border-radius: 75px;
+  background: $bg;
+  padding: 45px 15px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 90px;
+}
+
+.gallows {
+  position: relative;
+  padding: 10px;
+  &__title {
+    @include title;
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  &__image {
+    transform: scale(-1, 1);
+  }
+  .body-part {
+    position: absolute;
+    // opacity: 0;
+    transform: opacity 0.3s;
+    &__opened {
+      opacity: 1;
+    }
+  }
+}
+
+.head {
+  width: 60px;
+  top: 185px;
+  left: 130px;
+}
+
+.body {
+  width: 100px;
+  top: 247px;
+  left: 109px;
+}
+.leftarm {
+  width: 40px;
+  top: 276px;
+  left: 78px;
+}
+.rightarm {
+  width: 40px;
+  top: 276px;
+  left: 201px;
+}
+.leftleg {
+  top: 360px;
+  left: 121px;
+}
+.rightleg {
+  top: 360px;
+  left: 171px;
+}
+
+.quiz {
+  @include quiz-text;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  max-width: 50%;
+  padding: 10px;
+}
+
+.secret-word {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.letter {
+  width: 30px;
+  height: 40px;
+  border-bottom: 3px solid #b8e1e5;
+  text-transform: uppercase;
+  text-align: center;
+  &--guessed {
+    border-bottom: none;
+    font-weight: 600;
+    font-size: 30px;
+  }
+}
+
+.hint {
+  text-align: justify;
+  .strong {
+    @include title;
+  }
+}
+
+.attempt__incorrect {
+  color: #d33a3a;
+}
+
+.keyboard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  justify-content: center;
+  .keybtn {
+    width: calc(100% / 9 - 7px);
+    &--disabled {
+      background: transparent;
+      pointer-events: none;
+    }
+  }
+}
+
+.keybtn {
+  background: #b8e1e5;
+  border-radius: 5px;
+  border: 1px solid #c47f1d;
+  @include quiz-text;
+  transition: transform 0.3s;
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  background: $bg;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  &--shown {
+    display: flex;
+  }
+}
+
+.modal__content {
+  text-align: center;
+  background: $bg;
+  border-radius: 50px;
+  padding: 40px;
+  .correct-word {
+    @include quiz-text;
+    font-size: 30px;
+  }
+}
+
+.modal__answer,
+.modal__mes {
+  @include title;
+  margin-bottom: 30px;
+}
