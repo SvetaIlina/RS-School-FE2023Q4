@@ -1,6 +1,8 @@
 // eslint-disable-next-line import/extensions
 import wordList from './js/WordList.js';
 
+let secretWord;
+
 function createDomNode(element, ...classes) {
   const node = document.createElement(element);
   node.classList.add(...classes);
@@ -34,5 +36,20 @@ function createKeyboard(parentSelector) {
   }
 }
 
+function selectQuestion(hintSelector) {
+  const { word, hint } = wordList[Math.floor(Math.random() * wordList.length)];
+  secretWord = word.split('');
+  document.querySelector(hintSelector).insertAdjacentHTML('beforeend', hint);
+}
+
+function generateSecretWord(parentSelector) {
+  secretWord.forEach(() => {
+    const letter = createDomNode('li', 'letter');
+    document.querySelector(parentSelector).append(letter);
+  });
+}
+
 document.body.append(generateMainContent());
 createKeyboard('.keyboard');
+selectQuestion('.hint');
+generateSecretWord('.secret-word');
