@@ -39,10 +39,7 @@ const wordList = [
     word: 'pizza',
     hint: 'A savory dish consisting of a round, flattened base with toppings.',
   },
-  {
-    word: 'jazz',
-    hint: 'A genre of music characterized by improvisation and syncopation.',
-  },
+
   {
     word: 'camera',
     hint: 'A device used to capture and record images or videos.',
@@ -51,14 +48,7 @@ const wordList = [
     word: 'diamond',
     hint: 'A precious gemstone known for its brilliance and hardness.',
   },
-  {
-    word: 'adventure',
-    hint: 'An exciting or daring experience.',
-  },
-  {
-    word: 'science',
-    hint: 'The systematic study of the structure and behavior of the physical and natural world.',
-  },
+
   {
     word: 'bicycle',
     hint: 'A human-powered vehicle with two wheels.',
@@ -69,7 +59,7 @@ const wordList = [
   },
   {
     word: 'coffee',
-    hint: 'A popular caffeinated beverage made from roasted coffee beans.',
+    hint: 'A popular caffeinated beverage made from roasted  beans.',
   },
   {
     word: 'dance',
@@ -87,10 +77,7 @@ const wordList = [
     word: 'volcano',
     hint: 'A mountain or hill with a vent through which lava, rock fragments, hot vapor, and gas are ejected.',
   },
-  {
-    word: 'novel',
-    hint: 'A long work of fiction, typically with a complex plot and characters.',
-  },
+
   {
     word: 'sculpture',
     hint: 'A three-dimensional art form created by shaping or combining materials.',
@@ -115,10 +102,7 @@ const wordList = [
     word: 'waterfall',
     hint: 'A cascade of water falling from a height.',
   },
-  {
-    word: 'technology',
-    hint: 'The application of scientific knowledge for practical purposes.',
-  },
+
   {
     word: 'rainbow',
     hint: 'A meteorological phenomenon that is caused by reflection, refraction, and dispersion of light.',
@@ -135,10 +119,7 @@ const wordList = [
     word: 'vacation',
     hint: 'A period of time devoted to pleasure, rest, or relaxation.',
   },
-  {
-    word: 'rainforest',
-    hint: 'A dense forest characterized by high rainfall and biodiversity.',
-  },
+
   {
     word: 'theater',
     hint: 'A building or outdoor area in which plays, movies, or other performances are staged.',
@@ -159,10 +140,7 @@ const wordList = [
     word: 'sunflower',
     hint: 'A tall plant with a large yellow flower head.',
   },
-  {
-    word: 'fantasy',
-    hint: 'A genre of imaginative fiction involving magic and supernatural elements.',
-  },
+
   {
     word: 'telescope',
     hint: 'An optical instrument used to view distant objects in space.',
@@ -191,18 +169,7 @@ const wordList = [
     word: 'river',
     hint: 'A large natural stream of water flowing in a channel to the sea, a lake, or another such stream.',
   },
-  {
-    word: 'tropical',
-    hint: 'Relating to or situated in the region between the Tropic of Cancer and the Tropic of Capricorn.',
-  },
-  {
-    word: 'mysterious',
-    hint: 'Difficult or impossible to understand, explain, or identify.',
-  },
-  {
-    word: 'enigma',
-    hint: 'Something that is mysterious, puzzling, or difficult to understand.',
-  },
+
   {
     word: 'paradox',
     hint: 'A statement or situation that contradicts itself or defies intuition.',
@@ -223,22 +190,7 @@ const wordList = [
     word: 'secret',
     hint: 'Something kept hidden or unknown to others.',
   },
-  {
-    word: 'curiosity',
-    hint: 'A strong desire to know or learn something.',
-  },
-  {
-    word: 'unpredictable',
-    hint: 'Not able to be foreseen or known beforehand; uncertain.',
-  },
-  {
-    word: 'obfuscate',
-    hint: 'To confuse or bewilder someone; to make something unclear or difficult to understand.',
-  },
-  {
-    word: 'unveil',
-    hint: 'To make known or reveal something previously secret or unknown.',
-  },
+
   {
     word: 'illusion',
     hint: 'A false perception or belief; a deceptive appearance or impression.',
@@ -247,17 +199,10 @@ const wordList = [
     word: 'moonlight',
     hint: 'The light from the moon.',
   },
-  {
-    word: 'vibrant',
-    hint: 'Full of energy, brightness, and life.',
-  },
+
   {
     word: 'nostalgia',
     hint: 'A sentimental longing or wistful affection for the past.',
-  },
-  {
-    word: 'brilliant',
-    hint: 'Exceptionally clever, talented, or impressive.',
   },
 ];
 
