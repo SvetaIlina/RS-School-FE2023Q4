@@ -87,6 +87,7 @@ function disableBtn(tapBtn) {
 }
 
 function playGame(e) {
+  if (attempts === maxAttempt || rightattempt === secretWord.length) return;
   let clickedBtn;
   if (e.type === 'click' && e.target.tagName.toLowerCase() === 'button') {
     clickedBtn = e.target.innerText.toLowerCase();
@@ -115,10 +116,10 @@ function playGame(e) {
 
 function gameOver() {
   if (attempts === maxAttempt) {
-    generateModal(false);
+    setTimeout(() => generateModal(false), 500);
   }
   if (rightattempt === secretWord.length) {
-    generateModal(true);
+    setTimeout(() => generateModal(true), 500);
   }
 }
 
