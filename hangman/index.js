@@ -21,7 +21,7 @@ function generateMainContent() {
   quiz.innerHTML =
     '<ul class="secret-word"></ul><p class="hint"><span class="strong">HINT: </span></p><p class="attempt">Incorrect guesses: <span class="attempt__incorrect">0</span> / 6</p>';
   const keyboard = createDomNode('div', 'keyboard');
-  keyboard.addEventListener('click', (event) => startGame(event));
+  keyboard.addEventListener('click', (event) => playGame(event));
   quiz.append(keyboard);
   const gallows = createDomNode('div', 'gallows');
   gallows.innerHTML =
@@ -37,6 +37,7 @@ function createKeyboard(parentSelector) {
   for (let i = 97; i <= 122; i++) {
     const btn = createDomNode('button', 'keybtn');
     btn.innerText = String.fromCharCode(i);
+    btn.setAttribute('id', String.fromCharCode(i));
     parent.append(btn);
   }
 }
@@ -55,17 +56,13 @@ function generateSecretWord(parentSelector) {
   });
 }
 
-function startGame(e) {
-  if (
-    !e.target.classList.contains('keybtn--disabled') &&
-    e.target.classList.contains('keybtn')
-  ) {
-    const clickedBtn = e.target.innerText.toLowerCase();
-    const bodyParts = document.querySelectorAll('.body-part');
-    if (secretWord.includes(clickedBtn)) {
+function checkLetter(key) {
+  const bodyParts = document.querySelectorAll('.body-part');
+  if (key) {
+    if (secretWord.includes(key)) {
       secretWord.forEach((item, i) => {
-        if (item === clickedBtn) {
-          hiddenLetters[i].innerText = clickedBtn;
+        if (item === key) {
+          hiddenLetters[i].innerText = key;
           hiddenLetters[i].classList.add('letter--guessed');
           rightattempt += 1;
         }
@@ -75,8 +72,42 @@ function startGame(e) {
       attempts++;
       document.querySelector('.attempt__incorrect').innerText = attempts;
     }
-    e.target.classList.add('keybtn--disabled');
   }
+}
+
+function disableBtn(tapBtn) {
+  const btn = document.querySelector(`#${tapBtn}`);
+  btn.classList.add('keybtn--disabled');
+}
+
+function playGame(e) {
+  let clickedBtn;
+  if (e.type === 'click' && e.target.tagName.toLowerCase() === 'button') {
+    clickedBtn = e.target.innerText.toLowerCase();
+  }
+  if (
+    e.type === 'keydown' &&
+    /Key[A-Z]/.test(e.code) &&
+    !e.altKey &&
+    !e.ctrlKey &&
+    !e.shiftKey
+  ) {
+    clickedBtn = e.key.toLowerCase();
+  }
+
+  if (
+    clickedBtn &&
+    !document
+      .querySelector(`#${clickedBtn}`)
+      .classList.contains('keybtn--disabled')
+  ) {
+    checkLetter(clickedBtn);
+    disableBtn(clickedBtn);
+    gameOver();
+  }
+}
+
+function gameOver() {
   if (attempts === maxAttempt) {
     setTimeout(() => generateModal(false), 1000);
   }
@@ -110,3 +141,4 @@ document.body.append(generateMainContent());
 createKeyboard('.keyboard');
 selectQuestion('.hint');
 generateSecretWord('.secret-word');
+document.addEventListener('keydown', (event) => playGame(event));
