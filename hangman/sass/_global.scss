@@ -1,0 +1,53 @@
+html {
+  box-sizing: border-box;
+  font-size: 10px;
+  @media (max-width: 930px) {
+    font-size: 9px;
+  }
+  @media (max-width: 768px) {
+    font-size: 8px;
+  }
+  @media (max-width: 500px) {
+    font-size: 7px;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+ul,
+li,
+p {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-size: inherit;
+}
+
+button {
+  outline: none;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+body {
+  min-height: 100vh;
+  background-image: url('../images/bg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
