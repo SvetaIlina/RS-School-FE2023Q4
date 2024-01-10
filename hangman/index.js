@@ -46,6 +46,7 @@ function selectQuestion(hintSelector) {
   const { word, hint } = wordList[Math.floor(Math.random() * wordList.length)];
   secretWord = word.split('');
   document.querySelector(hintSelector).insertAdjacentHTML('beforeend', hint);
+  console.log(word);
 }
 
 function generateSecretWord(parentSelector) {
