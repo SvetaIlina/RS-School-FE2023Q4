@@ -19,6 +19,7 @@
     align-items: flex-start;
     gap: 5px;
     flex-wrap: wrap;
+    padding: 15px;
   }
 }
 
@@ -163,8 +164,10 @@
   border: 1px solid #ffd700;
   @include quiz-text;
   transition: transform 0.3s;
-  &:hover {
-    transform: scale(1.5);
+  @media (hover: hover) {
+    &:hover {
+      transform: scale(1.5);
+    }
   }
 }
 

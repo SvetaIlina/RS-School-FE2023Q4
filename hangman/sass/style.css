@@ -80,6 +80,7 @@ body {
     align-items: flex-start;
     gap: 5px;
     flex-wrap: wrap;
+    padding: 15px;
   }
 }
 
@@ -259,8 +260,10 @@ body {
   text-shadow: 2px 0 black;
   transition: transform 0.3s;
 }
-.keybtn:hover {
-  transform: scale(1.5);
+@media (hover: hover) {
+  .keybtn:hover {
+    transform: scale(1.5);
+  }
 }
 
 .modal {
