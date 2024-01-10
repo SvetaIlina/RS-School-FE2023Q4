@@ -18,8 +18,7 @@ function generateMainContent() {
   container.innerHTML =
     '<h4 class="game-title">Let\'s play the GAME...</h4><h4 class="game-title">Try to guess the word before it\'s too late</h4>';
   const quiz = createDomNode('div', 'quiz');
-  quiz.innerHTML =
-    '<ul class="secret-word"></ul><p class="hint"><span class="strong">HINT: </span></p><p class="attempt">Incorrect guesses: <span class="attempt__incorrect">0</span> / 6</p>';
+  quiz.innerHTML = `<ul class="secret-word"></ul><p class="hint"><span class="strong">HINT: </span></p><p class="attempt">Incorrect guesses: <span class="attempt__incorrect">0</span> / 6</p>`;
   const keyboard = createDomNode('div', 'keyboard');
   keyboard.addEventListener('click', (event) => playGame(event));
   quiz.append(keyboard);
@@ -43,13 +42,19 @@ function createKeyboard(parentSelector) {
 }
 
 function selectQuestion(hintSelector) {
+  const parentNode = document.querySelector(hintSelector);
   const { word, hint } = wordList[Math.floor(Math.random() * wordList.length)];
+  if (parentNode.childNodes.length > 1) {
+    parentNode.lastChild.data = hint;
+  } else {
+    parentNode.insertAdjacentHTML('beforeend', hint);
+  }
   secretWord = word.split('');
-  document.querySelector(hintSelector).insertAdjacentHTML('beforeend', hint);
   console.log(word);
 }
 
 function generateSecretWord(parentSelector) {
+  document.querySelector(parentSelector).innerHTML = '';
   secretWord.forEach(() => {
     const letter = createDomNode('li', 'letter');
     document.querySelector(parentSelector).append(letter);
@@ -110,10 +115,10 @@ function playGame(e) {
 
 function gameOver() {
   if (attempts === maxAttempt) {
-    setTimeout(() => generateModal(false), 1000);
+    generateModal(false);
   }
   if (rightattempt === secretWord.length) {
-    setTimeout(() => generateModal(true), 1000);
+    generateModal(true);
   }
 }
 
@@ -122,7 +127,7 @@ function generateModal(isWin) {
   const modal = createDomNode('div', 'modal');
   const content = createDomNode('div', 'modal__content');
   const btn = createDomNode('button', 'keybtn');
-  btn.addEventListener('click', () => document.location.reload());
+  btn.addEventListener('click', () => rePlay());
   if (isWin) {
     message = "Congratulations, you've won!!!";
   } else {
@@ -135,7 +140,24 @@ function generateModal(isWin) {
   content.append(btn);
   modal.append(content);
   document.body.append(modal);
-  document.querySelector('.container').style.display = 'none';
+  document.querySelector('.container').classList.toggle('container--hide');
+}
+
+function rePlay() {
+  attempts = 0;
+  rightattempt = 0;
+  hiddenLetters.length = 0;
+  document
+    .querySelectorAll('.keybtn')
+    .forEach((i) => i.classList.remove('keybtn--disabled'));
+  document
+    .querySelectorAll('.body-part')
+    .forEach((i) => i.classList.remove('body-part--opened'));
+  document.querySelector('.modal').remove();
+  document.querySelector('.container').classList.toggle('container--hide');
+  document.querySelector('.attempt__incorrect').innerText = attempts;
+  selectQuestion('.hint');
+  generateSecretWord('.secret-word');
 }
 
 document.body.append(generateMainContent());
