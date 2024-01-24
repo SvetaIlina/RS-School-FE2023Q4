@@ -19,6 +19,11 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  rules: {},
+  rules: {
+    'linebreak-style': 'off',
+    'no-plusplus': 'off',
+    'no-console': 'off',
+    'no-use-before-define': 'off',
+  },
 };
 
