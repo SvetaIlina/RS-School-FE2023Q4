@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./src/sass/style.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="menu">
+          <ul class="menu__list">
+            <li class="menu__list-item">
+              <button class="btn menu__btn">Best results</button>
+            </li>
+            <li class="menu__list-item">
+              <a
+                href="https://www.nonograms.ru/instructions"
+                class="instruction-link"
+                target="_blank"
+                >How to play</a
+              >
+            </li>
+            <li class="menu__list-item">
+              <button class="btn menu__btn">Change theme</button>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <div class="screen">
+        <h1 class="title">Nonograms</h1>
+        <button class="btn new-game-btn">New game</button>
+        <button class="btn continue-game-btn">Continue last game</button>
+      </div>
+      <div class="screen">
+        <h1 class="title">Select level</h1>
+        <button class="btn level-btn">Easy (5*5)</button>
+        <button class="btn level-btn">Medium (10*10)</button>
+        <button class="btn level-btn">Hard(15*15)</button>
+        <button class="btn level-btn">Random game</button>
+      </div>
+      <div class="screen game">
+        <div class="game-control">
+          <div class="timer">00 : 00</div>
+          <button class="btn solution-btn">Show solution</button>
+          <button class="btn reset-btn">Reset game</button>
+          <button class="btn new-game-btn">New game</button>
+          <button class="btn save-btn">Save game</button>
+          <button class="btn main-page-btn">Main page</button>
+        </div>
+        <div class="game-field">
+          <div class="top-hints">
+            <div class="top-hint">
+              <div>1</div>
+              <div>2</div>
+              <div>3</div>
+              <div>4</div>
+            </div>
+            <div class="top-hint">1</div>
+            <div class="top-hint">1</div>
+            <div class="top-hint">1</div>
+            <div class="top-hint">1</div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </table>
+          </div>
+          <div class="left-hints">
+            <div class="left-hint">
+              <div>1</div>
+              <div>2</div>
+              <div>3</div>
+              <div>4</div>
+            </div>
+            <div class="left-hint">1</div>
+            <div class="left-hint">1</div>
+            <div class="left-hint">1</div>
+            <div class="left-hint">1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>

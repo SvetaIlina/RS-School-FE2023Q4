@@ -1,0 +1,62 @@
+// $borderS: 1px solid black;
+// $borderM: 2px solid black;
+// $text-color: #795548;
+// $bg-color: rgba(245, 237, 229, 0.7);
+// $bg: url('../images/iaponii-9.jpg');
+
+@mixin flexC {
+  display: flex;
+  flex-direction: column;
+}
+
+$text-color: #c1d6f4;
+$bg-color: rgba(31, 37, 51, 0.7);
+$borderS: 1px solid white;
+$borderM: 2px solid white;
+$bg: url('../images/darc-bg.jpg');
+
+html {
+  box-sizing: border-box;
+  font-size: 10px;
+  @media (max-width: 768px) {
+    font-size: 8px;
+  }
+  @media (max-width: 690px) {
+    font-size: 6.5px;
+  }
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: $text-color;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  background: transparent;
+  text-transform: uppercase;
+  border: none;
+}
+
+body {
+  color: $text-color;
+  font-family: 'Shippori Mincho', serif;
+  height: 100vh;
+  // overflow: hidden;
+  text-align: center;
+  background-image: $bg;
+  background-size: cover;
+  // background-repeat: no-repeat;
+}

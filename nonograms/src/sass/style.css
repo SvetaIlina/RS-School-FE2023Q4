@@ -1,0 +1,279 @@
+html {
+  box-sizing: border-box;
+  font-size: 10px;
+}
+@media (max-width: 768px) {
+  html {
+    font-size: 8px;
+  }
+}
+@media (max-width: 690px) {
+  html {
+    font-size: 6.5px;
+  }
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #c1d6f4;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  background: transparent;
+  text-transform: uppercase;
+  border: none;
+}
+
+body {
+  color: #c1d6f4;
+  font-family: "Shippori Mincho", serif;
+  height: 100vh;
+  text-align: center;
+  background-image: url("../images/darc-bg.jpg");
+  background-size: cover;
+}
+
+.wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  background: rgba(31, 37, 51, 0.7);
+}
+
+.menu__list {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.btn {
+  font-family: "Shippori Mincho", serif;
+  font-weight: 800;
+  text-align: center;
+  padding: 5px 10px;
+  color: #c1d6f4;
+  text-shadow: 1px -1px 1px black;
+  font-size: 2.1rem;
+}
+
+.instruction-link {
+  font-size: 2.6rem;
+  transition: all 0.5s;
+}
+.instruction-link:hover {
+  color: #eb7b95;
+}
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  transition: margin 0.5s ease-out;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+.screen.up {
+  margin-top: -100vh;
+}
+.screen .btn {
+  width: 295px;
+  border: 3px solid #c1d6f4;
+  box-shadow: inset 0 0 20px #c1d6f4;
+  transition: all 0.6s;
+}
+.screen .btn:hover {
+  box-shadow: inset 15px 15px 40px #c1d6f4;
+}
+@media (max-width: 768px) {
+  .screen .btn {
+    width: 200px;
+  }
+}
+
+.game {
+  padding-left: 50px;
+  flex-direction: row;
+  justify-content: start;
+  gap: 300px;
+}
+@media (max-width: 960px) {
+  .game {
+    gap: 150px;
+  }
+}
+@media (max-width: 800px) {
+  .game {
+    gap: 100px;
+  }
+}
+@media (max-width: 690px) {
+  .game {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-left: 0;
+    gap: 40px;
+  }
+}
+
+h1 {
+  font-size: 12rem;
+  text-shadow: 4px -2px 4px black;
+}
+@media (max-width: 500px) {
+  h1 {
+    font-size: 9rem;
+  }
+}
+
+.timer {
+  font-size: 3.5rem;
+}
+@media (max-width: 690px) {
+  .timer {
+    grid-column: 1/6;
+    grid-row: 3/4;
+  }
+}
+
+.game-control {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+@media (max-width: 690px) {
+  .game-control {
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    grid-template-rows: repeat(3, auto);
+    justify-items: center;
+    gap: 25px;
+  }
+}
+.game-control .btn {
+  font-size: 1.8rem;
+  width: 200px;
+}
+@media (max-width: 768px) {
+  .game-control .btn {
+    width: 150px;
+  }
+}
+@media (max-width: 690px) {
+  .game-control .btn {
+    width: 100px;
+  }
+}
+
+.game-field {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: repeat(3, auto);
+  grid-template-areas: ". top top" "left table table" "left table table";
+  justify-items: center;
+  align-items: center;
+  gap: 1px;
+  max-height: 480px;
+  max-width: 480px;
+  font-size: 1.5rem;
+}
+
+.top-hints,
+.left-hints {
+  background: rgba(31, 37, 51, 0.7);
+  border: 1px solid white;
+  font-weight: 800;
+}
+
+.top-hints {
+  grid-area: top;
+  display: flex;
+}
+.top-hints .top-hint {
+  width: 60px;
+  display: flex;
+  flex-direction: column-reverse;
+  border: 1px solid white;
+}
+
+.left-hints {
+  display: flex;
+  flex-direction: column;
+  grid-area: left;
+}
+.left-hints .left-hint {
+  border: 1px solid white;
+  height: 60px;
+  padding: 0 3px;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 3px;
+}
+
+.table-wrap {
+  grid-area: table;
+}
+
+table {
+  margin: 0 auto;
+  border-spacing: 0;
+  border-collapse: collapse;
+  border: 2px solid white;
+  background: rgba(31, 37, 51, 0.7);
+}
+
+td {
+  width: 60px;
+  height: 60px;
+  border: 1px solid white;
+}
+
+td:nth-child(6n) {
+  border-left: 2px solid red;
+}
+
+tr:nth-child(6n) {
+  border-bottom: 2px solid red;
+}
+
+@media (max-width: 690px) {
+  .main-page-btn {
+    grid-column: 1/4;
+    grid-row: 1/2;
+  }
+  .reset-btn {
+    grid-column: 1/3;
+    grid-row: 2/3;
+  }
+  .new-game-btn {
+    grid-column: 3/4;
+    grid-row: 2/3;
+  }
+  .save-btn {
+    grid-column: 4/6;
+    grid-row: 2/3;
+  }
+  .solution-btn {
+    grid-column: 3/6;
+    grid-row: 1/2;
+  }
+}/*# sourceMappingURL=style.css.map */
