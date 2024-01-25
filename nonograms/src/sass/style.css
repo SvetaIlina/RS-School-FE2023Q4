@@ -245,8 +245,9 @@ h1 {
 .top-hints .top-hint {
   width: 60px;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   border: 1px solid black;
+  justify-content: end;
 }
 
 .left-hints {
@@ -259,9 +260,10 @@ h1 {
   height: 60px;
   padding: 0 3px;
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
   align-items: center;
   gap: 3px;
+  justify-content: end;
 }
 
 .table-wrap {
