@@ -27,6 +27,11 @@
     }
   }
 
+  #level-items {
+    border: 3px solid $text-color-dark;
+    background: rgb(31, 37, 51);
+  }
+
   .top-hints,
   .left-hints,
   table,

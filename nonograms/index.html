@@ -29,9 +29,28 @@
         <button class="btn new-game-btn">New game</button>
         <button class="btn continue-game-btn">Continue last game</button>
       </div>
+
       <div class="screen game">
+        <div id="level-items" popover>
+          <ul class="level__list">
+            <li class="level__item">
+              <button class="btn level-btn">Easy (5*5)</button>
+            </li>
+            <li class="level__item">
+              <button class="btn level-btn">Medium (10*10)</button>
+            </li>
+            <li class="level__item">
+              <button class="btn level-btn">Hard(15*15)</button>
+            </li>
+            <li class="level__item">
+              <button class="btn level-btn">Random game</button>
+            </li>
+          </ul>
+        </div>
         <div class="game-control">
-          <button class="btn level-btn">Select level</button>
+          <button class="btn level-btn" popovertarget="level-items">
+            Select level
+          </button>
           <button class="btn solution-btn">Show solution</button>
           <button class="btn reset-btn">Reset game</button>
           <button class="btn change-game-btn">Change puzzle</button>
@@ -106,6 +125,7 @@
         <div class="timer">00 : 00</div>
       </div>
     </div>
+
     <script src="src/index.js"></script>
   </body>
 </html>
