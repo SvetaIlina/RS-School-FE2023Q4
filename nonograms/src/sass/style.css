@@ -23,7 +23,7 @@ html {
 
 a {
   text-decoration: none;
-  color: #c1d6f4;
+  color: #795548;
 }
 
 ul {
@@ -38,12 +38,14 @@ button {
 }
 
 body {
-  color: #c1d6f4;
+  color: #795548;
   font-family: "Shippori Mincho", serif;
   height: 100vh;
+  overflow: hidden;
   text-align: center;
-  background-image: url("../images/darc-bg.jpg");
+  background-image: url("../images/iaponii-9.jpg");
   background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .wrapper {
@@ -52,10 +54,9 @@ body {
 }
 
 .header {
-  position: fixed;
-  left: 0;
-  right: 0;
-  background: rgba(31, 37, 51, 0.7);
+  position: sticky;
+  top: 10px;
+  background: rgba(245, 237, 229, 0.7);
 }
 
 .menu__list {
@@ -68,7 +69,7 @@ body {
   font-weight: 800;
   text-align: center;
   padding: 5px 10px;
-  color: #c1d6f4;
+  color: #795548;
   text-shadow: 1px -1px 1px black;
   font-size: 2.1rem;
 }
@@ -95,12 +96,12 @@ body {
 }
 .screen .btn {
   width: 295px;
-  border: 3px solid #c1d6f4;
-  box-shadow: inset 0 0 20px #c1d6f4;
+  border: 3px solid #795548;
+  box-shadow: inset 0 0 20px #795548;
   transition: all 0.6s;
 }
 .screen .btn:hover {
-  box-shadow: inset 15px 15px 40px #c1d6f4;
+  box-shadow: inset 15px 15px 40px #795548;
 }
 @media (max-width: 768px) {
   .screen .btn {
@@ -198,8 +199,8 @@ h1 {
 
 .top-hints,
 .left-hints {
-  background: rgba(31, 37, 51, 0.7);
-  border: 1px solid white;
+  background: rgba(245, 237, 229, 0.7);
+  border: 1px solid black;
   font-weight: 800;
 }
 
@@ -211,7 +212,7 @@ h1 {
   width: 60px;
   display: flex;
   flex-direction: column-reverse;
-  border: 1px solid white;
+  border: 1px solid black;
 }
 
 .left-hints {
@@ -220,7 +221,7 @@ h1 {
   grid-area: left;
 }
 .left-hints .left-hint {
-  border: 1px solid white;
+  border: 1px solid black;
   height: 60px;
   padding: 0 3px;
   display: flex;
@@ -237,14 +238,17 @@ table {
   margin: 0 auto;
   border-spacing: 0;
   border-collapse: collapse;
-  border: 2px solid white;
-  background: rgba(31, 37, 51, 0.7);
+  border: 2px solid black;
+  background: rgba(245, 237, 229, 0.7);
 }
 
-td {
+.ceil {
   width: 60px;
   height: 60px;
-  border: 1px solid white;
+  border: 1px solid black;
+}
+.ceil--clicked {
+  background-color: rgb(26, 13, 13);
 }
 
 td:nth-child(6n) {
@@ -275,5 +279,45 @@ tr:nth-child(6n) {
   .solution-btn {
     grid-column: 3/6;
     grid-row: 1/2;
+  }
+}
+@container style(--theme: dark) {
+  .top-hints,
+  .top-hints .top-hint,
+  .left-hints,
+  .left-hints .left-hint,
+  .ceil {
+    border: 1px solid white;
+  }
+  table {
+    border: 2px solid white;
+  }
+  a,
+  body,
+  .screen .btn,
+  .menu__btn {
+    color: #c1d6f4;
+  }
+  .screen .btn {
+    border: 3px solid #c1d6f4;
+    box-shadow: inset 0 0 20px #c1d6f4;
+  }
+  .screen .btn:hover {
+    box-shadow: inset 15px 15px 40px #c1d6f4;
+  }
+  .top-hints,
+  .left-hints,
+  table,
+  .header {
+    background: rgba(31, 37, 51, 0.7);
+  }
+  body {
+    background-image: url("../images/darc-bg.jpg");
+  }
+  .instruction-link:hover {
+    color: #8840a8;
+  }
+  .ceil--clicked {
+    background-color: rgb(222, 235, 241);
   }
 }/*# sourceMappingURL=style.css.map */

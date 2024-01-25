@@ -1,0 +1,47 @@
+@import './abstract';
+
+@container style(--theme: dark) {
+  .top-hints,
+  .top-hints .top-hint,
+  .left-hints,
+  .left-hints .left-hint,
+  .ceil {
+    border: $borderS-dark;
+  }
+
+  table {
+    border: $borderM-dark;
+  }
+  a,
+  body,
+  .screen .btn,
+  .menu__btn {
+    color: $text-color-dark;
+  }
+
+  .screen .btn {
+    border: 3px solid $text-color-dark;
+    box-shadow: inset 0 0 20px $text-color-dark;
+    &:hover {
+      box-shadow: inset 15px 15px 40px $text-color-dark;
+    }
+  }
+
+  .top-hints,
+  .left-hints,
+  table,
+  .header {
+    background: $bg-color-dark;
+  }
+  body {
+    background-image: $bg-dark;
+  }
+
+  .instruction-link:hover {
+    color: #8840a8;
+  }
+
+  .ceil--clicked {
+    background-color: rgb(222, 235, 241);
+  }
+}

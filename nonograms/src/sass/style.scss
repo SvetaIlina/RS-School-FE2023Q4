@@ -6,9 +6,8 @@
 }
 
 .header {
-  position: fixed;
-  left: 0;
-  right: 0;
+  position: sticky;
+  top: 10px;
   background: $bg-color;
 }
 
@@ -177,10 +176,13 @@ table {
   background: $bg-color;
 }
 
-td {
+.ceil {
   width: 60px;
   height: 60px;
   border: $borderS;
+  &--clicked {
+    background-color: rgb(26, 13, 13);
+  }
 }
 
 td:nth-child(6n) {
@@ -212,3 +214,5 @@ tr:nth-child(6n) {
     grid-row: 1/2;
   }
 }
+
+@import './_dark.scss';
