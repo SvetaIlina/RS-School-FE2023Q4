@@ -165,6 +165,17 @@ h1 {
   }
 }
 
+.timer__item + .timer__item {
+  position: relative;
+  margin-left: 5px;
+}
+.timer__item + .timer__item::before {
+  content: ":";
+  position: absolute;
+  bottom: 4px;
+  right: 36px;
+}
+
 .game-control {
   display: flex;
   flex-direction: column;
