@@ -14,8 +14,8 @@
   }
   a,
   body,
-  .screen .btn,
-  .menu__btn {
+  .btn,
+  .instruction-link {
     color: $text-color-dark;
   }
 
@@ -42,7 +42,8 @@
     background-image: $bg-dark;
   }
 
-  .instruction-link:hover {
+  .instruction-link:hover,
+  .header .btn:hover {
     color: #8840a8;
   }
 

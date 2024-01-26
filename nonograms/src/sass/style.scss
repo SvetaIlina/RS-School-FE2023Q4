@@ -13,7 +13,8 @@
   justify-content: space-evenly;
 }
 
-.btn {
+.btn,
+.instruction-link {
   font-family: 'Shippori Mincho', serif;
   font-weight: 800;
   text-align: center;
@@ -23,8 +24,8 @@
   font-size: 2.1rem;
 }
 
-.instruction-link {
-  font-size: 2.6rem;
+.instruction-link,
+.header .btn {
   transition: all 0.5s;
   &:hover {
     color: #eb7b95;

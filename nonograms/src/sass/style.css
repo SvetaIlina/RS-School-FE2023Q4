@@ -24,6 +24,7 @@ html {
 a {
   text-decoration: none;
   color: #795548;
+  text-transform: uppercase;
 }
 
 ul {
@@ -61,7 +62,8 @@ body {
   justify-content: space-evenly;
 }
 
-.btn {
+.btn,
+.instruction-link {
   font-family: "Shippori Mincho", serif;
   font-weight: 800;
   text-align: center;
@@ -71,11 +73,12 @@ body {
   font-size: 2.1rem;
 }
 
-.instruction-link {
-  font-size: 2.6rem;
+.instruction-link,
+.header .btn {
   transition: all 0.5s;
 }
-.instruction-link:hover {
+.instruction-link:hover,
+.header .btn:hover {
   color: #eb7b95;
 }
 
@@ -308,8 +311,8 @@ tr:nth-child(6n) {
   }
   a,
   body,
-  .screen .btn,
-  .menu__btn {
+  .btn,
+  .instruction-link {
     color: #c1d6f4;
   }
   .screen .btn {
@@ -332,7 +335,8 @@ tr:nth-child(6n) {
   body {
     background-image: url("../images/darc-bg.jpg");
   }
-  .instruction-link:hover {
+  .instruction-link:hover,
+  .header .btn:hover {
     color: #8840a8;
   }
   .ceil--clicked {
