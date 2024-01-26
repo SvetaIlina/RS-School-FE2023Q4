@@ -1,20 +1,20 @@
 import { createNode } from './service.js';
 
 export class GameBtn {
-  constructor(classes, id) {
+  constructor(classes, text, callback) {
     this.classes = classes;
-    this.id = id;
+    this.text = text;
+    this.cb = callback;
   }
 
-  buildBtn(text) {
+  buildBtn() {
     this.btn = createNode('button', this.classes);
-    if (typeof text === 'string') {
-      this.btn.innerText = text;
+    if (typeof this.text === 'string') {
+      this.btn.innerText = this.text;
+    }
+    if (this.cb) {
+      this.btn.addEventListener('click', this.cb);
     }
     return this.btn;
-  }
-
-  bindEvents(callback) {
-    this.btn.addEventListener('click', callback);
   }
 }
