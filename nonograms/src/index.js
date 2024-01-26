@@ -73,6 +73,7 @@ function renderBtn(parent) {
 }
 
 function setPopover() {
+  const parentPage = document.querySelector('.game');
   const trigger = document.querySelector('#select-level');
   const target = createNode('div');
   const content = createNode('div', 'level__list');
@@ -82,7 +83,7 @@ function setPopover() {
   content.setAttribute('data-id', 'level');
   renderBtn(content);
   appendChild(target, content);
-  document.body.prepend(target);
+  appendChild(parentPage, target);
 }
 
 generateContent();
