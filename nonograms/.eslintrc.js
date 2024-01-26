@@ -24,6 +24,8 @@ module.exports = {
     'no-plusplus': 'off',
     'no-console': 'off',
     'no-use-before-define': 'off',
+    'import/prefer-default-export': 'off',
+    'import/extensions': 'off',
   },
 };
 
