@@ -2,6 +2,9 @@ import { createNode, appendChild } from './js/service.js';
 import { GameBtn } from './js/_Button.js';
 import { Link } from './js/_Link.js';
 import { btns } from './js/btnList.js';
+import { GameField } from './js/_GameField.js';
+import { markCeil } from './js/callbacks.js';
+import { arr1 } from './js/imageTemplates.js';
 
 function generateContent() {
   const wrapper = createNode('div', 'wrapper');
@@ -39,8 +42,7 @@ function setMainPage() {
 function setGamePage() {
   const gamePage = createNode('div', 'screen', 'game');
   const controlField = createNode('div', 'game-control');
-  const gameField = createNode('div', 'game-field');
-
+  const gameField = new GameField(5, [markCeil], arr1, '60px').buildField();
   controlField.setAttribute('data-id', 'control');
   renderBtn(controlField);
   appendChild(gamePage, controlField);
