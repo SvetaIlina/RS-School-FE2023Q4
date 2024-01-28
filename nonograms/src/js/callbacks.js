@@ -39,9 +39,21 @@ export function openModal() {
   console.log(openModal);
 }
 
-export function markCeil(event) {
-  if (event.target.classList.contains('ceil')) {
-    event.target.classList.toggle('ceil--clicked');
+export function fillCeil(event) {
+  let sound;
+
+  if (event.button === 0 && !event.target.classList.contains('ceil--crossed')) {
+    sound = new Audio('./src/assets/sound/fill.mp3');
+    event.target.classList.toggle('ceil--fill');
+    sound.play();
+  } else if (
+    event.button === 2 &&
+    !event.target.classList.contains('ceil--fill')
+  ) {
+    event.preventDefault();
+    sound = new Audio('./src/assets/sound/cross.mp3');
+    event.target.classList.toggle('ceil--crossed');
+    sound.play();
   }
 }
 
