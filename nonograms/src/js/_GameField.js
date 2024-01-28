@@ -79,25 +79,19 @@ export class GameField {
         if (direction === 'row') {
           if (this.img[i][j] === 1) {
             counter += 1;
-            if (j === this.fiedSize - 1) {
+            if (j === this.fiedSize - 1 || this.img[i][j + 1] === 0) {
               this.getHint(parent, `${counter}`);
               counter = 0;
             }
-          } else if (j !== 0) {
-            this.getHint(parent, `${counter}`);
-            counter = 0;
           }
         }
         if (direction === 'column') {
           if (this.img[j][i] === 1) {
             counter += 1;
-            if (j === this.fiedSize - 1) {
+            if (j === this.fiedSize - 1 || this.img[j + 1][i] === 0) {
               this.getHint(parent, `${counter}`);
               counter = 0;
             }
-          } else if (j !== 0 && i !== this.fiedSize - 1) {
-            this.getHint(parent, `${counter}`);
-            counter = 0;
           }
         }
       }
