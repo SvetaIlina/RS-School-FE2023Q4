@@ -10,7 +10,7 @@ export class GameField {
 
   buildField() {
     this.field = createNode('div', 'game-field');
-    appendChild(this.field, this.buildTable(this.fiedSize));
+    appendChild(this.field, this.buildTable(this.fiedSize, this.img));
     appendChild(
       this.field,
       this.buildHint(this.fiedSize, this.ceilSize, 'top')
@@ -23,15 +23,19 @@ export class GameField {
     return this.field;
   }
 
-  buildTable(size) {
+  buildTable(size, img) {
     this.table = createNode('table', 'table');
-    for (let i = 1; i <= size; i++) {
+    for (let i = 0; i < size; i++) {
       const row = createNode('tr', 'row');
-      for (let j = 1; j <= size; j++) {
+      for (let j = 0; j < size; j++) {
         const ceil = createNode('td', 'ceil');
         ceil.style.width = this.ceilSize;
         ceil.style.height = this.ceilSize;
         ceil.setAttribute('data-coord', `${i}${j}`);
+        if (img[i][j] === 1) {
+          ceil.setAttribute('data-fill', true);
+        }
+
         appendChild(row, ceil);
       }
       appendChild(this.table, row);
