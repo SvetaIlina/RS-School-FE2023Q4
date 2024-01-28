@@ -8,4 +8,11 @@ function appendChild(node, child) {
   node.append(child);
 }
 
-export { createNode, appendChild };
+function getZero(count) {
+  if (count >= 0 && count < 10) {
+    return `0${count}`;
+  }
+  return count;
+}
+
+export { createNode, appendChild, getZero };

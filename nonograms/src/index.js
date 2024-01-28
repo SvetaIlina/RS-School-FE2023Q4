@@ -3,7 +3,7 @@ import { GameBtn } from './js/_Button.js';
 import { Link } from './js/_Link.js';
 import { btns } from './js/btnList.js';
 import { GameField } from './js/_GameField.js';
-import { markCeil } from './js/callbacks.js';
+import { markCeil, startTimer } from './js/callbacks.js';
 import { arr1 } from './js/imageTemplates.js';
 
 function generateContent() {
@@ -42,7 +42,7 @@ function setMainPage() {
 function setGamePage() {
   const gamePage = createNode('div', 'screen', 'game');
   const controlField = createNode('div', 'game-control');
-  const gameField = new GameField(5, [markCeil], arr1, '60px').buildField();
+  const gameField = new GameField(5, markCeil, arr1, '60px').buildField();
   controlField.setAttribute('data-id', 'control');
   renderBtn(controlField);
   appendChild(gamePage, controlField);
@@ -89,3 +89,7 @@ function setPopover() {
 }
 
 generateContent();
+const table = document.querySelector('.table');
+table.addEventListener('click', startTimer, {
+  once: true,
+});
