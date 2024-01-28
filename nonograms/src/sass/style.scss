@@ -1,7 +1,7 @@
 @import './_global.scss';
 
 .wrapper {
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -66,7 +66,9 @@
     row-gap: 0px;
     align-items: flex-start;
   }
-
+  @media (max-width: 830px) {
+    column-gap: 40px;
+  }
   @media (max-width: 690px) {
     flex-direction: column;
     align-items: center;
@@ -166,8 +168,8 @@ h1 {
   justify-items: center;
   align-items: center;
   gap: 1px;
-  max-height: 480px;
-  max-width: 480px;
+  max-height: 500px;
+  max-width: 500px;
   font-size: 1.5rem;
   @media (max-width: 690px) {
     order: 3;
@@ -202,7 +204,7 @@ h1 {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 3px;
+    gap: 6px;
     justify-content: end;
   }
 }
@@ -246,11 +248,12 @@ table {
   }
 }
 
-td:nth-child(6n) {
-  border-left: 2px solid red;
+td:nth-child(5n + 5):not(:last-child) {
+  border-right: $borderM;
 }
-tr:nth-child(6n) {
-  border-bottom: 2px solid red;
+
+tr:nth-child(5n + 5):not(:last-child) {
+  border-bottom: $borderM;
 }
 
 @import './_dark.scss';

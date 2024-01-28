@@ -9,6 +9,13 @@
     border: $borderS-dark;
   }
 
+  td:nth-child(5n + 5):not(:last-child) {
+    border-right: $borderM-dark;
+  }
+  tr:nth-child(5n + 5):not(:last-child) {
+    border-bottom: $borderM-dark;
+  }
+
   table {
     border: $borderM-dark;
   }
