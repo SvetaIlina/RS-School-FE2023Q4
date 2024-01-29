@@ -1,4 +1,4 @@
-import { getZero, appendChild } from './service.js';
+import { getZero, appendChild, createNode } from './service.js';
 import nonograms from './nonograms.json' assert { type: 'json' };
 import { GameField } from './_GameField.js';
 import { Modal } from './_Modal.js';
@@ -41,8 +41,27 @@ export function goToMainPage() {
 }
 
 export function openModal(e) {
-  console.log(e.target);
-  appendChild(document.body, new Modal('modal').buildModal('ffffg'));
+  const objId = e.target.getAttribute('id');
+  const obj = nonograms.find(i => i.id === objId);
+  const content = createNode('div', 'modal-content');
+  obj.img.forEach(i => {
+    const wrapper = createNode('div', 'modal-item');
+    const img = createNode('img', 'modal-img');
+    const title = createNode('h6', 'item-title');
+    title.innerText = `${i.id.toUpperCase()}`;
+    img.setAttribute('src', `${i.src}`);
+    wrapper.addEventListener('click', () => {
+      const selectedImg = obj.img.find(item => item.id === i.id);
+      console.log(i.id);
+      updateField(obj, selectedImg);
+      document.querySelector('.overlay').remove();
+    });
+
+    appendChild(wrapper, img);
+    appendChild(wrapper, title);
+    appendChild(content, wrapper);
+  });
+  appendChild(document.body, new Modal('modal').buildModal(content));
 }
 
 export function fillCeil(event) {

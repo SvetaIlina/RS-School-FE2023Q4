@@ -8,14 +8,13 @@ export class Modal {
   buildModal(content) {
     this.overlay = createNode('div', 'overlay');
     this.modal = createNode('div', this.classes);
-    this.modalContent = createNode('div', 'modal__content');
     if (typeof content === 'string') {
-      this.modalContent.innerHTML = content;
+      this.modal.innerHTML = content;
     } else {
-      this.modalContent.innerHTML = '';
-      appendChild(this.modalContent, content);
+      this.modal.innerHTML = '';
+      appendChild(this.modal, content);
     }
-    appendChild(this.modal, this.modalContent);
+
     appendChild(this.overlay, this.modal);
     this.overlay.addEventListener('click', e => {
       if (e.target.classList.contains('overlay')) {
