@@ -3,10 +3,11 @@ import { GameBtn } from './js/_Button.js';
 import { Link } from './js/_Link.js';
 import { btns } from './js/btnList.js';
 import { GameField } from './js/_GameField.js';
-import { fillCeil, startTimer } from './js/callbacks.js';
+import { startTimer, randomGame } from './js/callbacks.js';
 import nonograms from './js/nonograms.json' assert { type: 'json' };
 
-const targetObj = nonograms[2];
+let targetObj = nonograms[0];
+let targetImg = targetObj.img[Math.floor(Math.random() * targetObj.img.length)];
 
 function generateContent() {
   const wrapper = createNode('div', 'wrapper');
@@ -46,10 +47,10 @@ function setGamePage() {
   const controlField = createNode('div', 'game-control');
   const gameField = new GameField(
     targetObj.size,
-    fillCeil,
-    targetObj.img[0].matrix,
+    targetImg.matrix,
     targetObj.width
   ).buildField();
+
   controlField.setAttribute('data-id', 'control');
   renderBtn(controlField);
   appendChild(gamePage, controlField);
@@ -78,6 +79,10 @@ function renderBtn(parent) {
     const btn = new GameBtn('btn', text, callBack).buildBtn();
     btn.setAttribute('id', `${text.toLowerCase().split(' ').join('-')}`);
     appendChild(parent, btn);
+    if (parent.classList.contains('level__list')) {
+      btn.setAttribute('popovertargetaction', 'hide');
+      btn.setAttribute('popovertarget', 'level-items');
+    }
   });
 }
 

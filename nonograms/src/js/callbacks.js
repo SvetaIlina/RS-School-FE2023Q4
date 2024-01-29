@@ -1,6 +1,10 @@
 import { getZero } from './service.js';
+import nonograms from './nonograms.json' assert { type: 'json' };
+import { GameField } from './_GameField.js';
 
 let interval;
+let obj;
+let img;
 
 export function showResult() {
   console.log('showRes');
@@ -89,4 +93,17 @@ function stopTimer() {
 
 export function manageSound(event) {
   event.target.classList.toggle('crossed');
+}
+
+export function randomGame() {
+  const objInd = Math.floor(Math.random() * nonograms.length);
+  obj = nonograms[objInd];
+  img = obj.img[Math.floor(Math.random() * obj.img.length)];
+  updateField(obj, img);
+}
+
+function updateField(obj, img) {
+  const newField = new GameField(obj.size, img.matrix, obj.width).buildField();
+
+  document.querySelector('.game-field').replaceWith(newField);
 }

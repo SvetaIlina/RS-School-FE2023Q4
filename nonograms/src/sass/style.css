@@ -42,7 +42,6 @@ body {
   color: #795548;
   font-family: "Shippori Mincho", serif;
   height: 100vh;
-  overflow: hidden;
   text-align: center;
   background-image: url("../assets/images/iaponii-9.jpg");
   background-size: cover;
@@ -305,7 +304,7 @@ h1 {
 table {
   grid-area: table;
   margin: 0 auto;
-  border-spacing: 0;
+  border-spacing: 1px;
   border-collapse: collapse;
   border: 2px solid black;
   background: rgba(245, 237, 229, 0.9);
@@ -316,7 +315,7 @@ table {
   border: 1px solid black;
 }
 .ceil--fill {
-  background-color: rgb(26, 13, 13);
+  background-color: rgb(75, 48, 48);
 }
 
 .crossed::before, .crossed::after {
@@ -392,6 +391,6 @@ tr:nth-child(5n+5):not(:last-child),
     color: #8840a8;
   }
   .ceil--fill {
-    background-color: rgb(222, 235, 241);
+    background-color: rgb(177, 194, 202);
   }
 }/*# sourceMappingURL=style.css.map */

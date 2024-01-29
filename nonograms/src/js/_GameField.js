@@ -1,12 +1,11 @@
 import { appendChild, createNode } from './service.js';
 import { GameBtn } from './_Button.js';
-import { manageSound } from './callbacks.js';
+import { manageSound, fillCeil } from './callbacks.js';
 
 export class GameField {
-  constructor(fiedSize, callback, targetImg, ceilSize = '25px') {
+  constructor(fiedSize, targetImg, ceilSize = '25px') {
     this.fiedSize = fiedSize;
     this.ceilSize = ceilSize;
-    this.callback = callback;
     this.img = targetImg;
   }
 
@@ -47,7 +46,7 @@ export class GameField {
       appendChild(this.table, row);
     }
 
-    this.table.addEventListener('mousedown', this.callback);
+    this.table.addEventListener('mousedown', fillCeil);
     this.table.addEventListener('contextmenu', e => {
       e.preventDefault();
     });
