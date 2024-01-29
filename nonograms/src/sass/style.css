@@ -321,11 +321,13 @@ table {
   transform: rotate(-45deg);
 }
 
-td:nth-child(5n+5):not(:last-child) {
+td:nth-child(5n+5):not(:last-child),
+.top-hint:nth-child(5n+5):not(:last-child) {
   border-right: 2px solid black;
 }
 
-tr:nth-child(5n+5):not(:last-child) {
+tr:nth-child(5n+5):not(:last-child),
+.left-hint:nth-child(5n+5):not(:last-child) {
   border-bottom: 2px solid black;
 }
 
@@ -337,10 +339,12 @@ tr:nth-child(5n+5):not(:last-child) {
   .ceil {
     border: 1px solid white;
   }
-  td:nth-child(5n+5):not(:last-child) {
+  td:nth-child(5n+5):not(:last-child),
+  .top-hint:nth-child(5n+5):not(:last-child) {
     border-right: 2px solid white;
   }
-  tr:nth-child(5n+5):not(:last-child) {
+  tr:nth-child(5n+5):not(:last-child),
+  .left-hint:nth-child(5n+5):not(:last-child) {
     border-bottom: 2px solid white;
   }
   table {
