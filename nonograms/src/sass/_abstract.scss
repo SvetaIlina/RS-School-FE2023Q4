@@ -3,6 +3,12 @@
   flex-direction: column;
 }
 
+@mixin center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @mixin cross {
   content: '';
   position: absolute;

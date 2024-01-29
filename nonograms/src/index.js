@@ -74,9 +74,14 @@ function createTimer() {
 function renderBtn(parent) {
   const btnObj = btns.find(i => i.parent === parent.getAttribute('data-id'));
   btnObj.buttons.forEach(i => {
-    const text = i.content;
+    const str = i.content;
+    const text = str
+      .match(/[^\*\)\(\d]/gi)
+      .join('')
+      .trim();
+
     const callBack = i.callback;
-    const btn = new GameBtn('btn', text, callBack).buildBtn();
+    const btn = new GameBtn('btn', str, callBack).buildBtn();
     btn.setAttribute('id', `${text.toLowerCase().split(' ').join('-')}`);
     appendChild(parent, btn);
     if (parent.classList.contains('level__list')) {

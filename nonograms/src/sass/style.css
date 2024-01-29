@@ -84,10 +84,11 @@ body {
 .screen {
   display: flex;
   flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 100vh;
   transition: margin 0.5s ease-out;
-  justify-content: center;
-  align-items: center;
   gap: 40px;
 }
 .screen.up {
@@ -131,6 +132,7 @@ body {
 @media (max-width: 690px) {
   .game {
     flex-direction: column;
+    display: flex;
     align-items: center;
     justify-content: center;
     gap: 20px;
@@ -341,6 +343,31 @@ tr:nth-child(5n+5):not(:last-child),
   border-bottom: 2px solid black;
 }
 
+.overlay {
+  position: fixed;
+  padding: 20px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(190, 190, 190, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  border-radius: 10px;
+  background-color: rgb(245, 237, 229);
+  width: 675px;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 40px;
+}
+
 @container style(--theme: dark) {
   .top-hints,
   .top-hints .top-hint,
@@ -376,6 +403,9 @@ tr:nth-child(5n+5):not(:last-child),
   #level-items {
     border: 3px solid #c1d6f4;
     background: rgb(31, 37, 51);
+  }
+  .modal {
+    background-color: rgb(31, 37, 51);
   }
   .top-hints,
   .left-hints,

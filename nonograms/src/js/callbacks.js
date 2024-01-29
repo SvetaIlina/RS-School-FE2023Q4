@@ -1,6 +1,7 @@
-import { getZero } from './service.js';
+import { getZero, appendChild } from './service.js';
 import nonograms from './nonograms.json' assert { type: 'json' };
 import { GameField } from './_GameField.js';
+import { Modal } from './_Modal.js';
 
 let interval;
 let obj;
@@ -39,8 +40,9 @@ export function goToMainPage() {
   document.querySelectorAll('.screen').forEach(i => i.classList.remove('up'));
 }
 
-export function openModal() {
-  console.log(openModal);
+export function openModal(e) {
+  console.log(e.target);
+  appendChild(document.body, new Modal('modal').buildModal('ffffg'));
 }
 
 export function fillCeil(event) {

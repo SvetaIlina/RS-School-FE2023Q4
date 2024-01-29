@@ -38,7 +38,7 @@ export const btns = [
         callback: openModal,
       },
       {
-        content: 'Hard(15*15)',
+        content: 'Hard (15*15)',
         callback: openModal,
       },
       {

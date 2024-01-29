@@ -34,10 +34,9 @@
 
 .screen {
   @include flexC;
+  @include center;
   height: 100vh;
   transition: margin 0.5s ease-out;
-  justify-content: center;
-  align-items: center;
   gap: 40px;
   &.up {
     margin-top: -100vh;
@@ -71,8 +70,7 @@
   }
   @media (max-width: 690px) {
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    @include center;
     gap: 20px;
   }
 }
@@ -260,6 +258,27 @@ td:nth-child(5n + 5):not(:last-child),
 tr:nth-child(5n + 5):not(:last-child),
 .left-hint:nth-child(5n + 5):not(:last-child) {
   border-bottom: $borderM;
+}
+
+.overlay {
+  position: fixed;
+  padding: 20px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(190, 190, 190, 0.5);
+  @include center;
+}
+
+.modal {
+  border-radius: 10px;
+  background-color: rgb(245, 237, 229);
+  width: 675px;
+  height: 400px;
+  @include center;
+  flex-wrap: wrap;
+  padding: 40px;
 }
 
 @import './_dark.scss';
