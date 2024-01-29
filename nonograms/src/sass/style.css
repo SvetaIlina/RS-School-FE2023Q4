@@ -42,6 +42,7 @@ body {
   color: #795548;
   font-family: "Shippori Mincho", serif;
   height: 100vh;
+  overflow: hidden;
   text-align: center;
   background-image: url("../assets/images/iaponii-9.jpg");
   background-size: cover;
@@ -114,7 +115,7 @@ body {
 }
 @media (max-width: 1000px) {
   .game {
-    padding-top: 70px;
+    padding-top: 20px;
     flex-wrap: wrap;
     -moz-column-gap: 100px;
          column-gap: 100px;
@@ -133,7 +134,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 30px;
+    gap: 20px;
   }
 }
 
@@ -236,7 +237,7 @@ h1 {
   display: grid;
   grid-template-columns: repeat(3, auto);
   grid-template-rows: repeat(3, auto);
-  grid-template-areas: ". top top" "left table table" "left table table";
+  grid-template-areas: "sound top top" "left table table" "left table table";
   justify-items: center;
   align-items: center;
   gap: 1px;
@@ -248,6 +249,15 @@ h1 {
   .game-field {
     order: 3;
   }
+}
+
+.sound-btn {
+  position: relative;
+  grid-area: sound;
+  width: 40px;
+  height: 40px;
+  background-image: url("../assets/images/loon-icon.svg");
+  background-position: center;
 }
 
 .top-hints,
@@ -308,7 +318,8 @@ table {
 .ceil--fill {
   background-color: rgb(26, 13, 13);
 }
-.ceil--crossed::before, .ceil--crossed::after {
+
+.crossed::before, .crossed::after {
   content: "";
   position: absolute;
   width: 100%;
@@ -317,7 +328,7 @@ table {
   right: 0;
   transform: rotate(45deg);
 }
-.ceil--crossed::after {
+.crossed::after {
   transform: rotate(-45deg);
 }
 

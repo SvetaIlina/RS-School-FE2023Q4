@@ -41,18 +41,20 @@ export function openModal() {
 
 export function fillCeil(event) {
   let sound;
+  const soundTrigger = document.querySelector('.sound-btn');
 
-  if (event.button === 0 && !event.target.classList.contains('ceil--crossed')) {
+  if (event.button === 0 && !event.target.classList.contains('crossed')) {
     sound = new Audio('./src/assets/sound/fill.mp3');
     event.target.classList.toggle('ceil--fill');
-    sound.play();
   } else if (
     event.button === 2 &&
     !event.target.classList.contains('ceil--fill')
   ) {
     event.preventDefault();
     sound = new Audio('./src/assets/sound/cross.mp3');
-    event.target.classList.toggle('ceil--crossed');
+    event.target.classList.toggle('crossed');
+  }
+  if (!soundTrigger.classList.contains('crossed')) {
     sound.play();
   }
 }
@@ -83,4 +85,8 @@ export function startTimer() {
 
 function stopTimer() {
   clearInterval(interval);
+}
+
+export function manageSound(event) {
+  event.target.classList.toggle('crossed');
 }

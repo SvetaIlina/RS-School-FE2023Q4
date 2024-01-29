@@ -1,4 +1,6 @@
 import { appendChild, createNode } from './service.js';
+import { GameBtn } from './_Button.js';
+import { manageSound } from './callbacks.js';
 
 export class GameField {
   constructor(fiedSize, callback, targetImg, ceilSize = '25px') {
@@ -18,6 +20,10 @@ export class GameField {
     appendChild(
       this.field,
       this.buildHint(this.fiedSize, this.ceilSize, 'left')
+    );
+    appendChild(
+      this.field,
+      new GameBtn('sound-btn', '', manageSound).buildBtn()
     );
 
     return this.field;

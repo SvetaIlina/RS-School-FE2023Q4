@@ -3,6 +3,16 @@
   flex-direction: column;
 }
 
+@mixin cross {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: #a83636;
+  right: 0;
+  transform: rotate(45deg);
+}
+
 $borderS: 1px solid black;
 $borderM: 2px solid black;
 $text-color: #795548;
