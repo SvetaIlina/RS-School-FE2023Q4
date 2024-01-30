@@ -8,7 +8,7 @@ import {
   saveGame,
   goToMainPage,
   randomGame,
-  openModal,
+  openLevelModal,
 } from './callbacks.js';
 
 export const btns = [
@@ -31,15 +31,15 @@ export const btns = [
     buttons: [
       {
         content: 'Easy (5*5)',
-        callback: openModal,
+        callback: openLevelModal,
       },
       {
         content: 'Medium (10*10)',
-        callback: openModal,
+        callback: openLevelModal,
       },
       {
         content: 'Hard (15*15)',
-        callback: openModal,
+        callback: openLevelModal,
       },
       {
         content: 'Random game',
