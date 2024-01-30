@@ -8,7 +8,7 @@ import {
 } from './callbacks.js';
 
 export class GameField {
-  constructor(fiedSize, targetImg, ceilSize = '25px') {
+  constructor(fiedSize = 0, targetImg = [], ceilSize = '25px') {
     this.fiedSize = fiedSize;
     this.ceilSize = ceilSize;
     this.img = targetImg;

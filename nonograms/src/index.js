@@ -41,17 +41,9 @@ function setMainPage() {
 }
 
 function setGamePage() {
-  const targetObj = nonograms[0];
-  const targetImg =
-    targetObj.img[Math.floor(Math.random() * targetObj.img.length)];
   const gamePage = createNode('div', 'screen', 'game');
   const controlField = createNode('div', 'game-control');
-  const gameField = new GameField(
-    targetObj.size,
-    targetImg.matrix,
-    targetObj.width
-  ).buildField();
-
+  const gameField = new GameField().buildField();
   controlField.setAttribute('data-id', 'control');
   renderBtn(controlField);
   appendChild(gamePage, controlField);
