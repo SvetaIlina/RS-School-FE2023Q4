@@ -5,6 +5,7 @@ import { Modal } from './_Modal.js';
 
 let interval;
 let obj;
+let selectedImg = {};
 
 export function showResult() {
   console.log('showRes');
@@ -40,12 +41,12 @@ export function goToMainPage() {
   document.querySelectorAll('.screen').forEach(i => i.classList.remove('up'));
 }
 
-export function openModal(e) {
+export function openLevelModal(e) {
   const objId = e.target.getAttribute('id');
   const obj = nonograms.find(i => i.id === objId);
   const content = createNode('div', 'modal-content');
   obj.img.forEach(i => {
-    const wrapper = createNode('div', 'modal-item');
+    const wrapper = createNode('div', 'modal-item', 'level-cont');
     const image = createNode('img', 'modal-img');
     const title = createNode('h6', 'item-title');
     title.innerText = `${i.id.toUpperCase()}`;
@@ -66,26 +67,25 @@ export function openModal(e) {
 export function fillCeil(event) {
   let sound;
   const soundTrigger = document.querySelector('.sound-btn');
-
-  if (event.type === 'click' && !event.target.classList.contains('crossed')) {
-    sound = new Audio('./src/assets/sound/fill.mp3');
-    event.target.classList.toggle('ceil--fill');
-  } else if (
-    event.type === 'contextmenu' &&
-    !event.target.classList.contains('ceil--fill')
-  ) {
-    sound = new Audio('./src/assets/sound/cross.mp3');
-    event.target.classList.toggle('crossed');
-  }
-  if (!soundTrigger.classList.contains('crossed')) {
-    sound.play();
+  if (event.target.classList.contains('ceil')) {
+    if (event.type === 'click' && !event.target.classList.contains('crossed')) {
+      sound = new Audio('./src/assets/sound/fill.mp3');
+      event.target.classList.toggle('ceil--fill');
+    } else if (
+      event.type === 'contextmenu' &&
+      !event.target.classList.contains('ceil--fill')
+    ) {
+      sound = new Audio('./src/assets/sound/cross.mp3');
+      event.target.classList.toggle('crossed');
+    }
+    if (!soundTrigger.classList.contains('crossed')) {
+      sound.play();
+    }
   }
 }
 
 export function startTimer() {
-  const sec = document.querySelector('#sec');
-  const min = document.querySelector('#min');
-  const hour = document.querySelector('#hour');
+  const { sec, min, hour } = getTime();
   let countSec = 0;
   let countMin = 0;
   let countHour = 0;
@@ -107,9 +107,10 @@ export function startTimer() {
 }
 
 function resetTimer() {
-  document.querySelector('#sec').innerText = '00';
-  document.querySelector('#min').innerText = '00';
-  document.querySelector('#hour').innerText = '00';
+  const { sec, min, hour } = getTime();
+  sec.innerText = '00';
+  min.innerText = '00';
+  hour.innerText = '00';
   clearInterval(interval);
 }
 
@@ -133,7 +134,7 @@ export function checkSolution() {
   if (mustBeField.every(ceil => ceil.classList.contains('ceil--fill'))) {
     clearInterval(interval);
     ceils.forEach(ceil => ceil.classList.remove('crossed'));
-    appendChild(document.body, new Modal('modal').buildModal('congrats'));
+    openGongratsModal(selectedImg);
   }
 }
 
@@ -141,4 +142,37 @@ function updateField(obj, img) {
   const newField = new GameField(obj.size, img.matrix, obj.width).buildField();
   document.querySelector('.game-field').replaceWith(newField);
   resetTimer();
+}
+
+function openGongratsModal(someImg) {
+  const content = createNode('div', 'modal-item'),
+    image = createNode('img', 'modal-img', 'congrats'),
+    title = createNode('h6', 'item-title'),
+    time = getWinTime();
+  title.innerText = `Great! You have solved the nonogram in ${time} seconds!`;
+  image.setAttribute('src', `${someImg.src}`);
+  appendChild(content, title);
+  appendChild(content, image);
+  appendChild(document.body, new Modal('modal').buildModal(content));
+}
+
+function getTime() {
+  const sec = document.querySelector('#sec');
+  const min = document.querySelector('#min');
+  const hour = document.querySelector('#hour');
+  return {
+    sec: sec,
+    min: min,
+    hour: hour,
+  };
+}
+
+function getWinTime() {
+  const { sec, min, hour } = getTime(),
+    winSec = +sec.innerText,
+    winMin = +min.innerText,
+    winHour = +hour.innerText,
+    winTime = winSec + winMin * 60 + winHour * 3600;
+
+  return winTime;
 }
