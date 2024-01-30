@@ -1,6 +1,11 @@
 import { appendChild, createNode } from './service.js';
 import { GameBtn } from './_Button.js';
-import { manageSound, fillCeil, startTimer } from './callbacks.js';
+import {
+  manageSound,
+  fillCeil,
+  startTimer,
+  checkSolution,
+} from './callbacks.js';
 
 export class GameField {
   constructor(fiedSize, targetImg, ceilSize = '25px') {
@@ -51,6 +56,7 @@ export class GameField {
       fillCeil(e);
       e.preventDefault();
     });
+    this.table.addEventListener('click', checkSolution);
     this.table.addEventListener('click', startTimer, {
       once: true,
     });

@@ -106,7 +106,7 @@ export function startTimer() {
   }
 }
 
-function stopTimer() {
+function resetTimer() {
   document.querySelector('#sec').innerText = '00';
   document.querySelector('#min').innerText = '00';
   document.querySelector('#hour').innerText = '00';
@@ -127,8 +127,18 @@ export function randomGame(e) {
   updateField(obj, img);
 }
 
+export function checkSolution() {
+  const ceils = Array.from(document.querySelectorAll('.ceil'));
+  const mustBeField = ceils.filter(ceil => ceil.dataset.fill === 'true');
+  if (mustBeField.every(ceil => ceil.classList.contains('ceil--fill'))) {
+    clearInterval(interval);
+    ceils.forEach(ceil => ceil.classList.remove('crossed'));
+    appendChild(document.body, new Modal('modal').buildModal('congrats'));
+  }
+}
+
 function updateField(obj, img) {
   const newField = new GameField(obj.size, img.matrix, obj.width).buildField();
   document.querySelector('.game-field').replaceWith(newField);
-  stopTimer();
+  resetTimer();
 }
