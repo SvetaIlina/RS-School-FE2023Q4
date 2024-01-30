@@ -275,6 +275,7 @@ tr:nth-child(5n + 5):not(:last-child),
 }
 
 .modal {
+  position: relative;
   border-radius: 10px;
   background-color: rgb(245, 237, 229);
   width: 675px;
@@ -285,6 +286,10 @@ tr:nth-child(5n + 5):not(:last-child),
     @include center;
     gap: 20px;
     flex-wrap: wrap;
+  }
+  svg {
+    fill: $text-color;
+    pointer-events: none;
   }
 }
 
@@ -311,6 +316,13 @@ tr:nth-child(5n + 5):not(:last-child),
     height: 100px;
     cursor: pointer;
   }
+}
+
+.close-btn {
+  position: absolute;
+  top: 13px;
+  right: 15px;
+  cursor: pointer;
 }
 
 @import './_dark.scss';
