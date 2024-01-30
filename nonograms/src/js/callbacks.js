@@ -142,11 +142,14 @@ function updateField(obj, img) {
   const newField = new GameField(obj.size, img.matrix, obj.width).buildField();
   document.querySelector('.game-field').replaceWith(newField);
   resetTimer();
+  selectedImg.id = img.id;
+  selectedImg.src = img.src;
+  selectedImg.matrix = img.matrix;
 }
 
 function openGongratsModal(someImg) {
   const content = createNode('div', 'modal-item'),
-    image = createNode('img', 'modal-img', 'congrats'),
+    image = createNode('img', 'modal-img'),
     title = createNode('h6', 'item-title'),
     time = getWinTime();
   title.innerText = `Great! You have solved the nonogram in ${time} seconds!`;
