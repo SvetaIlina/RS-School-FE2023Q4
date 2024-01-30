@@ -44,6 +44,8 @@ export class GameField {
         ceil.setAttribute('data-coord', `${i}${j}`);
         if (img[i][j] === 1) {
           ceil.setAttribute('data-fill', true);
+        } else {
+          ceil.setAttribute('data-fill', false);
         }
 
         appendChild(row, ceil);

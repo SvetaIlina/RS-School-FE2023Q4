@@ -131,8 +131,10 @@ export function randomGame(e) {
 export function checkSolution() {
   const feild = document.querySelector('.game-field');
   const ceils = Array.from(document.querySelectorAll('.ceil'));
-  const mustBeField = ceils.filter(ceil => ceil.dataset.fill === 'true');
-  if (mustBeField.every(ceil => ceil.classList.contains('ceil--fill'))) {
+  const mustBeFill = ceils.filter(ceil => ceil.dataset.fill === 'true');
+  const notFill = ceils.filter(ceil => ceil.dataset.fill === 'false');
+  const filledCeil = ceil => ceil.classList.contains('ceil--fill');
+  if (mustBeFill.every(filledCeil) && !notFill.some(filledCeil)) {
     clearInterval(interval);
     ceils.forEach(ceil => ceil.classList.remove('crossed'));
     feild.classList.add('game-field--disable');
