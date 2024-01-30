@@ -21,6 +21,7 @@ export function changeTheme() {
 }
 
 export function startNewgame(event) {
+  randomGame(event);
   event.target.parentNode.classList.add('up');
 }
 
@@ -118,10 +119,13 @@ export function manageSound(event) {
   event.target.classList.toggle('crossed');
 }
 
-export function randomGame() {
-  const objInd = Math.floor(Math.random() * nonograms.length);
+export function randomGame(e) {
+  let objInd = 0;
+  if (e.target.getAttribute('id') === 'random-game') {
+    objInd = Math.floor(Math.random() * nonograms.length);
+  }
   obj = nonograms[objInd];
-  img = obj.img[Math.floor(Math.random() * obj.img.length)];
+  const img = obj.img[Math.floor(Math.random() * obj.img.length)];
   updateField(obj, img);
 }
 
