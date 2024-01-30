@@ -46,8 +46,9 @@ export class GameField {
       appendChild(this.table, row);
     }
 
-    this.table.addEventListener('mousedown', fillCeil);
+    this.table.addEventListener('click', e => fillCeil(e));
     this.table.addEventListener('contextmenu', e => {
+      fillCeil(e);
       e.preventDefault();
     });
     this.table.addEventListener('click', startTimer, {

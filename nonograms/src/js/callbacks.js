@@ -5,7 +5,6 @@ import { Modal } from './_Modal.js';
 
 let interval;
 let obj;
-let img;
 
 export function showResult() {
   console.log('showRes');
@@ -68,14 +67,13 @@ export function fillCeil(event) {
   let sound;
   const soundTrigger = document.querySelector('.sound-btn');
 
-  if (event.button === 0 && !event.target.classList.contains('crossed')) {
+  if (event.type === 'click' && !event.target.classList.contains('crossed')) {
     sound = new Audio('./src/assets/sound/fill.mp3');
     event.target.classList.toggle('ceil--fill');
   } else if (
-    event.button === 2 &&
+    event.type === 'contextmenu' &&
     !event.target.classList.contains('ceil--fill')
   ) {
-    event.preventDefault();
     sound = new Audio('./src/assets/sound/cross.mp3');
     event.target.classList.toggle('crossed');
   }
