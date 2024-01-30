@@ -377,13 +377,25 @@ tr:nth-child(5n+5):not(:last-child),
 .modal-item {
   display: flex;
   flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
 }
-.modal-item .item-title {
-  padding-top: 10px;
+
+.item-title {
   font-size: 2rem;
+}
+
+.modal-img {
+  width: 200px;
+  height: 200px;
+}
+
+.level-cont .item-title {
   cursor: pointer;
 }
-.modal-item .modal-img {
+.level-cont .modal-img {
   width: 100px;
   height: 100px;
   cursor: pointer;

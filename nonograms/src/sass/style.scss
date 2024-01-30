@@ -287,9 +287,20 @@ tr:nth-child(5n + 5):not(:last-child),
 
 .modal-item {
   @include flexC;
+  @include center;
+  gap: 20px;
+}
+
+.item-title {
+  font-size: 2rem;
+}
+.modal-img {
+  width: 200px;
+  height: 200px;
+}
+
+.level-cont {
   .item-title {
-    padding-top: 10px;
-    font-size: 2rem;
     cursor: pointer;
   }
   .modal-img {
