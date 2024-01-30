@@ -46,18 +46,17 @@ export function openModal(e) {
   const content = createNode('div', 'modal-content');
   obj.img.forEach(i => {
     const wrapper = createNode('div', 'modal-item');
-    const img = createNode('img', 'modal-img');
+    const image = createNode('img', 'modal-img');
     const title = createNode('h6', 'item-title');
     title.innerText = `${i.id.toUpperCase()}`;
-    img.setAttribute('src', `${i.src}`);
+    image.setAttribute('src', `${i.src}`);
     wrapper.addEventListener('click', () => {
       const selectedImg = obj.img.find(item => item.id === i.id);
-      console.log(i.id);
       updateField(obj, selectedImg);
       document.querySelector('.overlay').remove();
     });
 
-    appendChild(wrapper, img);
+    appendChild(wrapper, image);
     appendChild(wrapper, title);
     appendChild(content, wrapper);
   });
@@ -109,6 +108,9 @@ export function startTimer() {
 }
 
 function stopTimer() {
+  document.querySelector('#sec').innerText = '00';
+  document.querySelector('#min').innerText = '00';
+  document.querySelector('#hour').innerText = '00';
   clearInterval(interval);
 }
 
@@ -125,6 +127,6 @@ export function randomGame() {
 
 function updateField(obj, img) {
   const newField = new GameField(obj.size, img.matrix, obj.width).buildField();
-
   document.querySelector('.game-field').replaceWith(newField);
+  stopTimer();
 }

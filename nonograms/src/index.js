@@ -3,11 +3,9 @@ import { GameBtn } from './js/_Button.js';
 import { Link } from './js/_Link.js';
 import { btns } from './js/btnList.js';
 import { GameField } from './js/_GameField.js';
-import { startTimer, randomGame } from './js/callbacks.js';
 import nonograms from './js/nonograms.json' assert { type: 'json' };
 
-let targetObj = nonograms[0];
-let targetImg = targetObj.img[Math.floor(Math.random() * targetObj.img.length)];
+generateContent();
 
 function generateContent() {
   const wrapper = createNode('div', 'wrapper');
@@ -43,6 +41,9 @@ function setMainPage() {
 }
 
 function setGamePage() {
+  const targetObj = nonograms[0];
+  const targetImg =
+    targetObj.img[Math.floor(Math.random() * targetObj.img.length)];
   const gamePage = createNode('div', 'screen', 'game');
   const controlField = createNode('div', 'game-control');
   const gameField = new GameField(
@@ -104,10 +105,3 @@ function setPopover() {
   appendChild(target, content);
   appendChild(parentPage, target);
 }
-
-generateContent();
-
-const table = document.querySelector('.table');
-table.addEventListener('click', startTimer, {
-  once: true,
-});
