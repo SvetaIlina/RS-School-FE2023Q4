@@ -17,7 +17,7 @@ export class Modal {
     appendChild(this.modal, content);
 
     appendChild(this.overlay, this.modal);
-    this.closeBtn.addEventListener('click', this.closeModal);
+
     this.overlay.addEventListener('click', this.closeModal);
 
     return this.overlay;
