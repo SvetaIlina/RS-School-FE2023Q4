@@ -129,11 +129,13 @@ export function randomGame(e) {
 }
 
 export function checkSolution() {
+  const feild = document.querySelector('.game-field');
   const ceils = Array.from(document.querySelectorAll('.ceil'));
   const mustBeField = ceils.filter(ceil => ceil.dataset.fill === 'true');
   if (mustBeField.every(ceil => ceil.classList.contains('ceil--fill'))) {
     clearInterval(interval);
     ceils.forEach(ceil => ceil.classList.remove('crossed'));
+    feild.classList.add('game-field--disable');
     openGongratsModal(selectedImg);
   }
 }
@@ -151,12 +153,14 @@ function openGongratsModal(someImg) {
   const content = createNode('div', 'modal-item'),
     image = createNode('img', 'modal-img'),
     title = createNode('h6', 'item-title'),
-    time = getWinTime();
+    time = getWinTime(),
+    sound = new Audio('./src/assets/sound/happy.mp3');
   title.innerText = `Great! You have solved the nonogram in ${time} seconds!`;
   image.setAttribute('src', `${someImg.src}`);
   appendChild(content, title);
   appendChild(content, image);
   appendChild(document.body, new Modal('modal').buildModal(content));
+  sound.play();
 }
 
 function getTime() {

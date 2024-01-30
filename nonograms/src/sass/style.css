@@ -246,6 +246,9 @@ h1 {
   max-width: 500px;
   font-size: 1.5rem;
 }
+.game-field--disable {
+  pointer-events: none;
+}
 @media (max-width: 690px) {
   .game-field {
     order: 3;
