@@ -275,10 +275,28 @@ tr:nth-child(5n + 5):not(:last-child),
   border-radius: 10px;
   background-color: rgb(245, 237, 229);
   width: 675px;
-  height: 400px;
+  min-height: 400px;
   @include center;
-  flex-wrap: wrap;
   padding: 40px;
+  .modal-content {
+    @include center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+}
+
+.modal-item {
+  @include flexC;
+  .item-title {
+    padding-top: 10px;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+  .modal-img {
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+  }
 }
 
 @import './_dark.scss';
