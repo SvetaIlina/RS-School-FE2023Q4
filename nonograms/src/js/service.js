@@ -15,4 +15,9 @@ function getZero(count) {
   return count;
 }
 
-export { createNode, appendChild, getZero };
+function checkSound() {
+  const soundTrigger = document.querySelector('.sound-btn');
+  return soundTrigger.classList.contains('crossed');
+}
+
+export { createNode, appendChild, getZero, checkSound };

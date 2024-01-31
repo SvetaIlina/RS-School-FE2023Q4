@@ -1,4 +1,4 @@
-import { getZero, appendChild, createNode } from './service.js';
+import { getZero, appendChild, createNode, checkSound } from './service.js';
 import nonograms from './nonograms.json' assert { type: 'json' };
 import { GameField } from './_GameField.js';
 import { Modal } from './_Modal.js';
@@ -66,7 +66,7 @@ export function openLevelModal(e) {
 
 export function fillCeil(event) {
   let sound;
-  const soundTrigger = document.querySelector('.sound-btn');
+
   if (event.target.classList.contains('ceil')) {
     if (event.type === 'click' && !event.target.classList.contains('crossed')) {
       sound = new Audio('./src/assets/sound/fill.mp3');
@@ -78,7 +78,7 @@ export function fillCeil(event) {
       sound = new Audio('./src/assets/sound/cross.mp3');
       event.target.classList.toggle('crossed');
     }
-    if (!soundTrigger.classList.contains('crossed')) {
+    if (!checkSound()) {
       sound.play();
     }
   }
@@ -157,12 +157,15 @@ function openGongratsModal(someImg) {
     title = createNode('h6', 'item-title'),
     time = getWinTime(),
     sound = new Audio('./src/assets/sound/happy.mp3');
+
   title.innerText = `Great! You have solved the nonogram in ${time} seconds!`;
   image.setAttribute('src', `${someImg.src}`);
   appendChild(content, title);
   appendChild(content, image);
   appendChild(document.body, new Modal('modal').buildModal(content));
-  sound.play();
+  if (!checkSound()) {
+    sound.play();
+  }
 }
 
 function getTime() {
