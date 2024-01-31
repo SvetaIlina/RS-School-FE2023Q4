@@ -191,12 +191,13 @@ function openGongratsModal(someImg) {
   const content = createNode('div', 'modal-item'),
     image = createNode('img', 'modal-img'),
     title = createNode('h6', 'item-title'),
-    time = getWinTime(),
-    sound = new Audio('./src/assets/sound/happy.mp3');
-
+    time = getWinTime();
+  sound = createNode('audio', 'audio');
+  sound.setAttribute('src', './src/assets/sound/happy.mp3');
   title.innerText = `Great! You have solved the nonogram in ${time} seconds!`;
   image.setAttribute('src', `${someImg.src}`);
   appendChild(content, title);
+  appendChild(content, sound);
   appendChild(content, image);
   appendChild(document.body, new Modal('modal').buildModal(content));
   if (!checkSound()) {

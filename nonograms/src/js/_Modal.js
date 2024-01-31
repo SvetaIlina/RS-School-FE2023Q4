@@ -28,6 +28,10 @@ export class Modal {
       e.target.classList.contains('overlay') ||
       e.target.classList.contains('close-btn')
     ) {
+      if (document.querySelector('audio')) {
+        document.querySelector('audio').pause();
+      }
+
       document.querySelector('.overlay').remove();
     }
   }
