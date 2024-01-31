@@ -4,7 +4,6 @@ import { GameField } from './_GameField.js';
 import { Modal } from './_Modal.js';
 
 let interval;
-let obj;
 let selectedImg = {};
 
 export function showResult() {
@@ -57,18 +56,23 @@ export function goToMainPage() {
 }
 
 export function openLevelModal(e) {
-  const objId = e.target.getAttribute('id');
-  const obj = nonograms.find(i => i.id === objId);
+  let objId;
+  if (e.target.getAttribute('id') !== 'change-puzzle') {
+    objId = e.target.getAttribute('id');
+  } else {
+    objId = selectedImg.level;
+  }
+  const object = nonograms.find(i => i.id === objId);
   const content = createNode('div', 'modal-content');
-  obj.img.forEach(i => {
+  object.img.forEach(i => {
     const wrapper = createNode('div', 'modal-item', 'level-cont');
     const image = createNode('img', 'modal-img');
     const title = createNode('h6', 'item-title');
     title.innerText = `${i.id.toUpperCase()}`;
     image.setAttribute('src', `${i.src}`);
     wrapper.addEventListener('click', () => {
-      const img = obj.img.find(item => item.id === i.id);
-      updateField(obj, img);
+      const img = object.img.find(item => item.id === i.id);
+      updateField(object, img);
       document.querySelector('.overlay').remove();
     });
 
@@ -134,6 +138,7 @@ export function manageSound(event) {
 }
 
 export function randomGame(e) {
+  let obj;
   let objInd = 0;
   if (e.target.getAttribute('id') === 'random-game') {
     objInd = Math.floor(Math.random() * nonograms.length);
@@ -167,13 +172,19 @@ function getCeilstatus() {
   };
 }
 
-function updateField(obj, img) {
-  const newField = new GameField(obj.size, img.matrix, obj.width).buildField();
+function updateField(object, img) {
+  const newField = new GameField(
+    object.size,
+    img.matrix,
+    object.width
+  ).buildField();
   document.querySelector('.game-field').replaceWith(newField);
   resetTimer();
   selectedImg.id = img.id;
   selectedImg.src = img.src;
   selectedImg.matrix = img.matrix;
+  selectedImg.level = object.id;
+  console.log(selectedImg);
 }
 
 function openGongratsModal(someImg) {

@@ -63,6 +63,7 @@ export const btns = [
       },
       {
         content: 'Change puzzle',
+        callback: openLevelModal,
       },
       {
         content: 'Save game',
