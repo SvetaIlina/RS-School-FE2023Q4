@@ -30,6 +30,7 @@ export function continueSavedGame() {
 }
 export function showSolution() {
   const { feild, allCeils, fillCeil, emptyCeil } = getCeilstatus();
+
   allCeils.forEach(ceil => ceil.classList.remove('ceil--fill', 'crossed'));
   fillCeil.forEach(ceil => ceil.classList.add('ceil--fill'));
   emptyCeil.forEach(ceil => ceil.classList.add('crossed'));
@@ -37,7 +38,16 @@ export function showSolution() {
   clearInterval(interval);
 }
 export function resetGame() {
-  console.log(resetGame);
+  const allCeils = getCeilstatus().allCeils;
+  const feild = getCeilstatus().feild;
+  const table = document.querySelector('.table');
+  allCeils.forEach(ceil => ceil.classList.remove('ceil--fill', 'crossed'));
+
+  if (feild.classList.contains('game-field--disable')) {
+    feild.classList.remove('game-field--disable');
+    table.addEventListener('click', startTimer, { once: true });
+    resetTimer();
+  }
 }
 export function saveGame() {
   stopTimer();
