@@ -67,8 +67,8 @@ export function openLevelModal(e) {
     title.innerText = `${i.id.toUpperCase()}`;
     image.setAttribute('src', `${i.src}`);
     wrapper.addEventListener('click', () => {
-      const selectedImg = obj.img.find(item => item.id === i.id);
-      updateField(obj, selectedImg);
+      const img = obj.img.find(item => item.id === i.id);
+      updateField(obj, img);
       document.querySelector('.overlay').remove();
     });
 
