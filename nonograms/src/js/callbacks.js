@@ -25,7 +25,8 @@ export function startNewgame(event) {
 }
 
 export function continueSavedGame() {
-  console.log(continueSavedGame);
+  const saveObj = JSON.parse(localStorage.savedGame);
+  console.log(saveObj);
 }
 export function showSolution() {
   const { feild, allCeils, fillCeil, emptyCeil } = getCeilstatus();
@@ -49,7 +50,24 @@ export function resetGame() {
   }
 }
 export function saveGame() {
-  stopTimer();
+  const time = getTime();
+  const saveGame = {};
+  const arr = JSON.parse(JSON.stringify(selectedImg.matrix));
+  const ceils = document.querySelectorAll('.ceil');
+  Object.assign(saveGame, selectedImg);
+  ceils.forEach(ceil => {
+    const [i, j] = ceil.dataset.coord.split('-');
+    if (ceil.classList.contains('ceil--fill')) {
+      arr[i][j] = 1;
+    } else if (ceil.classList.contains('crossed')) {
+      arr[i][j] = -1;
+    } else {
+      arr[i][j] = 0;
+    }
+  });
+  saveGame.currentMatrix = arr;
+  saveGame.time = time;
+  localStorage.savedGame = JSON.stringify(saveGame);
 }
 export function goToMainPage() {
   document.querySelectorAll('.screen').forEach(i => i.classList.remove('up'));
@@ -184,15 +202,16 @@ function updateField(object, img) {
   selectedImg.src = img.src;
   selectedImg.matrix = img.matrix;
   selectedImg.level = object.id;
-  console.log(selectedImg);
+  selectedImg.size = object.size;
+  // console.log(selectedImg);
 }
 
 function openGongratsModal(someImg) {
   const content = createNode('div', 'modal-item'),
     image = createNode('img', 'modal-img'),
     title = createNode('h6', 'item-title'),
-    time = getWinTime();
-  sound = createNode('audio', 'audio');
+    time = getWinTime(),
+    sound = createNode('audio', 'audio');
   sound.setAttribute('src', './src/assets/sound/happy.mp3');
   title.innerText = `Great! You have solved the nonogram in ${time} seconds!`;
   image.setAttribute('src', `${someImg.src}`);
