@@ -51,7 +51,9 @@
 
   .top-hints,
   .left-hints,
-  table,
+  table {
+    background: rgba(97, 93, 66, 0.9);
+  }
   .header {
     background: $bg-color-dark;
   }

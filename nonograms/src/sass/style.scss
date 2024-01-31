@@ -71,7 +71,8 @@
   @media (max-width: 690px) {
     flex-direction: column;
     @include center;
-    gap: 20px;
+    padding-top: 0;
+    gap: 5px;
   }
 }
 
