@@ -41,11 +41,11 @@ export class GameField {
         const ceil = createNode('td', 'ceil');
         ceil.style.width = this.ceilSize;
         ceil.style.height = this.ceilSize;
-        ceil.setAttribute('data-coord', `${i}${j}`);
+        ceil.dataset.coord = `${i}-${j}`;
         if (img[i][j] === 1) {
-          ceil.setAttribute('data-fill', true);
+          ceil.dataset.fill = true;
         } else {
-          ceil.setAttribute('data-fill', false);
+          ceil.dataset.fill = false;
         }
 
         appendChild(row, ceil);
