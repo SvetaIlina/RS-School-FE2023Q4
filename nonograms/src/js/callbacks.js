@@ -29,7 +29,12 @@ export function continueSavedGame() {
   console.log(continueSavedGame);
 }
 export function showSolution() {
-  console.log(showSolution);
+  const { feild, allCeils, fillCeil, emptyCeil } = getCeilstatus();
+  allCeils.forEach(ceil => ceil.classList.remove('ceil--fill', 'crossed'));
+  fillCeil.forEach(ceil => ceil.classList.add('ceil--fill'));
+  emptyCeil.forEach(ceil => ceil.classList.add('crossed'));
+  feild.classList.add('game-field--disable');
+  clearInterval(interval);
 }
 export function resetGame() {
   console.log(resetGame);
@@ -129,17 +134,27 @@ export function randomGame(e) {
 }
 
 export function checkSolution() {
+  const filledCeil = ceil => ceil.classList.contains('ceil--fill');
+  const { feild, allCeils, fillCeil, emptyCeil } = getCeilstatus();
+  if (fillCeil.every(filledCeil) && !emptyCeil.some(filledCeil)) {
+    clearInterval(interval);
+    allCeils.forEach(ceil => ceil.classList.remove('crossed'));
+    feild.classList.add('game-field--disable');
+    openGongratsModal(selectedImg);
+  }
+}
+
+function getCeilstatus() {
   const feild = document.querySelector('.game-field');
   const ceils = Array.from(document.querySelectorAll('.ceil'));
   const mustBeFill = ceils.filter(ceil => ceil.dataset.fill === 'true');
   const notFill = ceils.filter(ceil => ceil.dataset.fill === 'false');
-  const filledCeil = ceil => ceil.classList.contains('ceil--fill');
-  if (mustBeFill.every(filledCeil) && !notFill.some(filledCeil)) {
-    clearInterval(interval);
-    ceils.forEach(ceil => ceil.classList.remove('crossed'));
-    feild.classList.add('game-field--disable');
-    openGongratsModal(selectedImg);
-  }
+  return {
+    feild: feild,
+    allCeils: ceils,
+    fillCeil: mustBeFill,
+    emptyCeil: notFill,
+  };
 }
 
 function updateField(obj, img) {
