@@ -283,6 +283,8 @@ tr:nth-child(5n + 5):not(:last-child),
   min-height: 400px;
   @include center;
   padding: 40px;
+  font-size: 3rem;
+  text-transform: uppercase;
   .modal-content {
     @include center;
     gap: 20px;
