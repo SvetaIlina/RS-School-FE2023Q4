@@ -28,7 +28,29 @@ export function startNewgame(event) {
 
 export function continueSavedGame() {
   const saveObj = JSON.parse(localStorage.savedGame);
-  console.log(saveObj);
+  const obj = nonograms.find(i => i.id === saveObj.level);
+  const img = obj.img.find(i => i.id === saveObj.id);
+  updateField(obj, img);
+  const { curSec, curMin, curHour } = saveObj.time;
+  const { sec, min, hour } = getTime();
+  sec.innerText = curSec;
+  min.innerText = curMin;
+  hour.innerText = curHour;
+  const ceils = document.querySelectorAll('.ceil');
+  ceils.forEach(ceil => {
+    const [i, j] = ceil.dataset.coord.split('-');
+    if (saveObj.currentMatrix[i][j] === 1) {
+      ceil.classList.add('ceil--fill');
+    } else if (saveObj.currentMatrix[i][j] === -1) {
+      ceil.classList.add('crossed');
+    }
+  });
+  document
+    .querySelector('table')
+    .addEventListener('click', e => startTimer(e, +curSec, +curMin, +curHour), {
+      once: true,
+    });
+  event.target.parentNode.classList.add('up');
 }
 export function showSolution() {
   const { feild, allCeils, fillCeil, emptyCeil } = getCeilstatus();
@@ -52,7 +74,12 @@ export function resetGame() {
   }
 }
 export function saveGame() {
-  const time = getTime();
+  const { sec, min, hour } = getTime();
+  const time = {
+    curSec: sec.innerText,
+    curMin: min.innerText,
+    curHour: hour.innerText,
+  };
   const saveGame = {};
   const arr = JSON.parse(JSON.stringify(selectedImg.matrix));
   const ceils = document.querySelectorAll('.ceil');
@@ -69,6 +96,11 @@ export function saveGame() {
   });
   saveGame.currentMatrix = arr;
   saveGame.time = time;
+  appendChild(
+    document.body,
+    new Modal('modal').buildModal('the game was saved')
+  );
+  setTimeout(() => document.querySelector('.overlay').remove(), 1000);
   localStorage.savedGame = JSON.stringify(saveGame);
 }
 export function goToMainPage() {
@@ -123,12 +155,13 @@ export function fillCeil(event) {
   }
 }
 
-export function startTimer() {
+export function startTimer(e, timerSec = 0, timerMin = 0, timerHour = 0) {
   const { sec, min, hour } = getTime();
-  let countSec = 0;
-  let countMin = 0;
-  let countHour = 0;
+  let countSec = timerSec;
+  let countMin = timerMin;
+  let countHour = timerHour;
   interval = setInterval(updateTimer, 1000);
+
   function updateTimer() {
     countSec++;
     if (countSec > 59) {
@@ -212,7 +245,7 @@ function updateField(object, img) {
   selectedImg.src = img.src;
   selectedImg.matrix = img.matrix;
   selectedImg.level = object.id;
-  selectedImg.size = object.size;
+  // selectedImg.size = object.size;
   // console.log(selectedImg);
 }
 
