@@ -40,6 +40,11 @@
     }
   }
 
+  .modal-img {
+    border: 2px solid $text-color-dark;
+    box-shadow: 0 0 20px $text-color-dark;
+  }
+
   #level-items {
     border: 3px solid $text-color-dark;
     background: rgb(31, 37, 51);

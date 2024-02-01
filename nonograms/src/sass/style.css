@@ -394,12 +394,21 @@ tr:nth-child(5n+5):not(:last-child),
 }
 
 .item-title {
-  font-size: 2rem;
+  font-size: 3rem;
 }
 
 .modal-img {
   width: 200px;
   height: 200px;
+  border: 2px solid #795548;
+  box-shadow: 0 0 20px #795548;
+  border-radius: 10%;
+}
+@media (max-width: 690px) {
+  .modal-img {
+    width: 150px;
+    height: 150px;
+  }
 }
 
 .level-cont .item-title {
@@ -452,6 +461,10 @@ tr:nth-child(5n+5):not(:last-child),
   }
   .screen .btn:hover {
     box-shadow: inset 15px 15px 40px #c1d6f4;
+  }
+  .modal-img {
+    border: 2px solid #c1d6f4;
+    box-shadow: 0 0 20px #c1d6f4;
   }
   #level-items {
     border: 3px solid #c1d6f4;

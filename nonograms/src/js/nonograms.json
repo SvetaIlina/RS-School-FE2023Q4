@@ -6,7 +6,7 @@
     "img": [
       {
         "id": "lion",
-        "src": 123,
+        "src": "src/assets/images/lion.png",
         "matrix": [
           [0, 1, 1, 1, 0],
           [1, 1, 1, 1, 0],
@@ -17,7 +17,7 @@
       },
       {
         "id": "rose",
-        "src": 123,
+        "src": "src/assets/images/rose.png",
         "matrix": [
           [1, 1, 1, 1, 1],
           [1, 1, 1, 1, 1],
@@ -28,7 +28,7 @@
       },
       {
         "id": "piggy",
-        "src": 123,
+        "src": "src/assets/images/piggy.png",
         "matrix": [
           [1, 1, 1, 1, 0],
           [0, 1, 1, 1, 1],
@@ -39,7 +39,7 @@
       },
       {
         "id": "tree",
-        "src": 123,
+        "src": "src/assets/images/tree.png",
         "matrix": [
           [1, 1, 1, 1, 1],
           [1, 1, 0, 1, 1],
@@ -50,7 +50,7 @@
       },
       {
         "id": "duck",
-        "src": 123,
+        "src": "src/assets/images/duck.png",
         "matrix": [
           [0, 1, 1, 1, 0],
           [0, 1, 0, 1, 1],
@@ -64,11 +64,11 @@
   {
     "id": "medium",
     "size": 10,
-    "width": "40px",
+    "width": "33px",
     "img": [
       {
         "id": "sunrise",
-        "src": 123,
+        "src": "src/assets/images/sunrise.png",
         "matrix": [
           [0, 0, 0, 1, 1, 1, 1, 0, 0, 0],
           [0, 0, 1, 1, 0, 0, 1, 1, 0, 0],
@@ -84,7 +84,7 @@
       },
       {
         "id": "bamboo",
-        "src": 123,
+        "src": "src/assets/images/bamboo.png",
         "matrix": [
           [1, 1, 0, 0, 1, 1, 0, 0, 1, 1],
           [1, 1, 0, 1, 1, 1, 0, 0, 1, 1],
@@ -100,7 +100,7 @@
       },
       {
         "id": "samurai",
-        "src": 123,
+        "src": "src/assets/images/samurai.png",
         "matrix": [
           [0, 1, 0, 1, 0, 1, 0, 0, 0, 0],
           [0, 1, 0, 1, 1, 1, 1, 0, 0, 0],
@@ -116,7 +116,7 @@
       },
       {
         "id": "fan",
-        "src": 123,
+        "src": "src/assets/images/fan.png",
         "matrix": [
           [0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
           [0, 1, 0, 1, 1, 0, 0, 0, 0, 0],
@@ -132,7 +132,7 @@
       },
       {
         "id": "gardener",
-        "src": 123,
+        "src": "src/assets/images/gardener.png",
         "matrix": [
           [0, 0, 0, 0, 1, 1, 1, 1, 0, 0],
           [1, 1, 0, 1, 1, 1, 1, 1, 1, 0],
@@ -151,11 +151,11 @@
   {
     "id": "hard",
     "size": 15,
-    "width": "25px",
+    "width": "23px",
     "img": [
       {
         "id": "lion",
-        "src": 123,
+        "src": "src/assets/images/lev.png",
         "matrix": [
           [0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0],
           [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
@@ -176,7 +176,7 @@
       },
       {
         "id": "pyramid",
-        "src": 123,
+        "src": "src/assets/images/piramida.png",
         "matrix": [
           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
           [0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
@@ -197,7 +197,7 @@
       },
       {
         "id": "flamingo",
-        "src": 123,
+        "src": "src/assets/images/flamingo.png",
         "matrix": [
           [0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
           [0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -218,7 +218,7 @@
       },
       {
         "id": "giraffe",
-        "src": 123,
+        "src": "src/assets/images/zhiraf.png",
         "matrix": [
           [0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
           [1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -239,7 +239,7 @@
       },
       {
         "id": "palm",
-        "src": 123,
+        "src": "src/assets/images/palma.png",
         "matrix": [
           [0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1],
           [0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
