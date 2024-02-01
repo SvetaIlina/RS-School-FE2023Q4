@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" style="--theme: dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,119 +13,6 @@
     <link rel="stylesheet" href="./src/sass/style.css" />
   </head>
   <body>
-    <div class="wrapper">
-      <header class="header">
-        <button class="btn menu__btn best">Best results</button>
-        <a
-          href="https://www.nonograms.ru/instructions"
-          class="instruction-link"
-          target="_blank"
-          >How to play</a
-        >
-        <button class="btn menu__btn theme">Change theme</button>
-      </header>
-      <div class="screen">
-        <h1 class="title">Nonograms</h1>
-        <button class="btn new-game-btn">New game</button>
-        <button class="btn continue-game-btn">Continue last game</button>
-      </div>
-
-      <div class="screen game">
-        <div id="level-items" popover>
-          <ul class="level__list">
-            <li class="level__item">
-              <button class="btn level-btn">Easy (5*5)</button>
-            </li>
-            <li class="level__item">
-              <button class="btn level-btn">Medium (10*10)</button>
-            </li>
-            <li class="level__item">
-              <button class="btn level-btn">Hard(15*15)</button>
-            </li>
-            <li class="level__item">
-              <button class="btn level-btn">Random game</button>
-            </li>
-          </ul>
-        </div>
-        <div class="game-control">
-          <button class="btn level-btn" popovertarget="level-items">
-            Select level
-          </button>
-          <button class="btn solution-btn">Show solution</button>
-          <button class="btn reset-btn">Reset game</button>
-          <button class="btn change-game-btn">Change puzzle</button>
-          <button class="btn save-btn">Save game</button>
-          <button class="btn main-page-btn">Main page</button>
-        </div>
-        <div class="game-field">
-          <div class="top-hints">
-            <div class="top-hint">
-              <div>1</div>
-              <div>2</div>
-              <div>3</div>
-              <div>4</div>
-            </div>
-            <div class="top-hint">1</div>
-            <div class="top-hint">1</div>
-            <div class="top-hint">1</div>
-            <div class="top-hint">1</div>
-          </div>
-          <div class="table-wrap">
-            <table>
-              <tr>
-                <td class="ceil"></td>
-                <td class="ceil"></td>
-                <td class="ceil"></td>
-                <td class="ceil"></td>
-                <td class="ceil"></td>
-              </tr>
-              <tr>
-                <td class="ceil"></td>
-                <td class="ceil"></td>
-                <td class="ceil"></td>
-                <td class="ceil"></td>
-                <td class="ceil"></td>
-              </tr>
-              <tr>
-                <td class="ceil"></td>
-                <td class="ceil"></td>
-                <td class="ceil"></td>
-                <td class="ceil"></td>
-                <td class="ceil"></td>
-              </tr>
-              <tr>
-                <td class="ceil"></td>
-                <td class="ceil"></td>
-                <td class="ceil"></td>
-                <td class="ceil"></td>
-                <td class="ceil"></td>
-              </tr>
-              <tr>
-                <td class="ceil"></td>
-                <td class="ceil"></td>
-                <td class="ceil"></td>
-                <td class="ceil"></td>
-                <td class="ceil"></td>
-              </tr>
-            </table>
-          </div>
-          <div class="left-hints">
-            <div class="left-hint">
-              <div>1</div>
-              <div>2</div>
-              <div>3</div>
-              <div>4</div>
-            </div>
-            <div class="left-hint">1</div>
-            <div class="left-hint">1</div>
-            <div class="left-hint">1</div>
-            <div class="left-hint">1</div>
-          </div>
-        </div>
-        <div class="timer">00 : 00</div>
-      </div>
-    </div>
-
-    <script src="src/index.js"></script>
+    <script src="src/index.js" type="module"></script>
   </body>
 </html>
