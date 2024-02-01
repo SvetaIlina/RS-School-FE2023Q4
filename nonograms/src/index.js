@@ -8,6 +8,9 @@ import nonograms from './js/nonograms.json' assert { type: 'json' };
 generateContent();
 
 function generateContent() {
+  if (localStorage.getItem('theme') === 'dark') {
+    document.documentElement.style.cssText = '--theme: dark;';
+  }
   const wrapper = createNode('div', 'wrapper');
   document.body.prepend(wrapper);
   appendChild(wrapper, setHeader());

@@ -14,8 +14,10 @@ export function changeTheme() {
   const text = '--theme: dark;';
   if (document.documentElement.style.cssText === text) {
     document.documentElement.style.cssText = '';
+    localStorage.setItem('theme', 'light');
   } else {
     document.documentElement.style.cssText = text;
+    localStorage.setItem('theme', 'dark');
   }
 }
 
