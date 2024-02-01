@@ -153,6 +153,11 @@ function resetTimer() {
 
 export function manageSound(event) {
   event.target.classList.toggle('crossed');
+  if (event.target.classList.contains('crossed')) {
+    localStorage.setItem('sound', 'off');
+  } else {
+    localStorage.setItem('sound', 'on');
+  }
 }
 
 export function randomGame(e) {
@@ -197,6 +202,9 @@ function updateField(object, img) {
     object.width
   ).buildField();
   document.querySelector('.game-field').replaceWith(newField);
+  if (localStorage.getItem('sound') === 'off') {
+    document.querySelector('.sound-btn').classList.add('crossed');
+  }
   resetTimer();
   selectedImg.id = img.id;
   selectedImg.src = img.src;
