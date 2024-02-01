@@ -5,9 +5,60 @@ import { Modal } from './_Modal.js';
 
 let interval;
 let selectedImg = {};
+let winGames = JSON.parse(localStorage.getItem('wins'));
+
+function transformWinsGame(arr) {
+  arr.sort(function (a, b) {
+    return a.time - b.time;
+  });
+  if (arr.length > 5) {
+    arr.splice(5);
+  }
+}
 
 export function showResult() {
-  console.log('showRes');
+  transformWinsGame(winGames);
+  const winModal = new Modal('modal');
+  const winTable = createWinTable(winGames);
+  appendChild(document.body, winModal.buildModal(winTable));
+}
+
+function createWinTable(arr) {
+  const gameList = createNode('table', 'win-list');
+  const title = createNode('tr', 'table-title');
+  const titleName = createNode('th', 'win-descr');
+  titleName.innerText = 'name';
+  appendChild(title, titleName);
+  const titleImg = createNode('th', 'win-descr');
+  titleImg.innerText = 'image';
+  appendChild(title, titleImg);
+  const titleLevel = createNode('th', 'win-descr');
+  titleLevel.innerText = 'level';
+  appendChild(title, titleLevel);
+  const titleTime = createNode('th', 'win-descr');
+  titleTime.innerText = 'time';
+  appendChild(title, titleTime);
+  appendChild(gameList, title);
+  arr.forEach(game => {
+    const gameItem = createNode('tr', 'win-item');
+    const gameName = createNode('td', 'win-descr');
+    gameName.innerText = game.name;
+    appendChild(gameItem, gameName);
+    const gameImg = createNode('td', 'win-descr');
+    const winImg = createNode('img', 'win-img');
+    winImg.src = game.img;
+    appendChild(gameImg, winImg);
+    appendChild(gameItem, gameImg);
+    const gameLevel = createNode('td', 'win-descr');
+    gameLevel.innerText = game.level;
+    appendChild(gameItem, gameLevel);
+    const gameTime = createNode('td', 'win-descr');
+    gameTime.innerText = `${game.time} sec`;
+    appendChild(gameItem, gameTime);
+
+    appendChild(gameList, gameItem);
+  });
+  return gameList;
 }
 
 export function changeTheme() {
@@ -214,6 +265,13 @@ export function checkSolution() {
     allCeils.forEach(ceil => ceil.classList.remove('crossed'));
     feild.classList.add('game-field--disable');
     openGongratsModal(selectedImg);
+    winGames.push({
+      name: selectedImg.id,
+      img: selectedImg.src,
+      level: selectedImg.level,
+      time: getWinTime(),
+    });
+    localStorage.setItem('wins', JSON.stringify(winGames));
   }
 }
 

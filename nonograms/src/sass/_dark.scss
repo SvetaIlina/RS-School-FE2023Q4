@@ -9,11 +9,11 @@
     border: $borderS-dark;
   }
 
-  td:nth-child(5n + 5):not(:last-child),
+  .ceil:nth-child(5n + 5):not(:last-child),
   .top-hint:nth-child(5n + 5):not(:last-child) {
     border-right: $borderM-dark;
   }
-  tr:nth-child(5n + 5):not(:last-child),
+  .row:nth-child(5n + 5):not(:last-child),
   .left-hint:nth-child(5n + 5):not(:last-child) {
     border-bottom: $borderM-dark;
   }

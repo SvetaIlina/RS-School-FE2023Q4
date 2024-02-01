@@ -3,11 +3,13 @@ import { GameBtn } from './js/_Button.js';
 import { Link } from './js/_Link.js';
 import { btns } from './js/btnList.js';
 import { GameField } from './js/_GameField.js';
-import nonograms from './js/nonograms.json' assert { type: 'json' };
 
 generateContent();
 
 function generateContent() {
+  if (!localStorage.getItem('wins')) {
+    localStorage.setItem('wins', JSON.stringify(Array()));
+  }
   if (localStorage.getItem('theme') === 'dark') {
     document.documentElement.style.cssText = '--theme: dark;';
   }
