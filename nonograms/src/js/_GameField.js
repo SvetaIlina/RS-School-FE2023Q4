@@ -16,17 +16,11 @@ export class GameField {
 
   buildField() {
     this.field = createNode('div', 'game-field');
-    appendChild(this.field, this.buildTable(this.fiedSize, this.img));
     appendChild(
       this.field,
-      this.buildHint(this.fiedSize, this.ceilSize, 'top')
-    );
-    appendChild(
-      this.field,
-      this.buildHint(this.fiedSize, this.ceilSize, 'left')
-    );
-    appendChild(
-      this.field,
+      this.buildTable(this.fiedSize, this.img),
+      this.buildHint(this.fiedSize, this.ceilSize, 'top'),
+      this.buildHint(this.fiedSize, this.ceilSize, 'left'),
       new GameBtn('sound-btn', '', manageSound).buildBtn()
     );
 

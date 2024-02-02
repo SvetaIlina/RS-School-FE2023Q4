@@ -28,33 +28,27 @@ function createWinTable(arr) {
   const title = createNode('tr', 'table-title');
   const titleName = createNode('th', 'win-descr');
   titleName.innerText = 'name';
-  appendChild(title, titleName);
   const titleImg = createNode('th', 'win-descr');
   titleImg.innerText = 'image';
-  appendChild(title, titleImg);
   const titleLevel = createNode('th', 'win-descr');
   titleLevel.innerText = 'level';
-  appendChild(title, titleLevel);
   const titleTime = createNode('th', 'win-descr');
   titleTime.innerText = 'time';
-  appendChild(title, titleTime);
+  appendChild(title, titleName, titleImg, titleLevel, titleTime);
   appendChild(gameList, title);
   arr.forEach(game => {
     const gameItem = createNode('tr', 'win-item');
     const gameName = createNode('td', 'win-descr');
     gameName.innerText = game.name;
-    appendChild(gameItem, gameName);
     const gameImg = createNode('td', 'win-descr');
     const winImg = createNode('img', 'win-img');
     winImg.src = game.img;
     appendChild(gameImg, winImg);
-    appendChild(gameItem, gameImg);
     const gameLevel = createNode('td', 'win-descr');
     gameLevel.innerText = game.level;
-    appendChild(gameItem, gameLevel);
     const gameTime = createNode('td', 'win-descr');
     gameTime.innerText = `${game.time} sec`;
-    appendChild(gameItem, gameTime);
+    appendChild(gameItem, gameName, gameImg, gameLevel, gameTime);
 
     appendChild(gameList, gameItem);
   });
@@ -180,14 +174,10 @@ export function openLevelModal(e) {
     wrapper.addEventListener('click', () => {
       const img = object.img.find(item => item.id === i.id);
       updateField(object, img);
-      // document
-      //   .querySelector('table')
-      //   .addEventListener('click', startTimer, { once: true });
       document.querySelector('.overlay').remove();
     });
 
-    appendChild(wrapper, image);
-    appendChild(wrapper, title);
+    appendChild(wrapper, image, title);
     appendChild(content, wrapper);
   });
   appendChild(document.body, new Modal('modal').buildModal(content));
@@ -325,9 +315,7 @@ function openGongratsModal(someImg) {
   sound.setAttribute('src', './src/assets/sound/happy.mp3');
   title.innerText = `Great! You have solved the nonogram in ${time} seconds!`;
   image.setAttribute('src', `${someImg.src}`);
-  appendChild(content, title);
-  appendChild(content, sound);
-  appendChild(content, image);
+  appendChild(content, title, sound, image);
   appendChild(document.body, new Modal('modal').buildModal(content));
   if (!checkSound()) {
     sound.play();

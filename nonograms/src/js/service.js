@@ -4,8 +4,8 @@ function createNode(element, ...classes) {
   return node;
 }
 
-function appendChild(node, child) {
-  node.append(child);
+function appendChild(node, ...child) {
+  child.forEach(i => node.append(i));
 }
 
 function getZero(count) {
