@@ -1,0 +1,29 @@
+.timer {
+  font-size: 3.5rem;
+  display: flex;
+  justify-content: center;
+
+  &__item {
+    width: 40px;
+  }
+  @media (max-width: 1000px) {
+    order: -1;
+    width: 100%;
+  }
+  @media (max-width: 690px) {
+    order: 0;
+  }
+}
+
+#min,
+#sec {
+  position: relative;
+  margin-left: 5px;
+
+  &::before {
+    content: ':';
+    position: absolute;
+    bottom: 4px;
+    right: 40px;
+  }
+}

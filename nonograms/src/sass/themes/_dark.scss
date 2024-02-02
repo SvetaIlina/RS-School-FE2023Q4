@@ -1,0 +1,76 @@
+@container style(--theme: dark) {
+  body {
+    background-image: $bg-dark;
+  }
+
+  a,
+  body,
+  .btn,
+  .instruction-link {
+    color: $text-color-dark;
+  }
+
+  .header {
+    background: $bg-color-dark;
+  }
+
+  .instruction-link:hover,
+  .header .btn:hover {
+    color: #8840a8;
+  }
+  .screen .btn {
+    border: 3px solid $text-color-dark;
+    box-shadow: inset 0 0 20px $text-color-dark;
+    &:hover {
+      box-shadow: inset 15px 15px 40px $text-color-dark;
+    }
+  }
+  table {
+    border: $borderM-dark;
+  }
+
+  .top-hints,
+  .left-hints,
+  table {
+    background: rgba(97, 93, 66, 0.9);
+  }
+
+  .top-hints,
+  .top-hints .top-hint,
+  .left-hints,
+  .left-hints .left-hint,
+  .ceil {
+    border: $borderS-dark;
+  }
+
+  .ceil--fill {
+    background-color: rgb(177 194 202);
+  }
+
+  .ceil:nth-child(5n + 5):not(:last-child),
+  .top-hint:nth-child(5n + 5):not(:last-child) {
+    border-right: $borderM-dark;
+  }
+  .row:nth-child(5n + 5):not(:last-child),
+  .left-hint:nth-child(5n + 5):not(:last-child) {
+    border-bottom: $borderM-dark;
+  }
+
+  .modal {
+    background-color: rgb(31, 37, 51);
+  }
+
+  .modal svg {
+    fill: $text-color-dark;
+  }
+
+  .modal-img {
+    border: 2px solid $text-color-dark;
+    box-shadow: 0 0 20px $text-color-dark;
+  }
+
+  #level-items {
+    border: 3px solid $text-color-dark;
+    background: rgb(31, 37, 51);
+  }
+}

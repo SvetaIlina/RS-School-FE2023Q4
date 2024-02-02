@@ -1,0 +1,39 @@
+.top-hints,
+.left-hints {
+  background: $bg-color;
+  border: $borderS;
+  font-weight: 800;
+}
+
+.top-hints {
+  grid-area: top;
+  display: flex;
+  .top-hint {
+    min-height: 40px;
+    @include flexC;
+    border: $borderS;
+    justify-content: end;
+  }
+}
+
+.left-hints {
+  @include flexC;
+  grid-area: left;
+  .left-hint {
+    border: $borderS;
+    min-width: 40px;
+    padding: 0 3px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    justify-content: end;
+  }
+}
+
+.hint {
+  cursor: pointer;
+  &--checked {
+    opacity: 0.5;
+  }
+}

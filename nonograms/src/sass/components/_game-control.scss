@@ -1,0 +1,10 @@
+.game-control {
+  @include flexC;
+  gap: 40px;
+  @media (max-width: 690px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+}

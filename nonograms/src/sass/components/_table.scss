@@ -1,0 +1,36 @@
+table {
+  grid-area: table;
+  margin: 0 auto;
+  border-spacing: 1px;
+  border-collapse: collapse;
+  border: $borderM;
+  background: $bg-color;
+}
+
+.ceil {
+  position: relative;
+  border: $borderS;
+  &--fill {
+    background-color: rgb(75 48 48);
+  }
+}
+
+.crossed {
+  &::before,
+  &::after {
+    @include cross;
+  }
+  &::after {
+    transform: rotate(-45deg);
+  }
+}
+
+.ceil:nth-child(5n + 5):not(:last-child),
+.top-hint:nth-child(5n + 5):not(:last-child) {
+  border-right: $borderM;
+}
+
+.row:nth-child(5n + 5):not(:last-child),
+.left-hint:nth-child(5n + 5):not(:last-child) {
+  border-bottom: $borderM;
+}

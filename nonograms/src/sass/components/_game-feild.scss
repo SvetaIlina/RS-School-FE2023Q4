@@ -1,0 +1,21 @@
+.game-field {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: repeat(3, auto);
+  grid-template-areas:
+    'sound top top'
+    'left table table'
+    'left table table';
+  justify-items: center;
+  align-items: center;
+  gap: 1px;
+  max-height: 500px;
+  max-width: 500px;
+  font-size: 1.5rem;
+  &--disable {
+    pointer-events: none;
+  }
+  @media (max-width: 690px) {
+    order: 3;
+  }
+}

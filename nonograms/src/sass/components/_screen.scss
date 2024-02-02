@@ -1,0 +1,31 @@
+.screen {
+  @include flexC;
+  @include center;
+  height: 100vh;
+  transition: margin 0.5s ease-out;
+  gap: 40px;
+  &.up {
+    margin-top: -100vh;
+  }
+}
+
+.game {
+  flex-direction: row;
+  justify-content: space-evenly;
+  @media (max-width: 1000px) {
+    padding-top: 20px;
+    flex-wrap: wrap;
+    column-gap: 100px;
+    row-gap: 0px;
+    align-items: flex-start;
+  }
+  @media (max-width: 830px) {
+    column-gap: 40px;
+  }
+  @media (max-width: 690px) {
+    flex-direction: column;
+    @include center;
+    padding-top: 0;
+    gap: 5px;
+  }
+}
