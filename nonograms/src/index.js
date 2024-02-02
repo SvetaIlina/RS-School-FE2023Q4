@@ -1,3 +1,4 @@
+import './sass/style.scss';
 import { createNode, appendChild } from './js/service.js';
 import { GameBtn } from './js/_Button.js';
 import { Link } from './js/_Link.js';
