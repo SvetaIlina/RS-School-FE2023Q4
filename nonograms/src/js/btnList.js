@@ -23,7 +23,7 @@ export const btns = [
     parent: 'main',
     buttons: [
       { content: 'New game', callback: startNewgame },
-      { content: 'Continue last game', callback: continueSavedGame },
+      { content: 'Continue saved game', callback: continueSavedGame },
     ],
   },
   {
