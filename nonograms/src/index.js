@@ -70,7 +70,7 @@ function renderBtn(parent) {
   btnObj.buttons.forEach(i => {
     const str = i.content;
     const text = str
-      .match(/[^\*\)\(\d]/gi)
+      .match(/[^*)(\d]/gi)
       .join('')
       .trim();
 
