@@ -58,10 +58,8 @@ export class GameField {
       fillCeil(e);
       e.preventDefault();
     });
+    this.table.addEventListener('click', startTimer, { once: true });
     this.table.addEventListener('click', checkSolution);
-    this.table.addEventListener('click', startTimer, {
-      once: true,
-    });
     return this.table;
   }
 

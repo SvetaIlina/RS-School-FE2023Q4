@@ -82,6 +82,9 @@ export function continueSavedGame() {
   const obj = nonograms.find(i => i.id === saveObj.level);
   const img = obj.img.find(i => i.id === saveObj.id);
   updateField(obj, img);
+  document
+    .querySelector('table')
+    .removeEventListener('click', startTimer, { once: true });
   const { curSec, curMin, curHour } = saveObj.time;
   const { sec, min, hour } = getTime();
   sec.innerText = curSec;
@@ -101,6 +104,7 @@ export function continueSavedGame() {
     .addEventListener('click', e => startTimer(e, +curSec, +curMin, +curHour), {
       once: true,
     });
+
   event.target.parentNode.classList.add('up');
 }
 export function showSolution() {
@@ -176,6 +180,9 @@ export function openLevelModal(e) {
     wrapper.addEventListener('click', () => {
       const img = object.img.find(item => item.id === i.id);
       updateField(object, img);
+      // document
+      //   .querySelector('table')
+      //   .addEventListener('click', startTimer, { once: true });
       document.querySelector('.overlay').remove();
     });
 
@@ -255,6 +262,9 @@ export function randomGame(e) {
   obj = nonograms[objInd];
   const img = obj.img[Math.floor(Math.random() * obj.img.length)];
   updateField(obj, img);
+  // document
+  //   .querySelector('table')
+  //   .addEventListener('click', startTimer, { once: true });
 }
 
 export function checkSolution() {
@@ -303,8 +313,7 @@ function updateField(object, img) {
   selectedImg.src = img.src;
   selectedImg.matrix = img.matrix;
   selectedImg.level = object.id;
-  // selectedImg.size = object.size;
-  // console.log(selectedImg);
+  console.log(selectedImg);
 }
 
 function openGongratsModal(someImg) {
