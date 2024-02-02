@@ -2,7 +2,7 @@ import {
   showResult,
   changeTheme,
   startNewgame,
-  continueSavedGame,
+  loadSavedGame,
   showSolution,
   resetGame,
   saveGame,
@@ -23,7 +23,7 @@ export const btns = [
     parent: 'main',
     buttons: [
       { content: 'New game', callback: startNewgame },
-      { content: 'Continue saved game', callback: continueSavedGame },
+      { content: 'Continue saved game', callback: loadSavedGame },
     ],
   },
   {

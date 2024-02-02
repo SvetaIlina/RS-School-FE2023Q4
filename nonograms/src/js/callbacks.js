@@ -1,4 +1,14 @@
-import { getZero, appendChild, createNode, checkSound } from './service.js';
+import {
+  getZero,
+  appendChild,
+  createNode,
+  checkSound,
+  transformWinsGameArray,
+  createWinTable,
+  getCeilstatus,
+  getTime,
+  getWinTime,
+} from './service.js';
 import nonograms from './nonograms.json' assert { type: 'json' };
 import { GameField } from './_GameField.js';
 import { Modal } from './_Modal.js';
@@ -7,52 +17,13 @@ let interval;
 let selectedImg = {};
 let winGames = JSON.parse(localStorage.getItem('wins'));
 
-function transformWinsGame(arr) {
-  arr.sort(function (a, b) {
-    return a.time - b.time;
-  });
-  if (arr.length > 5) {
-    arr.splice(5);
-  }
-}
+//btns callbacks
 
 export function showResult() {
-  transformWinsGame(winGames);
+  transformWinsGameArray(winGames);
   const winModal = new Modal('modal');
   const winTable = createWinTable(winGames);
   appendChild(document.body, winModal.buildModal(winTable));
-}
-
-function createWinTable(arr) {
-  const gameList = createNode('table', 'win-list');
-  const title = createNode('tr', 'table-title');
-  const titleName = createNode('th', 'win-descr');
-  titleName.innerText = 'name';
-  const titleImg = createNode('th', 'win-descr');
-  titleImg.innerText = 'image';
-  const titleLevel = createNode('th', 'win-descr');
-  titleLevel.innerText = 'level';
-  const titleTime = createNode('th', 'win-descr');
-  titleTime.innerText = 'time';
-  appendChild(title, titleName, titleImg, titleLevel, titleTime);
-  appendChild(gameList, title);
-  arr.forEach(game => {
-    const gameItem = createNode('tr', 'win-item');
-    const gameName = createNode('td', 'win-descr');
-    gameName.innerText = game.name;
-    const gameImg = createNode('td', 'win-descr');
-    const winImg = createNode('img', 'win-img');
-    winImg.src = game.img;
-    appendChild(gameImg, winImg);
-    const gameLevel = createNode('td', 'win-descr');
-    gameLevel.innerText = game.level;
-    const gameTime = createNode('td', 'win-descr');
-    gameTime.innerText = `${game.time} sec`;
-    appendChild(gameItem, gameName, gameImg, gameLevel, gameTime);
-
-    appendChild(gameList, gameItem);
-  });
-  return gameList;
 }
 
 export function changeTheme() {
@@ -71,7 +42,7 @@ export function startNewgame(event) {
   event.target.parentNode.classList.add('up');
 }
 
-export function continueSavedGame() {
+export function loadSavedGame() {
   const saveObj = JSON.parse(localStorage.savedGame);
   const obj = nonograms.find(i => i.id === saveObj.level);
   const img = obj.img.find(i => i.id === saveObj.id);
@@ -101,27 +72,6 @@ export function continueSavedGame() {
 
   event.target.parentNode.classList.add('up');
 }
-export function showSolution() {
-  const { feild, allCeils, fillCeil, emptyCeil } = getCeilstatus();
-
-  allCeils.forEach(ceil => ceil.classList.remove('ceil--fill', 'crossed'));
-  fillCeil.forEach(ceil => ceil.classList.add('ceil--fill'));
-  emptyCeil.forEach(ceil => ceil.classList.add('crossed'));
-  feild.classList.add('game-field--disable');
-  clearInterval(interval);
-}
-export function resetGame() {
-  const allCeils = getCeilstatus().allCeils;
-  const feild = getCeilstatus().feild;
-  const table = document.querySelector('.table');
-  allCeils.forEach(ceil => ceil.classList.remove('ceil--fill', 'crossed'));
-
-  if (feild.classList.contains('game-field--disable')) {
-    feild.classList.remove('game-field--disable');
-    table.addEventListener('click', startTimer, { once: true });
-    resetTimer();
-  }
-}
 export function saveGame() {
   const { sec, min, hour } = getTime();
   const time = {
@@ -130,9 +80,9 @@ export function saveGame() {
     curHour: hour.innerText,
   };
   const saveGame = {};
+  Object.assign(saveGame, selectedImg);
   const arr = JSON.parse(JSON.stringify(selectedImg.matrix));
   const ceils = document.querySelectorAll('.ceil');
-  Object.assign(saveGame, selectedImg);
   ceils.forEach(ceil => {
     const [i, j] = ceil.dataset.coord.split('-');
     if (ceil.classList.contains('ceil--fill')) {
@@ -152,8 +102,36 @@ export function saveGame() {
   setTimeout(() => document.querySelector('.overlay').remove(), 1000);
   localStorage.savedGame = JSON.stringify(saveGame);
 }
-export function goToMainPage() {
-  document.querySelectorAll('.screen').forEach(i => i.classList.remove('up'));
+export function showSolution() {
+  const { feild, allCeils, fillCeils, emptyCeil } = getCeilstatus();
+
+  allCeils.forEach(ceil => ceil.classList.remove('ceil--fill', 'crossed'));
+  fillCeils.forEach(ceil => ceil.classList.add('ceil--fill'));
+  emptyCeil.forEach(ceil => ceil.classList.add('crossed'));
+  feild.classList.add('game-field--disable');
+  clearInterval(interval);
+}
+export function resetGame() {
+  const allCeils = getCeilstatus().allCeils;
+  const feild = getCeilstatus().feild;
+  const table = document.querySelector('.table');
+  allCeils.forEach(ceil => ceil.classList.remove('ceil--fill', 'crossed'));
+
+  if (feild.classList.contains('game-field--disable')) {
+    feild.classList.remove('game-field--disable');
+    table.addEventListener('click', startTimer, { once: true });
+    resetTimer();
+  }
+}
+export function randomGame(e) {
+  let obj;
+  let objInd = 0;
+  if (e.target.getAttribute('id') === 'random-game') {
+    objInd = Math.floor(Math.random() * nonograms.length);
+  }
+  obj = nonograms[objInd];
+  const img = obj.img[Math.floor(Math.random() * obj.img.length)];
+  updateField(obj, img);
 }
 
 export function openLevelModal(e) {
@@ -182,6 +160,11 @@ export function openLevelModal(e) {
   });
   appendChild(document.body, new Modal('modal').buildModal(content));
 }
+export function goToMainPage() {
+  document.querySelectorAll('.screen').forEach(i => i.classList.remove('up'));
+}
+
+// tables callbacks
 
 export function fillCeil(event) {
   let sound;
@@ -225,42 +208,10 @@ export function startTimer(e, timerSec = 0, timerMin = 0, timerHour = 0) {
     sec.innerText = getZero(countSec);
   }
 }
-
-function resetTimer() {
-  const { sec, min, hour } = getTime();
-  sec.innerText = '00';
-  min.innerText = '00';
-  hour.innerText = '00';
-  clearInterval(interval);
-}
-
-export function manageSound(event) {
-  event.target.classList.toggle('crossed');
-  if (event.target.classList.contains('crossed')) {
-    localStorage.setItem('sound', 'off');
-  } else {
-    localStorage.setItem('sound', 'on');
-  }
-}
-
-export function randomGame(e) {
-  let obj;
-  let objInd = 0;
-  if (e.target.getAttribute('id') === 'random-game') {
-    objInd = Math.floor(Math.random() * nonograms.length);
-  }
-  obj = nonograms[objInd];
-  const img = obj.img[Math.floor(Math.random() * obj.img.length)];
-  updateField(obj, img);
-  // document
-  //   .querySelector('table')
-  //   .addEventListener('click', startTimer, { once: true });
-}
-
 export function checkSolution() {
   const filledCeil = ceil => ceil.classList.contains('ceil--fill');
-  const { feild, allCeils, fillCeil, emptyCeil } = getCeilstatus();
-  if (fillCeil.every(filledCeil) && !emptyCeil.some(filledCeil)) {
+  const { feild, allCeils, fillCeils, emptyCeil } = getCeilstatus();
+  if (fillCeils.every(filledCeil) && !emptyCeil.some(filledCeil)) {
     clearInterval(interval);
     allCeils.forEach(ceil => ceil.classList.remove('crossed'));
     feild.classList.add('game-field--disable');
@@ -275,17 +226,24 @@ export function checkSolution() {
   }
 }
 
-function getCeilstatus() {
-  const feild = document.querySelector('.game-field');
-  const ceils = Array.from(document.querySelectorAll('.ceil'));
-  const mustBeFill = ceils.filter(ceil => ceil.dataset.fill === 'true');
-  const notFill = ceils.filter(ceil => ceil.dataset.fill === 'false');
-  return {
-    feild: feild,
-    allCeils: ceils,
-    fillCeil: mustBeFill,
-    emptyCeil: notFill,
-  };
+// sound-btn callback
+
+export function manageSound(event) {
+  event.target.classList.toggle('crossed');
+  if (event.target.classList.contains('crossed')) {
+    localStorage.setItem('sound', 'off');
+  } else {
+    localStorage.setItem('sound', 'on');
+  }
+}
+
+// callbacks helpers
+function resetTimer() {
+  const { sec, min, hour } = getTime();
+  sec.innerText = '00';
+  min.innerText = '00';
+  hour.innerText = '00';
+  clearInterval(interval);
 }
 
 function updateField(object, img) {
@@ -320,25 +278,4 @@ function openGongratsModal(someImg) {
   if (!checkSound()) {
     sound.play();
   }
-}
-
-function getTime() {
-  const sec = document.querySelector('#sec');
-  const min = document.querySelector('#min');
-  const hour = document.querySelector('#hour');
-  return {
-    sec: sec,
-    min: min,
-    hour: hour,
-  };
-}
-
-function getWinTime() {
-  const { sec, min, hour } = getTime(),
-    winSec = +sec.innerText,
-    winMin = +min.innerText,
-    winHour = +hour.innerText,
-    winTime = winSec + winMin * 60 + winHour * 3600;
-
-  return winTime;
 }
