@@ -15,7 +15,14 @@ import { Modal } from './_Modal.js';
 
 let interval;
 let selectedImg = {};
-let winGames = JSON.parse(localStorage.getItem('wins'));
+let winGames;
+if (!localStorage.getItem('wins')) {
+  winGames = [];
+} else {
+  winGames = JSON.parse(localStorage.getItem('wins'));
+}
+
+console.log(winGames);
 
 //btns callbacks
 

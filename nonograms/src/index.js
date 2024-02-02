@@ -8,9 +8,6 @@ import { GameField } from './js/_GameField.js';
 generateContent();
 
 function generateContent() {
-  if (!localStorage.getItem('wins')) {
-    localStorage.setItem('wins', JSON.stringify([]));
-  }
   if (localStorage.getItem('theme') === 'dark') {
     document.documentElement.style.cssText = '--theme: dark;';
   }
