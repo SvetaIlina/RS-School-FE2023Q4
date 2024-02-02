@@ -8,22 +8,20 @@ generateContent();
 
 function generateContent() {
   if (!localStorage.getItem('wins')) {
-    localStorage.setItem('wins', JSON.stringify(Array()));
+    localStorage.setItem('wins', JSON.stringify([]));
   }
   if (localStorage.getItem('theme') === 'dark') {
     document.documentElement.style.cssText = '--theme: dark;';
   }
   const wrapper = createNode('div', 'wrapper');
   document.body.prepend(wrapper);
-  appendChild(wrapper, setHeader());
-  appendChild(wrapper, setMainPage());
-  appendChild(wrapper, setGamePage());
+  appendChild(wrapper, setHeader(), setMainPage(), setGamePage());
   setPopover();
 }
 
 function setHeader() {
   const header = createNode('header', 'header');
-  header.setAttribute('data-id', 'header');
+  header.dataset.id = 'header';
   const link = new Link(
     'instruction-link',
     'https://www.nonograms.ru/instructions',
@@ -39,7 +37,7 @@ function setMainPage() {
   const mainPage = createNode('div', 'screen', 'main');
   const head = createNode('h1', 'title');
   head.innerText = 'Nonograms';
-  mainPage.setAttribute('data-id', 'main');
+  mainPage.dataset.id = 'main';
   appendChild(mainPage, head);
   renderBtn(mainPage);
   return mainPage;
@@ -49,11 +47,9 @@ function setGamePage() {
   const gamePage = createNode('div', 'screen', 'game');
   const controlField = createNode('div', 'game-control');
   const gameField = new GameField().buildField();
-  controlField.setAttribute('data-id', 'control');
+  controlField.dataset.id = 'control';
   renderBtn(controlField);
-  appendChild(gamePage, controlField);
-  appendChild(gamePage, gameField);
-  appendChild(gamePage, createTimer());
+  appendChild(gamePage, controlField, gameField, createTimer());
   return gamePage;
 }
 
@@ -70,7 +66,7 @@ function createTimer() {
 }
 
 function renderBtn(parent) {
-  const btnObj = btns.find(i => i.parent === parent.getAttribute('data-id'));
+  const btnObj = btns.find(i => i.parent === parent.dataset.id);
   btnObj.buttons.forEach(i => {
     const str = i.content;
     const text = str
@@ -97,7 +93,7 @@ function setPopover() {
   trigger.setAttribute('popovertarget', 'level-items');
   target.setAttribute('id', 'level-items');
   target.setAttribute('popover', '');
-  content.setAttribute('data-id', 'level');
+  content.dataset.id = 'level';
   renderBtn(content);
   appendChild(target, content);
   appendChild(parentPage, target);
