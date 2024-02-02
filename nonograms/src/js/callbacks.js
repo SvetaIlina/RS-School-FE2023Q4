@@ -171,13 +171,13 @@ export function fillCeil(event) {
 
   if (event.target.classList.contains('ceil')) {
     if (event.type === 'click' && !event.target.classList.contains('crossed')) {
-      sound = new Audio('./src/assets/sound/fill.mp3');
+      sound = new Audio('assets/sound/fill.mp3');
       event.target.classList.toggle('ceil--fill');
     } else if (
       event.type === 'contextmenu' &&
       !event.target.classList.contains('ceil--fill')
     ) {
-      sound = new Audio('./src/assets/sound/cross.mp3');
+      sound = new Audio('assets/sound/cross.mp3');
       event.target.classList.toggle('crossed');
     }
     if (!checkSound()) {
@@ -270,7 +270,7 @@ function openGongratsModal(someImg) {
     title = createNode('h6', 'item-title'),
     time = getWinTime(),
     sound = createNode('audio', 'audio');
-  sound.setAttribute('src', './src/assets/sound/happy.mp3');
+  sound.setAttribute('src', 'assets/sound/happy.mp3');
   title.innerText = `Great! You have solved the nonogram in ${time} seconds!`;
   image.setAttribute('src', `${someImg.src}`);
   appendChild(content, title, sound, image);
