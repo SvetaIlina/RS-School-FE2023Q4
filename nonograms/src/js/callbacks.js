@@ -2,7 +2,7 @@ import {
   getZero,
   createNode,
   checkSound,
-  transformWinsGameArray,
+  sortWinsGameArray,
   createWinTable,
   getCeilstatus,
   getTime,
@@ -24,10 +24,12 @@ if (!localStorage.getItem('wins')) {
 //btns callbacks
 
 export function showResult() {
-  transformWinsGameArray(winGames);
+  const arrForSort = Array.from(winGames);
+  sortWinsGameArray(arrForSort);
   const winModal = new Modal('modal');
-  const winTable = createWinTable(winGames);
+  const winTable = createWinTable(arrForSort);
   document.body.append(winModal.buildModal(winTable));
+  console.log(winGames, arrForSort);
 }
 
 export function changeTheme() {
@@ -218,12 +220,17 @@ export function checkSolution() {
     allCeils.forEach(ceil => ceil.classList.remove('crossed'));
     feild.classList.add('game-field--disable');
     openGongratsModal(selectedImg);
-    winGames.push({
+    const winGame = {
       name: selectedImg.id,
       img: selectedImg.src,
       level: selectedImg.level,
       time: getWinTime(),
-    });
+    };
+    if (winGames.length === 5) {
+      winGames.shift();
+    }
+    winGames.push(winGame);
+
     localStorage.setItem('wins', JSON.stringify(winGames));
   }
 }

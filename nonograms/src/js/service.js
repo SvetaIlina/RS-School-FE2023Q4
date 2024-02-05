@@ -16,11 +16,8 @@ function checkSound() {
   return soundTrigger.classList.contains('crossed');
 }
 
-function transformWinsGameArray(arr) {
+function sortWinsGameArray(arr) {
   arr.sort((a, b) => a.time - b.time);
-  if (arr.length > 5) {
-    arr.splice(5);
-  }
 }
 
 function createWinTable(arr) {
@@ -47,7 +44,7 @@ function createWinTable(arr) {
     const gameLevel = createNode('td', 'win-descr');
     gameLevel.innerText = game.level;
     const gameTime = createNode('td', 'win-descr');
-    gameTime.innerText = `${game.time} sec`;
+    gameTime.innerText = `${getZero(Math.trunc(game.time / 60))} : ${getZero(game.time % 60)}`;
     gameItem.append(gameName, gameImg, gameLevel, gameTime);
 
     gameList.append(gameItem);
@@ -93,7 +90,7 @@ export {
   createNode,
   getZero,
   checkSound,
-  transformWinsGameArray,
+  sortWinsGameArray,
   createWinTable,
   getCeilstatus,
   getTime,
