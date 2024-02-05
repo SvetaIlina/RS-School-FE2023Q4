@@ -1,4 +1,4 @@
-import { appendChild, createNode } from './service.js';
+import { createNode } from './service.js';
 import { GameBtn } from './_Button.js';
 import {
   manageSound,
@@ -16,8 +16,8 @@ export class GameField {
 
   buildField() {
     this.field = createNode('div', 'game-field');
-    appendChild(
-      this.field,
+
+    this.field.append(
       this.buildTable(this.fiedSize, this.img),
       this.buildHint(this.fiedSize, this.ceilSize, 'top'),
       this.buildHint(this.fiedSize, this.ceilSize, 'left'),
@@ -42,9 +42,9 @@ export class GameField {
           ceil.dataset.fill = false;
         }
 
-        appendChild(row, ceil);
+        row.append(ceil);
       }
-      appendChild(this.table, row);
+      this.table.append(row);
     }
 
     this.table.addEventListener('click', e => fillCeil(e));
@@ -70,7 +70,7 @@ export class GameField {
         container.style.height = size;
       }
 
-      appendChild(this.hints, container);
+      this.hints.append(container);
     }
     if (position === 'top') {
       this.setHints(parentNodes, 'column');
@@ -113,6 +113,6 @@ export class GameField {
     this.hint.addEventListener('click', e =>
       e.target.classList.toggle('hint--checked')
     );
-    appendChild(parentNode, this.hint);
+    parentNode.append(this.hint);
   }
 }

@@ -4,10 +4,6 @@ function createNode(element, ...classes) {
   return node;
 }
 
-function appendChild(node, ...child) {
-  child.forEach(i => node.append(i));
-}
-
 function getZero(count) {
   if (count >= 0 && count < 10) {
     return `0${count}`;
@@ -38,8 +34,8 @@ function createWinTable(arr) {
   titleLevel.innerText = 'level';
   const titleTime = createNode('th', 'win-descr');
   titleTime.innerText = 'time';
-  appendChild(title, titleName, titleImg, titleLevel, titleTime);
-  appendChild(gameList, title);
+  title.append(titleName, titleImg, titleLevel, titleTime);
+  gameList.append(title);
   arr.forEach(game => {
     const gameItem = createNode('tr', 'win-item');
     const gameName = createNode('td', 'win-descr');
@@ -47,14 +43,14 @@ function createWinTable(arr) {
     const gameImg = createNode('td', 'win-descr');
     const winImg = createNode('img', 'win-img');
     winImg.src = game.img;
-    appendChild(gameImg, winImg);
+    gameImg.append(winImg);
     const gameLevel = createNode('td', 'win-descr');
     gameLevel.innerText = game.level;
     const gameTime = createNode('td', 'win-descr');
     gameTime.innerText = `${game.time} sec`;
-    appendChild(gameItem, gameName, gameImg, gameLevel, gameTime);
+    gameItem.append(gameName, gameImg, gameLevel, gameTime);
 
-    appendChild(gameList, gameItem);
+    gameList.append(gameItem);
   });
   return gameList;
 }
@@ -95,7 +91,6 @@ function getWinTime() {
 
 export {
   createNode,
-  appendChild,
   getZero,
   checkSound,
   transformWinsGameArray,

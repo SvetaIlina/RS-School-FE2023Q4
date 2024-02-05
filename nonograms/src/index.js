@@ -1,5 +1,5 @@
 import './sass/style.scss';
-import { createNode, appendChild } from './js/service.js';
+import { createNode } from './js/service.js';
 import { GameBtn } from './js/_Button.js';
 import { Link } from './js/_Link.js';
 import { btns } from './js/btnList.js';
@@ -13,7 +13,7 @@ function generateContent() {
   }
   const wrapper = createNode('div', 'wrapper');
   document.body.prepend(wrapper);
-  appendChild(wrapper, setHeader(), setMainPage(), setGamePage());
+  wrapper.append(setHeader(), setMainPage(), setGamePage());
   setPopover();
 }
 
@@ -26,7 +26,7 @@ function setHeader() {
     'How to play'
   ).buildLink();
   link.setAttribute('target', '_blank');
-  appendChild(header, link);
+  header.append(link);
   renderBtn(header);
   return header;
 }
@@ -36,7 +36,7 @@ function setMainPage() {
   const head = createNode('h1', 'title');
   head.innerText = 'Nonograms';
   mainPage.dataset.id = 'main';
-  appendChild(mainPage, head);
+  mainPage.append(head);
   renderBtn(mainPage);
   return mainPage;
 }
@@ -47,7 +47,7 @@ function setGamePage() {
   const gameField = new GameField().buildField();
   controlField.dataset.id = 'control';
   renderBtn(controlField);
-  appendChild(gamePage, controlField, gameField, createTimer());
+  gamePage.append(controlField, gameField, createTimer());
   return gamePage;
 }
 
@@ -58,7 +58,7 @@ function createTimer() {
     const span = createNode('span', 'timer__item');
     span.setAttribute('id', `${i}`);
     span.innerText = '00';
-    appendChild(timer, span);
+    timer.append(span);
   });
   return timer;
 }
@@ -75,7 +75,7 @@ function renderBtn(parent) {
     const callBack = i.callback;
     const btn = new GameBtn('btn', str, callBack).buildBtn();
     btn.setAttribute('id', `${text.toLowerCase().split(' ').join('-')}`);
-    appendChild(parent, btn);
+    parent.append(btn);
     if (parent.classList.contains('level__list')) {
       btn.setAttribute('popovertargetaction', 'hide');
       btn.setAttribute('popovertarget', 'level-items');
@@ -93,6 +93,6 @@ function setPopover() {
   target.setAttribute('popover', '');
   content.dataset.id = 'level';
   renderBtn(content);
-  appendChild(target, content);
-  appendChild(parentPage, target);
+  target.append(content);
+  parentPage.append(target);
 }

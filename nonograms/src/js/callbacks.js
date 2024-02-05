@@ -1,6 +1,5 @@
 import {
   getZero,
-  appendChild,
   createNode,
   checkSound,
   transformWinsGameArray,
@@ -22,15 +21,13 @@ if (!localStorage.getItem('wins')) {
   winGames = JSON.parse(localStorage.getItem('wins'));
 }
 
-console.log(winGames);
-
 //btns callbacks
 
 export function showResult() {
   transformWinsGameArray(winGames);
   const winModal = new Modal('modal');
   const winTable = createWinTable(winGames);
-  appendChild(document.body, winModal.buildModal(winTable));
+  document.body.append(winModal.buildModal(winTable));
 }
 
 export function changeTheme() {
@@ -102,10 +99,8 @@ export function saveGame() {
   });
   saveGame.currentMatrix = arr;
   saveGame.time = time;
-  appendChild(
-    document.body,
-    new Modal('modal').buildModal('the game was saved')
-  );
+
+  document.body.append(new Modal('modal').buildModal('the game was saved'));
   setTimeout(() => document.querySelector('.overlay').remove(), 1000);
   localStorage.savedGame = JSON.stringify(saveGame);
 }
@@ -162,10 +157,10 @@ export function openLevelModal(e) {
       document.querySelector('.overlay').remove();
     });
 
-    appendChild(wrapper, image, title);
-    appendChild(content, wrapper);
+    wrapper.append(image, title);
+    content.append(wrapper);
   });
-  appendChild(document.body, new Modal('modal').buildModal(content));
+  document.body.append(new Modal('modal').buildModal(content));
 }
 export function goToMainPage() {
   document.querySelectorAll('.screen').forEach(i => i.classList.remove('up'));
@@ -280,8 +275,8 @@ function openGongratsModal(someImg) {
   sound.setAttribute('src', 'assets/sound/happy.mp3');
   title.innerText = `Great! You have solved the nonogram in ${time} seconds!`;
   image.setAttribute('src', `${someImg.src}`);
-  appendChild(content, title, sound, image);
-  appendChild(document.body, new Modal('modal').buildModal(content));
+  content.append(title, sound, image);
+  document.body.append(new Modal('modal').buildModal(content));
   if (!checkSound()) {
     sound.play();
   }

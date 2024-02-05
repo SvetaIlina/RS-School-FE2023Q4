@@ -1,4 +1,4 @@
-import { appendChild, createNode } from './service.js';
+import { createNode } from './service.js';
 
 export class Modal {
   constructor(classes) {
@@ -14,11 +14,11 @@ export class Modal {
     if (typeof content === 'string') {
       this.modal.innerText = content;
     } else {
-      appendChild(this.modal, content);
+      this.modal.append(content);
     }
-    appendChild(this.modal, this.closeBtn);
+    this.modal.append(this.closeBtn);
 
-    appendChild(this.overlay, this.modal);
+    this.overlay.append(this.modal);
 
     this.overlay.addEventListener('click', this.closeModal);
 
