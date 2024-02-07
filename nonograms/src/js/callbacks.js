@@ -108,12 +108,12 @@ export function saveGame() {
 }
 export function showSolution() {
   const { feild, allCeils, fillCeils, emptyCeil } = getCeilstatus();
-
   allCeils.forEach(ceil => ceil.classList.remove('ceil--fill', 'crossed'));
   fillCeils.forEach(ceil => ceil.classList.add('ceil--fill'));
   emptyCeil.forEach(ceil => ceil.classList.add('crossed'));
   feild.classList.add('game-field--disable');
   clearInterval(interval);
+  document.querySelector('#save-game').disabled = true;
 }
 export function resetGame() {
   const allCeils = getCeilstatus().allCeils;
@@ -243,6 +243,18 @@ export function manageSound(event) {
     localStorage.setItem('sound', 'off');
   } else {
     localStorage.setItem('sound', 'on');
+  }
+}
+
+// enable save game
+
+export function enableSaveGameBtn(e) {
+  if (
+    e.target.tagName.toLowerCase() === 'button' &&
+    e.target.getAttribute('id') !== 'save-game' &&
+    e.target.getAttribute('id') !== 'show-solution'
+  ) {
+    document.querySelector('#save-game').disabled = false;
   }
 }
 

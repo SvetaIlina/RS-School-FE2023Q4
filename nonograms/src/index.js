@@ -4,8 +4,12 @@ import { GameBtn } from './js/_Button.js';
 import { Link } from './js/_Link.js';
 import { btns } from './js/btnList.js';
 import { GameField } from './js/_GameField.js';
+import { enableSaveGameBtn } from './js/callbacks.js';
 
 generateContent();
+document
+  .querySelector('.game-control')
+  .addEventListener('click', enableSaveGameBtn);
 
 function generateContent() {
   if (localStorage.getItem('theme') === 'dark') {

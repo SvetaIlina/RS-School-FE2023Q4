@@ -32,6 +32,9 @@ button {
   background: transparent;
   text-transform: uppercase;
   border: none;
+  &:disabled {
+    opacity: 0.5;
+  }
 }
 
 body {
