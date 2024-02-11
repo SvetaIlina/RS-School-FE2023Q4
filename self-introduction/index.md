@@ -1,4 +1,6 @@
-https://youtu.be/FpQ5oP_lKR0
+[youtubeLink](https://youtu.be/FpQ5oP_lKR0)
+
+---
 
 Hi, my name is Sveta and I'm an aspiring front-end developer.
 And now I'm going to tell you how I came to this.
