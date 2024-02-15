@@ -9,7 +9,7 @@ Here is mine collection of badges I earned from completing Microsoft Learn's Typ
 3. **Implement Interfaces in TypeScript**: [Badge](https://learn.microsoft.com/api/achievements/share/en-us/SvetaIlina-5865/PTZJDVV4?sharingId=CF3D41B4AA8478B9)
 4. **Develop Typed Functions in TypeScript**: [Badge](https://learn.microsoft.com/api/achievements/share/en-us/SvetaIlina-5865/7ENQ6RPZ?sharingId=CF3D41B4AA8478B9)
 5. **Declare and Instantiate Classes in TypeScript**: [Badge](https://learn.microsoft.com/api/achievements/share/en-us/SvetaIlina-5865/WACAPLUN?sharingId=CF3D41B4AA8478B9)
-6. **Generics in TypeScript**: [Badge]()
+6. **Generics in TypeScript**: [Badge](https://learn.microsoft.com/api/achievements/share/en-us/SvetaIlina-5865/7ENP23GZ?sharingId=CF3D41B4AA8478B9)
 7. **Work with External Libraries in TypeScript**: [Badge]()
 8. **Organize Code with Namespaces in TypeScript**: [Badge]()
 
@@ -62,3 +62,20 @@ Here is mine collection of badges I earned from completing Microsoft Learn's Typ
   Since both an interface and a class define the structure of an object and can be interchangeable in some cases, we can define that structure in an interface and then implement that interface in each class.  
    Practicing with classes in TypeScript allows us to create modular, reusable, and well-organized code.
   They help model complex systems in a way that reflects real-world entities and relationships.
+- **Generics in TypeScript**
+  This module was about feature, that are supported by many programming languages, but not by JS - Generics.
+  Its cool and poverfull tool which provide a way to tell functions, classes, or interfaces what type you want to use when you call it.
+  Generics are code templates that you can define and reuse throughout your codebase.
+  If you want to create a component that can work over a variety of types rather than just one,generic enables you to tell the component what type it should expect.
+  The main advantage of generics is definition one or more type variables to identify the type or types that you will pass to the component.
+  After you specify the type variable, it can be used wherever the type annotation is needed.
+  You can use more than one type variable in your generic components.
+  To further protect yourself from errors, you can use so-called generic constraints (restricting the types a parameter can take to a specific type range).
+  You can use it with native types, with custom types and classes.
+  Also you can use the typeof (for primitive type) or instanceof (for object) type guard in an if block to check the type of the value parameter before performing an operation.
+  Using generics with primitive types, like number, string, or boolean, illustrate the concepts of generics well, but the most powerful uses come from using them with custom types and classes.
+  Using generics is especially useful when we work with third-party code and cannot influence the type of data provided (for example, today the exchange rate is transmitted as a string,
+  and yesterday it was passed as a numeric code, while we still get a string code for old history records).
+  Generics allow us to type functions and classes that can be called with different number of arguments and their types. By taking this module I learned about generics and their parameterization, learned how to use them to type variables, functions and methods, as well as classes.
+  I learned how to restrict types and help TypeScript with type inference if necessary by using Type Guard.
+  The main advantages of generics I can name are providing more flexibility when working with types, reusing code, and reducing the need to use any type.
