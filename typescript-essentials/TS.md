@@ -8,7 +8,7 @@ Here is mine collection of badges I earned from completing Microsoft Learn's Typ
 2. **Declare Variable Types in TypeScript**: [Badge](https://learn.microsoft.com/api/achievements/share/en-us/SvetaIlina-5865/FZ9FFA8X?sharingId=CF3D41B4AA8478B9)
 3. **Implement Interfaces in TypeScript**: [Badge](https://learn.microsoft.com/api/achievements/share/en-us/SvetaIlina-5865/PTZJDVV4?sharingId=CF3D41B4AA8478B9)
 4. **Develop Typed Functions in TypeScript**: [Badge](https://learn.microsoft.com/api/achievements/share/en-us/SvetaIlina-5865/7ENQ6RPZ?sharingId=CF3D41B4AA8478B9)
-5. **Declare and Instantiate Classes in TypeScript**: [Badge]()
+5. **Declare and Instantiate Classes in TypeScript**: [Badge](https://learn.microsoft.com/api/achievements/share/en-us/SvetaIlina-5865/WACAPLUN?sharingId=CF3D41B4AA8478B9)
 6. **Generics in TypeScript**: [Badge]()
 7. **Work with External Libraries in TypeScript**: [Badge]()
 8. **Organize Code with Namespaces in TypeScript**: [Badge]()
@@ -43,3 +43,22 @@ Here is mine collection of badges I earned from completing Microsoft Learn's Typ
   You can define a function type using a type alias or an interface. An interface is better to use if you want to be able to extend the function type.
   Type alias is better to use if you want to use unions or tuples.
   Applying the acquired knowledge will allow you to improve the quality of written code, to handle the behavior of functions with different parameters more correctly
+- **Declare and Instantiate Classes in TypeScript**
+  The information in this module deepens understanding of what classes are for, how they can be created, and how TS features help us use them.
+  Like JS, TypeScript implements an object-oriented approach and has full support for classes.
+  One feature is that Classes in TypeScript create two separate types: the instance type, which defines what members an instance of a class has, and the constructor function type, which defines what members the class constructor function has. Unlike JS, TypeScript supports the access modifiers public,private and protected,readonly, which determine the accessibility of class members. If an access modifier is not defined, it is implicitly interpreted as public, as this is consistent with the nature of JavaScript.
+  in Typescript you can also use an interface to ensure class instance shape.
+  Both structures (class and interface) define what an object looks like, and both can be used in TypeScript to create objects.
+  The decision to use a class or an interface depends entirely on the particular case: whether only type checking is needed, whether implementation details (usually through the creation of a new instance) are needed
+  or both cases at the same time.Unlike classes, an interface is a virtual structure that exists only in the context of TypeScript.
+  The TypeScript compiler uses interfaces solely for the purpose of property type checking.
+  A class defines a schema for how an object should look and act, and then implements that object by initializing the class properties and defining its methods.
+  In a nutshell, if you need to create an instance of an object while getting the benefits of type checking entities such as arguments,
+  return types or generics, it makes sense to use a class.
+  prefer to used classes if you are creating a full stack application with client and server implementations and
+  you need to define how the data will be structured.
+  If you are not creating instances - you can use interfaces, their advantage is that they do not create any additional code,
+  but they do provide a "virtual" type-checking of the code.
+  Since both an interface and a class define the structure of an object and can be interchangeable in some cases, we can define that structure in an interface and then implement that interface in each class.  
+   Practicing with classes in TypeScript allows us to create modular, reusable, and well-organized code.
+  They help model complex systems in a way that reflects real-world entities and relationships.
