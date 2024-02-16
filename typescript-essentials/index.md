@@ -103,7 +103,7 @@ Here is mine collection of badges I earned from completing Microsoft Learn's Typ
   you may want to create an alias to shorten and simplify your code. To do this, use the import keyword.
   Compiling a namespace into a single file is the same as compiling any other TypeScript file.
   Because namespaces are a TypeScript-only construct, they are removed from the resulting JavaScript code and convertedinto variables, which are nested into namespace-like objects as needed. Namespaces can be extended by sharing them across multiple TypeScript files.If namespaces are in multiple files that are linked together, link tags must be added to tell the TypeScript compiler about the links between the files.An important part of the module was learning the differences between modules and namespaces.Although namespaces and modules have some similarities, they are used in different ways. Namespaces are typically used to organize and group related code. Modules, on the other hand, are used to create reusable code that can be imported and used in other parts of your code.Namespaces can also lead to name conflicts and can be difficult to manage in large projects. Namespaces are typically used to organize and group related code, and they are independent of the module loader. Modules, on the other hand, are used to create reusable code that can be imported and used in other parts of your code.
-  Modules, on the other hand, provide better organization and encapsulation and can help prevent name conflicts.
+  Modules also provide better organization and encapsulation and can help prevent name conflicts.
   In general, TypeScript recommends using modules instead of namespaces
   Even so, it is important to understand namespaces because there may be cases where namespaces are more appropriate, such as when working with legacy code that was written before modules were introduced in TypeScript.
 
@@ -118,9 +118,12 @@ Here is mine collection of badges I earned from completing Microsoft Learn's Typ
   - Implements many OOP concepts such as inheritance, polymorphism, encapsulation, and access modifiers. It has classes, interfaces, and (even!) abstract classes;
   - Improved support for large projects - structures the code base and increases its maintainability;
   - Easy implementation in an existing project - you can incrementally add TypeScript to existing JavaScript code;
-    But it also has disadvantages:
+
+  But it also has disadvantages:
+
   - The need to add types may require additional time and effort;
   - In some cases, it may take more time to develop and maintain the code;
   - Need to ensure TypeScript training and adoption within the development team
-    Comparing TypeScript and JavaScript, you can see that TS is a great OOP language with which you can write large applications more efficiently.
-    Despite the more complex code and extra compilation time, it will help you save time in the long run.
+
+  Comparing TypeScript and JavaScript, you can see that TS is a great OOP language with which you can write large applications more efficiently.
+  Despite the more complex code and extra compilation time, it will help you save time in the long run.
