@@ -10,8 +10,8 @@ Here is mine collection of badges I earned from completing Microsoft Learn's Typ
 4. **Develop Typed Functions in TypeScript**: [Badge](https://learn.microsoft.com/api/achievements/share/en-us/SvetaIlina-5865/7ENQ6RPZ?sharingId=CF3D41B4AA8478B9)
 5. **Declare and Instantiate Classes in TypeScript**: [Badge](https://learn.microsoft.com/api/achievements/share/en-us/SvetaIlina-5865/WACAPLUN?sharingId=CF3D41B4AA8478B9)
 6. **Generics in TypeScript**: [Badge](https://learn.microsoft.com/api/achievements/share/en-us/SvetaIlina-5865/7ENP23GZ?sharingId=CF3D41B4AA8478B9)
-7. **Work with External Libraries in TypeScript**: [Badge]()
-8. **Organize Code with Namespaces in TypeScript**: [Badge]()
+7. **Work with External Libraries in TypeScript**: [Badge](https://learn.microsoft.com/api/achievements/share/en-us/SvetaIlina-5865/WACVJAVN?sharingId=CF3D41B4AA8478B9)
+8. **Organize Code with Namespaces in TypeScript**: [Badge](https://learn.microsoft.com/api/achievements/share/en-us/SvetaIlina-5865/WACMF3GN?sharingId=CF3D41B4AA8478B9)
 
 ## Reflections
 
@@ -79,3 +79,25 @@ Here is mine collection of badges I earned from completing Microsoft Learn's Typ
   Generics allow us to type functions and classes that can be called with different number of arguments and their types. By taking this module I learned about generics and their parameterization, learned how to use them to type variables, functions and methods, as well as classes.
   I learned how to restrict types and help TypeScript with type inference if necessary by using Type Guard.
   The main advantages of generics I can name are providing more flexibility when working with types, reusing code, and reducing the need to use any type.
+- **Work with External Libraries in TypeScript** After studying this module, I learned what peculiarities there are when working with modules in TS, how to install third-party libraries.
+  This information significantly expands the possibilities of organizing code and helps to control its availability in the global namespace,
+  which helps to avoid name conflicts between components.
+  As well as in JS, the export and import keywords are used for interaction between modules.
+  The module syntax in TS is not much different from JS, except, of course, for typing. For example, TS extends the import syntax with import type, which allows only types to be imported.
+  To compile modules, you must specify the --module target on the command line or in the tsconfig.json file for the project (e.g., commonjs, es6). It is also important to note that in order for the JS file to work successfully after compilation, it is necessary to specify the .js extension in the paths to imported files.
+  An important aspect of this module was working with third-party libraries. They can be imported as well as your own modules (unlike JS you need to use impotn instead of required).
+  But there is one nuance - types in the library may not be defined and then the compiler will generate an error.
+  To avoid this, the library should be installed with the @types prefix.
+  Practical exercises of this module gave an opportunity to apply new knowledge in practice and consolidate it.This topic is very important for understanding the correct code organization, which helps to speed up development, avoid conflicts, makes code more readable and understandable, simplifies code maintenance and further modification
+- **Organize Code with Namespaces in TypeScript** This module extends the understanding of the possibilities that TS provides for organizing code.
+  In addition to modules, you can use namespaces.
+  Namespaces (called "internal modules" in early versions of TypeScript) are a TypeScript-specific way of organizing and categorizing code,
+  allowing related code to be grouped together.
+  Namespaces reduce the amount of code in the global scope, provide context for names to help reduce naming collisions, and increase reusability.
+  You can also nest namespaces within namespaces, which gives you even more ways to organize your code.But as nested namespaces become more complex
+  you may want to create an alias to shorten and simplify your code. To do this, use the import keyword.
+  Compiling a namespace into a single file is the same as compiling any other TypeScript file.
+  Because namespaces are a TypeScript-only construct, they are removed from the resulting JavaScript code and convertedinto variables, which are nested into namespace-like objects as needed. Namespaces can be extended by sharing them across multiple TypeScript files.If namespaces are in multiple files that are linked together, link tags must be added to tell the TypeScript compiler about the links between the files.An important part of the module was learning the differences between modules and namespaces.Although namespaces and modules have some similarities, they are used in different ways. Namespaces are typically used to organize and group related code. Modules, on the other hand, are used to create reusable code that can be imported and used in other parts of your code.Namespaces can also lead to name conflicts and can be difficult to manage in large projects. Namespaces are typically used to organize and group related code, and they are independent of the module loader. Modules, on the other hand, are used to create reusable code that can be imported and used in other parts of your code.
+  Modules, on the other hand, provide better organization and encapsulation and can help prevent name conflicts.
+  In general, TypeScript recommends using modules instead of namespaces
+  Even so, it is important to understand namespaces because there may be cases where namespaces are more appropriate, such as when working with legacy code that was written before modules were introduced in TypeScript.
