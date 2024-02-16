@@ -13,16 +13,20 @@ Here is mine collection of badges I earned from completing Microsoft Learn's Typ
 7. **Work with External Libraries in TypeScript**: [Badge](https://learn.microsoft.com/api/achievements/share/en-us/SvetaIlina-5865/WACVJAVN?sharingId=CF3D41B4AA8478B9)
 8. **Organize Code with Namespaces in TypeScript**: [Badge](https://learn.microsoft.com/api/achievements/share/en-us/SvetaIlina-5865/WACMF3GN?sharingId=CF3D41B4AA8478B9)
 
+## Build JavaScript applications using TypeScript [Badge](https://learn.microsoft.com/api/achievements/share/en-us/SvetaIlina-5865/24XTMAWV?sharingId=CF3D41B4AA8478B9)
+
 ## Reflections
 
 - **Getting Started with TypeScript**  
   In this module I learned what TS is, how it differs from JS and how it improves it.
   I learned where I can write code in TS (any text editor or IDE), how to install TS (necessary packages and config file), how create projects in this language in VSC and how to compile it into JS.
+  Understanding compiler options and configurations is very important to optimize your TypeScript workflow.Using tsconfig.json allows you to maintain a consistent configuration throughout your TypeScript project and simplifies the compilation process by eliminating the need to specify options each time you run the tsc command.
   After passing this module I got basic knowledge to start working with TS and now I can use it to write code for my projects.
 - **Declare Variable Types in TypeScript**  
   By completing this module I gained a deeper understanding of the key difference and advantage of TS, namely that as a strictly typed language it allows you to describe the shape of an object, providing better documentation, and allows for code validation.
   I learned what data types are available in TS , as well as how you can associate types with variables through explicit type annotations or through implicit type inference.
   Applying the acquired knowledge I learned to declare variables using primitive types, object types, union and intersection types.
+  Types form the foundation of your code, providing the basis for more complex structures. Understanding them is essential for efficient and type-safe programming.
   These skills in practice will allow me to avoid many errors and to handle values of unknown types more correctly.
 - **Implement Interfaces in TypeScript**  
   In this module, I gained an understanding of what an interface is, its main tasks, and its practical applications.
@@ -42,6 +46,7 @@ Here is mine collection of badges I earned from completing Microsoft Learn's Typ
   This design is useful if you want to apply the same function type signature to multiple functions.
   You can define a function type using a type alias or an interface. An interface is better to use if you want to be able to extend the function type.
   Type alias is better to use if you want to use unions or tuples.
+  Understanding how to annotate function parameters and return types is critical to effective development in TypeScript.
   Applying the acquired knowledge will allow you to improve the quality of written code, to handle the behavior of functions with different parameters more correctly
 - **Declare and Instantiate Classes in TypeScript**
   The information in this module deepens understanding of what classes are for, how they can be created, and how TS features help us use them.
@@ -101,3 +106,21 @@ Here is mine collection of badges I earned from completing Microsoft Learn's Typ
   Modules, on the other hand, provide better organization and encapsulation and can help prevent name conflicts.
   In general, TypeScript recommends using modules instead of namespaces
   Even so, it is important to understand namespaces because there may be cases where namespaces are more appropriate, such as when working with legacy code that was written before modules were introduced in TypeScript.
+
+  ## Conclusion
+
+  TypeScript is a programming language that is a superset of JavaScript. It adds static typing and some additional features that help developers create more reliable and scalable applications.
+  Its pluses include:
+
+  - Static typing - allows to detect errors at the compilation stage;
+  - Improved tool support - good integration with IDEs and other development tools;
+  - Compatible with JavaScript - you can use existing JavaScript code in TypeScript;
+  - Implements many OOP concepts such as inheritance, polymorphism, encapsulation, and access modifiers. It has classes, interfaces, and (even!) abstract classes;
+  - Improved support for large projects - structures the code base and increases its maintainability;
+  - Easy implementation in an existing project - you can incrementally add TypeScript to existing JavaScript code;
+    But it also has disadvantages:
+  - The need to add types may require additional time and effort;
+  - In some cases, it may take more time to develop and maintain the code;
+  - Need to ensure TypeScript training and adoption within the development team
+    Comparing TypeScript and JavaScript, you can see that TS is a great OOP language with which you can write large applications more efficiently.
+    Despite the more complex code and extra compilation time, it will help you save time in the long run.
