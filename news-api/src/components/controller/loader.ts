@@ -1,4 +1,3 @@
-import { INewsResponse, ISourcesResponse } from '../../types/index';
 class Loader {
     private baseLink: string;
     private options: Record<string, string>;
@@ -7,18 +6,20 @@ class Loader {
         this.options = options;
     }
 
-    getResp(
+    getResp<T>(
         {
             endpoint,
             options,
         }: {
             endpoint: string;
-            options: {
-                sources?: string;
+            options?: {
+                sources: string;
             };
         },
-        callback = (): void => {
-            console.error('No callback for GET response');
+        callback = (data: T): void => {
+            if (!data) {
+                console.error('No callback for GET response');
+            }
         }
     ) {
         this.load('GET', endpoint, callback, options);
@@ -45,16 +46,11 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    load(
-        method: string,
-        endpoint: string,
-        callback: (data: INewsResponse | ISourcesResponse) => void,
-        options: Record<string, string> = {}
-    ) {
+    load<T>(method: string, endpoint: string, callback: (data: T) => void, options: Record<string, string> = {}) {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res: Response) => res.json())
-            .then((data: INewsResponse | ISourcesResponse) => callback(data))
+            .then((data: T) => callback(data))
             .catch((err: Error) => console.error(err));
     }
 }
