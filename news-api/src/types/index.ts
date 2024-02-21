@@ -29,3 +29,8 @@ export interface ISourcesResponse {
     status: string;
     sources: ISources[];
 }
+
+export enum StatusCode {
+    unauthorized = 401,
+    notFound = 404,
+}

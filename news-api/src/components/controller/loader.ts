@@ -1,3 +1,5 @@
+import { StatusCode } from '../../types/index';
+
 class Loader {
     private baseLink: string;
     private options: Record<string, string>;
@@ -27,7 +29,7 @@ class Loader {
 
     errorHandler(res: Response) {
         if (!res.ok) {
-            if (res.status === 401 || res.status === 404)
+            if (res.status === StatusCode.unauthorized || res.status === StatusCode.notFound)
                 console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
             throw Error(res.statusText);
         }
