@@ -1,9 +1,9 @@
 import { StatusCode } from '../../types/servise';
 
 class Loader {
-    private baseLink: string;
-    private options: Record<string, string>;
-    constructor(baseLink: string, options: Record<string, string>) {
+    private baseLink: string | undefined;
+    private options: Record<string, string | undefined>;
+    constructor(baseLink: string | undefined, options: Record<string, string | undefined>) {
         this.baseLink = baseLink;
         this.options = options;
     }
@@ -38,7 +38,10 @@ class Loader {
     }
 
     private makeUrl(options: Record<string, string>, endpoint: string) {
-        const urlOptions: Record<string, string> = { ...this.options, ...options };
+        if (!Object.values(this.options)[0] || !this.baseLink) {
+            throw new Error('errror');
+        }
+        const urlOptions: Record<string, string | undefined> = { ...this.options, ...options };
         let url: string = `${this.baseLink}${endpoint}?`;
 
         Object.keys(urlOptions).forEach((key: string) => {
