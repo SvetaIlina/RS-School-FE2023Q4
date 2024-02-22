@@ -1,4 +1,4 @@
-import { StatusCode } from '../../types/index';
+import { StatusCode } from '../../types/servise';
 
 class Loader {
     private baseLink: string;
@@ -27,7 +27,7 @@ class Loader {
         this.load('GET', endpoint, callback, options);
     }
 
-    errorHandler(res: Response) {
+    private errorHandler(res: Response) {
         if (!res.ok) {
             if (res.status === StatusCode.unauthorized || res.status === StatusCode.notFound)
                 console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
@@ -37,7 +37,7 @@ class Loader {
         return res;
     }
 
-    makeUrl(options: Record<string, string>, endpoint: string) {
+    private makeUrl(options: Record<string, string>, endpoint: string) {
         const urlOptions: Record<string, string> = { ...this.options, ...options };
         let url: string = `${this.baseLink}${endpoint}?`;
 
@@ -48,7 +48,12 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    load<T>(method: string, endpoint: string, callback: (data: T) => void, options: Record<string, string> = {}) {
+    private load<T>(
+        method: string,
+        endpoint: string,
+        callback: (data: T) => void,
+        options: Record<string, string> = {}
+    ) {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res: Response) => res.json())

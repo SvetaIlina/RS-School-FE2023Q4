@@ -1,5 +1,5 @@
 import './news.css';
-import { INews } from '../../../types/index';
+import { INews, getEl, isNotNull } from '../../../types/servise';
 
 class News {
     draw(data: INews[]) {
@@ -11,30 +11,31 @@ class News {
             news.forEach((item: INews, idx: number) => {
                 const newsClone: Node = newsItemTemp.content.cloneNode(true);
                 if (newsClone instanceof DocumentFragment) {
-                    if (idx % 2) newsClone.querySelector('.news__item')!.classList.add('alt');
+                    if (idx % 2) getEl('.news__item', newsClone).classList.add('alt');
 
-                    (newsClone.querySelector('.news__meta-photo') as HTMLElement)!.style.backgroundImage = `url(${
+                    getEl('.news__meta-photo', newsClone).style.backgroundImage = `url(${
                         item.urlToImage || 'img/news_placeholder.jpg'
                     })`;
-                    newsClone.querySelector('.news__meta-author')!.textContent = item.author || item.source.name;
-                    newsClone.querySelector('.news__meta-date')!.textContent = item.publishedAt
+                    getEl('.news__meta-author', newsClone).textContent = item.author || item.source.name;
+                    getEl('.news__meta-date', newsClone).textContent = item.publishedAt
                         .slice(0, 10)
                         .split('-')
                         .reverse()
                         .join('-');
 
-                    newsClone.querySelector('.news__description-title')!.textContent = item.title;
-                    newsClone.querySelector('.news__description-source')!.textContent = item.source.name;
-                    newsClone.querySelector('.news__description-content')!.textContent = item.description;
-                    newsClone.querySelector('.news__read-more a')!.setAttribute('href', item.url);
+                    getEl('.news__description-title', newsClone).textContent = item.title;
+                    getEl('.news__description-source', newsClone).textContent = item.source.name;
+                    getEl('.news__description-content', newsClone).textContent = item.description;
+                    getEl('.news__read-more a', newsClone).setAttribute('href', item.url);
                 }
 
                 fragment.append(newsClone);
             });
         }
-
-        document.querySelector('.news')!.innerHTML = '';
-        document.querySelector('.news')!.appendChild(fragment);
+        const elem = document.querySelector('.news');
+        isNotNull(elem);
+        elem.innerHTML = '';
+        elem.appendChild(fragment);
     }
 }
 

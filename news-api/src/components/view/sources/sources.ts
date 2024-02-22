@@ -1,5 +1,5 @@
 import './sources.css';
-import { ISources } from '../../../types/index';
+import { ISources, isNotNull, getEl } from '../../../types/servise';
 
 class Sources {
     draw(data: ISources[]) {
@@ -10,15 +10,17 @@ class Sources {
             data.forEach((item: ISources) => {
                 const sourceClone: Node = sourceItemTemp.content.cloneNode(true);
                 if (sourceClone instanceof DocumentFragment) {
-                    sourceClone.querySelector('.source__item-name')!.textContent = item.name;
-                    sourceClone.querySelector('.source__item')!.setAttribute('data-source-id', item.id);
+                    getEl('.source__item-name', sourceClone).textContent = item.name;
+                    getEl('.source__item', sourceClone).setAttribute('data-source-id', item.id);
                 }
 
                 fragment.append(sourceClone);
             });
         }
 
-        document.querySelector('.sources')!.append(fragment);
+        const elem = document.querySelector('.sources');
+        isNotNull(elem);
+        elem.append(fragment);
     }
 }
 

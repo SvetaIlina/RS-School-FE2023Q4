@@ -1,10 +1,10 @@
 import News from './news/news';
 import Sources from './sources/sources';
-import { INewsResponse, ISourcesResponse, INews, ISources } from '../../types/index';
+import { INewsResponse, ISourcesResponse, INews, ISources } from '../../types/servise';
 
 export class AppView {
-    news: News;
-    sources: Sources;
+    private news: News;
+    private sources: Sources;
     constructor() {
         this.news = new News();
         this.sources = new Sources();
