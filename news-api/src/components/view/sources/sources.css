@@ -1,20 +1,35 @@
 .sources {
     display: flex;
-    flex-wrap: nowrap;
+    justify-content: center;
+    flex-wrap: wrap;
     width: 100%;
-    height: 120px;
+    height: 200px;
     overflow: auto;
     align-items: center;
-    font: 300 1em 'Fira Sans', sans-serif;
+    font: 300 1.6rem 'Fira Sans', sans-serif;
+    margin-bottom: 50px;
 }
+
+.sources::-webkit-scrollbar{
+    width: 10px;
+    background: linear-gradient(#1d6f8f , #3fcc59 );
+    border-radius: 5px;
+    
+}
+.sources::-webkit-scrollbar-thumb {
+   background-color: #70d6ff;
+    border-radius: 5px
+}
+
+
 
 .source__item {
     background: none;
     border: 2px solid #30c5ff;
     font: inherit;
     line-height: 1;
-    margin: 0.5em;
-    padding: 1em 2em;
+    margin: 0.8rem;
+    padding: 1.6rem 3.2rem;
     color: #70d6ff;
     transition: 0.25s;
     cursor: pointer;
@@ -31,4 +46,10 @@
 .source__item-name {
     font-weight: 400;
     white-space: nowrap;
+}
+
+@media (max-width: 460px) {
+    .source__item {
+        padding: 0.8rem 1.6rem;
+    }
 }
