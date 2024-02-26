@@ -1,5 +1,6 @@
 import './news.css';
 import { INews, getEl, isNotNull } from '../../../types/servise';
+import Placeholder from './img/news_placeholder.jpg';
 
 class News {
     draw(data: INews[]) {
@@ -14,7 +15,7 @@ class News {
                     if (idx % 2) getEl('.news__item', newsClone).classList.add('alt');
 
                     getEl('.news__meta-photo', newsClone).style.backgroundImage = `url(${
-                        item.urlToImage || 'img/news_placeholder.jpg'
+                        item.urlToImage || Placeholder
                     })`;
                     getEl('.news__meta-author', newsClone).textContent = item.author || item.source.name;
                     getEl('.news__meta-date', newsClone).textContent = item.publishedAt
