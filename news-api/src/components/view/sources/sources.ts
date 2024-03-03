@@ -1,5 +1,6 @@
 import './sources.css';
-import { ISources, isNotNull, getEl } from '../../../types/servise';
+import { ISources } from '../../../types/servise';
+import { getEl, isNotNull } from '../../../types/utils';
 
 class Sources {
     draw(data: ISources[]) {

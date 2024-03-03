@@ -35,17 +35,8 @@ export enum StatusCode {
     notFound = 404,
 }
 
-export function isNotNull<T>(value: unknown): asserts value is NonNullable<T> {
-    if (value === null || value === undefined) {
-        throw new Error(`Not expected value: ${value}`);
-    }
-}
+export type ApiConfig = {
+    apiKey: string | undefined;
+};
 
-export function getEl(selector: string, parent: DocumentFragment): HTMLElement {
-    const el = parent.querySelector(selector);
-    isNotNull(el);
-    if (!(el instanceof HTMLElement)) {
-        throw new Error('!!!!');
-    }
-    return el;
-}
+export type Callback<T> = (data: T) => void;

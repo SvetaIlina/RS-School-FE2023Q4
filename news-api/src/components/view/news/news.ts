@@ -1,5 +1,6 @@
 import './news.css';
-import { INews, getEl, isNotNull } from '../../../types/servise';
+import { INews } from '../../../types/servise';
+import { getEl, isNotNull } from '../../../types/utils';
 import Placeholder from './img/news_placeholder.jpg';
 
 class News {

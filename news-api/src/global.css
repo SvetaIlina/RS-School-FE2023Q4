@@ -41,9 +41,7 @@ header h1 {
 
 main{
     flex-grow: 1;
-    /* display: flex;
-    justify-content: space-evenly;
-    gap: 20px; */
+ 
 }
 
 footer {

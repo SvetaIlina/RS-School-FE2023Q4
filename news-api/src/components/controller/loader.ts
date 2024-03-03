@@ -1,9 +1,9 @@
-import { StatusCode } from '../../types/servise';
+import { StatusCode, ApiConfig } from '../../types/servise';
 
 class Loader {
     private baseLink: string | undefined;
-    private options: Record<string, string | undefined>;
-    constructor(baseLink: string | undefined, options: Record<string, string | undefined>) {
+    private options: ApiConfig;
+    constructor(options: ApiConfig, baseLink?: string) {
         this.baseLink = baseLink;
         this.options = options;
     }
@@ -39,7 +39,7 @@ class Loader {
 
     private makeUrl(options: Record<string, string>, endpoint: string) {
         if (!Object.values(this.options)[0] || !this.baseLink) {
-            throw new Error('errror');
+            throw new Error('Base link or options are missing');
         }
         const urlOptions: Record<string, string | undefined> = { ...this.options, ...options };
         let url: string = `${this.baseLink}${endpoint}?`;
