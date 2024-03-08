@@ -21,7 +21,24 @@ module.exports = {
         ecmaVersion: 'latest',
         sourceType: 'module',
     },
+    settings: {
+        'import/resolver': {
+            node: {
+                extensions: ['.ts', '.js'],
+            },
+        },
+    },
     rules: {
         '@typescript-eslint/no-explicit-any': 2,
+        'import/extensions': [
+            'error',
+            'ignorePackages',
+            {
+                js: 'never',
+                jsx: 'never',
+                ts: 'never',
+                tsx: 'never',
+            },
+        ],
     },
 };

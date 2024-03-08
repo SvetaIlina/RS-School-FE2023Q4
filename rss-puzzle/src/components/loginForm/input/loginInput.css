@@ -1,0 +1,24 @@
+.inputContainer {
+    margin: 20px 0 40px;
+    width: 300px;
+}
+
+.inputField {
+    background-color: transparent;
+    border: 0;
+    border-bottom: 2px #009cff solid;
+    width: 100%;
+    padding: 15px 0;
+    font-size: 3rem;
+    color: #0e5f93;
+}
+
+.inputField:focus {
+    outline: 0;
+    border-bottom-color: lightblue;
+}
+
+.labelField {
+    font-size: 3rem;
+    color: #009cff;
+}
