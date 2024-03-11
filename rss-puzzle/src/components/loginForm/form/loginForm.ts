@@ -6,9 +6,9 @@ import Button from '../../buttons/button';
 import './loginForm.css';
 
 export default class LoginForm extends BaseComponent<HTMLFormElement> {
-    name = new LoginInput('First Name', 3);
+    name = new LoginInput('First Name', 3, 'name');
 
-    surName = new LoginInput('Surname', 4);
+    surName = new LoginInput('Surname', 4, 'surName');
 
     loginBtn = new Button('Login', 'btn_disable');
 

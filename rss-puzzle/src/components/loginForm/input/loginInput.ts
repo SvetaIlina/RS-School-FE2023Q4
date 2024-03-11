@@ -7,7 +7,7 @@ export default class LoginInput extends BaseComponent {
 
     label: HTMLElement;
 
-    constructor(labelText: string, minInputLength: number) {
+    constructor(labelText: string, minInputLength: number, inputName: string) {
         super({
             tag: 'div',
             classes: ['inputContainer'],
@@ -23,6 +23,7 @@ export default class LoginInput extends BaseComponent {
         this.input.setAttribute('type', 'text');
         this.input.setAttribute('minlength', `${minInputLength}`);
         this.input.setAttribute('pattern', '[a-zA-Z \\-]+');
+        this.input.setAttribute('name', `${inputName}`);
         this.input.addEventListener('input', () => this.setValidMessage());
         this.label = new BaseComponent({
             tag: 'label',
@@ -31,10 +32,6 @@ export default class LoginInput extends BaseComponent {
         }).getElement();
         this.addChild(this.label);
         this.addChild(this.input);
-    }
-
-    getValue() {
-        return this.input.value;
     }
 
     setCallback(cb: Callback<Event>) {

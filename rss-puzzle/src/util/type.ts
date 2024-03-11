@@ -6,3 +6,8 @@ export interface elemOptions {
     textContent: string;
     callback?: Callback<Event>;
 }
+
+export interface userData {
+    name: string;
+    surName: string;
+}
