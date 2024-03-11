@@ -1,13 +1,14 @@
 import BaseComponent from '../../../util/baseComponent';
 import { Callback } from '../../../util/type';
+
 import LoginInput from '../input/loginInput';
 import Button from '../../buttons/button';
 import './loginForm.css';
 
 export default class LoginForm extends BaseComponent<HTMLFormElement> {
-    name = new LoginInput('First Name');
+    name = new LoginInput('First Name', 3);
 
-    surName = new LoginInput('Surname');
+    surName = new LoginInput('Surname', 4);
 
     loginBtn = new Button('Login', 'btn_disable');
 

@@ -11,6 +11,7 @@
     padding: 15px 0;
     font-size: 3rem;
     color: #0e5f93;
+    padding-bottom: 0;
 }
 
 .inputField:focus {
@@ -18,7 +19,20 @@
     border-bottom-color: lightblue;
 }
 
+.inputField:invalid:focus {
+    background-color: rgb(241, 193, 210);
+}
+
+.inputField:invalid {
+    text-decoration: underline dotted red;
+}
+
 .labelField {
     font-size: 3rem;
     color: #009cff;
+}
+
+.labelField::after {
+    content: '*';
+    color: red;
 }

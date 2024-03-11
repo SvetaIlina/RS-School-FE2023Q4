@@ -7,7 +7,7 @@ export default class LoginInput extends BaseComponent {
 
     label: HTMLElement;
 
-    constructor(labelText: string) {
+    constructor(labelText: string, minInputLength: number) {
         super({
             tag: 'div',
             classes: ['inputContainer'],
@@ -21,6 +21,9 @@ export default class LoginInput extends BaseComponent {
         }).getElement();
         this.input.setAttribute('required', '');
         this.input.setAttribute('type', 'text');
+        this.input.setAttribute('minlength', `${minInputLength}`);
+        this.input.setAttribute('pattern', '[a-zA-Z \\-]+');
+        this.input.addEventListener('input', () => this.setValidMessage());
         this.label = new BaseComponent({
             tag: 'label',
             classes: ['labelField'],
@@ -37,6 +40,24 @@ export default class LoginInput extends BaseComponent {
     setCallback(cb: Callback<Event>) {
         if (typeof cb === 'function') {
             this.element.addEventListener('keyup', (event) => cb(event));
+        }
+    }
+
+    setValidMessage() {
+        const field: HTMLInputElement = this.input;
+        const fieldValue: Array<string> = field.value.split('');
+        const minlength: string | null = this.input.getAttribute('minlength');
+        if (fieldValue.length) {
+            if (field.validity.patternMismatch) {
+                field.setCustomValidity('Accept only English alphabet letters and the hyphen symbol.');
+            } else if (fieldValue[0].toLowerCase() === fieldValue[0]) {
+                field.setCustomValidity('First letter must be in uppercase');
+            } else if (field.validity.tooShort) {
+                field.setCustomValidity(`Minimum length for the field must be ${minlength} symbols `);
+            } else {
+                field.setCustomValidity('');
+            }
+            field.reportValidity();
         }
     }
 }
