@@ -1,5 +1,4 @@
 import './style.css';
-import LoginForm from './components/loginForm/form/loginForm';
-import loginBtnCallback from './services/callbacks';
+import loginPageView from './pages/loginPage/loginPageView';
 
-document.body.append(new LoginForm(loginBtnCallback).getElement());
+loginPageView.setContent();

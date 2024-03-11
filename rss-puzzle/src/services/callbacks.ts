@@ -1,12 +1,16 @@
+import myEmitter from './emitter';
 import { getUserData, isNotNull } from './utils';
+import { Callback } from '../util/type';
 
-export default function loginBtnCallback(event: Event): void {
+const loginBtnCallback: Callback<Event> = (event) => {
     event.preventDefault();
     isNotNull(event.target);
     if (event.target instanceof HTMLElement) {
         const form = event.target.parentElement;
         isNotNull(form);
         localStorage.setItem('playerData', JSON.stringify(getUserData(form)));
+        myEmitter.emit('myEvent');
     }
-    console.log(123);
-}
+};
+
+export default loginBtnCallback;

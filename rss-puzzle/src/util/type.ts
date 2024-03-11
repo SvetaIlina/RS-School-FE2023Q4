@@ -1,4 +1,4 @@
-export type Callback<T> = (data: T) => void;
+export type Callback<T, T2 = HTMLElement> = (data: T, arg?: T2) => void;
 
 export interface elemOptions {
     tag: string;
