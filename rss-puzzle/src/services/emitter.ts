@@ -1,16 +1,12 @@
 import { EventEmitter } from 'events';
 import loginPageView from '../pages/loginPage/loginPageView';
-import BaseComponent from '../util/baseComponent';
+import startPageView from '../pages/startPage/startPageView';
 
-const newCont = new BaseComponent({
-    tag: 'h1',
-    classes: [''],
-    textContent: 'GGGGGGGGGGGGGGGGG',
-}).getElement();
+const startPage = startPageView.getElement();
 
 const myEmitter = new EventEmitter();
 myEmitter.on('myEvent', () => {
-    loginPageView.replaceCont(newCont);
+    loginPageView.replaceCont(startPage);
 });
 
 export default myEmitter;

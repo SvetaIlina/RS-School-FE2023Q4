@@ -1,8 +1,8 @@
 import BaseComponent from '../util/baseComponent';
 
 export default class PageView extends BaseComponent {
-    constructor() {
-        super({ tag: 'section', classes: [''], textContent: '' });
+    constructor(className: string = '') {
+        super({ tag: 'section', classes: [`${className}`], textContent: '' });
     }
 
     setContent() {

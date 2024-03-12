@@ -1,0 +1,28 @@
+.startPage {
+    max-width: 700px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    color: #086b98;
+    position: relative;
+}
+
+.title {
+    font-size: 3rem;
+    text-shadow: -1px -1px black;
+}
+
+.descr {
+    font-size: 2rem;
+    line-height: 3rem;
+    font-weight: 600;
+}
+
+.img {
+    position: absolute;
+    width: 100px;
+    z-index: -1;
+    left: -10px;
+    transform: rotate(-20deg);
+}
