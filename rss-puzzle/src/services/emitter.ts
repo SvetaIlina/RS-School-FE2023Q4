@@ -1,12 +1,11 @@
 import { EventEmitter } from 'events';
-import loginPageView from '../pages/loginPage/loginPageView';
-import startPageView from '../pages/startPage/startPageView';
 
-const startPage = startPageView.getElement();
+import StartPageView from '../pages/startPage/startPageView';
 
 const myEmitter = new EventEmitter();
-myEmitter.on('myEvent', () => {
-    loginPageView.replaceCont(startPage);
+myEmitter.on('myEvent', (loginPage: HTMLElement) => {
+    const startPage = new StartPageView(['startPage'], 'playerData');
+    loginPage.replaceWith(startPage.getHTMLElement());
 });
 
 export default myEmitter;

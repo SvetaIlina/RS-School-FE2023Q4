@@ -2,8 +2,11 @@ import PageView from '../pageView';
 import LoginForm from '../../components/loginForm/form/loginForm';
 import loginBtnCallback from '../../services/callbacks';
 
-const loginPageView = new PageView();
-const form = new LoginForm(loginBtnCallback);
-loginPageView.addChild(form.getElement());
+export default class LoginPageView extends PageView {
+    private form = new LoginForm(loginBtnCallback);
 
-export default loginPageView;
+    constructor() {
+        super();
+        this.viewPage.addChild([this.form]);
+    }
+}

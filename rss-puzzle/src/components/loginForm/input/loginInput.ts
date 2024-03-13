@@ -18,20 +18,22 @@ export default class LoginInput extends BaseComponent {
             tag: 'input',
             classes: ['inputField'],
             textContent: '',
+            attributes: [
+                { key: 'required', value: '' },
+                { key: 'type', value: 'text' },
+                { key: 'minlength', value: `${minInputLength}` },
+                { key: 'pattern', value: '[a-zA-Z \\-]+' },
+                { key: 'name', value: `${inputName}` },
+            ],
         }).getElement();
-        this.input.setAttribute('required', '');
-        this.input.setAttribute('type', 'text');
-        this.input.setAttribute('minlength', `${minInputLength}`);
-        this.input.setAttribute('pattern', '[a-zA-Z \\-]+');
-        this.input.setAttribute('name', `${inputName}`);
         this.input.addEventListener('input', () => this.setValidMessage());
         this.label = new BaseComponent({
             tag: 'label',
             classes: ['labelField'],
             textContent: labelText,
         }).getElement();
-        this.addChild(this.label);
-        this.addChild(this.input);
+        this.addChild([this.label]);
+        this.addChild([this.input]);
     }
 
     setCallback(cb: Callback<Event>) {

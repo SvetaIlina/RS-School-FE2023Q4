@@ -1,4 +1,4 @@
 import './style.css';
-import loginPageView from './pages/loginPage/loginPageView';
+import LoginPageView from './pages/loginPage/loginPageView';
 
-loginPageView.setContent();
+new LoginPageView().setContent();

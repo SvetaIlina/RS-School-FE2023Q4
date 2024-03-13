@@ -17,13 +17,14 @@ export default class LoginForm extends BaseComponent<HTMLFormElement> {
             tag: 'form',
             classes: ['formContainer'],
             textContent: 'Please Login',
+            attributes: [{ key: 'autocomplete', value: 'off' }],
         });
         this.loginBtn.setCallback(btnCB);
         this.name.setCallback(() => this.checkValid());
         this.surName.setCallback(() => this.checkValid());
-        this.addChild(this.name.getElement());
-        this.addChild(this.surName.getElement());
-        this.addChild(this.loginBtn.getElement());
+        this.addChild([this.name.getElement()]);
+        this.addChild([this.surName.getElement()]);
+        this.addChild([this.loginBtn.getElement()]);
     }
 
     checkValid() {

@@ -1,4 +1,4 @@
-import { elemOptions, Callback } from './type';
+import { elemOptions, Callback, attribute } from './type';
 
 export default class BaseComponent<T extends HTMLElement = HTMLElement> {
     element: T;
@@ -15,17 +15,22 @@ export default class BaseComponent<T extends HTMLElement = HTMLElement> {
     setElement(options: elemOptions) {
         this.setStyles(options.classes);
         this.setTextContent(options.textContent);
+        if (options.attributes) {
+            this.setAttributes(options.attributes);
+        }
         if (options.callback) {
             this.setCallback(options.callback);
         }
     }
 
-    addChild(child: HTMLElement) {
-        if (child instanceof BaseComponent) {
-            this.element.append(child.getElement());
-        } else {
-            this.element.append(child);
-        }
+    addChild(children: Array<HTMLElement | BaseComponent>) {
+        children.forEach((child) => {
+            if (child instanceof BaseComponent) {
+                this.element.append(child.getElement());
+            } else {
+                this.element.append(child);
+            }
+        });
     }
 
     setStyles(cssClasses: Array<string>) {
@@ -33,6 +38,12 @@ export default class BaseComponent<T extends HTMLElement = HTMLElement> {
             if (cssClass) {
                 this.element.classList.add(cssClass);
             }
+        });
+    }
+
+    setAttributes(attributes: Array<attribute>) {
+        attributes.forEach((attr) => {
+            this.element.setAttribute(attr.key, attr.value);
         });
     }
 
