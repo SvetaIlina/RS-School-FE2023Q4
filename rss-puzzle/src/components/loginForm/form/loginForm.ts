@@ -1,30 +1,27 @@
 import BaseComponent from '../../../util/baseComponent';
-import { Callback } from '../../../util/type';
-
+import { loginBtnCallback } from '../../../services/callbacks';
 import LoginInput from '../input/loginInput';
 import Button from '../../buttons/button';
 import './loginForm.css';
 
 export default class LoginForm extends BaseComponent<HTMLFormElement> {
-    name = new LoginInput('First Name', 3, 'name');
+    private name = new LoginInput('First Name', 3, 'name');
 
-    surName = new LoginInput('Surname', 4, 'surName');
+    private surName = new LoginInput('Surname', 4, 'surName');
 
-    loginBtn = new Button('Login', 'btn_disable');
+    private loginBtn = new Button('Login', loginBtnCallback, 'btn_disable');
 
-    constructor(btnCB: Callback<Event>) {
+    constructor() {
         super({
             tag: 'form',
             classes: ['formContainer'],
             textContent: 'Please Login',
             attributes: [{ key: 'autocomplete', value: 'off' }],
         });
-        this.loginBtn.setCallback(btnCB);
+
         this.name.setCallback(() => this.checkValid());
         this.surName.setCallback(() => this.checkValid());
-        this.addChild([this.name.getElement()]);
-        this.addChild([this.surName.getElement()]);
-        this.addChild([this.loginBtn.getElement()]);
+        this.addChild([this.name, this.surName, this.loginBtn]);
     }
 
     checkValid() {

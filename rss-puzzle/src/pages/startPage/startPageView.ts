@@ -3,7 +3,9 @@ import BaseComponent from '../../util/baseComponent';
 import img from '../../assets/images/sq.png';
 import LocalStore from '../../services/localStore';
 import { userData } from '../../util/type';
+import Button from '../../components/buttons/button';
 import './startPageStyles.css';
+import { startBtnCallback } from '../../services/callbacks';
 
 export default class StartPageView extends PageView {
     private image = new BaseComponent({
@@ -12,6 +14,8 @@ export default class StartPageView extends PageView {
         textContent: '',
         attributes: [{ key: 'src', value: `${img}` }],
     });
+
+    private startBtn = new Button('Start Playing', startBtnCallback, '');
 
     private gameDescr = new BaseComponent({
         tag: 'p',
@@ -32,7 +36,7 @@ export default class StartPageView extends PageView {
         super();
         this.localStorageKey = localStorageKey;
         this.viewPage.setStyles(cssClass);
-        this.viewPage.addChild([this.image, this.gameName, this.gameDescr]);
+        this.viewPage.addChild([this.image, this.gameName, this.gameDescr, this.startBtn]);
         this.viewPage.getElement().insertAdjacentElement('afterbegin', this.setGreetingMessage());
     }
 

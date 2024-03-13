@@ -6,6 +6,15 @@ export function isNotNull<T>(value: unknown): asserts value is NonNullable<T> {
     }
 }
 
+export function changeContent(eventTarget: EventTarget): HTMLElement | null {
+    if (eventTarget instanceof HTMLElement) {
+        const parentSection = eventTarget.closest('section');
+        isNotNull(parentSection);
+        return parentSection;
+    }
+    return null;
+}
+
 export function getUserData(parent: HTMLElement): userData {
     const data: userData = {
         name: '',

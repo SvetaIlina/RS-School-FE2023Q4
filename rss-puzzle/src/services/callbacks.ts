@@ -1,5 +1,5 @@
-import myEmitter from './emitter';
-import { getUserData, isNotNull } from './utils';
+import { myLoginPageEmitter, myStartPageEmitter } from './emitter';
+import { getUserData, isNotNull, changeContent } from './utils';
 import { Callback } from '../util/type';
 import LocalStore from './localStore';
 
@@ -9,12 +9,15 @@ const loginBtnCallback: Callback<Event> = (event) => {
     isNotNull(event.target);
     if (event.target instanceof HTMLElement) {
         const form = event.target.parentElement;
-        const parentSection = event.target.closest('section');
         isNotNull(form);
-        isNotNull(parentSection);
         localStore.saveData(getUserData(form));
-        myEmitter.emit('myEvent', parentSection);
+        myLoginPageEmitter.emit('myEvent', changeContent(event.target));
     }
 };
 
-export default loginBtnCallback;
+const startBtnCallback: Callback<Event> = (event) => {
+    isNotNull(event.target);
+    myStartPageEmitter.emit('myStartEvent', changeContent(event.target));
+};
+
+export { startBtnCallback, loginBtnCallback };

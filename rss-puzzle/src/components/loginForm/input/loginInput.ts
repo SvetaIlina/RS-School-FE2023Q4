@@ -27,13 +27,13 @@ export default class LoginInput extends BaseComponent {
             ],
         }).getElement();
         this.input.addEventListener('input', () => this.setValidMessage());
+
         this.label = new BaseComponent({
             tag: 'label',
             classes: ['labelField'],
             textContent: labelText,
         }).getElement();
-        this.addChild([this.label]);
-        this.addChild([this.input]);
+        this.addChild([this.label, this.input]);
     }
 
     setCallback(cb: Callback<Event>) {
