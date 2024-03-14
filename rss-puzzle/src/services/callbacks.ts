@@ -1,6 +1,6 @@
 import StartPageView from '../pages/startPage/startPageView';
-import PageView from '../pages/pageView';
-import { getUserData, isNotNull, loadNewContent } from './utils';
+import GamePageView from '../pages/gamePage/gamePageView';
+import { getUserData, isNotNull, loadNewContent, replaceWordBloc } from './utils';
 import { Callback } from '../util/type';
 import LocalStore from './localStore';
 
@@ -19,8 +19,32 @@ const loginBtnCallback: Callback<Event> = (event) => {
 
 const startBtnCallback: Callback<Event> = (event) => {
     isNotNull(event.target);
-    const newPage = new PageView();
-    loadNewContent<PageView>(newPage, event.target);
+    const newPage = new GamePageView(['startPage']);
+    loadNewContent<GamePageView>(newPage, event.target);
 };
 
-export { startBtnCallback, loginBtnCallback };
+const sourceBlockCallback: Callback<Event> = (event) => {
+    const currentWord = event.target;
+    if (currentWord instanceof HTMLElement) {
+        currentWord.style.order = '0';
+    }
+    const targetSentense = document.querySelector('.incomplete');
+    isNotNull(targetSentense);
+    const targetBlock = targetSentense.querySelector('.empty');
+    isNotNull(currentWord);
+    isNotNull(targetBlock);
+    replaceWordBloc(currentWord, targetBlock);
+};
+
+const resultBlockCallbac: Callback<Event> = (event) => {
+    const currentWord = event.target;
+    const sourceBlock = document.querySelector('.source');
+    isNotNull(sourceBlock);
+    const targetBlock = sourceBlock.querySelector('.empty');
+
+    isNotNull(targetBlock);
+    isNotNull(currentWord);
+    replaceWordBloc(currentWord, targetBlock);
+};
+
+export { startBtnCallback, loginBtnCallback, sourceBlockCallback, resultBlockCallbac };
