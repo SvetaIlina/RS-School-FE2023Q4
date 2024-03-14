@@ -1,3 +1,4 @@
+import PageView from '../pages/pageView';
 import { userData } from '../util/type';
 
 export function isNotNull<T>(value: unknown): asserts value is NonNullable<T> {
@@ -6,13 +7,21 @@ export function isNotNull<T>(value: unknown): asserts value is NonNullable<T> {
     }
 }
 
-export function changeContent(eventTarget: EventTarget): HTMLElement | null {
+export function getCurrentContent(eventTarget: EventTarget): HTMLElement | null {
     if (eventTarget instanceof HTMLElement) {
         const parentSection = eventTarget.closest('section');
         isNotNull(parentSection);
         return parentSection;
     }
     return null;
+}
+
+export function loadNewContent<T>(newPage: T, eTarget: EventTarget): void {
+    const currentPage = getCurrentContent(eTarget);
+    isNotNull(currentPage);
+    if (newPage instanceof PageView) {
+        currentPage.replaceWith(newPage.getHTMLElement());
+    }
 }
 
 export function getUserData(parent: HTMLElement): userData {
