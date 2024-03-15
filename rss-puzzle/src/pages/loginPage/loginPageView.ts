@@ -5,7 +5,7 @@ export default class LoginPageView extends PageView {
     private form = new LoginForm();
 
     constructor() {
-        super();
+        super(['']);
         this.viewPage.addChild([this.form]);
     }
 }

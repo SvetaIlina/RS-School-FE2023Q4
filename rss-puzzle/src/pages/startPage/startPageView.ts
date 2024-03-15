@@ -32,10 +32,12 @@ export default class StartPageView extends PageView {
 
     localStorageKey: string;
 
-    constructor(cssClass: Array<string>, localStorageKey: string) {
-        super();
+    constructor(localStorageKey: string, cssClass?: Array<string>) {
+        super(['startPage']);
         this.localStorageKey = localStorageKey;
-        this.viewPage.setStyles(cssClass);
+        if (cssClass) {
+            this.viewPage.setStyles(cssClass);
+        }
         this.viewPage.addChild([this.image, this.gameName, this.gameDescr, this.startBtn]);
         this.viewPage.getElement().insertAdjacentElement('afterbegin', this.setGreetingMessage());
     }

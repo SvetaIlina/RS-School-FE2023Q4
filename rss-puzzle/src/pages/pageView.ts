@@ -3,10 +3,10 @@ import BaseComponent from '../util/baseComponent';
 export default class PageView {
     viewPage: BaseComponent;
 
-    constructor() {
+    constructor(cssClass: Array<string>) {
         this.viewPage = new BaseComponent({
             tag: 'section',
-            classes: [''],
+            classes: cssClass,
             textContent: '',
         });
     }
@@ -19,12 +19,12 @@ export default class PageView {
         document.body.append(this.viewPage.getElement());
     }
 
-    replaceCont(newCont: HTMLElement) {
-        this.delete();
-        document.body.append(newCont);
-    }
+    // replaceCont(newCont: HTMLElement) {
+    //     this.delete();
+    //     document.body.append(newCont);
+    // }
 
-    delete() {
-        this.viewPage.getElement().remove();
-    }
+    // delete() {
+    //     this.viewPage.getElement().remove();
+    // }
 }

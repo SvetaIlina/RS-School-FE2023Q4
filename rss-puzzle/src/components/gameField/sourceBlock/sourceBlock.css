@@ -5,6 +5,7 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    margin-bottom: 20px;
 }
 
 .word {

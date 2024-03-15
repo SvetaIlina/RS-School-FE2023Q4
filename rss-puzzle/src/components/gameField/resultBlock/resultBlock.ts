@@ -1,6 +1,6 @@
-import { isNotNull } from '../../services/utils';
-import BaseComponent from '../../util/baseComponent';
-import { resultBlockCallbac } from '../../services/callbacks';
+import { isNotNull } from '../../../services/utils';
+import BaseComponent from '../../../util/baseComponent';
+import { resultBlockCallbac } from '../../../services/callbacks';
 import './resultBlock.css';
 
 export default class ResultBlock extends BaseComponent {

@@ -15,4 +15,8 @@ export default class LocalStore {
         const data = localStorage.getItem(`${this.key}`);
         return data ? JSON.parse(data) : null;
     }
+
+    removeData() {
+        localStorage.removeItem(this.key);
+    }
 }

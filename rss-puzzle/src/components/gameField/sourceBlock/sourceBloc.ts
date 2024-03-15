@@ -1,6 +1,6 @@
-import BaseComponent from '../../util/baseComponent';
-import { makeWordBlock } from '../../services/utils';
-import { sourceBlockCallback } from '../../services/callbacks';
+import BaseComponent from '../../../util/baseComponent';
+import { makeWordBlock } from '../../../services/utils';
+import { sourceBlockCallback } from '../../../services/callbacks';
 import './sourceBlock.css';
 
 export default class SourceBlock extends BaseComponent {
