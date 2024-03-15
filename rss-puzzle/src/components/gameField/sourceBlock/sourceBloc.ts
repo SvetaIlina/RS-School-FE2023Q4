@@ -1,5 +1,5 @@
 import BaseComponent from '../../../util/baseComponent';
-import { makeWordBlock } from '../../../services/utils';
+import { isNotNull, makeWordBlock } from '../../../services/utils';
 import { sourceBlockCallback } from '../../../services/callbacks';
 import './sourceBlock.css';
 
@@ -13,9 +13,15 @@ export default class SourceBlock extends BaseComponent {
         });
     }
 
-    getWords(sentence: string) {
-        const words = sentence.split(/\W/);
+    setWords(sentence: string) {
+        const words = sentence.split(' ');
         const parentWidth: number = 750;
+        while (this.getElement().firstElementChild) {
+            const child = this.getElement().firstElementChild;
+            isNotNull(child);
+
+            child.remove();
+        }
         this.addChild(makeWordBlock(words, parentWidth));
     }
 }

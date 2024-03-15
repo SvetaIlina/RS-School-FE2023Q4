@@ -4,6 +4,7 @@ import { getUserData, isNotNull, loadNewContent, replaceWordBloc } from './utils
 import { Callback, userData } from '../util/type';
 import LocalStore from './localStore';
 import LoginPageView from '../pages/loginPage/loginPageView';
+import data from '../data/data.json';
 
 const loginBtnCallback: Callback<Event> = (event) => {
     event.preventDefault();
@@ -20,7 +21,7 @@ const loginBtnCallback: Callback<Event> = (event) => {
 
 const startBtnCallback: Callback<Event> = (event) => {
     isNotNull(event.target);
-    const newPage = new GamePageView(['gamePage']);
+    const newPage = new GamePageView(data, ['gamePage']);
     loadNewContent<GamePageView>(newPage, event.target);
 };
 

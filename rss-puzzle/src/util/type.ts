@@ -17,3 +17,31 @@ export interface userData {
     name: string;
     surName: string;
 }
+
+type LevelData = {
+    id: string;
+    name: string;
+    imageSrc: string;
+    author: string;
+    year: string;
+    cutSrc?: string;
+};
+
+type Word = {
+    audioExample: string;
+    textExample: string;
+    textExampleTranslate: string;
+    id: number;
+    word: string;
+    wordTranslate: string;
+};
+
+type Round = {
+    levelData: LevelData;
+    words: Word[];
+};
+
+export type Data = {
+    rounds: Round[];
+    roundsCount: number;
+};
