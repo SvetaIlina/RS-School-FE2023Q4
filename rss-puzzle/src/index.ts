@@ -14,7 +14,7 @@ class App {
         const loginUser = new LocalStore(this.localStorageUserKey);
         const loginPage = new LoginPageView();
         const startPage = new StartPageView(this.localStorageUserKey);
-        if (loginUser) {
+        if (loginUser.getData()) {
             startPage.setContent();
         } else {
             loginPage.setContent();
