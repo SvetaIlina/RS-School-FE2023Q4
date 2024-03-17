@@ -15,7 +15,7 @@ export default class StartPageView extends PageView {
         attributes: [{ key: 'src', value: `${img}` }],
     });
 
-    private startBtn = new Button('Start Playing', startBtnCallback, '');
+    private startBtn = new Button('Start Playing', startBtnCallback);
 
     private gameDescr = new BaseComponent({
         tag: 'p',

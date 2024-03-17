@@ -1,6 +1,7 @@
 import { isNotNull } from '../../../services/utils';
 import BaseComponent from '../../../util/baseComponent';
 import { resultBlockCallbac } from '../../../services/callbacks';
+
 import './resultBlock.css';
 
 export default class ResultBlock extends BaseComponent {
@@ -11,6 +12,7 @@ export default class ResultBlock extends BaseComponent {
             textContent: '',
             callback: resultBlockCallbac,
         });
+
         this.addChild();
     }
 
@@ -26,6 +28,15 @@ export default class ResultBlock extends BaseComponent {
         }
     }
 
+    removeChild() {
+        while (this.getElement().firstElementChild) {
+            const child = this.getElement().firstElementChild;
+            isNotNull(child);
+
+            child.remove();
+        }
+    }
+
     splitSentence(wordCount: number) {
         const sentence = this.element.querySelector('.incomplete');
         isNotNull(sentence);
@@ -33,7 +44,7 @@ export default class ResultBlock extends BaseComponent {
             const block = new BaseComponent({
                 tag: 'div',
                 classes: ['empty'],
-                textContent: `${i}`,
+                textContent: '',
             });
 
             sentence.append(block.getElement());

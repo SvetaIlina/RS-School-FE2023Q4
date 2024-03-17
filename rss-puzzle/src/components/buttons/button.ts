@@ -3,12 +3,15 @@ import { Callback } from '../../util/type';
 import './button.css';
 
 export default class Button extends BaseComponent {
-    constructor(text: string, btnCallback: Callback<Event>, classCss: string = '') {
+    constructor(text: string, btnCallback: Callback<Event>, classCss?: Array<string>) {
         super({
             tag: 'button',
-            classes: [`${classCss}`, 'btn'],
+            classes: ['btn'],
             textContent: `${text}`,
             callback: btnCallback,
         });
+        if (classCss) {
+            this.setStyles(classCss);
+        }
     }
 }

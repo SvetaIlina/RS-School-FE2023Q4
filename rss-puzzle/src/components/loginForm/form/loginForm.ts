@@ -9,7 +9,7 @@ export default class LoginForm extends BaseComponent<HTMLFormElement> {
 
     private surName = new LoginInput('Surname', 4, 'surName');
 
-    private loginBtn = new Button('Login', loginBtnCallback, 'btn_disable');
+    private loginBtn = new Button('Login', loginBtnCallback, ['btn_disable']);
 
     constructor() {
         super({

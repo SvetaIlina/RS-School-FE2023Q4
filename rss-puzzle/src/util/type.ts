@@ -3,7 +3,7 @@ export type attribute = {
     value: string;
 };
 
-export type Callback<T, T2 = HTMLElement> = (data: T, arg?: T2) => void;
+export type Callback<T, T2 = undefined, T3 = undefined> = (data: T, arg1?: T2, arg2?: T3) => void;
 
 export interface elemOptions {
     tag: string;
@@ -27,7 +27,7 @@ type LevelData = {
     cutSrc?: string;
 };
 
-type Word = {
+export type Word = {
     audioExample: string;
     textExample: string;
     textExampleTranslate: string;
@@ -36,7 +36,7 @@ type Word = {
     wordTranslate: string;
 };
 
-type Round = {
+export type Round = {
     levelData: LevelData;
     words: Word[];
 };
@@ -44,4 +44,12 @@ type Round = {
 export type Data = {
     rounds: Round[];
     roundsCount: number;
+};
+
+export type GameParametres = {
+    level: number;
+    round: number;
+    sentense: number;
+    sentenceCount: number;
+    roundCount: number;
 };

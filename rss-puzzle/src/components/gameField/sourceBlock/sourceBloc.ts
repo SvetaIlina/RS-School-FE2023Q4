@@ -4,13 +4,26 @@ import { sourceBlockCallback } from '../../../services/callbacks';
 import './sourceBlock.css';
 
 export default class SourceBlock extends BaseComponent {
+    sentence: string;
+
     constructor() {
         super({
             tag: 'div',
             classes: ['source'],
             textContent: '',
-            callback: sourceBlockCallback,
+            callback: (event) => {
+                sourceBlockCallback(event, this);
+            },
         });
+        this.sentence = '';
+    }
+
+    setSentense(sentence: string) {
+        this.sentence = sentence;
+    }
+
+    getSentense() {
+        return this.sentence;
     }
 
     setWords(sentence: string) {

@@ -13,3 +13,8 @@
     height: 50px;
     display: flex;
 }
+
+.empty {
+    flex-grow: 1;
+    /* min-width: 1px; */
+}

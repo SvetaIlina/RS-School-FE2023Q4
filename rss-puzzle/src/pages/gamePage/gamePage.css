@@ -2,7 +2,7 @@
     width: 1200px;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
     gap: 10px;
 }
 

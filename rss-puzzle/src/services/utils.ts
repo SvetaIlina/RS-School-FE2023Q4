@@ -70,9 +70,40 @@ export function replaceWordBloc(currentBlock: EventTarget, targetBlock: Element)
                 classes: ['empty'],
                 textContent: ``,
             });
-
             currentBlock.replaceWith(defaultBlock.getElement());
             targetBlock.replaceWith(currentBlock);
+        }
+    }
+}
+
+function getSentense(): string {
+    const fraze: Array<string | null> = [];
+    const sentence = document.querySelector('.incomplete');
+    isNotNull(sentence);
+    const words = sentence.querySelectorAll('.word');
+    isNotNull(words);
+    words.forEach((word) => {
+        fraze.push(word.textContent);
+    });
+    return fraze.join(' ');
+}
+
+export function checkSentense(chekingBlock: EventTarget, currentLevelSentense: string) {
+    if (chekingBlock instanceof HTMLElement) {
+        const btn = document.querySelector('.continueBtn');
+        isNotNull(btn);
+        const sourseWords = chekingBlock.querySelectorAll('.word');
+        if (!sourseWords.length) {
+            const checkingFraze: string = getSentense();
+
+            if (checkingFraze === currentLevelSentense) {
+                const currentSentense = document.querySelector('.incomplete');
+                isNotNull(currentSentense);
+                currentSentense.classList.remove('incomplete');
+                btn.classList.remove('btn_disable');
+            }
+        } else {
+            btn.classList.add('btn_disable');
         }
     }
 }
