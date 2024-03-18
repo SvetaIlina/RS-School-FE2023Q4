@@ -1,5 +1,5 @@
 import BaseComponent from '../../../util/baseComponent';
-import { Callback } from '../../../util/type';
+import { Callback } from '../../../type/type';
 import './loginInput.css';
 
 export default class LoginInput extends BaseComponent {

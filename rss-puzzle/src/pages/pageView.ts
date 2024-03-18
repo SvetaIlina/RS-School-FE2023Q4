@@ -18,13 +18,4 @@ export default class PageView {
     setContent() {
         document.body.append(this.viewPage.getElement());
     }
-
-    // replaceCont(newCont: HTMLElement) {
-    //     this.delete();
-    //     document.body.append(newCont);
-    // }
-
-    // delete() {
-    //     this.viewPage.getElement().remove();
-    // }
 }

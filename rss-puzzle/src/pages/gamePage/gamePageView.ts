@@ -1,7 +1,7 @@
 import PageView from '../pageView';
 import Button from '../../components/buttons/button';
 import GameField from '../../components/gameField/gameField';
-import { logOutBtnCallback, continueBtnCallback, checkBtnCallback } from '../../services/callbacks';
+import { logOutBtnCallback, continueBtnCallback, checkBtnCallback } from '../../util/callbacks';
 
 import './gamePage.css';
 import BaseComponent from '../../util/baseComponent';

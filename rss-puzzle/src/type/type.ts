@@ -3,7 +3,7 @@ export type attribute = {
     value: string;
 };
 
-export type Callback<T, T2 = undefined, T3 = undefined> = (data: T, arg1?: T2, arg2?: T3) => void;
+export type Callback<T, T2 = undefined> = (data: T, arg1?: T2) => void;
 
 export interface elemOptions {
     tag: string;

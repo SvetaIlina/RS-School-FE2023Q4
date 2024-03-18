@@ -1,6 +1,6 @@
-import { isNotNull } from '../../../services/utils';
+import { isNotNull } from '../../../util/utils';
 import BaseComponent from '../../../util/baseComponent';
-import { resultBlockCallbac } from '../../../services/callbacks';
+import { resultBlockCallbac } from '../../../util/callbacks';
 
 import './resultBlock.css';
 

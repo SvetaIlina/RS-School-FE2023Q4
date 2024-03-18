@@ -1,4 +1,4 @@
-import { elemOptions, Callback, attribute } from './type';
+import { elemOptions, Callback, attribute } from '../type/type';
 
 export default class BaseComponent<T extends HTMLElement = HTMLElement> {
     element: T;

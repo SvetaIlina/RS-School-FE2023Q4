@@ -1,11 +1,11 @@
 import PageView from '../pageView';
 import BaseComponent from '../../util/baseComponent';
 import img from '../../assets/images/sq.png';
-import LocalStore from '../../services/localStore';
-import { userData } from '../../util/type';
+import LocalStore from '../../util/localStore';
+import { userData } from '../../type/type';
 import Button from '../../components/buttons/button';
 import './startPageStyles.css';
-import { startBtnCallback } from '../../services/callbacks';
+import { startBtnCallback } from '../../util/callbacks';
 
 export default class StartPageView extends PageView {
     private image = new BaseComponent({

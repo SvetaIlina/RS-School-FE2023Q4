@@ -1,6 +1,6 @@
 import PageView from '../pages/pageView';
-import { userData } from '../util/type';
-import BaseComponent from '../util/baseComponent';
+import { userData } from '../type/type';
+import BaseComponent from './baseComponent';
 
 export function isNotNull<T>(value: unknown): asserts value is NonNullable<T> {
     if (value === null || value === undefined) {

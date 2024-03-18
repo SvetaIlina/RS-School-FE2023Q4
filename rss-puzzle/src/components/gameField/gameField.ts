@@ -3,7 +3,7 @@ import ResultBlock from './resultBlock/resultBlock';
 import BaseComponent from '../../util/baseComponent';
 import level1Data from '../../data/level1.json';
 import level2Data from '../../data/level2.json';
-import { Data, Round, Word, GameParametres } from '../../util/type';
+import { Data, Round, Word, GameParametres } from '../../type/type';
 
 export default class GameField extends BaseComponent {
     private AllLevelData: Array<Data> = [level1Data, level2Data];

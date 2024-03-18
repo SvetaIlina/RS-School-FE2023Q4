@@ -9,7 +9,7 @@ import {
     getSentense,
     compareSentense,
 } from './utils';
-import { Callback, userData } from '../util/type';
+import { Callback, userData } from '../type/type';
 import LocalStore from './localStore';
 import LoginPageView from '../pages/loginPage/loginPageView';
 import GameField from '../components/gameField/gameField';

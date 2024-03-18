@@ -1,5 +1,5 @@
 import BaseComponent from '../../../util/baseComponent';
-import { loginBtnCallback } from '../../../services/callbacks';
+import { loginBtnCallback } from '../../../util/callbacks';
 import LoginInput from '../input/loginInput';
 import Button from '../../buttons/button';
 import './loginForm.css';
