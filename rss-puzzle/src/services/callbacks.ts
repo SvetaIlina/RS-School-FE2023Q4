@@ -44,16 +44,12 @@ const logOutBtnCallback: Callback<Event> = (event) => {
 
 const continueBtnCallback: Callback<Event, GameField> = (event, gameBlock) => {
     const continueBtn = event.target;
-    const checkBtn = document.querySelector('.checkBtn');
 
     isNotNull(gameBlock);
     isNotNull(continueBtn);
-    isNotNull(checkBtn);
+
     if (continueBtn instanceof HTMLElement) {
         continueBtn.classList.add('btn_disable');
-    }
-    if (checkBtn instanceof HTMLElement) {
-        checkBtn.classList.add('btn_disable');
     }
 
     gameBlock.createView();
@@ -61,6 +57,8 @@ const continueBtnCallback: Callback<Event, GameField> = (event, gameBlock) => {
 
 const checkBtnCallback: Callback<Event, SourceBlock> = (event, sourseBlock) => {
     isNotNull(sourseBlock);
+    const checkBtn = event.target;
+    isNotNull(checkBtn);
     const checkingFraze: string = getSentense();
     const currentLevelSentense = sourseBlock.getSentense();
     const currentSentense = document.querySelector('.incomplete');
@@ -71,6 +69,9 @@ const checkBtnCallback: Callback<Event, SourceBlock> = (event, sourseBlock) => {
         const continueBtn = document.querySelector('.continueBtn');
         isNotNull(continueBtn);
         continueBtn.classList.remove('btn_disable');
+    }
+    if (checkBtn instanceof HTMLElement) {
+        checkBtn.classList.add('btn_disable');
     }
     compareSentense(currentLevelSentense, checkingWords);
 };
@@ -100,10 +101,10 @@ const resultBlockCallbac: Callback<Event> = (event) => {
         if (currentWord instanceof HTMLElement) {
             if (currentWord.closest('.incomplete')) {
                 replaceWordBloc(currentWord, targetBlock);
+                currentWord.classList.remove('word--correct', 'word--incorrect');
+                enableCheckBtn();
             }
-            currentWord.classList.remove('word--correct', 'word--incorrect');
         }
-        enableCheckBtn();
     }
 };
 
