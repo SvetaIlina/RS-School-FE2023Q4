@@ -12,7 +12,7 @@ export default class SourceBlock extends BaseComponent {
             classes: ['source'],
             textContent: '',
             callback: (event) => {
-                sourceBlockCallback(event, this);
+                sourceBlockCallback(event);
             },
         });
         this.sentence = '';

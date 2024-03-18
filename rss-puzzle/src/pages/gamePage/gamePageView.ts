@@ -1,9 +1,10 @@
 import PageView from '../pageView';
 import Button from '../../components/buttons/button';
 import GameField from '../../components/gameField/gameField';
-import { logOutBtnCallback, continueBtnCallback } from '../../services/callbacks';
+import { logOutBtnCallback, continueBtnCallback, checkBtnCallback } from '../../services/callbacks';
 
 import './gamePage.css';
+import BaseComponent from '../../util/baseComponent';
 
 export default class GamePageView extends PageView {
     private logOutBtn = new Button('Log Out', logOutBtnCallback);
@@ -18,6 +19,11 @@ export default class GamePageView extends PageView {
     }
 
     viewPageElement() {
+        const btnConteiner = new BaseComponent({
+            tag: 'div',
+            classes: ['btn_container'],
+            textContent: '',
+        });
         const gameField = new GameField();
 
         const continueBtn = new Button(
@@ -27,6 +33,14 @@ export default class GamePageView extends PageView {
             },
             ['continueBtn', 'btn_disable']
         );
-        this.viewPage.addChild([gameField, continueBtn, this.logOutBtn]);
+        const checkBtn = new Button(
+            'Chek Sentense',
+            (event) => {
+                checkBtnCallback(event, gameField.getSourseBlock());
+            },
+            ['checkBtn', 'btn_disable']
+        );
+        btnConteiner.addChild([checkBtn, continueBtn, this.logOutBtn]);
+        this.viewPage.addChild([gameField, btnConteiner]);
     }
 }

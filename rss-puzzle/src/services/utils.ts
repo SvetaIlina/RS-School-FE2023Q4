@@ -76,7 +76,7 @@ export function replaceWordBloc(currentBlock: EventTarget, targetBlock: Element)
     }
 }
 
-function getSentense(): string {
+export function getSentense(): string {
     const fraze: Array<string | null> = [];
     const sentence = document.querySelector('.incomplete');
     isNotNull(sentence);
@@ -88,22 +88,30 @@ function getSentense(): string {
     return fraze.join(' ');
 }
 
-export function checkSentense(chekingBlock: EventTarget, currentLevelSentense: string) {
-    if (chekingBlock instanceof HTMLElement) {
-        const btn = document.querySelector('.continueBtn');
-        isNotNull(btn);
-        const sourseWords = chekingBlock.querySelectorAll('.word');
-        if (!sourseWords.length) {
-            const checkingFraze: string = getSentense();
+export function enableCheckBtn() {
+    const sourseBlock = document.querySelector('.source');
+    isNotNull(sourseBlock);
 
-            if (checkingFraze === currentLevelSentense) {
-                const currentSentense = document.querySelector('.incomplete');
-                isNotNull(currentSentense);
-                currentSentense.classList.remove('incomplete');
-                btn.classList.remove('btn_disable');
-            }
+    const btn = document.querySelector('.checkBtn');
+    isNotNull(btn);
+    const sourseWords = sourseBlock.querySelectorAll('.word');
+    if (!sourseWords.length) {
+        btn.classList.remove('btn_disable');
+    } else {
+        btn.classList.add('btn_disable');
+    }
+}
+
+export function compareSentense(originSentense: string, checkingWords: Array<Element>) {
+    const originOrder = originSentense.split(' ');
+    const sentenseLenght = originOrder.length;
+    for (let i = 0; i < sentenseLenght; i += 1) {
+        const checkingWord = checkingWords[i];
+        const wordContent = checkingWord.textContent;
+        if (originOrder[i] === wordContent) {
+            checkingWord.classList.add('word--correct');
         } else {
-            btn.classList.add('btn_disable');
+            checkingWord.classList.add('word--incorrect');
         }
     }
 }

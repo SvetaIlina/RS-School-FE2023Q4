@@ -1,6 +1,14 @@
 import StartPageView from '../pages/startPage/startPageView';
 import GamePageView from '../pages/gamePage/gamePageView';
-import { getUserData, isNotNull, loadNewContent, replaceWordBloc, checkSentense } from './utils';
+import {
+    getUserData,
+    isNotNull,
+    loadNewContent,
+    replaceWordBloc,
+    enableCheckBtn,
+    getSentense,
+    compareSentense,
+} from './utils';
 import { Callback, userData } from '../util/type';
 import LocalStore from './localStore';
 import LoginPageView from '../pages/loginPage/loginPageView';
@@ -35,18 +43,39 @@ const logOutBtnCallback: Callback<Event> = (event) => {
 };
 
 const continueBtnCallback: Callback<Event, GameField> = (event, gameBlock) => {
-    const btn = event.target;
+    const continueBtn = event.target;
+    const checkBtn = document.querySelector('.checkBtn');
 
     isNotNull(gameBlock);
-    isNotNull(btn);
-    if (btn instanceof HTMLElement) {
-        btn.classList.add('btn_disable');
+    isNotNull(continueBtn);
+    isNotNull(checkBtn);
+    if (continueBtn instanceof HTMLElement) {
+        continueBtn.classList.add('btn_disable');
+    }
+    if (checkBtn instanceof HTMLElement) {
+        checkBtn.classList.add('btn_disable');
     }
 
     gameBlock.createView();
 };
 
-const sourceBlockCallback: Callback<Event, SourceBlock> = (event, sourseBlock) => {
+const checkBtnCallback: Callback<Event, SourceBlock> = (event, sourseBlock) => {
+    isNotNull(sourseBlock);
+    const checkingFraze: string = getSentense();
+    const currentLevelSentense = sourseBlock.getSentense();
+    const currentSentense = document.querySelector('.incomplete');
+    isNotNull(currentSentense);
+    const checkingWords = Array.from(currentSentense.querySelectorAll('.word'));
+    if (checkingFraze === currentLevelSentense) {
+        currentSentense.classList.remove('incomplete');
+        const continueBtn = document.querySelector('.continueBtn');
+        isNotNull(continueBtn);
+        continueBtn.classList.remove('btn_disable');
+    }
+    compareSentense(currentLevelSentense, checkingWords);
+};
+
+const sourceBlockCallback: Callback<Event, SourceBlock> = (event) => {
     const currentWord = event.target;
     if (currentWord instanceof HTMLElement) {
         currentWord.style.order = '0';
@@ -56,9 +85,8 @@ const sourceBlockCallback: Callback<Event, SourceBlock> = (event, sourseBlock) =
     const targetBlock = targetSentenseBlock.querySelector('.empty');
     isNotNull(currentWord);
     isNotNull(targetBlock);
-    isNotNull(sourseBlock);
     replaceWordBloc(currentWord, targetBlock);
-    checkSentense(sourseBlock.getElement(), sourseBlock.getSentense());
+    enableCheckBtn();
 };
 
 const resultBlockCallbac: Callback<Event> = (event) => {
@@ -66,13 +94,16 @@ const resultBlockCallbac: Callback<Event> = (event) => {
     const sourceBlock = document.querySelector('.source');
     isNotNull(sourceBlock);
     const targetBlock = sourceBlock.querySelector('.empty');
-    isNotNull(targetBlock);
-    isNotNull(currentWord);
+    if (targetBlock) {
+        isNotNull(currentWord);
 
-    if (currentWord instanceof HTMLElement) {
-        if (currentWord.closest('.incomplete')) {
-            replaceWordBloc(currentWord, targetBlock);
+        if (currentWord instanceof HTMLElement) {
+            if (currentWord.closest('.incomplete')) {
+                replaceWordBloc(currentWord, targetBlock);
+            }
+            currentWord.classList.remove('word--correct', 'word--incorrect');
         }
+        enableCheckBtn();
     }
 };
 
@@ -83,4 +114,5 @@ export {
     resultBlockCallbac,
     logOutBtnCallback,
     continueBtnCallback,
+    checkBtnCallback,
 };

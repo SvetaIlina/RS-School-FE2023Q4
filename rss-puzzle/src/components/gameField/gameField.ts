@@ -29,6 +29,10 @@ export default class GameField extends BaseComponent {
         this.createView();
     }
 
+    getSourseBlock() {
+        return this.sourceBlock;
+    }
+
     createView() {
         const params = this.checkParams();
         const currentLevel: Data = this.AllLevelData[params.level - 1];

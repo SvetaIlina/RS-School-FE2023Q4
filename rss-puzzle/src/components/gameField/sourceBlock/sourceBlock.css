@@ -19,3 +19,11 @@
     border: 1px solid rgb(75, 0, 128);
     color: #086b98;
 }
+
+.word--correct {
+    box-shadow: inset 0px 0px 15px rgb(130, 238, 52);
+}
+
+.word--incorrect {
+    box-shadow: inset 0px 0px 15px rgb(233, 41, 41);
+}
