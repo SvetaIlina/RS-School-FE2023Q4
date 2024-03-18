@@ -1,5 +1,5 @@
 .result {
-    width: 750px;
+    width: 730px;
     height: 400px;
 
     background-color: rgba(255, 255, 255, 0.6);
@@ -12,9 +12,27 @@
 .sentence {
     height: 50px;
     display: flex;
+    position: relative;
 }
 
 .empty {
     flex-grow: 1;
-    /* min-width: 1px; */
+}
+
+.number {
+    height: 100%;
+    width: 0px;
+    position: absolute;
+    left: -20px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    color: #086b98;
+    font-size: 1.5rem;
+}
+
+@media (max-width: 850px) {
+    .number {
+        left: -5px;
+    }
 }

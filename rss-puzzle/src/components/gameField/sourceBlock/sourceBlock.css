@@ -1,11 +1,12 @@
 .source {
-    width: 750px;
+    width: 730px;
     height: 40px;
     background-color: rgba(255, 255, 255, 0.4);
     box-shadow: 0px 0px 50px 20px rgba(0, 156, 255, 0.5);
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    gap: 2px;
     margin-bottom: 20px;
     padding: 2px;
 }

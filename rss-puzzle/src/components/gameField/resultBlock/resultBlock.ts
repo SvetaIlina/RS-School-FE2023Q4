@@ -23,6 +23,12 @@ export default class ResultBlock extends BaseComponent {
                 classes: ['sentence', 'incomplete'],
                 textContent: '',
             });
+            const sentenseNumber = new BaseComponent({
+                tag: 'div',
+                classes: ['number'],
+                textContent: `${i + 1}`,
+            });
+            sentence.addChild([sentenseNumber]);
 
             this.element.append(sentence.getElement());
         }
