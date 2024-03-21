@@ -1,8 +1,10 @@
+export type Callback<T> = (argument: T) => void;
+
 export type elemOptions = {
     tag: string;
     classes: Array<string>;
-    attributes: Array<{ key: string; value: string }>;
+    attributes?: Array<{ key: string; value: string }>;
     textContent: string;
-    callback?: (argument: Event) => void;
+    onClick?: Callback<Event>;
     eventType: string;
 };

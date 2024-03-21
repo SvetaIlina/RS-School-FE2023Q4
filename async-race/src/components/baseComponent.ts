@@ -1,4 +1,4 @@
-import { elemOptions } from '../type/types';
+import { Callback, elemOptions } from '../type/types';
 
 export default class BaseComponent<T extends HTMLElement = HTMLElement> {
     element: T;
@@ -21,8 +21,8 @@ export default class BaseComponent<T extends HTMLElement = HTMLElement> {
         if (options.attributes) {
             this.setAttributes(options.attributes);
         }
-        if (options.callback) {
-            this.setCallback(options.callback, options.eventType);
+        if (options.onClick) {
+            this.setCallback(options.onClick, options.eventType);
         }
     }
 
@@ -60,7 +60,7 @@ export default class BaseComponent<T extends HTMLElement = HTMLElement> {
         this.element.textContent = text;
     }
 
-    setCallback(cb: (argument: Event) => void, eventType: string) {
+    setCallback(cb: Callback<Event>, eventType: string) {
         if (typeof cb === 'function') {
             this.element.addEventListener(eventType, cb);
         }
