@@ -1,3 +1,13 @@
+@font-face {
+       font-family: "Barbi"; 
+    
+    src: 
+    url('./assets/fonts/barbie-5.woff') format("woff2"),
+     url('./assets/fonts/barbie-5.woff2') format("woff"),
+     url('./assets/fonts/barbie-5.ttf') format("truetype") 
+   
+  } 
+
 html {
     box-sizing: border-box;
     font-size: 10px;
@@ -25,4 +35,9 @@ button {
     background: transparent;
     text-transform: uppercase;
     border: none;
+}
+
+body{
+    font-size: 3rem;
+    font-family: 'Barbi', sans-serif;
 }
