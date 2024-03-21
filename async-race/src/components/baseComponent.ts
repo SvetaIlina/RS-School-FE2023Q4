@@ -17,7 +17,9 @@ export default class BaseComponent<T extends HTMLElement = HTMLElement> {
 
     setElement(options: elemOptions) {
         this.setStyles(options.classes);
-        this.setTextContent(options.textContent);
+        if (options.textContent) {
+            this.setTextContent(options.textContent);
+        }
         if (options.attributes) {
             this.setAttributes(options.attributes);
         }
