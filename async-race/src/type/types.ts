@@ -6,5 +6,5 @@ export type elemOptions = {
     attributes?: Array<{ key: string; value: string }>;
     textContent: string;
     onClick?: Callback<Event>;
-    eventType: string;
+    eventType?: string;
 };

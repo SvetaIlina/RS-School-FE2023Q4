@@ -21,7 +21,7 @@ export default class BaseComponent<T extends HTMLElement = HTMLElement> {
         if (options.attributes) {
             this.setAttributes(options.attributes);
         }
-        if (options.onClick) {
+        if (options.onClick && options.eventType) {
             this.setCallback(options.onClick, options.eventType);
         }
     }
