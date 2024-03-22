@@ -2,7 +2,7 @@ import View from '../view';
 import BaseComponent from '../baseComponent';
 import MainView from '../main/main';
 import Button from '../buttons/button';
-import isNotNullHTMLElement from '../../servise/servise';
+import { isNotNullHTMLElement } from '../../servise/servise';
 import './header.css';
 
 export default class HeaderView extends View {
