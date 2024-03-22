@@ -23,7 +23,7 @@ export default class HeaderView extends View {
             classes: ['wrapper', 'headerWrapper'],
         });
         const title = new BaseComponent({
-            tag: 'h1',
+            tag: 'span',
             classes: ['headerTitle'],
             textContent: 'Async Race',
         });
