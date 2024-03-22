@@ -1,6 +1,7 @@
 import BaseComponent from '../../baseComponent';
 import View from '../../view';
 import getInfo from '../../../rest-api/api';
+import './garage.css';
 
 export default class GargeView extends View {
     constructor() {
@@ -17,7 +18,7 @@ export default class GargeView extends View {
             limit: 4,
         });
         const title = new BaseComponent({
-            tag: 'h1',
+            tag: 'div',
             classes: ['title'],
             textContent: `Garage (${cars.length})`,
         });
