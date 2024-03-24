@@ -25,15 +25,6 @@ gap: 20px;
 .headerBtn{
 width: 150px;
 height: 50px;
-border-radius: 20%;
-border: 1px solid #EC4399;
 font-size: 2rem;
-color: white;
-text-shadow: 1px 1px 2px #EC4399;
-transition: all 0.7s;
-}
 
-.headerBtn:hover{
-    color: #EC4399;
-    text-shadow: 1px 1px 2px #503030;
 }
