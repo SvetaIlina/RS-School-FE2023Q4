@@ -31,8 +31,8 @@ export default class HeaderView extends View {
             tag: 'div',
             classes: ['headerBtnContainer'],
         });
-        const garageBtn = new Button(['headerBtn'], 'garage', (event: Event) => this.showContent(event));
-        const winnerBtn = new Button(['headerBtn'], 'winners', (event: Event) => this.showContent(event));
+        const garageBtn = new Button(['btn', 'headerBtn'], 'garage', (event: Event) => this.showContent(event));
+        const winnerBtn = new Button(['btn', 'headerBtn'], 'winners', (event: Event) => this.showContent(event));
         btnConteiner.addChild([garageBtn, winnerBtn]);
         wrapper.addChild([btnConteiner, title]);
         this.view.addChild([wrapper]);
