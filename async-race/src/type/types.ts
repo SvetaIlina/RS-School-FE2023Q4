@@ -8,3 +8,14 @@ export type elemOptions = {
     onClick?: Callback<Event>;
     eventType?: string;
 };
+
+export type apiParams = {
+    page: number | '';
+    limit: number | '';
+};
+
+export type carInfo = {
+    name: string;
+    color: string;
+    id: number;
+};
