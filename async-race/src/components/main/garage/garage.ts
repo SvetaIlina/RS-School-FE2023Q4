@@ -29,8 +29,8 @@ export default class GargeView extends View {
         const title = new BaseComponent({
             tag: 'div',
             classes: ['title'],
-            textContent: `Garage (${cars.length})`,
         });
+        title.getElement().innerHTML = `Garage (<span class = 'carsCount'>${cars.length}</span>)`;
         const pageNumber = new BaseComponent({
             tag: 'span',
             classes: ['pageNumber'],
@@ -41,8 +41,8 @@ export default class GargeView extends View {
             classes: ['carsWrapper'],
         });
         cars.forEach((car) => {
-            const { color } = car;
-            const container = new CarContainerView(color);
+            const { color, name } = car;
+            const container = new CarContainerView(color, name);
             carsWrapper.addChild([container.getViewElement()]);
         });
         this.view.addChild([title, pageNumber, carsWrapper]);
