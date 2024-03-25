@@ -5,6 +5,7 @@ import { carInfo } from '../../../type/types';
 import CarContainerView from './careContainer/carContainer';
 import { isNotNull } from '../../../servise/servise';
 import './garage.css';
+import GarageOptions from './garge-options/garageOption';
 
 export default class GargeView extends View {
     private carInfo: Array<carInfo> | null;
@@ -24,6 +25,7 @@ export default class GargeView extends View {
     }
 
     configView() {
+        const garageOption = new GarageOptions();
         const cars = this.carInfo;
         isNotNull(cars);
         const title = new BaseComponent({
@@ -40,12 +42,13 @@ export default class GargeView extends View {
             tag: 'div',
             classes: ['carsWrapper'],
         });
+
         cars.forEach((car) => {
             const { color, name, id } = car;
             const container = new CarContainerView(color, name, id);
             carsWrapper.addChild([container.getViewElement()]);
         });
-        this.view.addChild([title, pageNumber, carsWrapper]);
+        this.view.addChild([garageOption, title, pageNumber, carsWrapper]);
     }
 
     async getCarInfo() {

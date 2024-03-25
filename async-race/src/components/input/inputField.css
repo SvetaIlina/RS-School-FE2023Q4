@@ -1,0 +1,19 @@
+.inputField{
+    border: none;
+    background-color: transparent;
+}
+
+.textInput{
+    font-family: 'Barbi', sans-serif;
+    font-size: 2.2rem;
+}
+
+.textInput:focus{
+outline: none;
+}
+
+.colorInput::-webkit-color-swatch {
+   cursor: pointer;
+   border-radius: 20%;
+  
+}
