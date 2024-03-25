@@ -41,6 +41,21 @@ export async function addNewCar(carParametrs: { name: string; color: string }) {
     const result = await response.json();
     return result;
 }
+
+export async function updateCar(carParametrs: { name: string; color: string }, id: number) {
+    const response = await fetch(`http://127.0.0.1:3000/garage/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(carParametrs),
+    });
+    if (!response.ok) {
+        throw new Error(`${response.status}`);
+    }
+    const result = await response.json();
+    return result;
+}
 // export async function getWinners(parametrs?: apiParams) {
 //     let page = '';
 //     let limit = '';

@@ -45,7 +45,7 @@ export default class GargeView extends View {
 
         cars.forEach((car) => {
             const { color, name, id } = car;
-            const container = new CarContainerView(color, name, id);
+            const container = new CarContainerView(color, name, id, garageOption);
             carsWrapper.addChild([container.getViewElement()]);
         });
 

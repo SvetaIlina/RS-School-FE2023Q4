@@ -4,25 +4,42 @@ import Car from '../../../carsElements/car/car';
 import './carContainer.css';
 import { deleteCar } from '../../../../rest-api/api';
 import { isNotNullHTMLElement } from '../../../../servise/servise';
+import GarageOptions from '../garge-options/garageOption';
 
 export default class CarContainerView extends View {
     id: number;
 
-    constructor(carColor: string, carName: string, carId: number) {
+    carName: string;
+
+    carColor: string;
+
+    editManger: GarageOptions;
+
+    constructor(carColor: string, carName: string, carId: number, editManger: GarageOptions) {
         super({
             tag: 'div',
             classes: ['carContainer'],
         });
         this.id = carId;
-        this.configView(carColor, carName, this.id);
+        this.carName = carName;
+        this.carColor = carColor;
+        this.editManger = editManger;
+        this.view.setAttributes([
+            {
+                key: 'id',
+                value: `car${this.id}`,
+            },
+        ]);
+        this.configView(this.carColor, this.carName, this.id);
     }
 
     configView(carColor: string, carName: string, id: number) {
         const deleteCb = async () => {
             await this.deleteThisCar(id);
         };
+        const editCb = () => this.editManger.setCarInfo(carName, carColor, id, this);
         const car = new Car(carColor);
-        const options = new CarOptions(carName, deleteCb);
+        const options = new CarOptions(carName, deleteCb, editCb);
         this.view.addChild([options.getViewElement(), car]);
     }
 
@@ -42,5 +59,4 @@ export default class CarContainerView extends View {
             }
         }
     }
-    // editCar()
 }
