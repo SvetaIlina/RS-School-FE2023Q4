@@ -25,7 +25,6 @@ export default class GargeView extends View {
     }
 
     configView() {
-        const garageOption = new GarageOptions();
         const cars = this.carInfo;
         isNotNull(cars);
         const title = new BaseComponent({
@@ -42,12 +41,14 @@ export default class GargeView extends View {
             tag: 'div',
             classes: ['carsWrapper'],
         });
+        const garageOption = new GarageOptions(carsWrapper);
 
         cars.forEach((car) => {
             const { color, name, id } = car;
             const container = new CarContainerView(color, name, id);
             carsWrapper.addChild([container.getViewElement()]);
         });
+
         this.view.addChild([garageOption, title, pageNumber, carsWrapper]);
     }
 

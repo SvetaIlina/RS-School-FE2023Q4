@@ -29,6 +29,18 @@ export async function deleteCar(carId: number) {
         }
     }
 }
+
+export async function addNewCar(carParametrs: { name: string; color: string }) {
+    const response = await fetch(`http://127.0.0.1:3000/garage/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(carParametrs),
+    });
+    const result = await response.json();
+    return result;
+}
 // export async function getWinners(parametrs?: apiParams) {
 //     let page = '';
 //     let limit = '';
