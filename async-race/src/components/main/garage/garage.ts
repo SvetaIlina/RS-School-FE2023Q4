@@ -1,6 +1,6 @@
 import BaseComponent from '../../baseComponent';
 import View from '../../view';
-import getInfo from '../../../rest-api/api';
+import { getInfo } from '../../../rest-api/api';
 import { carInfo } from '../../../type/types';
 import CarContainerView from './careContainer/carContainer';
 import { isNotNull } from '../../../servise/servise';
@@ -41,8 +41,8 @@ export default class GargeView extends View {
             classes: ['carsWrapper'],
         });
         cars.forEach((car) => {
-            const { color, name } = car;
-            const container = new CarContainerView(color, name);
+            const { color, name, id } = car;
+            const container = new CarContainerView(color, name, id);
             carsWrapper.addChild([container.getViewElement()]);
         });
         this.view.addChild([title, pageNumber, carsWrapper]);

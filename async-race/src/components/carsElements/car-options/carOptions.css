@@ -1,0 +1,43 @@
+.carOptions{
+    display: flex;
+
+justify-content: space-between;
+align-items: center;
+min-width: 80px
+}
+
+.carManage{
+    display: flex;
+   
+    gap: 5px;
+}
+
+.carName{
+    font-size: 2rem;
+}
+
+.carManageBtn{
+    font-size: 1.5rem;
+    padding: 0 5px;
+    
+}
+
+.raceBtnContainer{
+    display: flex;
+    gap: 5px;
+}
+
+.raceBtn{
+    border: 1px solid black;
+    border-radius: 100%;
+    width: 25px;
+    height: 25px;
+}
+
+.startBtn{
+    background-color: #207320
+}
+
+.stopBtn{
+    background-color: #c34444
+}
