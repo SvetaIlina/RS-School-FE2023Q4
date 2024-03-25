@@ -56,7 +56,8 @@ body{
 
 .btn{
     border: 1px solid #EC4399;
-    
+    font-size: 1.5rem;
+    padding: 0 5px;
     border-radius: 20%;
     color: white;
     text-shadow: 1px 1px 5px #EC4399;
@@ -68,4 +69,14 @@ body{
 .btn:hover{
     color: #EC4399;
     text-shadow: 1px 1px 2px #503030;
+}
+
+.disable{
+    pointer-events: none;
+}
+
+.disable>.btn{
+    text-shadow: none;
+    color:#beb5b5;
+    border: 1px solid #beb5b5
 }
