@@ -48,6 +48,7 @@ export default class GargeView extends View {
     async addNewCar(car: { name: string; color: string }) {
         try {
             await addCar(car);
+            this.garageOption.resetInputSettings('new');
             this.updateContent();
         } catch (error) {
             if (error instanceof Error) {
@@ -70,7 +71,7 @@ export default class GargeView extends View {
     async editCar(name: string, color: string) {
         try {
             await updateCar({ name, color }, this.currentId);
-            this.garageOption.resetInputSettings();
+            this.garageOption.resetInputSettings('edit');
             this.garageOption.toggleInputsAccessibility();
             this.updateContent();
         } catch (error) {

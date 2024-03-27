@@ -51,4 +51,9 @@ export default class InputOptions extends BaseComponent {
     getColor() {
         return this.colorInput.element.value;
     }
+
+    reset() {
+        this.setText('');
+        this.setColor('#000');
+    }
 }

@@ -67,8 +67,12 @@ export default class GarageOptions extends BaseComponent {
         this.editCarOption.getElement().classList.toggle('disable');
     }
 
-    resetInputSettings() {
-        this.editCarInput.setText('');
-        this.editCarInput.setColor('#000');
+    resetInputSettings(inputName: string) {
+        if (inputName === 'new') {
+            this.newCarInput.reset();
+        }
+        if (inputName === 'edit') {
+            this.editCarInput.reset();
+        }
     }
 }
