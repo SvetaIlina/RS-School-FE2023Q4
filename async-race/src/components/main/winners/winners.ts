@@ -1,6 +1,6 @@
 import BaseComponent from '../../baseComponent';
 import View from '../../view';
-import getInfo from '../../../rest-api/api';
+import { getInfo } from '../../../rest-api/api';
 
 export default class WinnersView extends View {
     constructor() {
