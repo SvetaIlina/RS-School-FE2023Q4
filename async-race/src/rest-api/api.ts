@@ -14,6 +14,16 @@ export async function getInfo(targetPage: string, parametrs?: apiParams): Promis
     return info;
 }
 
+export async function getCar(id: number): Promise<carInfo> {
+    const response = await fetch(`http://127.0.0.1:3000/garage/${id}`);
+    const car: carInfo = await response.json();
+
+    if (!response.ok) {
+        throw new Error(`${response.status}`);
+    }
+    return car;
+}
+
 export async function deleteCar(carId: number) {
     try {
         const response = await fetch(`http://127.0.0.1:3000/garage/${carId}`, {
@@ -30,7 +40,7 @@ export async function deleteCar(carId: number) {
     }
 }
 
-export async function addNewCar(carParametrs: { name: string; color: string }) {
+export async function addCar(carParametrs: { name: string; color: string }) {
     const response = await fetch(`http://127.0.0.1:3000/garage/`, {
         method: 'POST',
         headers: {

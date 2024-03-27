@@ -5,7 +5,7 @@ import Button from '../../buttons/button';
 import './carOptions.css';
 
 export default class CarOptions extends View {
-    constructor(carName: string, deleteCb: () => Promise<void>, editCB: () => void) {
+    constructor(carName: string, deleteCb: () => void, editCB: () => void) {
         super({
             tag: 'div',
             classes: ['carOptions'],
@@ -14,7 +14,7 @@ export default class CarOptions extends View {
         this.configView(carName, deleteCb, editCB);
     }
 
-    configView(name: string, deleteCb: () => Promise<void>, editCB: () => void) {
+    configView(name: string, deleteCb: () => void, editCB: () => void) {
         const raceBtnContainer = new BaseComponent({
             tag: 'div',
             classes: ['raceBtnContainer'],
@@ -22,17 +22,19 @@ export default class CarOptions extends View {
         const driveBtn = new Button(['startBtn', 'raceBtn'], '', () => console.log('start'));
         const stopBtn = new Button(['stopBtn', 'raceBtn'], '', () => console.log('stop'));
         raceBtnContainer.addChild([driveBtn, stopBtn]);
+
         const carName = new BaseComponent({
             tag: 'span',
             classes: ['carName'],
             textContent: name,
         });
+
         const carManage = new BaseComponent({
             tag: 'div',
             classes: ['carManage'],
         });
         const editBtn = new Button(['btn', 'carManageBtn'], 'Edit', editCB);
-        const deleteBtn = new Button(['btn', 'carManageBtn'], 'Delete', () => deleteCb());
+        const deleteBtn = new Button(['btn', 'carManageBtn'], 'Delete', deleteCb);
         carManage.addChild([editBtn, deleteBtn]);
         this.view.addChild([raceBtnContainer, carName, carManage]);
     }
