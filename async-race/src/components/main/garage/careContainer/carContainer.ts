@@ -5,6 +5,8 @@ import './carContainer.css';
 import { deleteCar } from '../../../../rest-api/api';
 import { isNotNullHTMLElement } from '../../../../servise/servise';
 import GarageOptions from '../garge-options/garageOption';
+import BaseComponent from '../../../baseComponent';
+import img from '../../../../assets/images/finish.png';
 
 export default class CarContainerView extends View {
     id: number;
@@ -34,13 +36,18 @@ export default class CarContainerView extends View {
     }
 
     configView(carColor: string, carName: string, id: number) {
+        const image = new BaseComponent({
+            tag: 'img',
+            classes: ['imgFinish'],
+            attributes: [{ key: 'src', value: img }],
+        });
         const deleteCb = async () => {
             await this.deleteThisCar(id);
         };
         const editCb = () => this.editManger.setCarInfo(carName, carColor, id, this);
         const car = new Car(carColor);
         const options = new CarOptions(carName, deleteCb, editCb);
-        this.view.addChild([options.getViewElement(), car]);
+        this.view.addChild([options.getViewElement(), car, image]);
     }
 
     // startEngine ()

@@ -4,5 +4,15 @@
     padding:0 10px;
     display: flex;
     flex-direction: column;
+    position: relative;
    
+}
+
+.imgFinish{
+    width: 70px;
+    height: 90px;
+    position: absolute;
+    right: 170px;
+    transform: rotateY(25deg);
+    bottom: 15px;
 }
