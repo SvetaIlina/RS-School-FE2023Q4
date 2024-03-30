@@ -18,11 +18,14 @@ export default class CarContainerView extends View {
 
     private carColor: string;
 
+    private car: Car | null;
+
     constructor(carColor: string, carName: string, carId: number) {
         super({
             tag: 'div',
             classes: ['carContainer'],
         });
+        this.car = null;
         this.id = carId;
         this.carName = carName;
         this.carColor = carColor;
@@ -49,8 +52,28 @@ export default class CarContainerView extends View {
             isNotNull(this.observer);
             this.observer.setCarInfo(carName, carColor, id);
         };
-        const car = new Car(carColor);
-        const options = new CarOptions(carName, deleteCb, editCb);
-        this.view.addChild([options.getViewElement(), car, image]);
+        this.car = new Car(carColor);
+        const options = new CarOptions(
+            carName,
+            deleteCb,
+            editCb,
+            () => this.moveCar(),
+            () => this.stopCar()
+        );
+        this.view.addChild([options.getViewElement(), this.car, image]);
+    }
+
+    moveCar() {
+        isNotNull(this.car);
+        const container = this.view.getElement();
+        const computedStyle = window.getComputedStyle(container);
+        const distance: number = parseInt(computedStyle.getPropertyValue('width'), 10) - 160;
+        const duration = 5000;
+        this.car.setAnimation(duration, distance);
+    }
+
+    stopCar() {
+        isNotNull(this.car);
+        this.car.resetAnimation();
     }
 }

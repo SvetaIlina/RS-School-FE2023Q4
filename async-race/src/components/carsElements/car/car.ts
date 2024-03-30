@@ -1,8 +1,13 @@
+import { isNotNull } from '../../../servise/servise';
 import BaseComponent from '../../baseComponent';
 
 import './car.css';
 
 export default class Car extends BaseComponent {
+    private animationID: number | null = null;
+
+    private distance: number | null = null;
+
     constructor(color: string) {
         super({
             tag: 'div',
@@ -88,5 +93,34 @@ export default class Car extends BaseComponent {
     	</g>
     	</svg>`;
         this.element.innerHTML = image;
+    }
+
+    setAnimation(duration: number, distance: number) {
+        const car = this.element;
+        this.distance = distance;
+
+        let startAnimation: number | null = null;
+
+        const animate = (time: number) => {
+            if (!startAnimation) {
+                startAnimation = time;
+            }
+            const progress = (time - startAnimation) / duration;
+            const translate = progress * distance;
+
+            car.style.transform = `translateX(${translate}px)`;
+            if (progress < 1) {
+                this.animationID = requestAnimationFrame(animate);
+            }
+        };
+
+        this.animationID = requestAnimationFrame(animate);
+    }
+
+    resetAnimation() {
+        isNotNull(this.animationID);
+        isNotNull(this.distance);
+        cancelAnimationFrame(this.animationID);
+        // this.element.style.transform = `translateX(0px)`;
     }
 }

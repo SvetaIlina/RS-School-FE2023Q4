@@ -5,22 +5,28 @@ import Button from '../../buttons/button';
 import './carOptions.css';
 
 export default class CarOptions extends View {
-    constructor(carName: string, deleteCb: () => void, editCB: () => void) {
+    constructor(
+        carName: string,
+        deleteCb: () => void,
+        editCB: () => void,
+        driveBtnCb: () => void,
+        stopBtnCb: () => void
+    ) {
         super({
             tag: 'div',
             classes: ['carOptions'],
         });
 
-        this.configView(carName, deleteCb, editCB);
+        this.configView(carName, deleteCb, editCB, driveBtnCb, stopBtnCb);
     }
 
-    configView(name: string, deleteCb: () => void, editCB: () => void) {
+    configView(name: string, deleteCb: () => void, editCB: () => void, driveBtnCb: () => void, stopBtnCb: () => void) {
         const raceBtnContainer = new BaseComponent({
             tag: 'div',
             classes: ['raceBtnContainer'],
         });
-        const driveBtn = new Button(['startBtn', 'raceBtn'], '', () => console.log('start'));
-        const stopBtn = new Button(['stopBtn', 'raceBtn'], '', () => console.log('stop'));
+        const driveBtn = new Button(['startBtn', 'raceBtn'], '', driveBtnCb);
+        const stopBtn = new Button(['stopBtn', 'raceBtn'], '', stopBtnCb);
         raceBtnContainer.addChild([driveBtn, stopBtn]);
 
         const carName = new BaseComponent({
