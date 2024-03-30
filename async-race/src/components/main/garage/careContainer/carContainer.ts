@@ -2,8 +2,8 @@ import View from '../../../view';
 import CarOptions from '../../../carsElements/car-options/carOptions';
 import Car from '../../../carsElements/car/car';
 import './carContainer.css';
-
-import { isNotNull } from '../../../../servise/servise';
+import { startStopEngine, switchToDriveMode } from '../../../../rest-api/api';
+import { isNotNull, isNotNullElement, toggleBtn } from '../../../../servise/servise';
 
 import BaseComponent from '../../../baseComponent';
 import img from '../../../../assets/images/finish.png';
@@ -57,23 +57,50 @@ export default class CarContainerView extends View {
             carName,
             deleteCb,
             editCb,
-            () => this.moveCar(),
-            () => this.stopCar()
+            (e) => this.moveCar(e),
+            (e) => this.stopCar(e)
         );
         this.view.addChild([options.getViewElement(), this.car, image]);
     }
 
-    moveCar() {
+    async moveCar(e: Event) {
+        const currentBtn = e.target;
+        isNotNullElement<HTMLElement>(currentBtn);
+        toggleBtn(currentBtn);
         isNotNull(this.car);
+
         const container = this.view.getElement();
         const computedStyle = window.getComputedStyle(container);
-        const distance: number = parseInt(computedStyle.getPropertyValue('width'), 10) - 160;
-        const duration = 5000;
-        this.car.setAnimation(duration, distance);
+        const carsWidth = 160;
+        const distanecForCar: number = parseInt(computedStyle.getPropertyValue('width'), 10) - carsWidth;
+        try {
+            const { velocity, distance } = await startStopEngine(this.id, 'started');
+            const duration = distance / velocity;
+            this.car.setAnimation(duration, distanecForCar);
+            const isSuccess = await switchToDriveMode(this.id, 'drive');
+            if (!isSuccess) {
+                this.car.setCarsBaloonAnimation();
+            }
+        } catch (error) {
+            if (error instanceof Error) {
+                console.error(`${error.message}`);
+            }
+        }
     }
 
-    stopCar() {
-        isNotNull(this.car);
-        this.car.resetAnimation();
+    async stopCar(e: Event) {
+        const currentBtn = e.target;
+        isNotNullElement<HTMLElement>(currentBtn);
+        toggleBtn(currentBtn);
+        try {
+            isNotNull(this.car);
+            this.car.resetAnimation();
+            await startStopEngine(this.id, 'stopped');
+            this.car.backToStart();
+        } catch (error) {
+            if (error instanceof Error) {
+                console.error(`${error.message}`);
+            }
+        }
     }
 }

@@ -65,6 +65,37 @@ export async function updateCar(carParametrs: { name: string; color: string }, i
     const result = await response.json();
     return result;
 }
+
+export async function startStopEngine(id: number, status: string) {
+    const response = await fetch(`http://127.0.0.1:3000/engine?id=${id}&status=${status}`, {
+        method: 'PATCH',
+    });
+    if (!response.ok) {
+        const text = await response.text();
+
+        throw new Error(`${response.status}: ${text}`);
+    }
+    const result = await response.json();
+    return result;
+}
+
+export async function switchToDriveMode(id: number, status: string) {
+    const response = await fetch(`http://127.0.0.1:3000/engine?id=${id}&status=${status}`, {
+        method: 'PATCH',
+    });
+    let text;
+    if (!response.ok) {
+        text = await response.text();
+    }
+    switch (response.status) {
+        case 200:
+            return true;
+        case 500:
+            return false;
+        default:
+            throw new Error(`${response.status}: ${text}`);
+    }
+}
 // export async function getWinners(parametrs?: apiParams) {
 //     let page = '';
 //     let limit = '';
