@@ -3,7 +3,7 @@ import CarOptions from '../../../carsElements/car-options/carOptions';
 import Car from '../../../carsElements/car/car';
 import './carContainer.css';
 import { startStopEngine, switchToDriveMode } from '../../../../rest-api/api';
-import { isNotNull, isNotNullElement, toggleBtn } from '../../../../servise/servise';
+import { isNotNull, toggleBtn } from '../../../../servise/servise';
 
 import BaseComponent from '../../../baseComponent';
 import img from '../../../../assets/images/finish.png';
@@ -57,18 +57,20 @@ export default class CarContainerView extends View {
             carName,
             deleteCb,
             editCb,
-            (e) => this.moveCar(e),
-            (e) => this.stopCar(e)
+            (e) => {
+                this.moveCar();
+                toggleBtn(e);
+            },
+            (e) => {
+                this.stopCar();
+                toggleBtn(e);
+            }
         );
         this.view.addChild([options.getViewElement(), this.car, image]);
     }
 
-    async moveCar(e: Event) {
-        const currentBtn = e.target;
-        isNotNullElement<HTMLElement>(currentBtn);
-        toggleBtn(currentBtn);
+    async moveCar() {
         isNotNull(this.car);
-
         const container = this.view.getElement();
         const computedStyle = window.getComputedStyle(container);
         const carsWidth = 160;
@@ -88,10 +90,7 @@ export default class CarContainerView extends View {
         }
     }
 
-    async stopCar(e: Event) {
-        const currentBtn = e.target;
-        isNotNullElement<HTMLElement>(currentBtn);
-        toggleBtn(currentBtn);
+    async stopCar() {
         try {
             isNotNull(this.car);
             this.car.resetAnimation();

@@ -15,7 +15,9 @@ export function isNotNullElement<T>(value: unknown): asserts value is T {
     }
 }
 
-export function toggleBtn(activeBtn: HTMLElement) {
+export function toggleBtn(e: Event) {
+    const activeBtn = e.target;
+    isNotNullElement<HTMLElement>(activeBtn);
     let blockedBtn;
     if (activeBtn.classList.contains('startBtn')) {
         blockedBtn = activeBtn.nextElementSibling;

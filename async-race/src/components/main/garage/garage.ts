@@ -25,11 +25,14 @@ export default class GargeView extends View {
 
     private pageLimit: number = 7;
 
+    private cars: Array<CarContainerView>;
+
     constructor() {
         super({
             tag: 'div',
             classes: ['garage'],
         });
+        this.cars = [];
         this.carsInfo = null;
         this.carsCount = 0;
         this.currentId = 0;
@@ -112,6 +115,10 @@ export default class GargeView extends View {
         }
     }
 
+    async startRace() {
+        this.cars.forEach((car) => car.moveCar());
+    }
+
     setCarInfo(name: string, color: string, id: number) {
         this.garageOption.toggleInputsAccessibility();
         this.garageOption.setEditableValue(name, color);
@@ -138,6 +145,7 @@ export default class GargeView extends View {
             const container = new CarContainerView(color, name, id);
             container.addObserver(this);
             carsWrapper.addChild([container.getViewElement()]);
+            this.cars.push(container);
         });
 
         return { title, carsWrapper };
