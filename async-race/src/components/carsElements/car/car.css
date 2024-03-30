@@ -3,3 +3,14 @@
     width: 80px;
     height: 80px;
 }
+
+.baloon {
+    opacity: 1;
+    transition: all 5s ease;
+}
+
+.baloon.hide {
+    opacity: 0;
+    transform: translate3d(42px, -62px, -135px);
+    
+}
