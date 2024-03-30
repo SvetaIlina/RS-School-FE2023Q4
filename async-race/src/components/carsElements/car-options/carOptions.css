@@ -37,6 +37,10 @@ min-width: 80px
     height: 25px;
 }
 
+.raceBtn.disable{
+    opacity: 0.5;
+}
+
 .startBtn{
     background-color: #207320
 }

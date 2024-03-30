@@ -9,8 +9,8 @@ export default class CarOptions extends View {
         carName: string,
         deleteCb: () => void,
         editCB: () => void,
-        driveBtnCb: () => void,
-        stopBtnCb: () => void
+        driveBtnCb: (e: Event) => void,
+        stopBtnCb: (e: Event) => void
     ) {
         super({
             tag: 'div',
@@ -20,13 +20,19 @@ export default class CarOptions extends View {
         this.configView(carName, deleteCb, editCB, driveBtnCb, stopBtnCb);
     }
 
-    configView(name: string, deleteCb: () => void, editCB: () => void, driveBtnCb: () => void, stopBtnCb: () => void) {
+    configView(
+        name: string,
+        deleteCb: () => void,
+        editCB: () => void,
+        driveBtnCb: (e: Event) => void,
+        stopBtnCb: (e: Event) => void
+    ) {
         const raceBtnContainer = new BaseComponent({
             tag: 'div',
             classes: ['raceBtnContainer'],
         });
         const driveBtn = new Button(['startBtn', 'raceBtn'], '', driveBtnCb);
-        const stopBtn = new Button(['stopBtn', 'raceBtn'], '', stopBtnCb);
+        const stopBtn = new Button(['stopBtn', 'raceBtn', 'disable'], '', stopBtnCb);
         raceBtnContainer.addChild([driveBtn, stopBtn]);
 
         const carName = new BaseComponent({

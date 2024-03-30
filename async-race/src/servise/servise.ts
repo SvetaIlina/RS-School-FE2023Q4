@@ -14,3 +14,17 @@ export function isNotNullElement<T>(value: unknown): asserts value is T {
         throw new Error(`Not expected value: ${value}`);
     }
 }
+
+export function toggleBtn(activeBtn: HTMLElement) {
+    let blockedBtn;
+    if (activeBtn.classList.contains('startBtn')) {
+        blockedBtn = activeBtn.nextElementSibling;
+    }
+    if (activeBtn.classList.contains('stopBtn')) {
+        blockedBtn = activeBtn.previousElementSibling;
+    }
+
+    isNotNull(blockedBtn);
+    activeBtn.classList.add('disable');
+    blockedBtn.classList.remove('disable');
+}
