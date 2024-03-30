@@ -1,10 +1,15 @@
 .carContainer{
-    border: 1px solid black;
+
     margin-bottom: 10px;
     padding:0 10px;
     display: flex;
     flex-direction: column;
     position: relative;
+ background: url('../../../../assets/images/44.png');
+ background-position: 0px 43px;
+    background-size: contain;
+    background-repeat: repeat-x;
+
    
 }
 
