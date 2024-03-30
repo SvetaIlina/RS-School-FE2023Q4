@@ -19,3 +19,8 @@ export type carInfo = {
     color: string;
     id: number;
 };
+
+export interface InfoResponse {
+    info: Array<carInfo>;
+    carCount: number | null;
+}

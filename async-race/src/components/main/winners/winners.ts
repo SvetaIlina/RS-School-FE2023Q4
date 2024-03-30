@@ -12,11 +12,14 @@ export default class WinnersView extends View {
     }
 
     async configView() {
-        const winners = await getInfo('winners');
+        const winners = await getInfo('winners', {
+            page: 1,
+            limit: 1,
+        });
         const title = new BaseComponent({
             tag: 'h1',
             classes: ['title'],
-            textContent: `Winners (${winners.length})`,
+            textContent: `Winners ()`,
         });
         const currentPage = new BaseComponent({
             tag: 'span',
