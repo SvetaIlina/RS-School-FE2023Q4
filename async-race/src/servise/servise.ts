@@ -9,7 +9,7 @@ export function isHTMLElement(value: unknown): asserts value is HTMLElement {
     }
 }
 
-export function isNotNullHTMLElement<T>(value: unknown): asserts value is T {
+export function isNotNullElement<T>(value: unknown): asserts value is T {
     if (value === null || value === undefined || !(value instanceof HTMLElement)) {
         throw new Error(`Not expected value: ${value}`);
     }

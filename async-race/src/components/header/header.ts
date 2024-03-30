@@ -2,7 +2,7 @@ import View from '../view';
 import BaseComponent from '../baseComponent';
 import MainView from '../main/main';
 import Button from '../buttons/button';
-import { isNotNullHTMLElement } from '../../servise/servise';
+import { isNotNullElement } from '../../servise/servise';
 import './header.css';
 
 export default class HeaderView extends View {
@@ -39,7 +39,7 @@ export default class HeaderView extends View {
     }
 
     showContent(event: Event) {
-        isNotNullHTMLElement<HTMLElement>(event.target);
+        isNotNullElement<HTMLElement>(event.target);
         const content = this.mainComponent.getChild();
         const btnName = event.target.textContent;
         content.forEach((item) => {
