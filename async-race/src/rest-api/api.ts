@@ -79,23 +79,22 @@ export async function startStopEngine(id: number, status: string) {
     return result;
 }
 
-export async function switchToDriveMode(id: number, status: string) {
-    const response = await fetch(`http://127.0.0.1:3000/engine?id=${id}&status=${status}`, {
+export function switchToDriveMode(id: number, status: string): Promise<void> {
+    return fetch(`http://127.0.0.1:3000/engine?id=${id}&status=${status}`, {
         method: 'PATCH',
-    });
-    let text;
-    if (!response.ok) {
-        text = await response.text();
-    }
-    switch (response.status) {
-        case 200:
-            return true;
-        case 500:
-            return false;
-        default:
-            throw new Error(`${response.status}: ${text}`);
-    }
+    })
+        .then(async (response) => {
+            if (!response.ok || response.status !== 200) {
+                const text = await response.text();
+                throw new Error(`HTTP error! status ${response.status}: ${text}`);
+            }
+        })
+        .catch((error) => {
+            throw new Error(`${error}`);
+        });
 }
+
+// }
 // export async function getWinners(parametrs?: apiParams) {
 //     let page = '';
 //     let limit = '';
