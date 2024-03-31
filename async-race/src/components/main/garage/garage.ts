@@ -3,10 +3,11 @@ import View from '../../view';
 import { getInfo, addCar, updateCar, deleteCar } from '../../../rest-api/api';
 import { carInfo } from '../../../type/types';
 import CarContainerView from './careContainer/carContainer';
-import { isNotNull, isNotNullElement } from '../../../servise/servise';
+import { dispatchBtnEvent, isNotNull, isNotNullElement, toggleBtn } from '../../../servise/servise';
 import './garage.css';
 import GarageOptions from './garge-options/garageOption';
 import Pagination from '../../pagination/pagination';
+import Button from '../../buttons/button';
 
 export default class GargeView extends View {
     private carsInfo: Array<carInfo> | null;
@@ -49,7 +50,12 @@ export default class GargeView extends View {
         const { title, carsWrapper } = this.setContent();
         this.child.push(title);
         this.child.push(carsWrapper);
-        this.view.addChild([title, carsWrapper]);
+        this.view.addChild([
+            new Button(['btn', 'startRace'], 'start', (e) => this.startRace(e)),
+            new Button(['btn'], 'reset', () => this.resetRace()),
+            title,
+            carsWrapper,
+        ]);
         if (this.carsCount > this.pageLimit) {
             this.pagination.getElement().classList.remove('hidden');
         }
@@ -115,8 +121,23 @@ export default class GargeView extends View {
         }
     }
 
-    async startRace() {
-        this.cars.forEach((car) => car.moveCar());
+    async startRace(e: Event) {
+        const startBtns = document.querySelectorAll('.raceBtn');
+        startBtns.forEach((btn) => btn.classList.add('disable'));
+        const promises: Array<Promise<string>> = [];
+        this.cars.forEach((car) => {
+            promises.push(car.moveCar());
+        });
+
+        Promise.any(promises)
+            .then((res) => console.log(res))
+            .catch((error) => console.log(error));
+    }
+
+    async resetRace() {
+        this.cars.forEach((car) => {
+            dispatchBtnEvent(car, 'stopBtn ');
+        });
     }
 
     setCarInfo(name: string, color: string, id: number) {
@@ -152,6 +173,7 @@ export default class GargeView extends View {
     }
 
     updateContent(newPageNumber: number) {
+        this.cars = [];
         this.pageNumber = newPageNumber;
         this.child.forEach((child) => child.getElement().remove());
         this.configView(newPageNumber);

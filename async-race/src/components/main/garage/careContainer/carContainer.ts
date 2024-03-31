@@ -53,23 +53,26 @@ export default class CarContainerView extends View {
             this.observer.setCarInfo(carName, carColor, id);
         };
         this.car = new Car(carColor);
+
         const options = new CarOptions(
             carName,
             deleteCb,
             editCb,
             (e) => {
-                this.moveCar();
-                toggleBtn(e);
+                isNotNull(e.target);
+                toggleBtn(e.target);
+                this.moveCar().catch((error) => console.error(error.message));
             },
             (e) => {
+                isNotNull(e.target);
+                toggleBtn(e.target);
                 this.stopCar();
-                toggleBtn(e);
             }
         );
         this.view.addChild([options.getViewElement(), this.car, image]);
     }
 
-    async moveCar() {
+    async moveCar(): Promise<string> {
         isNotNull(this.car);
         const container = this.view.getElement();
         const computedStyle = window.getComputedStyle(container);
@@ -79,14 +82,11 @@ export default class CarContainerView extends View {
             const { velocity, distance } = await startStopEngine(this.id, 'started');
             const duration = distance / velocity;
             this.car.setAnimation(duration, distanecForCar);
-            const isSuccess = await switchToDriveMode(this.id, 'drive');
-            if (!isSuccess) {
-                this.car.setCarsBaloonAnimation();
-            }
+            await switchToDriveMode(this.id, 'drive');
+            return this.carName;
         } catch (error) {
-            if (error instanceof Error) {
-                console.error(`${error.message}`);
-            }
+            this.car.setCarsBaloonAnimation();
+            throw error;
         }
     }
 
