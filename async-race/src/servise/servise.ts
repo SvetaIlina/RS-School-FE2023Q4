@@ -1,3 +1,5 @@
+import CarContainerView from '../components/main/garage/careContainer/carContainer';
+
 export function isNotNull<T>(value: unknown): asserts value is NonNullable<T> {
     if (value === null || value === undefined) {
         throw new Error(`Not expected value: ${value}`);
@@ -15,11 +17,10 @@ export function isNotNullElement<T>(value: unknown): asserts value is T {
     }
 }
 
-export function toggleBtn(e: Event) {
-    const activeBtn = e.target;
+export function toggleBtn(activeBtn: EventTarget) {
     isNotNullElement<HTMLElement>(activeBtn);
     let blockedBtn;
-    if (activeBtn.classList.contains('startBtn')) {
+    if (activeBtn.classList.contains('startBtn') || activeBtn.classList.contains('startRace')) {
         blockedBtn = activeBtn.nextElementSibling;
     }
     if (activeBtn.classList.contains('stopBtn')) {
@@ -29,4 +30,11 @@ export function toggleBtn(e: Event) {
     isNotNull(blockedBtn);
     activeBtn.classList.add('disable');
     blockedBtn.classList.remove('disable');
+}
+
+export function dispatchBtnEvent(parent: CarContainerView, btnSelector: string) {
+    const button = parent.getViewElement().querySelector(`.${btnSelector}`);
+    isNotNull(button);
+    const clickEvent = new Event('click');
+    button.dispatchEvent(clickEvent);
 }
