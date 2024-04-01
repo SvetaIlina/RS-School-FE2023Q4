@@ -1,9 +1,9 @@
 import BaseComponent from '../../baseComponent';
 import View from '../../view';
 import { getInfo, addCar, updateCar, deleteCar } from '../../../rest-api/api';
-import { carInfo } from '../../../type/types';
+import { carData, carInfo } from '../../../type/types';
 import CarContainerView from './careContainer/carContainer';
-import { dispatchBtnEvent, isNotNull, isNotNullElement } from '../../../servise/servise';
+import { dispatchBtnEvent, getRandomCarInfo, isNotNull, isNotNullElement } from '../../../servise/servise';
 import './garage.css';
 import GarageOptions from './garge-options/garageOption';
 import Pagination from '../../pagination/pagination';
@@ -49,19 +49,23 @@ export default class GargeView extends View {
     }
 
     async configView(pageNumber: number = 1) {
-        await this.getCarsInfo(pageNumber);
-        const { title, carsWrapper } = this.setContent();
-        this.child.push(title);
-        this.child.push(carsWrapper);
-        this.view.addChild([title, carsWrapper]);
-        if (this.carsCount > this.pageLimit) {
-            this.pagination.getElement().classList.remove('hidden');
+        try {
+            await this.getCarsInfo(pageNumber);
+            const { title, carsWrapper } = this.setContent();
+            this.child.push(title);
+            this.child.push(carsWrapper);
+            this.view.addChild([title, carsWrapper]);
+            if (this.carsCount > this.pageLimit) {
+                this.pagination.getElement().classList.remove('hidden');
+            }
+            if (this.carsCount <= this.pageLimit) {
+                this.pagination.getElement().classList.add('hidden');
+            }
+            this.pagination.setTotalPageCount(Math.ceil(this.carsCount / this.pageLimit));
+            this.pagination.configView();
+        } catch (error) {
+            if (error instanceof Error) console.error(error.message);
         }
-        if (this.carsCount <= this.pageLimit) {
-            this.pagination.getElement().classList.add('hidden');
-        }
-        this.pagination.setTotalPageCount(Math.ceil(this.carsCount / this.pageLimit));
-        this.pagination.configView();
     }
 
     async getCarsInfo(pageNumber: number) {
@@ -72,11 +76,13 @@ export default class GargeView extends View {
             isNotNull(carsInfofromApi.carCount);
             this.carsCount = carsInfofromApi.carCount;
         } catch (error) {
-            throw new Error(`Error fetching car information:${error}`);
+            if (error instanceof Error) {
+                throw new Error(`fetching cars information: ${error.message}`);
+            }
         }
     }
 
-    async addNewCar(car: { name: string; color: string }) {
+    async addNewCar(car: carData) {
         try {
             await addCar(car);
             this.garageOption.resetInputSettings('new');
@@ -106,9 +112,9 @@ export default class GargeView extends View {
         }
     }
 
-    async editCar(name: string, color: string) {
+    async editCar(car: carData) {
         try {
-            await updateCar({ name, color }, this.currentId);
+            await updateCar(car, this.currentId);
             this.garageOption.resetInputSettings('edit');
             this.garageOption.toggleInputsAccessibility();
             this.updateContent(this.pageNumber);
@@ -139,13 +145,20 @@ export default class GargeView extends View {
         });
     }
 
-    generateRandomCars() {
-        console.log(123);
+    async generateRandomCars() {
+        const addingPromises = [];
+        for (let i = 0; i < 100; i += 1) {
+            const data = getRandomCarInfo();
+            const promise = addCar(data);
+            addingPromises.push(promise);
+        }
+        await Promise.all(addingPromises);
+        this.updateContent(this.pageNumber);
     }
 
-    setCarInfo(name: string, color: string, id: number) {
+    setCarInfo(car: carData, id: number) {
         this.garageOption.toggleInputsAccessibility();
-        this.garageOption.setEditableValue(name, color);
+        this.garageOption.setEditableValue(car.name, car.color);
         this.currentId = id;
     }
 

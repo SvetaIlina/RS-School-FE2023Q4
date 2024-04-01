@@ -1,4 +1,6 @@
 import CarContainerView from '../components/main/garage/careContainer/carContainer';
+import { carBrands, carModels } from '../carsData/carsData';
+import { carData } from '../type/types';
 
 export function isNotNull<T>(value: unknown): asserts value is NonNullable<T> {
     if (value === null || value === undefined) {
@@ -23,7 +25,7 @@ export function toggleBtn(activeBtn: EventTarget) {
     if (activeBtn.classList.contains('startBtn') || activeBtn.classList.contains('startRace')) {
         blockedBtn = activeBtn.nextElementSibling;
     }
-    if (activeBtn.classList.contains('stopBtn')) {
+    if (activeBtn.classList.contains('stopBtn') || activeBtn.classList.contains('resetRace')) {
         blockedBtn = activeBtn.previousElementSibling;
     }
 
@@ -37,4 +39,27 @@ export function dispatchBtnEvent(parent: CarContainerView, btnSelector: string) 
     isNotNull(button);
     const clickEvent = new Event('click');
     button.dispatchEvent(clickEvent);
+}
+
+function getRandomName(): string {
+    const index: number = Math.floor(Math.random() * carModels.length);
+    const brand: string = carBrands[index];
+    const model: string = carModels[index];
+    return `${brand} ${model}`;
+}
+
+function getRandomColor(): string {
+    const hexCodes: string = '0123456789ABCDEF';
+    let color: string = '';
+    for (let i = 0; i < 6; i += 1) {
+        color += hexCodes[Math.floor(Math.random() * hexCodes.length)];
+    }
+    return `#${color}`;
+}
+
+export function getRandomCarInfo(): carData {
+    return {
+        name: getRandomName(),
+        color: getRandomColor(),
+    };
 }
