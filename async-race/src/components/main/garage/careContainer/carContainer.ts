@@ -77,8 +77,9 @@ export default class CarContainerView extends View {
         isNotNull(this.car);
         const container = this.view.getElement();
         const computedStyle = window.getComputedStyle(container);
-        const carsWidth = 160;
-        const distanecForCar: number = parseInt(computedStyle.getPropertyValue('width'), 10) - carsWidth;
+        const carsWidth = 80;
+        const paddings = 20;
+        const distanecForCar: number = parseInt(computedStyle.getPropertyValue('width'), 10) - carsWidth - paddings;
         try {
             const { velocity, distance } = await startStopEngine(this.id, 'started');
             const duration = distance / velocity;

@@ -29,7 +29,7 @@ export default class Modal extends BaseComponent {
         modal.addChild([winner, time]);
         this.addChild([modal]);
         this.openModal();
-        setTimeout(() => this.closeModal(), 2000);
+        setTimeout(() => this.closeModal(), 3000);
     }
 
     openModal() {
