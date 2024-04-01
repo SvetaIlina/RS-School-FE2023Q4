@@ -28,3 +28,13 @@ height: 50px;
 font-size: 2rem;
 
 }
+
+@media (max-width: 650px){
+    .headerWrapper{
+        flex-direction: column;
+        gap: 5px;
+    }
+    .headerBtnContainer{
+        order: 1
+    }
+}

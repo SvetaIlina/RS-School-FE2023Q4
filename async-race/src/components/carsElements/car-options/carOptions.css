@@ -1,7 +1,7 @@
 .carOptions{
     display: flex;
 
-justify-content: space-between;
+gap: 10px;
 align-items: center;
 min-width: 80px
 }

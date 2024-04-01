@@ -16,6 +16,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 0 10px;
     border: 1px solid;
     height: 200px;
     width: 400px;
@@ -23,4 +24,8 @@
     background: blanchedalmond;
     border-radius: 10px;
   
+}
+
+.modalText{
+    text-align: center;
 }

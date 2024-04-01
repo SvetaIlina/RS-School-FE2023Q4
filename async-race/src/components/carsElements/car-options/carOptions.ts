@@ -31,8 +31,8 @@ export default class CarOptions extends View {
             tag: 'div',
             classes: ['raceBtnContainer'],
         });
-        const driveBtn = new Button(['startBtn', 'raceBtn'], '', driveBtnCb);
-        const stopBtn = new Button(['stopBtn', 'raceBtn', 'disable'], '', stopBtnCb);
+        const driveBtn = new Button(['btn', 'startBtn', 'raceBtn'], '', driveBtnCb);
+        const stopBtn = new Button(['btn', 'stopBtn', 'raceBtn', 'disable'], '', stopBtnCb);
         raceBtnContainer.addChild([driveBtn, stopBtn]);
 
         const carName = new BaseComponent({
