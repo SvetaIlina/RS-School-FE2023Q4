@@ -1,16 +1,19 @@
-import { apiParams, carInfo, InfoResponse } from '../type/types';
+import { apiParams, carData, carInfo, InfoResponse } from '../type/types';
 
 export async function getInfo(targetPage: string, parametrs: apiParams): Promise<InfoResponse> {
     const limit = `&_limit=${parametrs.limit}`;
     const page = `?_page=${parametrs.page}`;
+    try {
+        const response = await fetch(`http://127.0.0.1:3000/${targetPage}${page}${limit}`);
 
-    const response = await fetch(`http://127.0.0.1:3000/${targetPage}${page}${limit}`);
+        const info: Array<carInfo> = await response.json();
 
-    const info: Array<carInfo> = await response.json();
+        const carCount: number | null = Number(response.headers.get('X-Total-Count'));
 
-    const carCount: number | null = Number(response.headers.get('X-Total-Count'));
-
-    return { info, carCount };
+        return { info, carCount };
+    } catch (error) {
+        throw new Error(`${error}`);
+    }
 }
 
 export async function getCar(id: number): Promise<carInfo> {
@@ -51,7 +54,7 @@ export async function addCar(carParametrs: { name: string; color: string }) {
     return result;
 }
 
-export async function updateCar(carParametrs: { name: string; color: string }, id: number) {
+export async function updateCar(carParametrs: carData, id: number) {
     const response = await fetch(`http://127.0.0.1:3000/garage/${id}`, {
         method: 'PUT',
         headers: {

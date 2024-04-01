@@ -12,20 +12,24 @@ export default class WinnersView extends View {
     }
 
     async configView() {
-        const winners = await getInfo('winners', {
-            page: 1,
-            limit: 1,
-        });
-        const title = new BaseComponent({
-            tag: 'h1',
-            classes: ['title'],
-            textContent: `Winners ()`,
-        });
-        const currentPage = new BaseComponent({
-            tag: 'span',
-            classes: ['pageNumber'],
-            textContent: `Page 1`,
-        });
-        this.view.addChild([title, currentPage]);
+        try {
+            const winners = await getInfo('winners', {
+                page: 1,
+                limit: 1,
+            });
+            const title = new BaseComponent({
+                tag: 'h1',
+                classes: ['title'],
+                textContent: `Winners ()`,
+            });
+            const currentPage = new BaseComponent({
+                tag: 'span',
+                classes: ['pageNumber'],
+                textContent: `Page 1`,
+            });
+            this.view.addChild([title, currentPage]);
+        } catch (error) {
+            if (error instanceof Error) console.error(`Error fetching winners information:${error.message}`);
+        }
     }
 }
