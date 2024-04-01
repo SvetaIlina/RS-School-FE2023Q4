@@ -1,0 +1,11 @@
+.raceOption{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.raceOptionBtn.disable{
+    text-shadow: none;
+    color: #beb5b5;
+    border: 1px solid #beb5b5;
+}

@@ -3,11 +3,11 @@ import View from '../../view';
 import { getInfo, addCar, updateCar, deleteCar } from '../../../rest-api/api';
 import { carInfo } from '../../../type/types';
 import CarContainerView from './careContainer/carContainer';
-import { dispatchBtnEvent, isNotNull, isNotNullElement, toggleBtn } from '../../../servise/servise';
+import { dispatchBtnEvent, isNotNull, isNotNullElement } from '../../../servise/servise';
 import './garage.css';
 import GarageOptions from './garge-options/garageOption';
 import Pagination from '../../pagination/pagination';
-import Button from '../../buttons/button';
+import RaceOptions from './race-options/raceOption';
 
 export default class GargeView extends View {
     private carsInfo: Array<carInfo> | null;
@@ -17,6 +17,8 @@ export default class GargeView extends View {
     private garageOption = new GarageOptions();
 
     private pagination = new Pagination();
+
+    private raceOptions = new RaceOptions();
 
     private pageNumber: number;
 
@@ -40,9 +42,10 @@ export default class GargeView extends View {
         this.pageNumber = 1;
         this.child = [];
         this.configView();
-        this.view.addChild([this.garageOption, this.pagination]);
+        this.view.addChild([this.garageOption, this.raceOptions, this.pagination]);
         this.garageOption.addObserver(this);
         this.pagination.addObserver(this);
+        this.raceOptions.addObserver(this);
     }
 
     async configView(pageNumber: number = 1) {
@@ -50,12 +53,7 @@ export default class GargeView extends View {
         const { title, carsWrapper } = this.setContent();
         this.child.push(title);
         this.child.push(carsWrapper);
-        this.view.addChild([
-            new Button(['btn', 'startRace'], 'start', (e) => this.startRace(e)),
-            new Button(['btn'], 'reset', () => this.resetRace()),
-            title,
-            carsWrapper,
-        ]);
+        this.view.addChild([title, carsWrapper]);
         if (this.carsCount > this.pageLimit) {
             this.pagination.getElement().classList.remove('hidden');
         }
@@ -121,9 +119,10 @@ export default class GargeView extends View {
         }
     }
 
-    async startRace(e: Event) {
+    async startRace() {
         const startBtns = document.querySelectorAll('.raceBtn');
         startBtns.forEach((btn) => btn.classList.add('disable'));
+
         const promises: Array<Promise<string>> = [];
         this.cars.forEach((car) => {
             promises.push(car.moveCar());
@@ -138,6 +137,10 @@ export default class GargeView extends View {
         this.cars.forEach((car) => {
             dispatchBtnEvent(car, 'stopBtn ');
         });
+    }
+
+    generateRandomCars() {
+        console.log(123);
     }
 
     setCarInfo(name: string, color: string, id: number) {
