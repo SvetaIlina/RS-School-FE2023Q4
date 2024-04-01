@@ -96,17 +96,3 @@ export function switchToDriveMode(id: number, status: string): Promise<void> {
             throw new Error(`${error}`);
         });
 }
-
-// }
-// export async function getWinners(parametrs?: apiParams) {
-//     let page = '';
-//     let limit = '';
-//     if (parametrs) {
-//         page = `_page${parametrs.page}`;
-//         limit = `_limit${parametrs.limit}`;
-//     }
-
-//     const response = await fetch(`http://127.0.0.1:3000/winners${page}${limit}`);
-//     const winners = await response.json();
-//     return winners;
-// }
