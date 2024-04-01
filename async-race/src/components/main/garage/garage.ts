@@ -1,7 +1,7 @@
 import BaseComponent from '../../baseComponent';
 import View from '../../view';
-import { getInfo, addCar, updateCar, deleteCar } from '../../../rest-api/api';
-import { carData, carInfo, winnerInfo } from '../../../type/types';
+import { getInfo, addCar, updateCar, deleteCar, addWinner } from '../../../rest-api/api';
+import { carData, carInfo, winnerResponse } from '../../../type/types';
 import CarContainerView from './careContainer/carContainer';
 import {
     dispatchBtnEvent,
@@ -136,13 +136,16 @@ export default class GargeView extends View {
         const btnsForDisable = getActiveBtns();
         btnsForDisable.forEach((btn) => btn.classList.add('disable'));
 
-        const promises: Array<Promise<winnerInfo>> = [];
+        const promises: Array<Promise<winnerResponse>> = [];
         this.cars.forEach((car) => {
             promises.push(car.moveCar());
         });
 
         Promise.any(promises)
-            .then((result) => new Modal().buildModal(result.name, result.time))
+            .then(async (result) => {
+                new Modal().buildModal(result.name, result.time);
+                await addWinner({ id: result.id, wins: 1, time: +result.time });
+            })
             .catch((error) => console.log(error));
 
         await Promise.allSettled(promises);

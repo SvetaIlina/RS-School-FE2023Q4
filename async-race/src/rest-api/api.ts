@@ -1,4 +1,4 @@
-import { apiParams, carData, carInfo, InfoResponse } from '../type/types';
+import { apiParams, carData, carInfo, InfoResponse, winnerCar } from '../type/types';
 
 export async function getInfo(targetPage: string, parametrs: apiParams): Promise<InfoResponse> {
     const limit = `&_limit=${parametrs.limit}`;
@@ -95,4 +95,59 @@ export function switchToDriveMode(id: number, status: string): Promise<void> {
         .catch((error) => {
             throw new Error(`${error}`);
         });
+}
+
+export async function createWinner(winnerCarinfo: winnerCar) {
+    const response = await fetch(`http://127.0.0.1:3000/winners/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(winnerCarinfo),
+    });
+
+    if (response.status === 500) {
+        const text = await response.text();
+        throw new Error(`${text}`);
+    }
+    const result = await response.json();
+    return result;
+}
+export async function updateWinner(winnerCarinfo: winnerCar) {
+    const response = await fetch(`http://127.0.0.1:3000/winners/${winnerCarinfo.id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            wins: winnerCarinfo.wins,
+            time: winnerCarinfo.time,
+        }),
+    });
+
+    const result = await response.json();
+    return result;
+}
+export async function getWinner(id: number) {
+    const response = await fetch(`http://127.0.0.1:3000/winners/${id}`);
+    const winner: winnerCar = await response.json();
+    if (response.status === 404) {
+        throw new Error(`${response.statusText}`);
+    }
+    return winner;
+}
+
+export async function addWinner(winnerCarinfo: winnerCar) {
+    try {
+        const winner = await getWinner(winnerCarinfo.id);
+        const { id, wins, time } = winner;
+        updateWinner({
+            id,
+            wins: wins + 1,
+            time,
+        });
+    } catch (error) {
+        console.error(error);
+        createWinner(winnerCarinfo);
+    }
 }

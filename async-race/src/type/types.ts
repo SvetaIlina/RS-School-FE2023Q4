@@ -28,3 +28,13 @@ export interface InfoResponse {
     info: Array<carInfo>;
     carCount: number | null;
 }
+
+export type winnerCar = {
+    id: number;
+    wins: number;
+    time: number;
+};
+
+export type winnerResponse = carInfo & {
+    time: string;
+};
