@@ -39,9 +39,13 @@ export default class GarageOptions extends BaseComponent {
     configView() {
         const createCarBtn = new Button(['btn'], 'Create', () => this.handleNewCarCreation());
         const updataCarBtn = new Button(['btn'], 'Update', () => this.handleCarEditing());
+        const generateRandomCar = new Button(['btn'], 'Generate Cars', () => {
+            isNotNull(this.observer);
+            this.observer.generateRandomCars();
+        });
         this.newCarOption.addChild([this.newCarInput, createCarBtn]);
         this.editCarOption.addChild([this.editCarInput, updataCarBtn]);
-        this.addChild([this.newCarOption, this.editCarOption]);
+        this.addChild([this.newCarOption, this.editCarOption, generateRandomCar]);
     }
 
     handleNewCarCreation() {
