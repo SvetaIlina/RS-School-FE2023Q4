@@ -20,6 +20,8 @@ export type carInfo = {
     id: number;
 };
 
+export type carData = Pick<carInfo, 'name' | 'color'>;
+
 export interface InfoResponse {
     info: Array<carInfo>;
     carCount: number | null;

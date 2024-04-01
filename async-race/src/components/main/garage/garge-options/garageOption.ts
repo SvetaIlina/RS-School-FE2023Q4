@@ -59,7 +59,7 @@ export default class GarageOptions extends BaseComponent {
         isNotNull(this.observer);
         const newName = this.editCarInput.getText();
         const newColor = this.editCarInput.getColor();
-        this.observer.editCar(newName, newColor);
+        this.observer.editCar({ name: newName, color: newColor });
     }
 
     setEditableValue(name: string, color: string) {

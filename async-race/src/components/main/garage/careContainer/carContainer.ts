@@ -50,7 +50,7 @@ export default class CarContainerView extends View {
         };
         const editCb = () => {
             isNotNull(this.observer);
-            this.observer.setCarInfo(carName, carColor, id);
+            this.observer.setCarInfo({ name: carName, color: carColor }, id);
         };
         this.car = new Car(carColor);
 
