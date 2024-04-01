@@ -63,3 +63,8 @@ export function getRandomCarInfo(): carData {
         color: getRandomColor(),
     };
 }
+
+export function getActiveBtns() {
+    const allBtns = Array.from(document.querySelectorAll('.btn'));
+    return allBtns.filter((btn) => !btn.classList.contains('disable'));
+}

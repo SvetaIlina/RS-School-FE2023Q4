@@ -3,7 +3,13 @@ import View from '../../view';
 import { getInfo, addCar, updateCar, deleteCar } from '../../../rest-api/api';
 import { carData, carInfo, winnerInfo } from '../../../type/types';
 import CarContainerView from './careContainer/carContainer';
-import { dispatchBtnEvent, getRandomCarInfo, isNotNull, isNotNullElement } from '../../../servise/servise';
+import {
+    dispatchBtnEvent,
+    getActiveBtns,
+    getRandomCarInfo,
+    isNotNull,
+    isNotNullElement,
+} from '../../../servise/servise';
 import './garage.css';
 import GarageOptions from './garge-options/garageOption';
 import Pagination from '../../pagination/pagination';
@@ -18,8 +24,6 @@ export default class GargeView extends View {
     private garageOption = new GarageOptions();
 
     private pagination = new Pagination();
-
-    private raceOptions = new RaceOptions();
 
     private pageNumber: number;
 
@@ -43,19 +47,21 @@ export default class GargeView extends View {
         this.pageNumber = 1;
         this.child = [];
         this.configView();
-        this.view.addChild([this.garageOption, this.raceOptions, this.pagination]);
+        this.view.addChild([this.garageOption, this.pagination]);
         this.garageOption.addObserver(this);
         this.pagination.addObserver(this);
-        this.raceOptions.addObserver(this);
     }
 
     async configView(pageNumber: number = 1) {
         try {
             await this.getCarsInfo(pageNumber);
             const { title, carsWrapper } = this.setContent();
+            const raceOptions = new RaceOptions();
+            raceOptions.addObserver(this);
             this.child.push(title);
             this.child.push(carsWrapper);
-            this.view.addChild([title, carsWrapper]);
+            this.child.push(raceOptions);
+            this.view.addChild([raceOptions, title, carsWrapper]);
             if (this.carsCount > this.pageLimit) {
                 this.pagination.getElement().classList.remove('hidden');
             }
@@ -127,8 +133,8 @@ export default class GargeView extends View {
     }
 
     async startRace() {
-        const startBtns = document.querySelectorAll('.raceBtn');
-        startBtns.forEach((btn) => btn.classList.add('disable'));
+        const btnsForDisable = getActiveBtns();
+        btnsForDisable.forEach((btn) => btn.classList.add('disable'));
 
         const promises: Array<Promise<winnerInfo>> = [];
         this.cars.forEach((car) => {
@@ -138,6 +144,9 @@ export default class GargeView extends View {
         Promise.any(promises)
             .then((result) => new Modal().buildModal(result.name, result.time))
             .catch((error) => console.log(error));
+
+        await Promise.allSettled(promises);
+        btnsForDisable.forEach((btn) => btn.classList.remove('disable'));
     }
 
     async resetRace() {
