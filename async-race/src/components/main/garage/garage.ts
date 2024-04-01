@@ -1,7 +1,7 @@
 import BaseComponent from '../../baseComponent';
 import View from '../../view';
-import { getInfo, addCar, updateCar, deleteCar, addWinner } from '../../../rest-api/api';
-import { carData, carInfo, winnerResponse } from '../../../type/types';
+import { getCars, addCar, updateCar, deleteCar, addWinner } from '../../../rest-api/api';
+import { CarsResponse, carData, carInfo, winnerResponse } from '../../../type/types';
 import CarContainerView from './careContainer/carContainer';
 import {
     dispatchBtnEvent,
@@ -77,11 +77,11 @@ export default class GargeView extends View {
 
     async getCarsInfo(pageNumber: number) {
         try {
-            const carsInfofromApi = await getInfo('garage', { page: pageNumber, limit: this.pageLimit });
+            const carsInfofromApi: CarsResponse = await getCars({ page: pageNumber, limit: this.pageLimit });
             this.carsInfo = carsInfofromApi.info;
 
-            isNotNull(carsInfofromApi.carCount);
-            this.carsCount = carsInfofromApi.carCount;
+            isNotNull(carsInfofromApi.membersCount);
+            this.carsCount = carsInfofromApi.membersCount;
         } catch (error) {
             if (error instanceof Error) {
                 throw new Error(`fetching cars information: ${error.message}`);

@@ -24,16 +24,19 @@ export type carData = Pick<carInfo, 'name' | 'color'>;
 
 export type winnerInfo = carData & { time: string };
 
-export interface InfoResponse {
+export interface CarsResponse {
     info: Array<carInfo>;
-    carCount: number | null;
+    membersCount: number | null;
 }
-
 export type winnerCar = {
     id: number;
     wins: number;
     time: number;
 };
+export interface WinnerResponse {
+    info: Array<winnerCar>;
+    membersCount: number | null;
+}
 
 export type winnerResponse = carInfo & {
     time: string;

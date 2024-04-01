@@ -4,6 +4,7 @@ import MainView from '../main/main';
 import Button from '../buttons/button';
 import { isNotNullElement } from '../../servise/servise';
 import './header.css';
+import WinnersView from '../main/winners/winners';
 
 export default class HeaderView extends View {
     mainComponent: MainView;
@@ -43,9 +44,12 @@ export default class HeaderView extends View {
         const content = this.mainComponent.getChild();
         const btnName = event.target.textContent;
         content.forEach((item) => {
-            item.classList.remove('hidden');
-            if (!item.classList.contains(`${btnName}`)) {
-                item.classList.add('hidden');
+            item.getViewElement().classList.remove('hidden');
+            if (!item.getViewElement().classList.contains(`${btnName}`)) {
+                item.getViewElement().classList.add('hidden');
+            }
+            if (item instanceof WinnersView) {
+                item.configView();
             }
         });
     }

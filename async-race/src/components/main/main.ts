@@ -4,14 +4,18 @@ import GargeView from './garage/garage';
 import BaseComponent from '../baseComponent';
 
 export default class MainView extends View {
-    private child: Array<HTMLElement>;
+    private child: [GargeView, WinnersView];
+
+    private garage = new GargeView();
+
+    private winners = new WinnersView();
 
     constructor() {
         super({
             tag: 'main',
             classes: ['main'],
         });
-        this.child = [];
+        this.child = [this.garage, this.winners];
         this.configView();
     }
 
@@ -20,11 +24,8 @@ export default class MainView extends View {
             tag: 'div',
             classes: ['wrapper'],
         });
-        const garage = new GargeView().getViewElement();
-        const winners = new WinnersView().getViewElement();
-        this.child.push(garage);
-        this.child.push(winners);
-        wrapper.addChild([garage, winners]);
+
+        wrapper.addChild([this.garage.getViewElement(), this.winners.getViewElement()]);
         this.view.addChild([wrapper]);
     }
 

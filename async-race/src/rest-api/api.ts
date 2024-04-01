@@ -1,16 +1,31 @@
-import { apiParams, carData, carInfo, InfoResponse, winnerCar } from '../type/types';
+import { apiParams, carData, carInfo, CarsResponse, winnerCar, WinnerResponse } from '../type/types';
 
-export async function getInfo(targetPage: string, parametrs: apiParams): Promise<InfoResponse> {
+export async function getCars(parametrs: apiParams): Promise<CarsResponse> {
     const limit = `&_limit=${parametrs.limit}`;
     const page = `?_page=${parametrs.page}`;
     try {
-        const response = await fetch(`http://127.0.0.1:3000/${targetPage}${page}${limit}`);
+        const response = await fetch(`http://127.0.0.1:3000/garage${page}${limit}`);
 
         const info: Array<carInfo> = await response.json();
 
-        const carCount: number | null = Number(response.headers.get('X-Total-Count'));
+        const membersCount: number | null = Number(response.headers.get('X-Total-Count'));
 
-        return { info, carCount };
+        return { info, membersCount };
+    } catch (error) {
+        throw new Error(`${error}`);
+    }
+}
+export async function getAllWinners(parametrs: apiParams): Promise<WinnerResponse> {
+    const limit = `&_limit=${parametrs.limit}`;
+    const page = `?_page=${parametrs.page}`;
+    try {
+        const response = await fetch(`http://127.0.0.1:3000/winners${page}${limit}`);
+
+        const info: Array<winnerCar> = await response.json();
+
+        const membersCount: number | null = Number(response.headers.get('X-Total-Count'));
+
+        return { info, membersCount };
     } catch (error) {
         throw new Error(`${error}`);
     }
@@ -140,7 +155,8 @@ export async function getWinner(id: number) {
 export async function addWinner(winnerCarinfo: winnerCar) {
     try {
         const winner = await getWinner(winnerCarinfo.id);
-        const { id, wins, time } = winner;
+        const { id, wins } = winner;
+        const { time } = winnerCarinfo;
         updateWinner({
             id,
             wins: wins + 1,
