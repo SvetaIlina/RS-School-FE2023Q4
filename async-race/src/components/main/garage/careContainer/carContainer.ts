@@ -8,6 +8,7 @@ import { isNotNull, toggleBtn } from '../../../../servise/servise';
 import BaseComponent from '../../../baseComponent';
 import img from '../../../../assets/images/finish.png';
 import GargeView from '../garage';
+import { winnerInfo } from '../../../../type/types';
 
 export default class CarContainerView extends View {
     private observer: GargeView | null;
@@ -72,7 +73,7 @@ export default class CarContainerView extends View {
         this.view.addChild([options.getViewElement(), this.car, image]);
     }
 
-    async moveCar(): Promise<string> {
+    async moveCar(): Promise<winnerInfo> {
         isNotNull(this.car);
         const container = this.view.getElement();
         const computedStyle = window.getComputedStyle(container);
@@ -83,7 +84,7 @@ export default class CarContainerView extends View {
             const duration = distance / velocity;
             this.car.setAnimation(duration, distanecForCar);
             await switchToDriveMode(this.id, 'drive');
-            return this.carName;
+            return { name: this.carName, color: this.carColor, time: `${(duration / 1000).toFixed(2)}` };
         } catch (error) {
             this.car.setCarsBaloonAnimation();
             throw error;

@@ -22,6 +22,8 @@ export type carInfo = {
 
 export type carData = Pick<carInfo, 'name' | 'color'>;
 
+export type winnerInfo = carData & { time: string };
+
 export interface InfoResponse {
     info: Array<carInfo>;
     carCount: number | null;

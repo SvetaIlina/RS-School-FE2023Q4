@@ -1,13 +1,14 @@
 import BaseComponent from '../../baseComponent';
 import View from '../../view';
 import { getInfo, addCar, updateCar, deleteCar } from '../../../rest-api/api';
-import { carData, carInfo } from '../../../type/types';
+import { carData, carInfo, winnerInfo } from '../../../type/types';
 import CarContainerView from './careContainer/carContainer';
 import { dispatchBtnEvent, getRandomCarInfo, isNotNull, isNotNullElement } from '../../../servise/servise';
 import './garage.css';
 import GarageOptions from './garge-options/garageOption';
 import Pagination from '../../pagination/pagination';
 import RaceOptions from './race-options/raceOption';
+import Modal from '../../modal/modalWindow';
 
 export default class GargeView extends View {
     private carsInfo: Array<carInfo> | null;
@@ -129,13 +130,13 @@ export default class GargeView extends View {
         const startBtns = document.querySelectorAll('.raceBtn');
         startBtns.forEach((btn) => btn.classList.add('disable'));
 
-        const promises: Array<Promise<string>> = [];
+        const promises: Array<Promise<winnerInfo>> = [];
         this.cars.forEach((car) => {
             promises.push(car.moveCar());
         });
 
         Promise.any(promises)
-            .then((res) => console.log(res))
+            .then((result) => new Modal().buildModal(result.name, result.time))
             .catch((error) => console.log(error));
     }
 
