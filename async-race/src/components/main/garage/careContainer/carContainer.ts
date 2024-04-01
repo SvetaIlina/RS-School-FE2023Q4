@@ -87,6 +87,9 @@ export default class CarContainerView extends View {
             await switchToDriveMode(this.id, 'drive');
             return { name: this.carName, color: this.carColor, time: `${(duration / 1000).toFixed(2)}` };
         } catch (error) {
+            if (error instanceof Error) {
+                console.error(error.message);
+            }
             this.car.setCarsBaloonAnimation();
             throw error;
         }
