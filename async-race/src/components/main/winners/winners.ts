@@ -34,7 +34,7 @@ export default class WinnersView extends View {
                 textContent: `Winners (${this.elementCount})`,
             });
             this.view.removeChild();
-            this.addPagination(this, this.pageNumber);
+            this.addPagination(this, pageNumber);
             this.view.addChild([title, this.addCarInTable()]);
         } catch (error) {
             if (error instanceof Error) console.error(`Error fetching winners information:${error.message}`);
