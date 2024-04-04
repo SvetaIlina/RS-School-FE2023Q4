@@ -1,3 +1,6 @@
+import GargeView from '../components/main/garage/garage';
+import WinnersView from '../components/main/winners/winners';
+
 export type Callback<T> = (argument: T) => void;
 
 export type elemOptions = {
@@ -19,6 +22,8 @@ export type carInfo = {
     color: string;
     id: number;
 };
+
+export type mainsChild = GargeView | WinnersView;
 
 export type carData = Pick<carInfo, 'name' | 'color'>;
 

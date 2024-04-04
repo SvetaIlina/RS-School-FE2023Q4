@@ -2,7 +2,7 @@ import BaseComponent from '../../baseComponent';
 import View from '../../view';
 import { getCars, addCar, updateCar, deleteCar, addWinner } from '../../../rest-api/api';
 import { CarsResponse, carData, carInfo, winnerResponse } from '../../../type/types';
-import CarContainerView from './careContainer/carContainer';
+import CarContainer from './careContainer/carContainer';
 import {
     dispatchBtnEvent,
     getActiveBtns,
@@ -12,18 +12,13 @@ import {
 } from '../../../servise/servise';
 import './garage.css';
 import GarageOptions from './garge-options/garageOption';
-import Pagination from '../../pagination/pagination';
 import RaceOptions from './race-options/raceOption';
 import Modal from '../../modal/modalWindow';
 
 export default class GargeView extends View {
     private carsInfo: Array<carInfo> | null;
 
-    private carsCount: number;
-
     private garageOption = new GarageOptions();
-
-    private pagination = new Pagination();
 
     private pageNumber: number;
 
@@ -31,9 +26,7 @@ export default class GargeView extends View {
 
     private child: Array<BaseComponent>;
 
-    private pageLimit: number = 7;
-
-    private cars: Array<CarContainerView>;
+    private cars: Array<CarContainer>;
 
     constructor() {
         super({
@@ -42,14 +35,14 @@ export default class GargeView extends View {
         });
         this.cars = [];
         this.carsInfo = null;
-        this.carsCount = 0;
+        this.pageLimit = 7;
         this.currentId = 0;
         this.pageNumber = 1;
         this.child = [];
+        this.elementCount = 0;
         this.configView();
-        this.view.addChild([this.garageOption, this.pagination]);
+        this.view.addChild([this.garageOption]);
         this.garageOption.addObserver(this);
-        this.pagination.addObserver(this);
     }
 
     async configView(pageNumber: number = 1) {
@@ -58,18 +51,11 @@ export default class GargeView extends View {
             const { title, carsWrapper } = this.setContent();
             const raceOptions = new RaceOptions();
             raceOptions.addObserver(this);
+            this.addPagination(this, pageNumber);
             this.child.push(title);
             this.child.push(carsWrapper);
             this.child.push(raceOptions);
             this.view.addChild([raceOptions, title, carsWrapper]);
-            if (this.carsCount > this.pageLimit) {
-                this.pagination.getElement().classList.remove('hidden');
-            }
-            if (this.carsCount <= this.pageLimit) {
-                this.pagination.getElement().classList.add('hidden');
-            }
-            this.pagination.setTotalPageCount(Math.ceil(this.carsCount / this.pageLimit));
-            this.pagination.configView();
         } catch (error) {
             if (error instanceof Error) console.error(error.message);
         }
@@ -81,7 +67,7 @@ export default class GargeView extends View {
             this.carsInfo = carsInfofromApi.info;
 
             isNotNull(carsInfofromApi.membersCount);
-            this.carsCount = carsInfofromApi.membersCount;
+            this.elementCount = carsInfofromApi.membersCount;
         } catch (error) {
             if (error instanceof Error) {
                 throw new Error(`fetching cars information: ${error.message}`);
@@ -107,7 +93,6 @@ export default class GargeView extends View {
         const cars = carsParent.childNodes;
         if (cars.length === 1) {
             this.pageNumber -= 1;
-            this.pagination.currentPageNumber -= 1;
         }
         try {
             await deleteCar(id);
@@ -183,7 +168,7 @@ export default class GargeView extends View {
             tag: 'div',
             classes: ['title'],
         });
-        title.getElement().innerHTML = `Garage (<span class = 'carsCount'>${this.carsCount}</span>)`;
+        title.getElement().innerHTML = `Garage (<span class = 'carsCount'>${this.elementCount}</span>)`;
 
         const carsWrapper = new BaseComponent({
             tag: 'div',
@@ -192,9 +177,9 @@ export default class GargeView extends View {
 
         cars.forEach((car) => {
             const { color, name, id } = car;
-            const container = new CarContainerView(color, name, id);
+            const container = new CarContainer(color, name, id);
             container.addObserver(this);
-            carsWrapper.addChild([container.getViewElement()]);
+            carsWrapper.addChild([container.getElement()]);
             this.cars.push(container);
         });
 

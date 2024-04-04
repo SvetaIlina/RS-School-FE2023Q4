@@ -1,11 +1,12 @@
 import { isNotNull } from '../../servise/servise';
+import { mainsChild } from '../../type/types';
 import BaseComponent from '../baseComponent';
 import Button from '../buttons/button';
-import GargeView from '../main/garage/garage';
+
 import './pagination.css';
 
 export default class Pagination extends BaseComponent {
-    private observer: GargeView | null;
+    private observer: mainsChild | null;
 
     private prevBtn = new Button(['paginationBtn', 'btn', 'disable'], 'Prev', () => this.prevBtnCb());
 
@@ -24,14 +25,14 @@ export default class Pagination extends BaseComponent {
     constructor() {
         super({
             tag: 'div',
-            classes: ['hidden', 'pagination'],
+            classes: ['pagination'],
         });
         this.observer = null;
         this.currentPageNumber = 1;
         this.addChild([this.prevBtn, this.page, this.nextBtn]);
     }
 
-    addObserver(observer: GargeView) {
+    addObserver(observer: mainsChild) {
         this.observer = observer;
     }
 

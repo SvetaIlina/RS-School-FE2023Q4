@@ -1,4 +1,4 @@
-import CarContainerView from '../components/main/garage/careContainer/carContainer';
+import CarContainer from '../components/main/garage/careContainer/carContainer';
 import { carBrands, carModels } from '../carsData/carsData';
 import { carData } from '../type/types';
 
@@ -34,8 +34,8 @@ export function toggleBtn(activeBtn: EventTarget) {
     blockedBtn.classList.remove('disable');
 }
 
-export function dispatchBtnEvent(parent: CarContainerView, btnSelector: string) {
-    const button = parent.getViewElement().querySelector(`.${btnSelector}`);
+export function dispatchBtnEvent(parent: CarContainer, btnSelector: string) {
+    const button = parent.getElement().querySelector(`.${btnSelector}`);
     isNotNull(button);
     const clickEvent = new Event('click');
     button.dispatchEvent(clickEvent);
@@ -65,6 +65,8 @@ export function getRandomCarInfo(): carData {
 }
 
 export function getActiveBtns() {
-    const allBtns = Array.from(document.querySelectorAll('.btn'));
+    const mainElem = document.querySelector('.main');
+    isNotNull(mainElem);
+    const allBtns = Array.from(mainElem.querySelectorAll('.btn'));
     return allBtns.filter((btn) => !btn.classList.contains('disable'));
 }

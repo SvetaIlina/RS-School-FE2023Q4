@@ -1,10 +1,9 @@
-import View from '../../view';
 import BaseComponent from '../../baseComponent';
 import Button from '../../buttons/button';
 
 import './carOptions.css';
 
-export default class CarOptions extends View {
+export default class CarOptions extends BaseComponent {
     constructor(
         carName: string,
         deleteCb: () => void,
@@ -48,6 +47,6 @@ export default class CarOptions extends View {
         const editBtn = new Button(['btn', 'carManageBtn'], 'Edit', editCB);
         const deleteBtn = new Button(['btn', 'carManageBtn'], 'Delete', deleteCb);
         carManage.addChild([editBtn, deleteBtn]);
-        this.view.addChild([raceBtnContainer, carName, carManage]);
+        this.addChild([raceBtnContainer, carName, carManage]);
     }
 }

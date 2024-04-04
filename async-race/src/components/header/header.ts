@@ -1,49 +1,51 @@
-import View from '../view';
 import BaseComponent from '../baseComponent';
-import MainView from '../main/main';
+import MainElement from '../main/main';
 import Button from '../buttons/button';
 import { isNotNullElement } from '../../servise/servise';
 import './header.css';
 import WinnersView from '../main/winners/winners';
+import { mainsChild } from '../../type/types';
 
-export default class HeaderView extends View {
-    mainComponent: MainView;
+export default class HeaderElement extends BaseComponent {
+    mainComponent: MainElement;
 
-    constructor(mainComponent: MainView) {
+    constructor(mainComponent: MainElement) {
         super({
             tag: 'header',
             classes: ['header'],
         });
-        this.configHeaderView();
+        this.configHeaderElement();
         this.mainComponent = mainComponent;
     }
 
-    configHeaderView() {
-        const wrapper = new BaseComponent({
+    configHeaderElement(): void {
+        const wrapper: BaseComponent = new BaseComponent({
             tag: 'div',
             classes: ['wrapper', 'headerWrapper'],
         });
-        const title = new BaseComponent({
+        const title: BaseComponent = new BaseComponent({
             tag: 'span',
             classes: ['headerTitle'],
             textContent: 'Async Race',
         });
-        const btnConteiner = new BaseComponent({
+        const btnConteiner: BaseComponent = new BaseComponent({
             tag: 'div',
             classes: ['headerBtnContainer'],
         });
-        const garageBtn = new Button(['btn', 'headerBtn'], 'garage', (event: Event) => this.showContent(event));
-        const winnerBtn = new Button(['btn', 'headerBtn'], 'winners', (event: Event) => this.showContent(event));
+        const garageBtn: Button = new Button(['btn', 'headerBtn'], 'garage', (event: Event) => this.showContent(event));
+        const winnerBtn: Button = new Button(['btn', 'headerBtn'], 'winners', (event: Event) =>
+            this.showContent(event)
+        );
         btnConteiner.addChild([garageBtn, winnerBtn]);
         wrapper.addChild([btnConteiner, title]);
-        this.view.addChild([wrapper]);
+        this.addChild([wrapper]);
     }
 
-    showContent(event: Event) {
+    showContent(event: Event): void {
         isNotNullElement<HTMLElement>(event.target);
-        const content = this.mainComponent.getChild();
-        const btnName = event.target.textContent;
-        content.forEach((item) => {
+        const content: Array<mainsChild> = this.mainComponent.getChild();
+        const btnName: string | null = event.target.textContent;
+        content.forEach((item: mainsChild) => {
             item.getViewElement().classList.remove('hidden');
             if (!item.getViewElement().classList.contains(`${btnName}`)) {
                 item.getViewElement().classList.add('hidden');

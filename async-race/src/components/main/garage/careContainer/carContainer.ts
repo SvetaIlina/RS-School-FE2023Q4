@@ -1,4 +1,3 @@
-import View from '../../../view';
 import CarOptions from '../../../carsElements/car-options/carOptions';
 import Car from '../../../carsElements/car/car';
 import './carContainer.css';
@@ -10,7 +9,7 @@ import img from '../../../../assets/images/finish.png';
 import GargeView from '../garage';
 import { winnerResponse } from '../../../../type/types';
 
-export default class CarContainerView extends View {
+export default class CarContainer extends BaseComponent {
     private observer: GargeView | null;
 
     private id: number;
@@ -70,12 +69,12 @@ export default class CarContainerView extends View {
                 this.stopCar();
             }
         );
-        this.view.addChild([options.getViewElement(), this.car, image]);
+        this.addChild([options.getElement(), this.car, image]);
     }
 
     async moveCar(): Promise<winnerResponse> {
         isNotNull(this.car);
-        const container = this.view.getElement();
+        const container = this.getElement();
         const computedStyle = window.getComputedStyle(container);
         const carsWidth = 80;
         const paddings = 20;

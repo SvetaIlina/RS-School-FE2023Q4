@@ -1,9 +1,9 @@
 import './style.css';
 
-import HeaderView from './components/header/header';
-import MainView from './components/main/main';
+import HeaderElement from './components/header/header';
+import MainElement from './components/main/main';
 
-const main = new MainView();
-const header = new HeaderView(main);
+const main: MainElement = new MainElement();
+const header: HeaderElement = new HeaderElement(main);
 
-document.body.append(header.getViewElement(), main.getViewElement());
+document.body.append(header.getElement(), main.getElement());

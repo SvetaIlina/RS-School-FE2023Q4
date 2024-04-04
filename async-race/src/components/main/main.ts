@@ -1,10 +1,10 @@
-import View from '../view';
 import WinnersView from './winners/winners';
 import GargeView from './garage/garage';
 import BaseComponent from '../baseComponent';
+import { mainsChild } from '../../type/types';
 
-export default class MainView extends View {
-    private child: [GargeView, WinnersView];
+export default class MainElement extends BaseComponent {
+    private child: Array<mainsChild>;
 
     private garage = new GargeView();
 
@@ -19,17 +19,17 @@ export default class MainView extends View {
         this.configView();
     }
 
-    configView() {
-        const wrapper = new BaseComponent({
+    configView(): void {
+        const wrapper: BaseComponent = new BaseComponent({
             tag: 'div',
             classes: ['wrapper'],
         });
 
         wrapper.addChild([this.garage.getViewElement(), this.winners.getViewElement()]);
-        this.view.addChild([wrapper]);
+        this.addChild([wrapper]);
     }
 
-    getChild() {
+    getChild(): Array<mainsChild> {
         return this.child;
     }
 }

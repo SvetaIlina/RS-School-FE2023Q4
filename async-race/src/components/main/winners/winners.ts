@@ -10,10 +10,6 @@ import './winners.css';
 export default class WinnersView extends View {
     private pageNumber: number;
 
-    private pageLimit: number;
-
-    private winsCount: number | null;
-
     private winInfo: Array<winnerCar>;
 
     constructor() {
@@ -21,11 +17,10 @@ export default class WinnersView extends View {
             tag: 'div',
             classes: ['winners', 'hidden'],
         });
-
+        this.pageLimit = 10;
         this.winInfo = [];
         this.pageNumber = 1;
-        this.pageLimit = 7;
-        this.winsCount = 0;
+        this.elementCount = 0;
         this.configView();
     }
 
@@ -36,9 +31,10 @@ export default class WinnersView extends View {
             const title = new BaseComponent({
                 tag: 'p',
                 classes: ['title'],
-                textContent: `Winners (${this.winsCount})`,
+                textContent: `Winners (${this.elementCount})`,
             });
             this.view.removeChild();
+            this.addPagination(this, this.pageNumber);
             this.view.addChild([title, this.addCarInTable()]);
         } catch (error) {
             if (error instanceof Error) console.error(`Error fetching winners information:${error.message}`);
@@ -51,8 +47,8 @@ export default class WinnersView extends View {
 
             this.winInfo = winsInfofromApi.info;
 
-            isNotNull(this.winsCount);
-            this.winsCount = winsInfofromApi.membersCount;
+            isNotNull(this.elementCount);
+            this.elementCount = winsInfofromApi.membersCount;
         } catch (error) {
             if (error instanceof Error) {
                 throw new Error(`fetching cars information: ${error.message}`);
@@ -82,5 +78,10 @@ export default class WinnersView extends View {
         });
         table.getTable().classList.add('wintable');
         return table.getTable();
+    }
+
+    updateContent(newPageNumber: number) {
+        this.view.removeChild();
+        this.configView(newPageNumber);
     }
 }
