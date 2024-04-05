@@ -13,11 +13,12 @@ export default class Car extends BaseComponent {
             tag: 'div',
             classes: ['car'],
         });
+
         this.setImage(color);
     }
 
-    setImage(color: string) {
-        const image = `
+    setImage(color: string): void {
+        const image: string = `
     	<svg height="80px" width="80px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
     		 viewBox="0 0 464 464" xml:space="preserve">
     	<g>
@@ -95,8 +96,8 @@ export default class Car extends BaseComponent {
         this.element.innerHTML = image;
     }
 
-    setAnimation(duration: number, distance: number) {
-        const car = this.element;
+    setAnimation(duration: number, distance: number): void {
+        const car: HTMLElement = this.element;
         this.distance = distance;
 
         let startAnimation: number | null = null;
@@ -105,8 +106,8 @@ export default class Car extends BaseComponent {
             if (!startAnimation) {
                 startAnimation = time;
             }
-            const progress = (time - startAnimation) / duration;
-            const translate = progress * distance;
+            const progress: number = (time - startAnimation) / duration;
+            const translate: number = progress * distance;
 
             car.style.transform = `translateX(${translate}px)`;
             if (progress < 1) {
@@ -117,25 +118,27 @@ export default class Car extends BaseComponent {
         this.animationID = requestAnimationFrame(animate);
     }
 
-    resetAnimation() {
+    resetAnimation(): void {
         isNotNull(this.animationID);
         isNotNull(this.distance);
         cancelAnimationFrame(this.animationID);
     }
 
-    setCarsBaloonAnimation() {
+    setBreakageAnimation(): void {
         this.resetAnimation();
-        const baloons = this.element.querySelectorAll('.baloon');
-        baloons.forEach((baloon) => {
-            baloon.classList.add('hide');
-        });
+        this.setBaloonAnimation('.baloon');
     }
 
-    backToStart() {
+    backToStart(): void {
         this.element.style.transform = `translateX(0px)`;
-        const baloons = this.element.querySelectorAll('.baloon');
-        baloons.forEach((baloon) => {
-            baloon.classList.remove('hide');
+        this.setBaloonAnimation('.baloon.hide');
+    }
+
+    setBaloonAnimation(cssClass: string): void {
+        const baloons: NodeListOf<Element> = this.element.querySelectorAll(`${cssClass}`);
+
+        baloons.forEach((baloon: Element) => {
+            baloon.classList.toggle('hide');
         });
     }
 }
