@@ -17,11 +17,11 @@ export default class RaceOptions extends BaseComponent {
         this.configView();
     }
 
-    addObserver(observer: GargeView) {
+    addObserver(observer: GargeView): void {
         this.observer = observer;
     }
 
-    configView() {
+    configView(): void {
         const startRaceBtn = new Button(['btn', 'raceOptionBtn', 'startRace'], 'start race', (e) =>
             this.handleStartRace(e)
         );
@@ -32,14 +32,14 @@ export default class RaceOptions extends BaseComponent {
         this.addChild([startRaceBtn, resetRaceBtn]);
     }
 
-    handleStartRace(e: Event) {
+    handleStartRace(e: Event): void {
         isNotNull(e.target);
         toggleBtn(e.target);
         isNotNull(this.observer);
         this.observer.startRace();
     }
 
-    handleResetRace(e: Event) {
+    handleResetRace(e: Event): void {
         isNotNull(e.target);
         toggleBtn(e.target);
         isNotNull(this.observer);

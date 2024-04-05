@@ -32,11 +32,11 @@ export default class GarageOptions extends BaseComponent {
         this.configView();
     }
 
-    addObserver(observer: GargeView) {
+    addObserver(observer: GargeView): void {
         this.observer = observer;
     }
 
-    configView() {
+    configView(): void {
         const createCarBtn = new Button(['btn'], 'Create', () => this.handleNewCarCreation());
         const updataCarBtn = new Button(['btn'], 'Update', () => this.handleCarEditing());
         const generateRandomCar = new Button(['btn'], 'Generate Cars', () => {
@@ -48,30 +48,30 @@ export default class GarageOptions extends BaseComponent {
         this.addChild([this.newCarOption, this.editCarOption, generateRandomCar]);
     }
 
-    handleNewCarCreation() {
+    handleNewCarCreation(): void {
         isNotNull(this.observer);
         const carName: string = this.newCarInput.getText();
         const carColor: string = this.newCarInput.getColor();
         this.observer.addNewCar({ name: carName, color: carColor });
     }
 
-    handleCarEditing() {
+    handleCarEditing(): void {
         isNotNull(this.observer);
         const newName = this.editCarInput.getText();
         const newColor = this.editCarInput.getColor();
         this.observer.editCar({ name: newName, color: newColor });
     }
 
-    setEditableValue(name: string, color: string) {
+    setEditableValue(name: string, color: string): void {
         this.editCarInput.setText(name);
         this.editCarInput.setColor(color);
     }
 
-    toggleInputsAccessibility() {
+    toggleInputsAccessibility(): void {
         this.editCarOption.getElement().classList.toggle('disable');
     }
 
-    resetInputSettings(inputName: string) {
+    resetInputSettings(inputName: string): void {
         if (inputName === 'new') {
             this.newCarInput.reset();
         }

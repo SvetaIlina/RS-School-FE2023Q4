@@ -7,7 +7,7 @@ import { isNotNull, toggleBtn } from '../../../../servise/servise';
 import BaseComponent from '../../../baseComponent';
 import img from '../../../../assets/images/finish.png';
 import GargeView from '../garage';
-import { winnerResponse } from '../../../../type/types';
+import { winnerData } from '../../../../type/types';
 
 export default class CarContainer extends BaseComponent {
     private observer: GargeView | null;
@@ -72,7 +72,7 @@ export default class CarContainer extends BaseComponent {
         this.addChild([options.getElement(), this.car, finishImage]);
     }
 
-    async moveCar(): Promise<winnerResponse> {
+    async moveCar(): Promise<winnerData> {
         isNotNull(this.car);
         try {
             const distanecForCar: number = this.getCarDistance();

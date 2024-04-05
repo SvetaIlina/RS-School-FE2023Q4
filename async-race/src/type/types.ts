@@ -1,3 +1,4 @@
+import BaseComponent from '../components/baseComponent';
 import GargeView from '../components/main/garage/garage';
 import WinnersView from '../components/main/winners/winners';
 
@@ -12,6 +13,13 @@ export type elemOptions = {
     eventType?: string;
 };
 
+export type mainsChild = GargeView | WinnersView;
+
+export type mainContent = {
+    title: BaseComponent<HTMLElement>;
+    carsWrapper: BaseComponent<HTMLElement>;
+};
+
 export type apiParams = {
     page: number | '';
     limit: number | '';
@@ -23,16 +31,13 @@ export type carInfo = {
     id: number;
 };
 
-export type mainsChild = GargeView | WinnersView;
-
 export type carData = Pick<carInfo, 'name' | 'color'>;
-
-export type winnerInfo = carData & { time: string };
 
 export interface CarsResponse {
     info: Array<carInfo>;
     membersCount: number | null;
 }
+
 export type winnerCar = {
     id: number;
     wins: number;
@@ -43,6 +48,11 @@ export interface WinnerResponse {
     membersCount: number | null;
 }
 
-export type winnerResponse = carInfo & {
+export type winnerData = carInfo & {
     time: string;
+};
+
+export type raceParams = {
+    velocity: number;
+    distance: number;
 };

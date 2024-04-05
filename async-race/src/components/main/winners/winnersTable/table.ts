@@ -15,12 +15,12 @@ export default class TableBuilder {
         this.buildHeader(columnName);
     }
 
-    buildHeader(columnName: Array<string>) {
-        const headerRow = document.createElement('tr');
-        const headerLabels = columnName;
+    buildHeader(columnName: Array<string>): void {
+        const headerRow: HTMLTableRowElement = document.createElement('tr');
+        const headerLabels: Array<string> = columnName;
 
         headerLabels.forEach((label: string) => {
-            const th = document.createElement('th');
+            const th: HTMLTableCellElement = document.createElement('th');
             th.textContent = label;
             headerRow.appendChild(th);
         });
@@ -28,11 +28,11 @@ export default class TableBuilder {
         this.thead.appendChild(headerRow);
     }
 
-    addRow(data: Array<string | HTMLImageElement>) {
-        const row = document.createElement('tr');
+    addRow(data: Array<string | HTMLImageElement>): void {
+        const row: HTMLTableRowElement = document.createElement('tr');
 
-        data.forEach((cellData) => {
-            const cell = document.createElement('td');
+        data.forEach((cellData: string | HTMLImageElement) => {
+            const cell: HTMLTableCellElement = document.createElement('td');
             if (typeof cellData === 'string') {
                 cell.textContent = cellData;
             } else {

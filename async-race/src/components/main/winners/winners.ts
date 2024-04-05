@@ -24,7 +24,7 @@ export default class WinnersView extends View {
         this.configView();
     }
 
-    async configView(pageNumber: number = 1) {
+    async configView(pageNumber: number = 1): Promise<void> {
         try {
             await this.getWinsInfo(pageNumber);
 
@@ -37,11 +37,11 @@ export default class WinnersView extends View {
             this.addPagination(this, pageNumber);
             this.view.addChild([title, this.addCarInTable()]);
         } catch (error) {
-            if (error instanceof Error) console.error(`Error fetching winners information:${error.message}`);
+            if (error instanceof Error) console.error(`${error.message}`);
         }
     }
 
-    async getWinsInfo(pageNumber: number) {
+    async getWinsInfo(pageNumber: number): Promise<void> {
         try {
             const winsInfofromApi = await getAllWinners({ page: pageNumber, limit: this.pageLimit });
 
@@ -51,12 +51,12 @@ export default class WinnersView extends View {
             this.elementCount = winsInfofromApi.membersCount;
         } catch (error) {
             if (error instanceof Error) {
-                throw new Error(`fetching cars information: ${error.message}`);
+                throw new Error(`Fetching winners information: ${error.message}`);
             }
         }
     }
 
-    addCarInTable() {
+    addCarInTable(): HTMLTableElement {
         const table = new TableBuilder(['#', 'Car', 'Name', 'Wins', 'Best time (sec)']);
 
         this.winInfo.forEach(async (winner, i) => {
@@ -80,7 +80,7 @@ export default class WinnersView extends View {
         return table.getTable();
     }
 
-    updateContent(newPageNumber: number) {
+    updateContent(newPageNumber: number): void {
         this.pageNumber = newPageNumber;
         this.view.removeChild();
         this.configView(newPageNumber);

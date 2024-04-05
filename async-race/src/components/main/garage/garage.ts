@@ -1,7 +1,7 @@
 import BaseComponent from '../../baseComponent';
 import View from '../../view';
 import { getCars, addCar, updateCar, deleteCar, addWinner } from '../../../rest-api/api';
-import { CarsResponse, carData, carInfo, winnerResponse } from '../../../type/types';
+import { CarsResponse, carData, carInfo, mainContent, winnerData } from '../../../type/types';
 import CarContainer from './careContainer/carContainer';
 import {
     dispatchBtnEvent,
@@ -40,12 +40,12 @@ export default class GargeView extends View {
         this.pageNumber = 1;
         this.child = [];
         this.elementCount = 0;
-        this.configView();
         this.view.addChild([this.garageOption]);
         this.garageOption.addObserver(this);
+        this.configView();
     }
 
-    async configView(pageNumber: number = 1) {
+    async configView(pageNumber: number = 1): Promise<void> {
         try {
             await this.getCarsInfo(pageNumber);
             const { title, carsWrapper } = this.setContent();
@@ -61,7 +61,7 @@ export default class GargeView extends View {
         }
     }
 
-    async getCarsInfo(pageNumber: number) {
+    async getCarsInfo(pageNumber: number): Promise<void> {
         try {
             const carsInfofromApi: CarsResponse = await getCars({ page: pageNumber, limit: this.pageLimit });
             this.carsInfo = carsInfofromApi.info;
@@ -75,7 +75,7 @@ export default class GargeView extends View {
         }
     }
 
-    async addNewCar(car: carData) {
+    async addNewCar(car: carData): Promise<void> {
         try {
             await addCar(car);
             this.garageOption.resetInputSettings('new');
@@ -87,10 +87,10 @@ export default class GargeView extends View {
         }
     }
 
-    async removeCar(id: number) {
-        const carsParent = document.querySelector('.carsWrapper');
+    async removeCar(id: number): Promise<void> {
+        const carsParent: Element | null = document.querySelector('.carsWrapper');
         isNotNullElement<HTMLElement>(carsParent);
-        const cars = carsParent.childNodes;
+        const cars: NodeListOf<ChildNode> = carsParent.childNodes;
         if (cars.length === 1) {
             this.pageNumber -= 1;
         }
@@ -104,7 +104,7 @@ export default class GargeView extends View {
         }
     }
 
-    async editCar(car: carData) {
+    async editCar(car: carData): Promise<void> {
         try {
             await updateCar(car, this.currentId);
             this.garageOption.resetInputSettings('edit');
@@ -117,51 +117,51 @@ export default class GargeView extends View {
         }
     }
 
-    async startRace() {
-        const btnsForDisable = getActiveBtns();
-        btnsForDisable.forEach((btn) => btn.classList.add('disable'));
+    async startRace(): Promise<void> {
+        const btnsForDisable: Array<Element> = getActiveBtns();
+        btnsForDisable.forEach((btn: Element) => btn.classList.add('disable'));
 
-        const promises: Array<Promise<winnerResponse>> = [];
-        this.cars.forEach((car) => {
+        const promises: Array<Promise<winnerData>> = [];
+        this.cars.forEach((car: CarContainer) => {
             promises.push(car.moveCar());
         });
 
         Promise.any(promises)
-            .then(async (result) => {
+            .then(async (result: winnerData) => {
                 new Modal().buildModal(result.name, result.time);
                 await addWinner({ id: result.id, wins: 1, time: +result.time });
             })
             .catch((error) => console.log(error));
 
         await Promise.allSettled(promises);
-        btnsForDisable.forEach((btn) => btn.classList.remove('disable'));
+        btnsForDisable.forEach((btn: Element) => btn.classList.remove('disable'));
     }
 
-    async resetRace() {
-        this.cars.forEach((car) => {
+    async resetRace(): Promise<void> {
+        this.cars.forEach((car: CarContainer) => {
             dispatchBtnEvent(car, 'stopBtn ');
         });
     }
 
-    async generateRandomCars() {
-        const addingPromises = [];
+    async generateRandomCars(): Promise<void> {
+        const addedPromises: Array<Promise<carInfo>> = [];
         for (let i = 0; i < 100; i += 1) {
-            const data = getRandomCarInfo();
-            const promise = addCar(data);
-            addingPromises.push(promise);
+            const data: carData = getRandomCarInfo();
+            const promise: Promise<carInfo> = addCar(data);
+            addedPromises.push(promise);
         }
-        await Promise.all(addingPromises);
+        await Promise.all(addedPromises);
         this.updateContent(this.pageNumber);
     }
 
-    setCarInfo(car: carData, id: number) {
+    setCarInfo(car: carData, id: number): void {
         this.garageOption.toggleInputsAccessibility();
         this.garageOption.setEditableValue(car.name, car.color);
         this.currentId = id;
     }
 
-    setContent() {
-        const cars = this.carsInfo;
+    setContent(): mainContent {
+        const cars: Array<carInfo> | null = this.carsInfo;
         isNotNull(cars);
 
         const title = new BaseComponent({
@@ -175,7 +175,7 @@ export default class GargeView extends View {
             classes: ['carsWrapper'],
         });
 
-        cars.forEach((car) => {
+        cars.forEach((car: carInfo) => {
             const { color, name, id } = car;
             const container = new CarContainer(color, name, id);
             container.addObserver(this);
@@ -186,7 +186,7 @@ export default class GargeView extends View {
         return { title, carsWrapper };
     }
 
-    updateContent(newPageNumber: number) {
+    updateContent(newPageNumber: number): void {
         this.cars = [];
         this.pageNumber = newPageNumber;
         this.child.forEach((child) => child.getElement().remove());

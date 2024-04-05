@@ -1,10 +1,10 @@
-import { apiParams, carData, carInfo, CarsResponse, winnerCar, WinnerResponse } from '../type/types';
+import { apiParams, carData, carInfo, CarsResponse, raceParams, winnerCar, WinnerResponse } from '../type/types';
 
 export async function getCars(parametrs: apiParams): Promise<CarsResponse> {
-    const limit = `&_limit=${parametrs.limit}`;
-    const page = `?_page=${parametrs.page}`;
+    const limit: string = `&_limit=${parametrs.limit}`;
+    const page: string = `?_page=${parametrs.page}`;
     try {
-        const response = await fetch(`http://127.0.0.1:3000/garage${page}${limit}`);
+        const response: Response = await fetch(`http://127.0.0.1:3000/garage${page}${limit}`);
 
         const info: Array<carInfo> = await response.json();
 
@@ -16,10 +16,10 @@ export async function getCars(parametrs: apiParams): Promise<CarsResponse> {
     }
 }
 export async function getAllWinners(parametrs: apiParams): Promise<WinnerResponse> {
-    const limit = `&_limit=${parametrs.limit}`;
-    const page = `?_page=${parametrs.page}`;
+    const limit: string = `&_limit=${parametrs.limit}`;
+    const page: string = `?_page=${parametrs.page}`;
     try {
-        const response = await fetch(`http://127.0.0.1:3000/winners${page}${limit}`);
+        const response: Response = await fetch(`http://127.0.0.1:3000/winners${page}${limit}`);
 
         const info: Array<winnerCar> = await response.json();
 
@@ -32,7 +32,7 @@ export async function getAllWinners(parametrs: apiParams): Promise<WinnerRespons
 }
 
 export async function getCar(id: number): Promise<carInfo> {
-    const response = await fetch(`http://127.0.0.1:3000/garage/${id}`);
+    const response: Response = await fetch(`http://127.0.0.1:3000/garage/${id}`);
     const car: carInfo = await response.json();
 
     if (!response.ok) {
@@ -41,9 +41,9 @@ export async function getCar(id: number): Promise<carInfo> {
     return car;
 }
 
-export async function deleteCar(carId: number) {
+export async function deleteCar(carId: number): Promise<void> {
     try {
-        const response = await fetch(`http://127.0.0.1:3000/garage/${carId}`, {
+        const response: Response = await fetch(`http://127.0.0.1:3000/garage/${carId}`, {
             method: 'DELETE',
         });
 
@@ -57,20 +57,20 @@ export async function deleteCar(carId: number) {
     }
 }
 
-export async function addCar(carParametrs: { name: string; color: string }) {
-    const response = await fetch(`http://127.0.0.1:3000/garage/`, {
+export async function addCar(carParametrs: { name: string; color: string }): Promise<carInfo> {
+    const response: Response = await fetch(`http://127.0.0.1:3000/garage/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(carParametrs),
     });
-    const result = await response.json();
+    const result: carInfo = await response.json();
     return result;
 }
 
-export async function updateCar(carParametrs: carData, id: number) {
-    const response = await fetch(`http://127.0.0.1:3000/garage/${id}`, {
+export async function updateCar(carParametrs: carData, id: number): Promise<carInfo> {
+    const response: Response = await fetch(`http://127.0.0.1:3000/garage/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -80,20 +80,20 @@ export async function updateCar(carParametrs: carData, id: number) {
     if (!response.ok) {
         throw new Error(`${response.status}`);
     }
-    const result = await response.json();
+    const result: carInfo = await response.json();
     return result;
 }
 
-export async function startStopEngine(id: number, status: string) {
-    const response = await fetch(`http://127.0.0.1:3000/engine?id=${id}&status=${status}`, {
+export async function startStopEngine(id: number, status: string): Promise<raceParams> {
+    const response: Response = await fetch(`http://127.0.0.1:3000/engine?id=${id}&status=${status}`, {
         method: 'PATCH',
     });
     if (!response.ok) {
-        const text = await response.text();
+        const text: string = await response.text();
 
         throw new Error(`${response.status}: ${text}`);
     }
-    const result = await response.json();
+    const result: raceParams = await response.json();
     return result;
 }
 
@@ -103,7 +103,7 @@ export function switchToDriveMode(id: number, status: string): Promise<void> {
     })
         .then(async (response) => {
             if (!response.ok || response.status !== 200) {
-                const text = await response.text();
+                const text: string = await response.text();
                 throw new Error(`HTTP error! status ${response.status}: ${text}`);
             }
         })
@@ -112,8 +112,8 @@ export function switchToDriveMode(id: number, status: string): Promise<void> {
         });
 }
 
-export async function createWinner(winnerCarinfo: winnerCar) {
-    const response = await fetch(`http://127.0.0.1:3000/winners/`, {
+export async function createWinner(winnerCarinfo: winnerCar): Promise<winnerCar> {
+    const response: Response = await fetch(`http://127.0.0.1:3000/winners/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -122,14 +122,14 @@ export async function createWinner(winnerCarinfo: winnerCar) {
     });
 
     if (response.status === 500) {
-        const text = await response.text();
+        const text: string = await response.text();
         throw new Error(`${text}`);
     }
-    const result = await response.json();
+    const result: winnerCar = await response.json();
     return result;
 }
-export async function updateWinner(winnerCarinfo: winnerCar) {
-    const response = await fetch(`http://127.0.0.1:3000/winners/${winnerCarinfo.id}`, {
+export async function updateWinner(winnerCarinfo: winnerCar): Promise<winnerCar> {
+    const response: Response = await fetch(`http://127.0.0.1:3000/winners/${winnerCarinfo.id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -140,10 +140,10 @@ export async function updateWinner(winnerCarinfo: winnerCar) {
         }),
     });
 
-    const result = await response.json();
+    const result: winnerCar = await response.json();
     return result;
 }
-export async function getWinner(id: number) {
+export async function getWinner(id: number): Promise<winnerCar> {
     const response = await fetch(`http://127.0.0.1:3000/winners/${id}`);
     const winner: winnerCar = await response.json();
     if (response.status === 404) {
@@ -152,9 +152,9 @@ export async function getWinner(id: number) {
     return winner;
 }
 
-export async function addWinner(winnerCarinfo: winnerCar) {
+export async function addWinner(winnerCarinfo: winnerCar): Promise<void> {
     try {
-        const winner = await getWinner(winnerCarinfo.id);
+        const winner: winnerCar = await getWinner(winnerCarinfo.id);
         const { id, wins } = winner;
         const { time } = winnerCarinfo;
         updateWinner({

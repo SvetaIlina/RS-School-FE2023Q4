@@ -22,7 +22,7 @@ export default class View {
         this.pageLimit = 0;
     }
 
-    addPagination(observer: mainsChild, page: number) {
+    addPagination(observer: mainsChild, page: number): void {
         this.pagination.addObserver(observer);
         this.pagination.currentPageNumber = page;
         isNotNull(this.elementCount);
@@ -31,7 +31,7 @@ export default class View {
         this.view.getElement().insertAdjacentElement('afterbegin', this.pagination.getElement());
     }
 
-    getViewElement() {
+    getViewElement(): HTMLElement {
         return this.view.getElement();
     }
 }

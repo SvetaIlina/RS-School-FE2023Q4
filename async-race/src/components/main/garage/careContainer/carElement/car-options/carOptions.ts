@@ -25,7 +25,7 @@ export default class CarOptions extends BaseComponent {
         editCB: () => void,
         driveBtnCb: (e: Event) => void,
         stopBtnCb: (e: Event) => void
-    ) {
+    ): void {
         const raceBtnContainer = new BaseComponent({
             tag: 'div',
             classes: ['raceBtnContainer'],

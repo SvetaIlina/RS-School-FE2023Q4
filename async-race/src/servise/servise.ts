@@ -7,11 +7,6 @@ export function isNotNull<T>(value: unknown): asserts value is NonNullable<T> {
         throw new Error(`Not expected value: ${value}`);
     }
 }
-export function isHTMLElement(value: unknown): asserts value is HTMLElement {
-    if (!(value instanceof HTMLElement)) {
-        throw new Error(`Expected value to be of type HTMLElement`);
-    }
-}
 
 export function isNotNullElement<T>(value: unknown): asserts value is T {
     if (value === null || value === undefined || !(value instanceof HTMLElement)) {
@@ -19,7 +14,7 @@ export function isNotNullElement<T>(value: unknown): asserts value is T {
     }
 }
 
-export function toggleBtn(activeBtn: EventTarget) {
+export function toggleBtn(activeBtn: EventTarget): void {
     isNotNullElement<HTMLElement>(activeBtn);
     let blockedBtn;
     if (activeBtn.classList.contains('startBtn') || activeBtn.classList.contains('startRace')) {
@@ -34,10 +29,10 @@ export function toggleBtn(activeBtn: EventTarget) {
     blockedBtn.classList.remove('disable');
 }
 
-export function dispatchBtnEvent(parent: CarContainer, btnSelector: string) {
-    const button = parent.getElement().querySelector(`.${btnSelector}`);
+export function dispatchBtnEvent(parent: CarContainer, btnSelector: string): void {
+    const button: Element | null = parent.getElement().querySelector(`.${btnSelector}`);
     isNotNull(button);
-    const clickEvent = new Event('click');
+    const clickEvent: Event = new Event('click');
     button.dispatchEvent(clickEvent);
 }
 

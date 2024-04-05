@@ -32,27 +32,27 @@ export default class InputOptions extends BaseComponent {
         this.createView();
     }
 
-    createView() {
+    createView(): void {
         this.addChild([this.textInput, this.colorInput]);
     }
 
-    setText(value: string) {
+    setText(value: string): void {
         this.textInput.element.value = value;
     }
 
-    setColor(value: string) {
+    setColor(value: string): void {
         this.colorInput.element.value = value;
     }
 
-    getText() {
+    getText(): string {
         return this.textInput.element.value;
     }
 
-    getColor() {
+    getColor(): string {
         return this.colorInput.element.value;
     }
 
-    reset() {
+    reset(): void {
         this.setText('');
         this.setColor('#000');
     }

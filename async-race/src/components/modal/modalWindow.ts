@@ -9,7 +9,7 @@ export default class Modal extends BaseComponent {
         });
     }
 
-    buildModal(winsCar: string, winsTime: string) {
+    buildModal(winsCar: string, winsTime: string): void {
         const modal = new BaseComponent({
             tag: 'div',
             classes: ['modal'],
@@ -32,11 +32,11 @@ export default class Modal extends BaseComponent {
         setTimeout(() => this.closeModal(), 3000);
     }
 
-    openModal() {
+    openModal(): void {
         document.body.append(this.getElement());
     }
 
-    closeModal() {
+    closeModal(): void {
         this.getElement().remove();
     }
 }
