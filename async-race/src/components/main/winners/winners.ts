@@ -8,7 +8,7 @@ import carImg from '../../../assets/images/1299198.svg';
 import './winners.css';
 
 export default class WinnersView extends View {
-    private pageNumber: number;
+    pageNumber: number;
 
     private winInfo: Array<winnerCar>;
 
@@ -81,6 +81,7 @@ export default class WinnersView extends View {
     }
 
     updateContent(newPageNumber: number) {
+        this.pageNumber = newPageNumber;
         this.view.removeChild();
         this.configView(newPageNumber);
     }

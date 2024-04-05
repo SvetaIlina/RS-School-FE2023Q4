@@ -51,7 +51,7 @@ export default class HeaderElement extends BaseComponent {
                 item.getViewElement().classList.add('hidden');
             }
             if (item instanceof WinnersView) {
-                item.configView();
+                item.updateContent(item.pageNumber);
             }
         });
     }
