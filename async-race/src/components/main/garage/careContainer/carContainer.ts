@@ -34,21 +34,21 @@ export default class CarContainer extends BaseComponent {
         this.configView(this.carColor, this.carName, this.id);
     }
 
-    addObserver(observer: GargeView) {
+    addObserver(observer: GargeView): void {
         this.observer = observer;
     }
 
-    configView(carColor: string, carName: string, id: number) {
-        const image = new BaseComponent({
+    configView(carColor: string, carName: string, id: number): void {
+        const finishImage = new BaseComponent({
             tag: 'img',
             classes: ['imgFinish'],
             attributes: [{ key: 'src', value: img }],
         });
-        const deleteCb = () => {
+        const deleteCb: () => void = () => {
             isNotNull(this.observer);
             this.observer.removeCar(id);
         };
-        const editCb = () => {
+        const editCb: () => void = () => {
             isNotNull(this.observer);
             this.observer.setCarInfo({ name: carName, color: carColor }, id);
         };
@@ -69,19 +69,15 @@ export default class CarContainer extends BaseComponent {
                 this.stopCar();
             }
         );
-        this.addChild([options.getElement(), this.car, image]);
+        this.addChild([options.getElement(), this.car, finishImage]);
     }
 
     async moveCar(): Promise<winnerResponse> {
         isNotNull(this.car);
-        const container = this.getElement();
-        const computedStyle = window.getComputedStyle(container);
-        const carsWidth = 80;
-        const paddings = 20;
-        const distanecForCar: number = parseInt(computedStyle.getPropertyValue('width'), 10) - carsWidth - paddings;
         try {
+            const distanecForCar: number = this.getCarDistance();
             const { velocity, distance } = await startStopEngine(this.id, 'started');
-            const duration = distance / velocity;
+            const duration: number = distance / velocity;
             this.car.setAnimation(duration, distanecForCar);
             await switchToDriveMode(this.id, 'drive');
             return { name: this.carName, color: this.carColor, id: this.id, time: `${(duration / 1000).toFixed(2)}` };
@@ -89,12 +85,12 @@ export default class CarContainer extends BaseComponent {
             if (error instanceof Error) {
                 console.error(error.message);
             }
-            this.car.setCarsBaloonAnimation();
+            this.car.setBreakageAnimation();
             throw error;
         }
     }
 
-    async stopCar() {
+    async stopCar(): Promise<void> {
         try {
             isNotNull(this.car);
             this.car.resetAnimation();
@@ -105,5 +101,14 @@ export default class CarContainer extends BaseComponent {
                 console.error(`${error.message}`);
             }
         }
+    }
+
+    getCarDistance(): number {
+        const container: HTMLElement = this.getElement();
+        const computedStyle: CSSStyleDeclaration = window.getComputedStyle(container);
+        const carsWidth: number = 80;
+        const paddings: number = 20;
+        const distanecForCar: number = parseInt(computedStyle.getPropertyValue('width'), 10) - carsWidth - paddings;
+        return distanecForCar;
     }
 }
