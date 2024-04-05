@@ -1,5 +1,5 @@
-import { isNotNull } from '../../../servise/servise';
-import BaseComponent from '../../baseComponent';
+import { isNotNull } from '../../../../../../servise/servise';
+import BaseComponent from '../../../../../baseComponent';
 
 import './car.css';
 

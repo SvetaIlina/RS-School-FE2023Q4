@@ -1,5 +1,5 @@
-import CarOptions from '../../../carsElements/car-options/carOptions';
-import Car from '../../../carsElements/car/car';
+import CarOptions from './carElement/car-options/carOptions';
+import Car from './carElement/car/car';
 import './carContainer.css';
 import { startStopEngine, switchToDriveMode } from '../../../../rest-api/api';
 import { isNotNull, toggleBtn } from '../../../../servise/servise';

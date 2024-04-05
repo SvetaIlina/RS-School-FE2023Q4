@@ -1,5 +1,5 @@
-import BaseComponent from '../../baseComponent';
-import Button from '../../buttons/button';
+import BaseComponent from '../../../../../baseComponent';
+import Button from '../../../../../buttons/button';
 
 import './carOptions.css';
 
