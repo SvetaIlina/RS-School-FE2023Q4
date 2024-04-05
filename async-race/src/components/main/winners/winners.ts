@@ -57,7 +57,7 @@ export default class WinnersView extends View {
     }
 
     addCarInTable() {
-        const table = new TableBuilder();
+        const table = new TableBuilder(['#', 'Car', 'Name', 'Wins', 'Best time (sec)']);
 
         this.winInfo.forEach(async (winner, i) => {
             let carNumber = i;

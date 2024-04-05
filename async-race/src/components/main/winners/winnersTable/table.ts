@@ -5,21 +5,21 @@ export default class TableBuilder {
 
     private tbody: HTMLTableSectionElement;
 
-    constructor() {
+    constructor(columnName: Array<string>) {
         this.table = document.createElement('table');
         this.thead = document.createElement('thead');
         this.tbody = document.createElement('tbody');
         this.table.appendChild(this.thead);
         this.table.appendChild(this.tbody);
 
-        this.buildHeader();
+        this.buildHeader(columnName);
     }
 
-    buildHeader() {
+    buildHeader(columnName: Array<string>) {
         const headerRow = document.createElement('tr');
-        const headerLabels = ['#', 'Car', 'Name', 'Wins', 'Best time (sec)'];
+        const headerLabels = columnName;
 
-        headerLabels.forEach((label) => {
+        headerLabels.forEach((label: string) => {
             const th = document.createElement('th');
             th.textContent = label;
             headerRow.appendChild(th);
