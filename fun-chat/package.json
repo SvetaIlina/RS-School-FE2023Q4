@@ -4,9 +4,9 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "format": "prettier --write .",
-        "ci:format": "prettier --check .",
-        "lint": "eslint .",
+        "format": "prettier --write src/",
+        "ci:format": "prettier --check src/",
+        "lint": "eslint src/",
         "prepare": "cd .. && husky fun-chat/.husky",
         "build": "webpack",
         "dev": "webpack serve --env develop"
