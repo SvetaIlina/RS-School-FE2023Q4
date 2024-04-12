@@ -1,4 +1,4 @@
-import { isNotNull } from '../../../servise';
+import { isNotNull } from '../../../servise/servise';
 import BaseComponent from '../../baseComponent';
 
 import './input.css';

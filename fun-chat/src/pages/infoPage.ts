@@ -1,6 +1,7 @@
 import BaseComponent from '../components/baseComponent';
-import Button from '../components/button';
+import Button from '../components/buttons/button';
 import BasePage from './basePage';
+import './infoPage.css';
 
 export default class InfoPage extends BasePage {
     constructor() {

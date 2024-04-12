@@ -1,5 +1,5 @@
 import BaseComponent from '../baseComponent';
-import Button from '../button';
+import Button from '../buttons/button';
 import LoginInput from './input/inputField';
 import './form.css';
 

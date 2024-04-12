@@ -1,4 +1,5 @@
-import BaseComponent from './baseComponent';
+import BaseComponent from '../baseComponent';
+import './btn.css';
 
 export default class Button extends BaseComponent {
     constructor(btnClasses: Array<string>, btnText: string, btnCallback: (event: Event) => void, btnType?: string) {
@@ -8,6 +9,7 @@ export default class Button extends BaseComponent {
             textContent: btnText,
         });
         this.setCallback(btnCallback, 'click');
+        this.setStyles(['btn']);
         if (btnType) {
             this.setAttributes([{ key: 'type', value: `${btnType}` }]);
         }
