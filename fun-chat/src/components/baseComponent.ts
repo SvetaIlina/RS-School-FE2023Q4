@@ -3,7 +3,7 @@ import { elemOptions, Callback } from '../type';
 export default class BaseComponent<T extends HTMLElement = HTMLElement> {
     element: T;
 
-    constructor(options: elemOptions, ...childs: Array<BaseComponent | HTMLElement>) {
+    constructor(options: elemOptions, childs?: Array<HTMLElement>) {
         this.element = document.createElement(options.tag) as T;
         this.setElement(options);
         if (childs) {
