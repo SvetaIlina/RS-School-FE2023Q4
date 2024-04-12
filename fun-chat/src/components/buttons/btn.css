@@ -1,0 +1,11 @@
+.btn {
+    padding: 0.8rem;
+    color: #5e3b7e;
+    border: 1px solid blueviolet;
+    font-size: 1.5rem;
+    transition: transform 0.5s;
+}
+
+.btn:hover {
+    transform: scale(1.2);
+}

@@ -12,15 +12,6 @@
 
 .form_btn {
     width: 100px;
-    padding: 0.8rem;
-    color: #5e3b7e;
-    border: 1px solid blueviolet;
-    font-size: 1.5rem;
-    transition: transform 0.5s;
-}
-
-.form_btn:hover {
-    transform: scale(1.2);
 }
 
 .invalid > .login-btn {
