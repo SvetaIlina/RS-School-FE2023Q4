@@ -1,6 +1,5 @@
-import BaseComponent from '../components/baseComponent';
 import LoginForm from '../components/loginForm/loginForm';
-import Button from '../components/button';
+import Button from '../components/buttons/button';
 import LoginInput from '../components/loginForm/input/inputField';
 import BasePage from './basePage';
 
@@ -10,6 +9,7 @@ export default class LoginPage extends BasePage {
         super();
         this.form = this.createForm();
         this.addChild([this.form]);
+        window.location.hash = 'login-page';
     }
 
     createForm() {

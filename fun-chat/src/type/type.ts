@@ -6,3 +6,9 @@ export type elemOptions = {
     attributes?: Array<{ key: string; value: string }>;
     textContent?: string;
 };
+
+export const enum PageIds {
+    LoginPage = 'login-page',
+    MainPage = 'main-page',
+    InfoPage = 'info-page',
+}
