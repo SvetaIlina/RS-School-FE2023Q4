@@ -1,0 +1,38 @@
+.inputContainer {
+    text-align: center;
+    width: 300px;
+}
+
+.inputField {
+    background-color: transparent;
+    border: 0;
+    border-bottom: 2px #5e3b7e solid;
+    width: 100%;
+    padding: 15px 0;
+    font-size: 3rem;
+    text-align: center;
+    color: #5e3b7e;
+    padding-bottom: 0;
+}
+
+.inputField:focus {
+    outline: 0;
+}
+
+.inputField:invalid:focus {
+    background-color: rgb(241, 193, 210);
+}
+
+.inputField:invalid {
+    text-decoration: underline dotted red;
+}
+
+.labelField {
+    font-size: 3rem;
+    color: #baa1be;
+}
+
+.labelField::after {
+    content: '*';
+    color: red;
+}
