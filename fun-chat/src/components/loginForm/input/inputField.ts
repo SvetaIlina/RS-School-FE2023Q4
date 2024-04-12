@@ -1,6 +1,7 @@
-import BaseComponent from '../baseComponent';
+import { isNotNull } from '../../../servise';
+import BaseComponent from '../../baseComponent';
 
-import { isNotNull } from '../../servise';
+import './input.css';
 
 export default class LoginInput extends BaseComponent {
     input: BaseComponent<HTMLInputElement>;
@@ -40,7 +41,7 @@ export default class LoginInput extends BaseComponent {
         this.addChild([this.label, this.input]);
     }
 
-    setValidMessage(regex: RegExp | undefined, messsage: string | undefined) {
+    setValidMessage(regex: RegExp | undefined, messsage: string | undefined): void {
         const field: HTMLInputElement = this.input.getElement();
 
         const minlength: string | null = field.getAttribute('minlength');
@@ -57,5 +58,12 @@ export default class LoginInput extends BaseComponent {
         }
 
         field.reportValidity();
+    }
+
+    getInputValue(): { [key: string]: string } {
+        const key: string | null = this.input.element.getAttribute('name');
+        const value: string = this.input.element.value;
+        isNotNull(key);
+        return { [key]: value };
     }
 }
