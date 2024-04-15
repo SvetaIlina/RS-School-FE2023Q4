@@ -2,6 +2,7 @@ import LoginForm from '../components/loginForm/loginForm';
 import Button from '../components/buttons/button';
 import LoginInput from '../components/loginForm/input/inputField';
 import BasePage from './basePage';
+import { userLoginData } from '../type/type';
 
 export default class LoginPage extends BasePage {
     form: LoginForm;
@@ -9,10 +10,9 @@ export default class LoginPage extends BasePage {
         super();
         this.form = this.createForm();
         this.addChild([this.form]);
-        window.location.hash = 'login-page';
     }
 
-    createForm() {
+    createForm(): LoginForm {
         const loginBtn = new Button(
             ['form_btn', 'login-btn'],
             'Login',
@@ -39,9 +39,9 @@ export default class LoginPage extends BasePage {
         return new LoginForm([login, password], [loginBtn, infoBtn]);
     }
 
-    getUser() {
+    getUser(): userLoginData {
         const userIputs = this.form.getInputValues();
-        const userData = userIputs.reduce((acc, inputData) => {
+        const userData: userLoginData = userIputs.reduce((acc, inputData) => {
             return { ...acc, ...inputData };
         }, {});
         return userData;

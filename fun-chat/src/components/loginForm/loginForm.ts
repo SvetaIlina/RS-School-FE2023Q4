@@ -2,6 +2,7 @@ import BaseComponent from '../baseComponent';
 import Button from '../buttons/button';
 import LoginInput from './input/inputField';
 import './form.css';
+import { userLoginData } from '../../type/type';
 
 export default class LoginForm extends BaseComponent<HTMLFormElement> {
     // private login = new LoginInput('User name', 3, 'userLogin', 'text');
@@ -56,9 +57,7 @@ export default class LoginForm extends BaseComponent<HTMLFormElement> {
         }
     }
 
-    getInputValues(): Array<{
-        [key: string]: string;
-    }> {
+    getInputValues(): Array<userLoginData> {
         return this.inputs.map((input: LoginInput) => input.getInputValue());
     }
 }
