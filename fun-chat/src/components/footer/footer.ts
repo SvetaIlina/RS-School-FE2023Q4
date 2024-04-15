@@ -20,6 +20,7 @@ export default class Footer extends BaseComponent {
             classes: ['footer_item'],
             textContent: '2024',
         });
-        this.addChild([schoolImg, myLink, year]);
+        const link = new myLink();
+        this.addChild([schoolImg, link, year]);
     }
 }
