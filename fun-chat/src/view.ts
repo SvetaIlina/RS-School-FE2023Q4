@@ -1,33 +1,37 @@
 import BaseComponent from './components/baseComponent';
 import LoginPage from './pages/loginPage';
-import InfoPage from './pages/infoPage';
+import InfoPage from './pages/infoPage/infoPage';
 import { PageIds } from './type/type';
+import Controller from './controller';
+import Button from './components/buttons/button';
+import Router from './router';
 
 export default class MainView extends BaseComponent {
     private loginPage: LoginPage = new LoginPage();
     private infoPage: InfoPage = new InfoPage();
 
+    private router: Router;
+
     constructor() {
         super({ tag: 'main', classes: ['CssClasses.MAIN'] });
-
         this.loginPage.subscribe(this);
         this.infoPage.subscribe(this);
-        this.setContent(PageIds.LoginPage);
-        this.enableRouteChange();
+        this.router = new Router(this);
+        this.router.init();
     }
 
     update(action: string) {
         switch (action) {
             case 'login':
                 {
-                    console.log(this.loginUser());
-                    window.location.hash = PageIds.MainPage;
+                    sessionStorage.setItem('myUser', JSON.stringify(this.getloginUserData()));
+                    this.router.route(PageIds.MainPage);
                 }
 
                 break;
             case 'showInfo':
                 {
-                    window.location.hash = PageIds.InfoPage;
+                    this.router.route(PageIds.InfoPage);
                 }
                 break;
             case 'back':
@@ -36,14 +40,7 @@ export default class MainView extends BaseComponent {
         }
     }
 
-    enableRouteChange() {
-        window.addEventListener('hashchange', () => {
-            const hash = window.location.hash.slice(1);
-            this.setContent(hash);
-        });
-    }
-
-    loginUser() {
+    getloginUserData() {
         const data = this.loginPage.getUser();
         return data;
     }
@@ -55,8 +52,8 @@ export default class MainView extends BaseComponent {
 
         if (idPage === PageIds.LoginPage) {
             content = this.loginPage.getPageElement();
-            // } else if (idPage === PageIds.MainPage) {
-            //   content = new SettingsPage(idPage);
+        } else if (idPage === PageIds.MainPage) {
+            content = new Button(['kkk'], 'uuu', () => console.log(555)).getElement();
         } else if (idPage === PageIds.InfoPage) {
             content = this.infoPage.getPageElement();
         }
