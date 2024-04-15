@@ -12,3 +12,7 @@ export const enum PageIds {
     MainPage = 'main-page',
     InfoPage = 'info-page',
 }
+
+export type userLoginData = {
+    [key: string]: string;
+};
