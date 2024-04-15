@@ -30,10 +30,11 @@ export default class Router {
         const isAuthenticated = this.checkUser(this.storageKey);
         if (!isAuthenticated && hash === PageIds.MainPage) {
             window.location.hash = PageIds.LoginPage;
+
             alert('need log in');
             return;
         }
-        if (this.currentPage === PageIds.MainPage && hash === PageIds.LoginPage) {
+        if (this.currentPage === PageIds.MainPage && hash === PageIds.LoginPage && isAuthenticated) {
             window.location.hash = PageIds.MainPage;
         }
         this.manager.setContent(hash);
