@@ -5,10 +5,12 @@ import { PageIds } from './type/type';
 import Button from './components/buttons/button';
 import Router from './router';
 import NotFound from './pages/notFound/notFound';
+import mainPage from './pages/mainPage/mainPageView';
 
 export default class MainView extends BaseComponent {
     private loginPage: LoginPage = new LoginPage();
     private infoPage: InfoPage = new InfoPage();
+    private mainPage: mainPage = new mainPage();
     private notFoundPage: NotFound = new NotFound();
 
     private router: Router;
@@ -17,6 +19,7 @@ export default class MainView extends BaseComponent {
         super({ tag: 'main', classes: ['CssClasses.MAIN'] });
         this.loginPage.subscribe(this);
         this.infoPage.subscribe(this);
+        this.mainPage.subscribe(this);
         this.router = new Router(this);
         this.router.init();
     }
@@ -27,6 +30,7 @@ export default class MainView extends BaseComponent {
                 {
                     sessionStorage.setItem('myUser', JSON.stringify(this.getloginUserData()));
                     this.router.route(PageIds.MainPage);
+                    this.loginPage.clear();
                 }
 
                 break;
@@ -35,6 +39,11 @@ export default class MainView extends BaseComponent {
                     this.router.route(PageIds.InfoPage);
                 }
                 break;
+            case 'logOut': {
+                sessionStorage.removeItem('myUser');
+                this.router.route(PageIds.LoginPage);
+                break;
+            }
             case 'back':
                 history.back();
                 break;
@@ -54,7 +63,7 @@ export default class MainView extends BaseComponent {
         if (idPage === PageIds.LoginPage) {
             content = this.loginPage.getPageElement();
         } else if (idPage === PageIds.MainPage) {
-            content = new Button(['kkk'], 'uuu', () => console.log(555)).getElement();
+            content = this.mainPage.getPageElement();
         } else if (idPage === PageIds.InfoPage) {
             content = this.infoPage.getPageElement();
         } else {
