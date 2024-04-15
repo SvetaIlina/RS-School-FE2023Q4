@@ -1,8 +1,8 @@
-import LoginForm from '../components/loginForm/loginForm';
-import Button from '../components/buttons/button';
-import LoginInput from '../components/loginForm/input/inputField';
-import BasePage from './basePage';
-import { userLoginData } from '../type/type';
+import LoginForm from '../../components/loginForm/loginForm';
+import Button from '../../components/buttons/button';
+import LoginInput from '../../components/loginForm/input/inputField';
+import BasePage from '../basePage';
+import { userLoginData } from '../../type/type';
 
 export default class LoginPage extends BasePage {
     form: LoginForm;

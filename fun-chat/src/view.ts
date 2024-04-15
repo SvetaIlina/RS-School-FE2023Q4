@@ -1,5 +1,5 @@
 import BaseComponent from './components/baseComponent';
-import LoginPage from './pages/loginPage';
+import LoginPage from './pages/loginPage/loginPage';
 import InfoPage from './pages/infoPage/infoPage';
 import { PageIds } from './type/type';
 import Button from './components/buttons/button';
