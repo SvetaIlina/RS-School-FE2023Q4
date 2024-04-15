@@ -1,5 +1,6 @@
 import BaseComponent from '../components/baseComponent';
 import MainView from '../view';
+import './page.css';
 
 export default class BasePage extends BaseComponent {
     private observers: MainView[] = [];
