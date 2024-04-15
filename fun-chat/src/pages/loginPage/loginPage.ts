@@ -39,6 +39,9 @@ export default class LoginPage extends BasePage {
         return new LoginForm([login, password], [loginBtn, infoBtn]);
     }
 
+    clear() {
+        this.form.removeInputValues();
+    }
     getUser(): userLoginData {
         const userIputs = this.form.getInputValues();
         const userData: userLoginData = userIputs.reduce((acc, inputData) => {

@@ -57,6 +57,10 @@ export default class LoginForm extends BaseComponent<HTMLFormElement> {
         }
     }
 
+    removeInputValues() {
+        this.inputs.forEach((input) => input.clear());
+    }
+
     getInputValues(): Array<userLoginData> {
         return this.inputs.map((input: LoginInput) => input.getInputValue());
     }

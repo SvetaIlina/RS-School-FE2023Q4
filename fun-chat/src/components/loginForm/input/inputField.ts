@@ -60,6 +60,9 @@ export default class LoginInput extends BaseComponent {
         field.reportValidity();
     }
 
+    clear() {
+        this.input.getElement().value = '';
+    }
     getInputValue(): { [key: string]: string } {
         const key: string | null = this.input.element.getAttribute('name');
         const value: string = this.input.element.value;
