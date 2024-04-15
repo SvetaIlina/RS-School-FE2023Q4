@@ -11,7 +11,10 @@ export default class Router {
         });
     }
     init() {
-        this.checkUser(this.storageKey) ? this.route(PageIds.MainPage) : this.route(PageIds.LoginPage);
+        let hash;
+        this.checkUser(this.storageKey) ? (hash = PageIds.MainPage) : (hash = window.location.hash);
+
+        this.route(hash);
     }
 
     route(path: string) {
@@ -21,7 +24,6 @@ export default class Router {
 
     locationHandler() {
         let hash = window.location.hash.slice(1);
-        console.log(hash);
         const isAuthenticated = this.checkUser(this.storageKey);
         if (!isAuthenticated && hash === PageIds.MainPage) {
             window.location.hash = PageIds.LoginPage;
