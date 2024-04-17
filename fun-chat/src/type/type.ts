@@ -1,9 +1,11 @@
 export type Callback<T> = (argument: T) => void;
 
+type attribute = { key: string; value: string };
+
 export type elemOptions = {
     tag: string;
     classes: Array<string>;
-    attributes?: Array<{ key: string; value: string }>;
+    attributes?: Array<attribute>;
     textContent?: string;
 };
 
