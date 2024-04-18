@@ -29,8 +29,8 @@ export default class Contact extends BaseComponent {
         }, 'click');
     }
 
-    init(contacts: Array<thirdPartyUser>) {
-        this.drawContacts(contacts);
+    init(contacts: Array<thirdPartyUser> | null) {
+        if (contacts) this.drawContacts(contacts);
         this.addChild([this.searchInput, this.contactList]);
     }
 
