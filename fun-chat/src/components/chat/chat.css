@@ -1,0 +1,8 @@
+.chat {
+    display: flex;
+    flex-grow: 1;
+    margin-bottom: 50px;
+    height: 70svh;
+    justify-content: space-between;
+    width: 100%;
+}
