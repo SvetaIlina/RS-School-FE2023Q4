@@ -1,0 +1,14 @@
+.dialog_header {
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 2rem;
+    color: #5e3b7e;
+}
+
+.dialog_header-status {
+    color: rgb(129, 13, 13);
+}
+
+.active > .dialog_header-status {
+    color: green;
+}
