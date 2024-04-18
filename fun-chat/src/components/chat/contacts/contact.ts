@@ -1,7 +1,9 @@
-import { isNotNullElement } from '../../../servise/servise';
+import { isNotNull, isNotNullElement } from '../../../servise/servise';
 import BaseComponent from '../../baseComponent';
 import { searchUser } from '../../../servise/servise';
 import './contact.css';
+
+import ChatData from '../chatData';
 
 export default class Contact extends BaseComponent {
     private searchInput: BaseComponent<HTMLInputElement> = new BaseComponent<HTMLInputElement>({
@@ -14,24 +16,25 @@ export default class Contact extends BaseComponent {
         classes: ['contacts_list'],
     });
 
-    contacts: Array<thirdPartyUser>;
-
-    constructor(contacts: Array<thirdPartyUser>) {
+    constructor(chatData: ChatData) {
         super({
             tag: 'div',
             classes: ['contacts'],
         });
-        this.contacts = contacts;
-        this.init(this.contacts);
+
+        this.init(chatData.contacts);
         this.searchInput.setCallback((e) => searchUser(e, this.contactList.getElement()), 'keyup');
+        this.contactList.setCallback((e) => {
+            chatData.updateSelectedContact(this.getSelectedContact(e));
+        }, 'click');
     }
 
     init(contacts: Array<thirdPartyUser>) {
-        this.addContacts(contacts);
+        this.drawContacts(contacts);
         this.addChild([this.searchInput, this.contactList]);
     }
 
-    addContacts(contactList: Array<thirdPartyUser>) {
+    drawContacts(contactList: Array<thirdPartyUser>) {
         contactList.forEach((contact) => {
             this.addNewContact(contact);
         });
@@ -48,7 +51,6 @@ export default class Contact extends BaseComponent {
             listItem.setStyles(['active']);
         }
         this.contactList.addChild([listItem]);
-        this.contacts.push(contact);
     }
 
     updateContactStatus(contact: thirdPartyUser) {
@@ -57,5 +59,15 @@ export default class Contact extends BaseComponent {
         const currentContact: Element | null = listElement.querySelector(`#${contact.login}`);
         isNotNullElement<HTMLElement>(currentContact);
         userStatus ? currentContact.classList.add('active') : currentContact.classList.remove('active');
+    }
+
+    getSelectedContact(e: Event): string | null {
+        let contactLogin: string | null = null;
+        const target: EventTarget | null = e.target;
+        isNotNullElement<HTMLElement>(target);
+        if (target.classList.contains('list_item')) {
+            contactLogin = target.textContent;
+        }
+        return contactLogin;
     }
 }
