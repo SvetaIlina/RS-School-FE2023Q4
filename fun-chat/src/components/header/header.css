@@ -1,15 +1,16 @@
 .header {
     width: 100%;
-    border: 1px solid blueviolet;
+    border: 1px solid var(--border-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 5px 15px;
+    margin-bottom: 50px;
 }
 
 .header_item {
     font-size: 1.5rem;
-    color: #5e3b7e;
+    color: var(--main-color);
     text-transform: uppercase;
 }
 

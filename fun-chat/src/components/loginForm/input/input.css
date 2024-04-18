@@ -6,12 +6,12 @@
 .inputField {
     background-color: transparent;
     border: 0;
-    border-bottom: 2px #5e3b7e solid;
+    border-bottom: 2px var(--main-color) solid;
     width: 100%;
     padding: 15px 0;
     font-size: 3rem;
     text-align: center;
-    color: #5e3b7e;
+    color: var(--main-color);
     padding-bottom: 0;
 }
 

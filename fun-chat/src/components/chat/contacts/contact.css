@@ -1,18 +1,18 @@
 .contacts {
-    border: 1px solid blueviolet;
+    border: 1px solid var(--border-color);
     width: 200px;
     display: flex;
     flex-direction: column;
     text-align: center;
     padding: 1.5rem;
-    color: #5e3b7e;
+    color: var(--main-color);
     font-size: 1.8rem;
 }
 
 .contacts_search {
     outline: none;
     border: none;
-    border-bottom: 1px solid blueviolet;
+    border-bottom: 1px solid var(--border-color);
     padding-left: 0.5rem;
     font-size: 1.8rem;
     margin-bottom: 2.5rem;

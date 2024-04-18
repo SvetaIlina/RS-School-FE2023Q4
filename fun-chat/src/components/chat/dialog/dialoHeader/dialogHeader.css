@@ -2,7 +2,10 @@
     display: flex;
     justify-content: space-evenly;
     font-size: 2rem;
-    color: #5e3b7e;
+    color: var(--main-color);
+    min-height: 27px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 1rem;
 }
 
 .dialog_header-status {
