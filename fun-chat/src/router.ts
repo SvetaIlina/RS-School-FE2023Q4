@@ -15,7 +15,6 @@ export default class Router {
     init() {
         let hash;
         this.checkUser(this.storageKey) ? (hash = PageIds.MainPage) : (hash = PageIds.LoginPage);
-
         this.route(hash);
     }
 
