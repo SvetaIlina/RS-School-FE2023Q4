@@ -2,11 +2,14 @@ import BaseComponent from '../baseComponent';
 import './modal.css';
 
 export default class Modal extends BaseComponent {
-    constructor() {
+    content: string;
+    constructor(content: string) {
         super({
             tag: 'div',
             classes: ['overlay'],
         });
+        this.content = content;
+        this.buildModal(this.content);
     }
 
     buildModal(content: string): void {
@@ -22,8 +25,6 @@ export default class Modal extends BaseComponent {
 
         modal.addChild([innerContent]);
         this.addChild([modal]);
-        this.openModal();
-        setTimeout(() => this.closeModal(), 2000);
     }
 
     openModal(): void {
