@@ -24,6 +24,11 @@
     line-height: 3rem;
 }
 
+.infoLink {
+    transition: transform 0.5s ease;
+    font-weight: 600;
+}
+
 .infoLink:hover {
-    color: var(--border-color);
+    transform: scale(1.2);
 }

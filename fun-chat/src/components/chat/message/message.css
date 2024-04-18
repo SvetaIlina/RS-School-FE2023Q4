@@ -18,7 +18,7 @@
 }
 
 .message_content {
-    background-color: #f1ece3;
+    background-color: var(--bg-color);
     font-size: 1.5rem;
     padding: 0.3rem 1rem;
     overflow-wrap: anywhere;

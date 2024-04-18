@@ -1,6 +1,7 @@
 :root {
     --main-color: #5e3b7e;
-    --main-border: 1px solid blueviolet;
+    --main-border: 1px solid #b69cce;
+    --bg-color: #eeeeee;
 }
 
 html {
@@ -38,4 +39,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: whitesmoke;
+}
+
+input {
+    background-color: var(--bg-color);
 }

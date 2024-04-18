@@ -1,0 +1,26 @@
+.dialog_input {
+    border-top: var(--main-border);
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+}
+
+.send_btn {
+    font-size: 1rem;
+    padding: 0.5rem;
+}
+
+.send_btn.inactive {
+    pointer-events: none;
+    border: 1px solid grey;
+    color: grey;
+}
+
+.message_input {
+    outline: none;
+    color: var(--main-color);
+    padding-left: 0.5rem;
+    flex-grow: 1;
+    border: var(--main-border);
+}
