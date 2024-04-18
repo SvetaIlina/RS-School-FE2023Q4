@@ -5,7 +5,7 @@
     align-items: center;
     gap: 20px;
     color: var(--main-color);
-    border: 1px solid var(--border-color);
+    border: var(--main-border);
     box-shadow: 8px 8px 10px #b0a2bd;
     padding: 15px;
 }

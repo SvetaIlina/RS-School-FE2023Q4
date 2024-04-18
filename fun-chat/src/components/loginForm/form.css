@@ -6,7 +6,7 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
-    border: 1px solid var(--border-color);
+    border: var(--main-border);
     box-shadow: 8px 8px 10px #b0a2bd;
 }
 
@@ -17,5 +17,5 @@
 .invalid > .login-btn {
     pointer-events: none;
     color: grey;
-    border: 1px solid grey;
+    border: grey;
 }

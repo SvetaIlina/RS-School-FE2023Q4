@@ -1,5 +1,5 @@
 .contacts {
-    border: 1px solid var(--border-color);
+    border: var(--main-border);
     width: 200px;
     display: flex;
     flex-direction: column;
@@ -12,7 +12,7 @@
 .contacts_search {
     outline: none;
     border: none;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: var(--main-border);
     padding-left: 0.5rem;
     font-size: 1.8rem;
     margin-bottom: 2.5rem;
@@ -39,7 +39,7 @@
     width: 5px;
     height: 5px;
     border-radius: 50%;
-    border: 1px solid black;
+    border: black;
     background-color: #d32b2b;
 }
 

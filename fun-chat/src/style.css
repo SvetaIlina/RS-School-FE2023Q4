@@ -1,6 +1,6 @@
 :root {
     --main-color: #5e3b7e;
-    --border-color: blueviolet;
+    --main-border: 1px solid blueviolet;
 }
 
 html {
