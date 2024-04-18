@@ -1,7 +1,7 @@
 :root {
     --main-color: #5e3b7e;
     --border-color: blueviolet;
-  }
+}
 
 html {
     box-sizing: border-box;
