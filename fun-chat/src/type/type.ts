@@ -14,6 +14,10 @@ export const enum PageIds {
     MainPage = 'main-page',
     InfoPage = 'info-page',
 }
+export const enum ConnectMessage {
+    InProcess = 'Connecting...',
+    Ready = 'Connect',
+}
 
 export type userLoginData = {
     [key: string]: string;
