@@ -18,3 +18,8 @@ export const enum PageIds {
 export type userLoginData = {
     [key: string]: string;
 };
+
+export const enum userStatus {
+    OnLine = 'On Line',
+    OffLine = 'Off Line',
+}
