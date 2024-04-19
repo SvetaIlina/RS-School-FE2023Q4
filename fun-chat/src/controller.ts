@@ -53,12 +53,29 @@ export default class Controller {
     }
 
     onMessage(e: MessageEvent) {
+        let errorMessage: string;
         const dataFromServer: generalRequest | errorResponse = JSON.parse(e.data);
         const type = dataFromServer.type;
+
         switch (type) {
-            case messageType.Login:
+            case messageType.Login: {
                 this.model.isLogined = true;
+                this.model.setMyUser();
                 this.router.route(PageIds.MainPage);
+                break;
+            }
+            case messageType.Logout: {
+                this.model.deleteUser();
+                this.router.route(PageIds.LoginPage);
+                break;
+            }
+            case messageType.Error: {
+                if ('error' in dataFromServer.payload) {
+                    errorMessage = dataFromServer.payload.error;
+
+                    this.view.showModal(errorMessage, this.isOpen);
+                }
+            }
         }
     }
 
@@ -71,6 +88,10 @@ export default class Controller {
             }
             case 'showInfo': {
                 this.router.route(PageIds.InfoPage);
+                break;
+            }
+            case 'logOut': {
+                this.userLogout();
             }
         }
     }
@@ -85,7 +106,6 @@ export default class Controller {
     }
 
     authorizeUser(data: string) {
-        isNotNull(this.ws);
         const user = JSON.parse(data);
         const serverRequest: generalRequest = {
             id: crypto.randomUUID(),
@@ -98,6 +118,27 @@ export default class Controller {
             },
         };
         this.model.myUser = user;
+        this.sendRequest(serverRequest);
+    }
+
+    userLogout() {
+        const user = this.model.myUser;
+        isNotNull(user);
+        const serverRequest: generalRequest = {
+            id: crypto.randomUUID(),
+            type: messageType.Logout,
+            payload: {
+                user: {
+                    login: user.login,
+                    password: user.password,
+                },
+            },
+        };
+        this.sendRequest(serverRequest);
+    }
+
+    sendRequest(serverRequest: generalRequest) {
+        isNotNull(this.ws);
         this.ws.send(JSON.stringify(serverRequest));
     }
 }

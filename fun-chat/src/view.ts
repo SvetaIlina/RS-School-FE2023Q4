@@ -37,8 +37,8 @@ export default class MainView extends BasePage {
                 }
                 break;
             case 'logOut': {
-                sessionStorage.removeItem('myUser');
-                // this.router.route(PageIds.LoginPage);
+                this.notifyObservers(action);
+
                 break;
             }
             case 'back':
@@ -79,6 +79,7 @@ export default class MainView extends BasePage {
             const modal = new Modal(`${message}`);
             modal.openModal();
             this.modalIsOpen = true;
+            this.closeThisModal(connectionStatus, modal);
         } else {
             this.replaceModal(message, connectionStatus);
         }
@@ -89,9 +90,13 @@ export default class MainView extends BasePage {
         isNotNull(openedModal);
         const newModal = new Modal(`${message}`);
         openedModal.replaceWith(newModal.getElement());
+        this.closeThisModal(connectionStatus, newModal);
+    }
+
+    closeThisModal(connectionStatus: boolean | undefined, modal: Modal) {
         if (connectionStatus) {
             this.modalIsOpen = false;
-            setTimeout(() => newModal.closeModal(), 1000);
+            setTimeout(() => modal.closeModal(), 1000);
         }
     }
 }

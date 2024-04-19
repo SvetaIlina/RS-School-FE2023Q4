@@ -37,6 +37,24 @@ export default class ChatData {
     }
 
     checkUser(): boolean {
-        return sessionStorage.getItem(this.storageKey) ? true : false;
+        if (sessionStorage.getItem(this.storageKey)) {
+            this.isLogined = true;
+            this.myUser = this.getUser();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    getUser(): currentUser {
+        const user = sessionStorage.getItem(this.storageKey);
+        isNotNull(user);
+        return JSON.parse(user);
+    }
+
+    deleteUser() {
+        this.myUser = null;
+        this.isLogined = false;
+        sessionStorage.removeItem(this.storageKey);
     }
 }
