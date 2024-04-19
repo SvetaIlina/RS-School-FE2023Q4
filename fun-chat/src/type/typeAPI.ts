@@ -1,18 +1,20 @@
-// type response = {
-//     id: string;
-//     type: string;
-//     payload:
-//         | {
-//               user: thirdPartyUser | Array<thirdPartyUser>;
-//           }
-//         | {
-//               message:
-//                   | receivedMessage
-//                   | Array<receivedMessage>
-//                   | messageState
-//                   | Pick<receivedMessage, 'id' | 'text' | 'status'>;
-//           };
-// };
+type generalRequest = {
+    id: string;
+    type: string;
+    payload: payload;
+};
+
+type payload =
+    | {
+          user: currentUser | thirdPartyUser | Array<thirdPartyUser>;
+      }
+    | {
+          message:
+              | receivedMessage
+              | Array<receivedMessage>
+              | messageState
+              | Pick<receivedMessage, 'id' | 'text' | 'status'>;
+      };
 
 type errorResponse = {
     id: string;
