@@ -19,9 +19,11 @@ type payload =
 type errorResponse = {
     id: string;
     type: string;
-    payload: {
-        error: string;
-    };
+    payload: serverError;
+};
+
+type serverError = {
+    error: string;
 };
 
 type currentUser = {
