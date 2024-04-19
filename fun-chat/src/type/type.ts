@@ -27,3 +27,19 @@ export const enum userStatus {
     OnLine = 'On Line',
     OffLine = 'Off Line',
 }
+
+export const enum messageType {
+    Login = 'USER_LOGIN',
+    Error = 'ERROR',
+    Logout = 'USER_LOGOUT',
+    AnotherUserLogin = 'USER_EXTERNAL_LOGIN',
+    AnotherUserLogout = 'USER_EXTERNAL_LOGOUT',
+    ActiveUser = 'USER_ACTIVE',
+    InactiveUser = 'USER_INACTIVE',
+    SendMSG = 'MSG_SEND',
+    MsgHistory = 'MSG_FROM_USER',
+    MsgDelivered = 'MSG_DELIVER',
+    MsgRead = 'MSG_READ',
+    MsgDelete = 'MSG_DELETE',
+    MsgEdit = 'MSG_EDIT',
+}
