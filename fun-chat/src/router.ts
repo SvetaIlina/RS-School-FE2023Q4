@@ -1,21 +1,19 @@
+import ChatData from './components/chat/chatData';
+import Controller from './controller';
 import { PageIds } from './type/type';
-import MainView from './view';
 
 export default class Router {
-    private storageKey: string = 'myUser';
-    private manager: MainView;
+    private manager: Controller;
     private currentPage: string;
-    constructor(pageManager: MainView) {
-        this.manager = pageManager;
+    private chatData: ChatData;
+
+    constructor(manager: Controller, chatData: ChatData) {
+        this.manager = manager;
+        this.chatData = chatData;
         window.addEventListener('hashchange', () => {
             this.locationHandler();
         });
         this.currentPage = '';
-    }
-    init() {
-        let hash;
-        this.checkUser(this.storageKey) ? (hash = PageIds.MainPage) : (hash = PageIds.LoginPage);
-        this.route(hash);
     }
 
     route(path: string) {
@@ -26,7 +24,7 @@ export default class Router {
     locationHandler() {
         let hash = window.location.hash.slice(1);
 
-        const isAuthenticated = this.checkUser(this.storageKey);
+        const isAuthenticated = this.chatData.isLogined;
         if (!isAuthenticated && hash === PageIds.MainPage) {
             window.location.hash = PageIds.LoginPage;
 
@@ -36,11 +34,7 @@ export default class Router {
         if (this.currentPage === PageIds.MainPage && hash === PageIds.LoginPage && isAuthenticated) {
             window.location.hash = PageIds.MainPage;
         }
-        this.manager.setContent(hash);
+        this.manager.displayContent(hash);
         this.currentPage = hash;
-    }
-
-    checkUser(key: string): boolean {
-        return sessionStorage.getItem(key) ? true : false;
     }
 }
