@@ -18,7 +18,7 @@ export default class LoginPage extends BasePage {
             'Login',
             (e) => {
                 e.preventDefault();
-                this.notifyObservers('login');
+                this.notifyObservers('login', this.getUser());
             },
             'submit'
         );
@@ -26,12 +26,12 @@ export default class LoginPage extends BasePage {
             e.preventDefault();
             this.notifyObservers('showInfo');
         });
-        const login = new LoginInput('User name', 3, 'userLogin', 'text');
+        const login = new LoginInput('User name', 3, 'login', 'text');
 
         const password = new LoginInput(
             'Password',
             6,
-            'userPassword',
+            'password',
             'password',
             /^(?=.*[0-9])(?=.*[A-Z]).+$/,
             'Password must contain at least one capital letter and a digit'
@@ -42,11 +42,11 @@ export default class LoginPage extends BasePage {
     clear() {
         this.form.removeInputValues();
     }
-    getUser(): userLoginData {
+    getUser(): string {
         const userIputs = this.form.getInputValues();
         const userData: userLoginData = userIputs.reduce((acc, inputData) => {
             return { ...acc, ...inputData };
         }, {});
-        return userData;
+        return JSON.stringify(userData);
     }
 }
