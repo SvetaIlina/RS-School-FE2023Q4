@@ -2,49 +2,43 @@ import BaseComponent from './components/baseComponent';
 import LoginPage from './pages/loginPage/loginPage';
 import InfoPage from './pages/infoPage/infoPage';
 import { PageIds } from './type/type';
-import Router from './router';
+
 import NotFound from './pages/notFound/notFound';
 import mainPage from './pages/mainPage/mainPageView';
 
 import Modal from './components/modal/modal';
 import { isNotNull } from './servise/servise';
+import BasePage from './pages/basePage';
 
-export default class MainView extends BaseComponent {
-    private loginPage: LoginPage = new LoginPage();
-    private infoPage: InfoPage = new InfoPage();
-    private mainPage: mainPage = new mainPage();
-    private notFoundPage: NotFound = new NotFound();
-    private router: Router;
+export default class MainView extends BasePage {
     private modalIsOpen: boolean;
 
     constructor() {
-        super({ tag: 'main', classes: ['MAIN'] });
-        this.loginPage.subscribe(this);
-        this.infoPage.subscribe(this);
-        this.mainPage.subscribe(this);
-        this.router = new Router(this);
+        super();
+        this.element = document.createElement('main');
+        this.setStyles(['main']);
+
         this.modalIsOpen = false;
-        this.router.init();
     }
 
-    update(action: string) {
+    update(action: string, data?: string) {
         switch (action) {
             case 'login':
                 {
-                    sessionStorage.setItem('myUser', JSON.stringify(this.getloginUserData()));
-                    this.router.route(PageIds.MainPage);
-                    this.loginPage.clear();
+                    isNotNull(data);
+
+                    this.notifyObservers(action, data);
                 }
 
                 break;
             case 'showInfo':
                 {
-                    this.router.route(PageIds.InfoPage);
+                    this.notifyObservers(action);
                 }
                 break;
             case 'logOut': {
                 sessionStorage.removeItem('myUser');
-                this.router.route(PageIds.LoginPage);
+                // this.router.route(PageIds.LoginPage);
                 break;
             }
             case 'back':
@@ -53,29 +47,31 @@ export default class MainView extends BaseComponent {
         }
     }
 
-    getloginUserData() {
-        const data = this.loginPage.getUser();
-        return data;
-    }
-
-    setContent(idPage: string) {
+    setContent(content: HTMLElement | null) {
         this.removeChild();
-
-        let content: HTMLElement | null = null;
-
-        if (idPage === PageIds.LoginPage) {
-            content = this.loginPage.getPageElement();
-        } else if (idPage === PageIds.MainPage) {
-            content = this.mainPage.getPageElement();
-        } else if (idPage === PageIds.InfoPage) {
-            content = this.infoPage.getPageElement();
-        } else {
-            content = this.notFoundPage.getElement();
-        }
 
         if (content) {
             this.addChild([content]);
         }
+    }
+
+    createPage(idPage: string, name?: string): void {
+        let content: HTMLElement | null = null;
+        let page: LoginPage | mainPage | InfoPage | NotFound | null = null;
+        if (idPage === PageIds.LoginPage) {
+            page = new LoginPage();
+        } else if (idPage === PageIds.MainPage) {
+            isNotNull(name);
+            page = new mainPage(name);
+        } else if (idPage === PageIds.InfoPage) {
+            page = new InfoPage();
+        } else {
+            page = new NotFound();
+        }
+        page.subscribe(this);
+        content = page.getElement();
+
+        this.setContent(content);
     }
 
     showModal(message: string, connectionStatus?: boolean) {
