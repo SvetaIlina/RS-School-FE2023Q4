@@ -2,25 +2,28 @@ import BaseComponent from './components/baseComponent';
 import LoginPage from './pages/loginPage/loginPage';
 import InfoPage from './pages/infoPage/infoPage';
 import { PageIds } from './type/type';
-import Button from './components/buttons/button';
 import Router from './router';
 import NotFound from './pages/notFound/notFound';
 import mainPage from './pages/mainPage/mainPageView';
+
+import Modal from './components/modal/modal';
+import { isNotNull } from './servise/servise';
 
 export default class MainView extends BaseComponent {
     private loginPage: LoginPage = new LoginPage();
     private infoPage: InfoPage = new InfoPage();
     private mainPage: mainPage = new mainPage();
     private notFoundPage: NotFound = new NotFound();
-
     private router: Router;
+    private modalIsOpen: boolean;
 
     constructor() {
-        super({ tag: 'main', classes: ['CssClasses.MAIN'] });
+        super({ tag: 'main', classes: ['MAIN'] });
         this.loginPage.subscribe(this);
         this.infoPage.subscribe(this);
         this.mainPage.subscribe(this);
         this.router = new Router(this);
+        this.modalIsOpen = false;
         this.router.init();
     }
 
@@ -72,6 +75,27 @@ export default class MainView extends BaseComponent {
 
         if (content) {
             this.addChild([content]);
+        }
+    }
+
+    showModal(message: string, connectionStatus?: boolean) {
+        if (!this.modalIsOpen) {
+            const modal = new Modal(`${message}`);
+            modal.openModal();
+            this.modalIsOpen = true;
+        } else {
+            this.replaceModal(message, connectionStatus);
+        }
+    }
+
+    replaceModal(message: string, connectionStatus: boolean | undefined) {
+        const openedModal = document.querySelector('.overlay');
+        isNotNull(openedModal);
+        const newModal = new Modal(`${message}`);
+        openedModal.replaceWith(newModal.getElement());
+        if (connectionStatus) {
+            this.modalIsOpen = false;
+            setTimeout(() => newModal.closeModal(), 1000);
         }
     }
 }
