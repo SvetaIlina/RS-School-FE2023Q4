@@ -3,56 +3,34 @@ import Router from './router';
 import { isNotNull } from './servise/servise';
 import { ConnectMessage, PageIds, messageType } from './type/type';
 import MainView from './view';
+import MyWebSocket from './webSocket';
 
 export default class Controller {
     private model: ChatData;
     private view: MainView;
-    private isOpen: boolean;
     private router: Router;
-    url: string;
-    ws: WebSocket | null;
+    private ws: MyWebSocket;
+
     constructor(url: string, model: ChatData, view: MainView) {
         this.model = model;
         this.view = view;
         this.view.subscribe(this);
-        this.url = url;
-        this.isOpen = false;
-        this.ws = null;
+        this.ws = new MyWebSocket(url, this.showConnectMessage.bind(this), this.handleWebSocketMessage.bind(this));
         this.router = new Router(this, this.model);
     }
     init() {
         let hash: string;
         this.model.checkUser() ? (hash = PageIds.MainPage) : (hash = PageIds.LoginPage);
         this.router.route(hash);
-        this.initWebSocket();
-    }
-
-    initWebSocket() {
         this.view.showModal(ConnectMessage.InProcess);
-        this.ws = new WebSocket(this.url);
-        this.ws.addEventListener('open', () => this.onOpen());
-
-        this.ws.addEventListener('message', (e) => {
-            this.onMessage(e);
-        });
-        this.ws.addEventListener('close', () => {
-            this.onClose();
-        });
+        this.ws.initWebSocket();
     }
 
-    onOpen() {
-        this.isOpen = true;
-        this.view.showModal(ConnectMessage.Ready, this.isOpen);
+    showConnectMessage(isOpen: boolean): void {
+        this.view.showModal(ConnectMessage.Ready, isOpen);
     }
 
-    onClose() {
-        isNotNull(this.ws);
-        this.ws.removeEventListener('open', () => this.onOpen());
-        this.ws.removeEventListener('close', () => this.onClose());
-        this.initWebSocket();
-    }
-
-    onMessage(e: MessageEvent) {
+    handleWebSocketMessage(e: MessageEvent) {
         let errorMessage: string;
         const dataFromServer: generalRequest | errorResponse = JSON.parse(e.data);
         const type = dataFromServer.type;
@@ -73,7 +51,7 @@ export default class Controller {
                 if ('error' in dataFromServer.payload) {
                     errorMessage = dataFromServer.payload.error;
 
-                    this.view.showModal(errorMessage, this.isOpen);
+                    this.view.showModal(errorMessage, this.ws.isOpen);
                 }
             }
         }
@@ -118,7 +96,7 @@ export default class Controller {
             },
         };
         this.model.myUser = user;
-        this.sendRequest(serverRequest);
+        this.ws.sendRequest(serverRequest);
     }
 
     userLogout() {
@@ -134,11 +112,6 @@ export default class Controller {
                 },
             },
         };
-        this.sendRequest(serverRequest);
-    }
-
-    sendRequest(serverRequest: generalRequest) {
-        isNotNull(this.ws);
-        this.ws.send(JSON.stringify(serverRequest));
+        this.ws.sendRequest(serverRequest);
     }
 }
