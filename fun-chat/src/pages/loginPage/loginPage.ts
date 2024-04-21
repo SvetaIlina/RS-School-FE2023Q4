@@ -6,6 +6,7 @@ import { userLoginData } from '../../type/type';
 
 export default class LoginPage extends BasePage {
     form: LoginForm;
+
     constructor() {
         super();
         this.form = this.createForm();
@@ -42,11 +43,10 @@ export default class LoginPage extends BasePage {
     clear() {
         this.form.removeInputValues();
     }
+
     getUser(): string {
         const userIputs = this.form.getInputValues();
-        const userData: userLoginData = userIputs.reduce((acc, inputData) => {
-            return { ...acc, ...inputData };
-        }, {});
+        const userData: userLoginData = userIputs.reduce((acc, inputData) => ({ ...acc, ...inputData }), {});
         return JSON.stringify(userData);
     }
 }

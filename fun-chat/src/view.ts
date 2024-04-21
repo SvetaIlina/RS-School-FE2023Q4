@@ -1,49 +1,57 @@
-import BaseComponent from './components/baseComponent';
 import LoginPage from './pages/loginPage/loginPage';
 import InfoPage from './pages/infoPage/infoPage';
 import { PageIds } from './type/type';
 
 import NotFound from './pages/notFound/notFound';
-import mainPage from './pages/mainPage/mainPageView';
+import MainPage from './pages/mainPage/mainPageView';
 
 import Modal from './components/modal/modal';
 import { isNotNull } from './servise/servise';
 import BasePage from './pages/basePage';
+import { thirdPartyUser } from './type/typeAPI';
 
 export default class MainView extends BasePage {
     private modalIsOpen: boolean;
+
+    private mainPage: MainPage | null;
 
     constructor() {
         super();
         this.element = document.createElement('main');
         this.setStyles(['main']);
-
+        this.mainPage = null;
         this.modalIsOpen = false;
     }
 
     update(action: string, data?: string) {
         switch (action) {
-            case 'login':
-                {
-                    isNotNull(data);
+            case 'login': {
+                isNotNull(data);
 
-                    this.notifyObservers(action, data);
-                }
+                this.notifyObservers(action, data);
 
                 break;
-            case 'showInfo':
-                {
-                    this.notifyObservers(action);
-                }
+            }
+
+            case 'showInfo': {
+                this.notifyObservers(action);
+
                 break;
+            }
+
             case 'logOut': {
                 this.notifyObservers(action);
 
                 break;
             }
-            case 'back':
-                history.back();
+            case 'back': {
+                window.history.back();
                 break;
+            }
+
+            default: {
+                console.log('nothing');
+            }
         }
     }
 
@@ -57,12 +65,13 @@ export default class MainView extends BasePage {
 
     createPage(idPage: string, name?: string): void {
         let content: HTMLElement | null = null;
-        let page: LoginPage | mainPage | InfoPage | NotFound | null = null;
+        let page: LoginPage | MainPage | InfoPage | NotFound | null = null;
         if (idPage === PageIds.LoginPage) {
             page = new LoginPage();
         } else if (idPage === PageIds.MainPage) {
             isNotNull(name);
-            page = new mainPage(name);
+            this.mainPage = new MainPage(name);
+            page = this.mainPage;
         } else if (idPage === PageIds.InfoPage) {
             page = new InfoPage();
         } else {
@@ -97,6 +106,12 @@ export default class MainView extends BasePage {
         if (connectionStatus) {
             this.modalIsOpen = false;
             setTimeout(() => modal.closeModal(), 1000);
+        }
+    }
+
+    addContactList(contacts: thirdPartyUser[]) {
+        if (this.mainPage) {
+            this.mainPage.addContact(contacts);
         }
     }
 }

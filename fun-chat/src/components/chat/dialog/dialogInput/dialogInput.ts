@@ -5,11 +5,13 @@ import './dialogInput.css';
 
 export default class DialogInput extends BaseComponent {
     private sendBtn: Button;
+
     private messageInput: BaseComponent<HTMLInputElement> = new BaseComponent<HTMLInputElement>({
         tag: 'input',
         classes: ['message_input'],
         attributes: [{ key: 'placeholder', value: 'message...' }],
     });
+
     constructor() {
         super({
             tag: 'div',
@@ -25,7 +27,12 @@ export default class DialogInput extends BaseComponent {
         isNotNullElement<HTMLElement>(btn);
         const input = this.messageInput.getElement();
         const message = input.value;
-        message ? console.log('send') : console.log('nothing');
+        if (message) {
+            console.log('send');
+        } else {
+            console.log('nothing');
+        }
+
         input.value = '';
         btn.classList.add('inactive');
     }

@@ -1,8 +1,8 @@
 import BaseComponent from '../../components/baseComponent';
 import Button from '../../components/buttons/button';
 import BasePage from '../basePage';
-import myLink from '../../components/myLink';
 import './infoPage.css';
+import MyLink from '../../components/myLink';
 
 export default class InfoPage extends BasePage {
     constructor() {
@@ -32,7 +32,7 @@ export default class InfoPage extends BasePage {
             this.notifyObservers('back');
         });
 
-        wrapper.addChild([title, text, new myLink(), backBtn]);
+        wrapper.addChild([title, text, new MyLink(), backBtn]);
         this.addChild([wrapper]);
     }
 }

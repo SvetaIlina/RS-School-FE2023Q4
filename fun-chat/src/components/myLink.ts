@@ -1,6 +1,6 @@
 import BaseComponent from './baseComponent';
 
-export default class myLink extends BaseComponent {
+export default class MyLink extends BaseComponent {
     constructor() {
         super({
             tag: 'a',

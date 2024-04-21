@@ -1,39 +1,8 @@
-type generalRequest = {
-    id: string;
-    type: string;
-    payload: payload | null;
-};
-
-type payload =
-    | {
-          user: currentUser | thirdPartyUser;
-      }
-    | {
-          message:
-              | receivedMessage
-              | Array<receivedMessage>
-              | messageState
-              | Pick<receivedMessage, 'id' | 'text' | 'status'>;
-      }
-    | {
-          users: Array<thirdPartyUser>;
-      };
-
-type errorResponse = {
-    id: string;
-    type: string;
-    payload: serverError;
-};
-
-type serverError = {
-    error: string;
-};
-
-type currentUser = {
+export type currentUser = {
     login: string;
     password: string;
 };
-type thirdPartyUser = {
+export type thirdPartyUser = {
     login: string;
     isLogined: boolean;
 };
@@ -54,7 +23,7 @@ type messageStatus = {
     isDeleted?: boolean;
 };
 
-type receivedMessage = {
+export type receivedMessage = {
     id: string;
     from: string;
     to: string;
@@ -63,7 +32,7 @@ type receivedMessage = {
     status: messageStatus;
 };
 
-type messageState = {
+export type messageState = {
     id: string;
     status: Partial<messageStatus>;
 };
@@ -78,7 +47,38 @@ type message = {
         | Pick<receivedMessage, 'id' | 'text' | 'status'>;
 };
 
-interface apiData {
+type payload =
+    | {
+          user: currentUser | thirdPartyUser;
+      }
+    | {
+          message:
+              | receivedMessage
+              | Array<receivedMessage>
+              | messageState
+              | Pick<receivedMessage, 'id' | 'text' | 'status'>;
+      }
+    | {
+          users: Array<thirdPartyUser>;
+      };
+
+type serverError = {
+    error: string;
+};
+
+export type errorResponse = {
+    id: string;
+    type: string;
+    payload: serverError;
+};
+
+export type generalRequest = {
+    id: string;
+    type: string;
+    payload: payload | null;
+};
+
+export interface apiData {
     id: string | null;
     type: string;
     payload: user | message | null;

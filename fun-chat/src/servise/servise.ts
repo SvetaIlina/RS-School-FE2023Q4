@@ -1,3 +1,5 @@
+import { generalRequest, errorResponse, thirdPartyUser, receivedMessage, messageState } from '../type/typeAPI';
+
 export function isNotNull<T>(value: unknown): asserts value is NonNullable<T> {
     if (value === null || value === undefined) {
         throw new Error(`Not expected value: ${value}`);
@@ -13,17 +15,47 @@ export function isNotNullElement<T>(value: unknown): asserts value is T {
 export function searchUser(e: Event, targetBlock: HTMLElement) {
     const input = e.target;
     isNotNullElement<HTMLInputElement>(input);
-    const value: string = input.value;
+    const { value } = input;
     const users = Array.from(targetBlock.children);
     users.forEach((user) => {
         if (user instanceof HTMLElement) {
             const userName = user.textContent;
+            const currentUser = user;
             isNotNull(userName);
             if (!userName.match(value)) {
-                user.style.display = 'none';
+                currentUser.style.display = 'none';
             } else {
-                user.style.display = 'block';
+                currentUser.style.display = 'block';
             }
         }
     });
+}
+
+export function checkServerData(
+    dataFromServer: generalRequest | errorResponse,
+    checkingType: string
+): string | thirdPartyUser[] | receivedMessage[] | messageState | null {
+    isNotNull(dataFromServer.payload);
+    const { payload } = dataFromServer;
+
+    if ('users' in payload && checkingType === 'users') {
+        return payload.users;
+    }
+    if ('message' in payload && checkingType === 'message') {
+        return payload.message;
+    }
+    if ('error' in payload && checkingType === 'error') {
+        return payload.error;
+    }
+    return null;
+}
+
+export function getSelectedContact(e: Event): string | null {
+    let contactLogin: string | null = null;
+    const { target } = e;
+    isNotNullElement<HTMLElement>(target);
+    if (target.classList.contains('list_item')) {
+        contactLogin = target.textContent;
+    }
+    return contactLogin;
 }

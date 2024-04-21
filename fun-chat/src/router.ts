@@ -4,7 +4,9 @@ import { PageIds } from './type/type';
 
 export default class Router {
     private manager: Controller;
+
     private currentPage: string;
+
     private chatData: ChatData;
 
     constructor(manager: Controller, chatData: ChatData) {
@@ -22,7 +24,7 @@ export default class Router {
     }
 
     locationHandler() {
-        let hash = window.location.hash.slice(1);
+        const hash = window.location.hash.slice(1);
 
         const isAuthenticated = this.chatData.isLogined;
         if (!isAuthenticated && hash === PageIds.MainPage) {

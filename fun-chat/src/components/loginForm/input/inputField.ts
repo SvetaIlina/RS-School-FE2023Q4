@@ -63,9 +63,10 @@ export default class LoginInput extends BaseComponent {
     clear() {
         this.input.getElement().value = '';
     }
+
     getInputValue(): { [key: string]: string } {
         const key: string | null = this.input.element.getAttribute('name');
-        const value: string = this.input.element.value;
+        const { value } = this.input.element;
         isNotNull(key);
         return { [key]: value };
     }

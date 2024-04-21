@@ -1,14 +1,18 @@
 import ChatData from './components/chat/chatData';
 import Router from './router';
-import { isNotNull } from './servise/servise';
+import { checkServerData, isNotNull } from './servise/servise';
 import { ConnectMessage, PageIds, messageType } from './type/type';
+import { generalRequest, errorResponse, thirdPartyUser } from './type/typeAPI';
 import MainView from './view';
 import MyWebSocket from './webSocket';
 
 export default class Controller {
     private model: ChatData;
+
     private view: MainView;
+
     private router: Router;
+
     private ws: MyWebSocket;
 
     constructor(url: string, model: ChatData, view: MainView) {
@@ -23,17 +27,24 @@ export default class Controller {
         );
         this.router = new Router(this, this.model);
     }
+
     init() {
         let hash: string;
-        this.model.checkUser() ? (hash = PageIds.MainPage) : (hash = PageIds.LoginPage);
+        const isUserLogin = this.model.checkUser();
+        if (isUserLogin) {
+            hash = PageIds.MainPage;
+        } else {
+            hash = PageIds.LoginPage;
+        }
+
         this.router.route(hash);
         this.view.showModal(ConnectMessage.InProcess);
         this.ws.initWebSocket();
     }
 
     handleWebSocketOnopen(isOpen: boolean, message: string): void {
-        this.getAllUsers.call(this, messageType.ActiveUser);
-        this.getAllUsers.call(this, messageType.InactiveUser);
+        this.getUsers.call(this, messageType.ActiveUser);
+        this.getUsers.call(this, messageType.InactiveUser);
         this.view.showModal(message, isOpen);
     }
 
@@ -43,13 +54,14 @@ export default class Controller {
 
     handleWebSocketMessage(e: MessageEvent) {
         const dataFromServer: generalRequest | errorResponse = JSON.parse(e.data);
-        const type = dataFromServer.type;
+        const { type } = dataFromServer;
 
         switch (type) {
             case messageType.Login: {
                 this.model.isLogined = true;
                 this.model.setMyUser();
                 this.router.route(PageIds.MainPage);
+
                 break;
             }
             case messageType.Logout: {
@@ -58,28 +70,35 @@ export default class Controller {
                 break;
             }
             case messageType.ActiveUser: {
-                const users = this.checkServerData(dataFromServer, 'users');
-                if (Array.isArray(users)) {
-                    this.model.ActiveUser = users as thirdPartyUser[];
+                const data = checkServerData(dataFromServer, 'users');
+                if (Array.isArray(data)) {
+                    const users = data as thirdPartyUser[];
+                    this.model.ActiveUser = users;
+                    this.view.addContactList(users);
                 }
 
                 break;
             }
             case messageType.InactiveUser: {
-                const users = this.checkServerData(dataFromServer, 'users');
-                if (Array.isArray(users)) {
-                    this.model.inActiveUser = users as thirdPartyUser[];
+                const data = checkServerData(dataFromServer, 'users');
+                if (Array.isArray(data)) {
+                    const users = data as thirdPartyUser[];
+                    this.model.ActiveUser = users;
+                    this.view.addContactList(users);
                 }
 
                 break;
             }
             case messageType.Error: {
-                const errorMessage = this.checkServerData(dataFromServer, 'error');
+                const errorMessage = checkServerData(dataFromServer, 'error');
                 if (typeof errorMessage === 'string') {
                     this.view.showModal(errorMessage, this.ws.isOpen);
                 }
 
                 break;
+            }
+            default: {
+                console.log('nothing');
             }
         }
     }
@@ -88,7 +107,9 @@ export default class Controller {
         switch (action) {
             case 'login': {
                 isNotNull(data);
+
                 this.authorizeUser(data);
+
                 break;
             }
             case 'showInfo': {
@@ -97,6 +118,10 @@ export default class Controller {
             }
             case 'logOut': {
                 this.userLogout();
+                break;
+            }
+            default: {
+                console.log('nothing');
             }
         }
     }
@@ -105,6 +130,7 @@ export default class Controller {
         if (this.model.myUser) {
             const name = this.model.myUser.login;
             this.view.createPage(hash, name);
+            this.view.addContactList(this.model.getAllContact());
         } else {
             this.view.createPage(hash);
         }
@@ -115,8 +141,6 @@ export default class Controller {
         this.model.myUser = user;
         const alreadyLogined = Boolean(this.model.checkLogginedUser());
         if (!alreadyLogined) {
-            console.log(this.model.ActiveUser);
-
             const serverRequest: generalRequest = {
                 id: crypto.randomUUID(),
                 type: messageType.Login,
@@ -135,7 +159,7 @@ export default class Controller {
         }
     }
 
-    getAllUsers(userStatus: string) {
+    getUsers(userStatus: string) {
         const serverRequest: generalRequest = {
             id: crypto.randomUUID(),
             type: userStatus,
@@ -159,19 +183,5 @@ export default class Controller {
             },
         };
         this.ws.sendRequest(serverRequest);
-    }
-
-    checkServerData(dataFromServer: generalRequest | errorResponse, checkingType: string) {
-        isNotNull(dataFromServer.payload);
-        const payload = dataFromServer.payload;
-
-        if ('users' in payload && checkingType === 'users') {
-            return payload.users;
-        } else if ('message' in payload && checkingType === 'message') {
-            return payload.message;
-        } else if ('error' in payload && checkingType === 'error') {
-            return payload.error;
-        }
-        return null;
     }
 }

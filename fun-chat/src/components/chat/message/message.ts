@@ -1,11 +1,16 @@
+import { receivedMessage } from '../../../type/typeAPI';
 import BaseComponent from '../../baseComponent';
 import './message.css';
 
 export default class Message extends BaseComponent {
     messageContent: string;
+
     messageDataTime: number;
+
     sender: string;
+
     status: string;
+
     constructor(message: Omit<receivedMessage, 'status'> & { status: string }) {
         super({ tag: 'div', classes: ['message-wrapper', 'myMessage'] });
         this.messageContent = message.text;

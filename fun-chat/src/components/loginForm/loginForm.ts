@@ -30,6 +30,7 @@ export default class LoginForm extends BaseComponent<HTMLFormElement> {
     //     console.log('about');
     // });
     inputs: Array<LoginInput>;
+
     buttons: Array<Button>;
 
     constructor(inputs: Array<LoginInput>, buttons: Array<Button>) {

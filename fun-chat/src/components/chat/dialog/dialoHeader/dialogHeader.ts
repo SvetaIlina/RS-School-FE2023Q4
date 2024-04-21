@@ -1,4 +1,5 @@
 import { userStatus } from '../../../../type/type';
+import { thirdPartyUser } from '../../../../type/typeAPI';
 import BaseComponent from '../../../baseComponent';
 import './dialogHeader.css';
 
@@ -7,10 +8,12 @@ export default class DialogHeader extends BaseComponent {
         tag: 'span',
         classes: ['dialog_header-name'],
     });
+
     private userStatus: BaseComponent = new BaseComponent({
         tag: 'span',
         classes: ['dialog_header-status'],
     });
+
     constructor() {
         super({
             tag: 'div',
@@ -23,7 +26,12 @@ export default class DialogHeader extends BaseComponent {
     setUserValue(user: thirdPartyUser) {
         let status: string;
         this.userName.setTextContent(user.login);
-        user.isLogined ? ((status = userStatus.OnLine), this.setStyles(['active'])) : (status = userStatus.OffLine);
+        if (user.isLogined) {
+            status = userStatus.OnLine;
+            this.setStyles(['active']);
+        } else {
+            status = userStatus.OffLine;
+        }
         this.userStatus.setTextContent(status);
     }
 }

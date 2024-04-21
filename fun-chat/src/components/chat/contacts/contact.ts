@@ -1,9 +1,7 @@
-import { isNotNull, isNotNullElement } from '../../../servise/servise';
+import { getSelectedContact, isNotNullElement, searchUser } from '../../../servise/servise';
+import { thirdPartyUser } from '../../../type/typeAPI';
 import BaseComponent from '../../baseComponent';
-import { searchUser } from '../../../servise/servise';
 import './contact.css';
-
-import ChatData from '../chatData';
 
 export default class Contact extends BaseComponent {
     private searchInput: BaseComponent<HTMLInputElement> = new BaseComponent<HTMLInputElement>({
@@ -11,26 +9,26 @@ export default class Contact extends BaseComponent {
         classes: ['contacts_search'],
         attributes: [{ key: 'placeholder', value: 'Search...' }],
     });
+
     private contactList: BaseComponent<HTMLUListElement> = new BaseComponent<HTMLUListElement>({
         tag: 'ul',
         classes: ['contacts_list'],
     });
 
-    constructor(chatData: ChatData) {
+    constructor() {
         super({
             tag: 'div',
             classes: ['contacts'],
         });
 
-        this.init(chatData.contacts);
+        this.init();
         this.searchInput.setCallback((e) => searchUser(e, this.contactList.getElement()), 'keyup');
         this.contactList.setCallback((e) => {
-            chatData.updateSelectedContact(this.getSelectedContact(e));
+            getSelectedContact(e);
         }, 'click');
     }
 
-    init(contacts: Array<thirdPartyUser> | null) {
-        if (contacts) this.drawContacts(contacts);
+    init() {
         this.addChild([this.searchInput, this.contactList]);
     }
 
@@ -58,16 +56,10 @@ export default class Contact extends BaseComponent {
         const listElement = this.contactList.getElement();
         const currentContact: Element | null = listElement.querySelector(`#${contact.login}`);
         isNotNullElement<HTMLElement>(currentContact);
-        userStatus ? currentContact.classList.add('active') : currentContact.classList.remove('active');
-    }
-
-    getSelectedContact(e: Event): string | null {
-        let contactLogin: string | null = null;
-        const target: EventTarget | null = e.target;
-        isNotNullElement<HTMLElement>(target);
-        if (target.classList.contains('list_item')) {
-            contactLogin = target.textContent;
+        if (userStatus) {
+            currentContact.classList.add('active');
+        } else {
+            currentContact.classList.remove('active');
         }
-        return contactLogin;
     }
 }

@@ -1,13 +1,18 @@
-import Controller from './controller';
 import { isNotNull } from './servise/servise';
-import { ConnectMessage, PageIds, messageType } from './type/type';
+import { ConnectMessage } from './type/type';
+import { generalRequest } from './type/typeAPI';
 
 export default class MyWebSocket {
     url: string;
+
     ws: WebSocket | null;
+
     isOpen: boolean;
+
     onOpenCb: (isOpen: boolean, message: string) => void;
+
     onCloseCb: (isOpen: boolean, message: string) => void;
+
     onMessageCb: (e: MessageEvent) => void;
 
     constructor(

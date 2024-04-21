@@ -7,7 +7,9 @@ export default class Header extends BaseComponent {
     userName: string;
 
     appName: string;
+
     logOutBtn: Button;
+
     infoBtn: Button;
 
     constructor(userName: string, appName: string, logOutCallback: Callback<Event>, infoCallback: Callback<Event>) {

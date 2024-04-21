@@ -3,6 +3,7 @@ import './modal.css';
 
 export default class Modal extends BaseComponent {
     content: string;
+
     constructor(content: string) {
         super({
             tag: 'div',

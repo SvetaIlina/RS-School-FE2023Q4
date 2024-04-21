@@ -1,7 +1,7 @@
 import BaseComponent from '../baseComponent';
 import './footer.css';
 import img from '../../assets/image/rs_school_js.svg';
-import myLink from '../myLink';
+import MyLink from '../myLink';
 
 export default class Footer extends BaseComponent {
     constructor() {
@@ -20,7 +20,7 @@ export default class Footer extends BaseComponent {
             classes: ['footer_item'],
             textContent: '2024',
         });
-        const link = new myLink();
+        const link = new MyLink();
         this.addChild([schoolImg, link, year]);
     }
 }

@@ -9,12 +9,12 @@ export type elemOptions = {
     textContent?: string;
 };
 
-export const enum PageIds {
+export enum PageIds {
     LoginPage = 'login-page',
     MainPage = 'main-page',
     InfoPage = 'info-page',
 }
-export const enum ConnectMessage {
+export enum ConnectMessage {
     InProcess = 'Connecting...',
     Ready = 'Connect',
 }
@@ -23,12 +23,12 @@ export type userLoginData = {
     [key: string]: string;
 };
 
-export const enum userStatus {
+export enum userStatus {
     OnLine = 'On Line',
     OffLine = 'Off Line',
 }
 
-export const enum messageType {
+export enum messageType {
     Login = 'USER_LOGIN',
     Error = 'ERROR',
     Logout = 'USER_LOGOUT',
