@@ -1,12 +1,12 @@
 type generalRequest = {
     id: string;
     type: string;
-    payload: payload;
+    payload: payload | null;
 };
 
 type payload =
     | {
-          user: currentUser | thirdPartyUser | Array<thirdPartyUser>;
+          user: currentUser | thirdPartyUser;
       }
     | {
           message:
@@ -14,6 +14,9 @@ type payload =
               | Array<receivedMessage>
               | messageState
               | Pick<receivedMessage, 'id' | 'text' | 'status'>;
+      }
+    | {
+          users: Array<thirdPartyUser>;
       };
 
 type errorResponse = {
