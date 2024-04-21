@@ -1,18 +1,26 @@
 import Controller from './controller';
 import { isNotNull } from './servise/servise';
-import { PageIds, messageType } from './type/type';
+import { ConnectMessage, PageIds, messageType } from './type/type';
 
 export default class MyWebSocket {
     url: string;
     ws: WebSocket | null;
     isOpen: boolean;
-    onOpenCb: (isOpen: boolean) => void;
+    onOpenCb: (isOpen: boolean, message: string) => void;
+    onCloseCb: (isOpen: boolean, message: string) => void;
     onMessageCb: (e: MessageEvent) => void;
-    constructor(url: string, onOpenCb: (isOpen: boolean) => void, onMessageCb: (e: MessageEvent) => void) {
+
+    constructor(
+        url: string,
+        onOpenCb: (isOpen: boolean, message: string) => void,
+        onMessageCb: (e: MessageEvent) => void,
+        onCloseCb: (isOpen: boolean, message: string) => void
+    ) {
         this.url = url;
         this.ws = null;
         this.isOpen = false;
         this.onOpenCb = onOpenCb;
+        this.onCloseCb = onCloseCb;
         this.onMessageCb = onMessageCb;
         this.initWebSocket();
     }
@@ -30,20 +38,24 @@ export default class MyWebSocket {
             this.onMessageCb(e);
         });
         this.ws.addEventListener('close', () => {
-            this.onClose();
+            this.onClose(this.onCloseCb);
         });
     }
 
-    onClose() {
+    onClose(cb: (isOpen: boolean, message: string) => void) {
+        this.isOpen = false;
         isNotNull(this.ws);
         this.ws.removeEventListener('open', () => this.onOpen(this.onOpenCb));
-        this.ws.removeEventListener('close', () => this.onClose());
+        this.ws.removeEventListener('close', () => this.onClose(this.onCloseCb));
         this.ws.removeEventListener('message', (e) => this.onMessageCb(e));
+        cb(this.isOpen, ConnectMessage.InProcess);
         this.initWebSocket();
     }
 
-    onOpen(cb: (isOpen: boolean) => void) {
+    onOpen(cb: (isOpen: boolean, message: string) => void) {
         this.isOpen = true;
-        cb(this.isOpen);
+        if (this.ws?.readyState === 1) {
+            cb(this.isOpen, ConnectMessage.Ready);
+        }
     }
 }
