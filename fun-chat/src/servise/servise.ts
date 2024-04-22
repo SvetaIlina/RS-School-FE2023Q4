@@ -41,6 +41,9 @@ export function checkServerData(dataFromServer: generalRequest | errorResponse, 
     if ('user' in payload && checkingType === 'user') {
         return payload.user;
     }
+    if ('messages' in payload && checkingType === 'messages') {
+        return payload.messages;
+    }
     if ('message' in payload && checkingType === 'message') {
         return payload.message;
     }

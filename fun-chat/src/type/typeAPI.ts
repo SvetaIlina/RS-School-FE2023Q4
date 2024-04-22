@@ -38,7 +38,6 @@ export type messageState = {
 type message =
     | sendedMessage
     | receivedMessage
-    | Array<receivedMessage>
     | messageState
     | Pick<messageState, 'id'>
     | Pick<receivedMessage, 'id' | 'text' | 'status'>;
@@ -49,6 +48,9 @@ type payload =
       }
     | {
           message: message;
+      }
+    | {
+          messages: Array<receivedMessage>;
       }
     | {
           users: Array<thirdPartyUser>;

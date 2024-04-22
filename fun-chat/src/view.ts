@@ -126,7 +126,7 @@ export default class MainView extends BasePage {
 
     setUserContact(user: thirdPartyUser) {
         isNotNull(this.mainPage);
-        this.mainPage.setHeaderContact(user);
+        this.mainPage.updateChat(user);
     }
 
     addMessage(message: checkedMessage) {

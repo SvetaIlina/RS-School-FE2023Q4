@@ -31,6 +31,7 @@ export default class DialogHeader extends BaseComponent {
             this.setStyles(['active']);
         } else {
             status = userStatus.OffLine;
+            this.getElement().classList.remove('active');
         }
         this.userStatus.setTextContent(status);
     }

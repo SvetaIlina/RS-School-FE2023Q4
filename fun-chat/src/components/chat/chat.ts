@@ -33,4 +33,8 @@ export default class Chat extends BaseComponent {
     drawNewMessage(message: Message) {
         this.dialog.addMessage(message);
     }
+
+    updateDialog() {
+        this.dialog.updateDialogMessage();
+    }
 }

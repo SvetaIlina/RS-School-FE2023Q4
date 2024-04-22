@@ -104,6 +104,22 @@ export default class Controller {
 
                 break;
             }
+
+            case messageType.MsgHistory: {
+                const data = checkServerData(dataFromServer, 'messages');
+
+                if (Array.isArray(data)) {
+                    const messages = data as receivedMessage[];
+
+                    messages.forEach((message) => {
+                        const messageDraft = this.model.checkMessage(message);
+
+                        this.view.addMessage(messageDraft);
+                    });
+                }
+
+                break;
+            }
             case messageType.Error: {
                 const errorMessage = checkServerData(dataFromServer, 'error');
                 if (typeof errorMessage === 'string') {
@@ -140,6 +156,16 @@ export default class Controller {
                 isNotNull(data);
                 this.model.setCurrentContact(data);
                 isNotNull(this.model.currentContact);
+                const serverRequest: generalRequest = {
+                    id: crypto.randomUUID(),
+                    type: 'MSG_FROM_USER',
+                    payload: {
+                        user: {
+                            login: data,
+                        },
+                    },
+                };
+                this.ws.sendRequest(serverRequest);
                 this.view.setUserContact(this.model.currentContact);
                 break;
             }

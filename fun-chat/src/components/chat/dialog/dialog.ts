@@ -33,4 +33,8 @@ export default class Dialog extends BaseComponent {
         }
         this.messages.addChild([message]);
     }
+
+    updateDialogMessage() {
+        this.messages.init();
+    }
 }

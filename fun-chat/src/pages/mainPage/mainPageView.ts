@@ -32,8 +32,9 @@ export default class MainPage extends BasePage {
         this.chat.updateContact(user);
     }
 
-    setHeaderContact(user: thirdPartyUser) {
+    updateChat(user: thirdPartyUser) {
         this.chat.setHeader(user);
+        this.chat.updateDialog();
     }
 
     addNewMessage(message: Message) {

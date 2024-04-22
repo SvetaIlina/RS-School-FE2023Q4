@@ -11,6 +11,7 @@ export default class DialogMessages extends BaseComponent {
     }
 
     init() {
+        this.removeChild();
         const description = new BaseComponent({
             tag: 'p',
             classes: ['description'],
