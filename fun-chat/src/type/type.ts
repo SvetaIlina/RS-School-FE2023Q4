@@ -43,3 +43,11 @@ export enum messageType {
     MsgDelete = 'MSG_DELETE',
     MsgEdit = 'MSG_EDIT',
 }
+
+export type checkedMessage = {
+    text: string;
+    sender: string;
+    date: string;
+    isYour: boolean;
+    deliveredStatus: string;
+};

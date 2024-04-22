@@ -1,6 +1,6 @@
 import LoginPage from './pages/loginPage/loginPage';
 import InfoPage from './pages/infoPage/infoPage';
-import { PageIds } from './type/type';
+import { PageIds, checkedMessage } from './type/type';
 
 import NotFound from './pages/notFound/notFound';
 import MainPage from './pages/mainPage/mainPageView';
@@ -9,6 +9,7 @@ import Modal from './components/modal/modal';
 import { isNotNull } from './servise/servise';
 import BasePage from './pages/basePage';
 import { thirdPartyUser } from './type/typeAPI';
+import Message from './components/chat/message/message';
 
 export default class MainView extends BasePage {
     private modalIsOpen: boolean;
@@ -21,6 +22,9 @@ export default class MainView extends BasePage {
         this.setStyles(['main']);
         this.mainPage = null;
         this.modalIsOpen = false;
+        this.element.addEventListener('sendMes', ((event: CustomEvent) => {
+            this.notifyObservers('sendMessage', event.detail);
+        }) as EventListener);
     }
 
     update(action: string, data?: string) {
@@ -123,5 +127,11 @@ export default class MainView extends BasePage {
     setUserContact(user: thirdPartyUser) {
         isNotNull(this.mainPage);
         this.mainPage.setHeaderContact(user);
+    }
+
+    addMessage(message: checkedMessage) {
+        isNotNull(this.mainPage);
+        const newMessage = new Message(message);
+        this.mainPage.addNewMessage(newMessage);
     }
 }

@@ -2,7 +2,7 @@ import ChatData from './components/chat/chatData';
 import Router from './router';
 import { checkServerData, isNotNull } from './servise/servise';
 import { ConnectMessage, PageIds, messageType } from './type/type';
-import { generalRequest, errorResponse, thirdPartyUser, currentUser } from './type/typeAPI';
+import { generalRequest, errorResponse, thirdPartyUser, currentUser, receivedMessage } from './type/typeAPI';
 import MainView from './view';
 import MyWebSocket from './webSocket';
 
@@ -87,6 +87,13 @@ export default class Controller {
 
                 break;
             }
+            case messageType.SendMSG: {
+                const message = checkServerData(dataFromServer, 'message') as receivedMessage;
+                const messageDraft = this.model.checkMessage(message);
+                this.view.addMessage(messageDraft);
+
+                break;
+            }
             case messageType.Error: {
                 const errorMessage = checkServerData(dataFromServer, 'error');
                 if (typeof errorMessage === 'string') {
@@ -124,6 +131,23 @@ export default class Controller {
                 this.model.setCurrentContact(data);
                 isNotNull(this.model.currentContact);
                 this.view.setUserContact(this.model.currentContact);
+                break;
+            }
+            case 'sendMessage': {
+                isNotNull(data);
+                if (this.model.currentContact) {
+                    const serverRequest: generalRequest = {
+                        id: crypto.randomUUID(),
+                        type: 'MSG_SEND',
+                        payload: {
+                            message: {
+                                to: this.model.currentContact.login,
+                                text: data,
+                            },
+                        },
+                    };
+                    this.ws.sendRequest(serverRequest);
+                }
                 break;
             }
             default: {

@@ -1,4 +1,6 @@
 import Chat from '../../components/chat/chat';
+import Message from '../../components/chat/message/message';
+
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import { thirdPartyUser } from '../../type/typeAPI';
@@ -32,5 +34,9 @@ export default class MainPage extends BasePage {
 
     setHeaderContact(user: thirdPartyUser) {
         this.chat.setHeader(user);
+    }
+
+    addNewMessage(message: Message) {
+        this.chat.drawNewMessage(message);
     }
 }

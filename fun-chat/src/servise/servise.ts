@@ -1,11 +1,4 @@
-import {
-    generalRequest,
-    errorResponse,
-    thirdPartyUser,
-    receivedMessage,
-    messageState,
-    currentUser,
-} from '../type/typeAPI';
+import { generalRequest, errorResponse, thirdPartyUser, currentUser } from '../type/typeAPI';
 
 export function isNotNull<T>(value: unknown): asserts value is NonNullable<T> {
     if (value === null || value === undefined) {
@@ -38,10 +31,7 @@ export function searchUser(e: Event, targetBlock: HTMLElement) {
     });
 }
 
-export function checkServerData(
-    dataFromServer: generalRequest | errorResponse,
-    checkingType: string
-): string | thirdPartyUser[] | receivedMessage[] | messageState | null | currentUser | thirdPartyUser {
+export function checkServerData(dataFromServer: generalRequest | errorResponse, checkingType: string) {
     isNotNull(dataFromServer.payload);
     const { payload } = dataFromServer;
 

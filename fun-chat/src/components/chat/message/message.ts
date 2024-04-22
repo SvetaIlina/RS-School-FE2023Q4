@@ -1,26 +1,29 @@
-import { receivedMessage } from '../../../type/typeAPI';
+import { checkedMessage } from '../../../type/type';
 import BaseComponent from '../../baseComponent';
 import './message.css';
 
 export default class Message extends BaseComponent {
     messageContent: string;
 
-    messageDataTime: number;
+    messageDataTime: string;
 
     sender: string;
 
     status: string;
 
-    constructor(message: Omit<receivedMessage, 'status'> & { status: string }) {
-        super({ tag: 'div', classes: ['message-wrapper', 'myMessage'] });
+    isMyMessage: boolean;
+
+    constructor(message: checkedMessage) {
+        super({ tag: 'div', classes: ['message-wrapper'] });
         this.messageContent = message.text;
-        this.messageDataTime = message.datetime;
-        this.sender = message.from;
-        this.status = message.status;
+        this.messageDataTime = message.date;
+        this.sender = message.sender;
+        this.status = message.deliveredStatus;
+        this.isMyMessage = message.isYour;
         this.drawMessage(this.sender, this.messageDataTime, this.messageContent, this.status);
     }
 
-    drawMessage(sender: string, messageDataTime: number, content: string, status: string) {
+    drawMessage(sender: string, messageDataTime: string, content: string, status: string) {
         const message = new BaseComponent({
             tag: 'div',
             classes: ['message'],
@@ -51,6 +54,9 @@ export default class Message extends BaseComponent {
             textContent: `${status}`,
         });
         message.addChild([messageHeader, messageContent, messageFooter]);
+        if (this.isMyMessage) {
+            this.setStyles(['myMessage']);
+        }
         this.addChild([message]);
     }
 }

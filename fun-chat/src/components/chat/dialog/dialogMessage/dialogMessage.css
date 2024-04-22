@@ -1,6 +1,7 @@
 .message-container {
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
     justify-content: flex-start;
     overflow-y: scroll;
     padding: 1rem;

@@ -1,5 +1,6 @@
 import { thirdPartyUser } from '../../../type/typeAPI';
 import BaseComponent from '../../baseComponent';
+import Message from '../message/message';
 
 import DialogHeader from './dialoHeader/dialogHeader';
 import './dialog.css';
@@ -23,5 +24,13 @@ export default class Dialog extends BaseComponent {
 
     updateHeader(newUser: thirdPartyUser) {
         this.header.setUserValue(newUser);
+    }
+
+    addMessage(message: Message) {
+        const description = this.messages.element.querySelector('.description');
+        if (description) {
+            this.messages.removeChild();
+        }
+        this.messages.addChild([message]);
     }
 }

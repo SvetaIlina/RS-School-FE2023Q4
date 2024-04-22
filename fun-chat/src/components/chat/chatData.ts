@@ -1,6 +1,7 @@
 import { findUserIndex, isNotNull } from '../../servise/servise';
 import Dialog from './dialog/dialog';
-import { thirdPartyUser, currentUser } from '../../type/typeAPI';
+import { thirdPartyUser, currentUser, receivedMessage } from '../../type/typeAPI';
+import { checkedMessage } from '../../type/type';
 
 export default class ChatData {
     dialog: Dialog | null;
@@ -91,5 +92,31 @@ export default class ChatData {
         if (contact) {
             this.currentContact = contact;
         }
+    }
+
+    checkMessage(message: receivedMessage): checkedMessage {
+        isNotNull(this.myUser);
+        let sender = message.from;
+        let isYour: boolean = false;
+        let deliveredStatus: string;
+        const date = new Date(message.datetime).toLocaleString('en-US');
+        if (sender === this.myUser.login) {
+            sender = 'you';
+            isYour = true;
+        }
+        if (message.status.isDelivered) {
+            deliveredStatus = 'delivered';
+        } else {
+            deliveredStatus = 'undelivered';
+        }
+        const messageObject = {
+            text: message.text,
+            sender,
+            date,
+            isYour,
+            deliveredStatus,
+        };
+
+        return messageObject;
     }
 }
