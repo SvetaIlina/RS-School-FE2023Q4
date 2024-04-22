@@ -90,7 +90,17 @@ export default class Controller {
             case messageType.SendMSG: {
                 const message = checkServerData(dataFromServer, 'message') as receivedMessage;
                 const messageDraft = this.model.checkMessage(message);
-                this.view.addMessage(messageDraft);
+                if (this.model.currentContact) {
+                    const contact = this.model.currentContact.login;
+                    isNotNull(this.model.myUser);
+                    if (contact === message.from || message.from === this.model.myUser.login) {
+                        this.view.addMessage(messageDraft);
+                    } else {
+                        this.view.setUnreadMessage(message.from);
+                    }
+                } else {
+                    this.view.setUnreadMessage(message.from);
+                }
 
                 break;
             }

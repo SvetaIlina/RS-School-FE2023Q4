@@ -17,25 +17,32 @@ export default class Contact extends BaseComponent {
 
     contact: thirdPartyUser[];
 
+    listCallback: (name: string) => void;
+
     constructor(contact: thirdPartyUser[], contactListCallback: (name: string) => void) {
         super({
             tag: 'div',
             classes: ['contacts'],
         });
+        this.listCallback = contactListCallback;
         this.contact = contact;
         this.init(this.contact);
         this.searchInput.setCallback((e) => searchUser(e, this.contactList.getElement()), 'keyup');
         this.contactList.setCallback((e) => {
-            const selectedContact = getSelectedContact(e);
-            if (selectedContact) {
-                contactListCallback(selectedContact);
-            }
+            this.handleListEvent(e);
         }, 'click');
     }
 
     init(contact: thirdPartyUser[]) {
         this.drawContacts(contact);
         this.addChild([this.searchInput, this.contactList]);
+    }
+
+    handleListEvent(e: Event) {
+        const selectedContact = getSelectedContact(e);
+        if (selectedContact) {
+            this.listCallback(selectedContact);
+        }
     }
 
     drawContacts(contactList: Array<thirdPartyUser>) {
@@ -48,12 +55,23 @@ export default class Contact extends BaseComponent {
         const listItem = new BaseComponent({
             tag: 'li',
             classes: ['list_item'],
-            textContent: contact.login,
             attributes: [{ key: 'id', value: `${contact.login}` }],
         });
         if (contact.isLogined) {
             listItem.setStyles(['active']);
         }
+        const userName = new BaseComponent({
+            tag: 'span',
+            classes: ['list_item-name'],
+            textContent: contact.login,
+        });
+
+        const unreadMessage = new BaseComponent({
+            tag: 'span',
+            classes: ['list_item-mes'],
+            textContent: '',
+        });
+        listItem.addChild([userName, unreadMessage]);
         this.contactList.addChild([listItem]);
     }
 

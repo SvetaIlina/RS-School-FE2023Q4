@@ -48,15 +48,17 @@ export default class Message extends BaseComponent {
             classes: ['message_content'],
             textContent: `${content}`,
         });
+
         const messageFooter = new BaseComponent({
             tag: 'div',
             classes: ['message_footer'],
-            textContent: `${status}`,
         });
-        message.addChild([messageHeader, messageContent, messageFooter]);
         if (this.isMyMessage) {
             this.setStyles(['myMessage']);
+            messageFooter.setTextContent(`${status}`);
         }
+        message.addChild([messageHeader, messageContent, messageFooter]);
+
         this.addChild([message]);
     }
 }

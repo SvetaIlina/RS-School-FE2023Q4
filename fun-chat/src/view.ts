@@ -134,4 +134,15 @@ export default class MainView extends BasePage {
         const newMessage = new Message(message);
         this.mainPage.addNewMessage(newMessage);
     }
+
+    setUnreadMessage(sender: string) {
+        isNotNull(this.mainPage);
+        const contact = document.getElementById(`${sender}`);
+        isNotNull(contact);
+        const messageContainer = contact.querySelector('.list_item-mes');
+        isNotNull(messageContainer);
+        let messageCount = Number(messageContainer.textContent);
+        isNotNull(messageCount);
+        messageContainer.textContent = `${(messageCount += 1)}`;
+    }
 }

@@ -54,7 +54,7 @@ export function getSelectedContact(e: Event): string | null {
     let contactLogin: string | null = null;
     const { target } = e;
     isNotNullElement<HTMLElement>(target);
-    if (target.classList.contains('list_item')) {
+    if (target.classList.contains('list_item-name')) {
         contactLogin = target.textContent;
     }
     return contactLogin;

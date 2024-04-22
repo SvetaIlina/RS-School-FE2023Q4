@@ -28,6 +28,10 @@
     margin-bottom: 0.7rem;
     position: relative;
     cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 0.5rem;
 }
 
 .list_item::before {
@@ -45,4 +49,12 @@
 
 .list_item.active::before {
     background-color: green;
+}
+
+.list_item-mes {
+    font-size: 1.5rem;
+
+    border-radius: 30px;
+    background-color: var(--main-color);
+    color: whitesmoke;
 }
