@@ -22,15 +22,20 @@ module.exports = {
         ecmaVersion: 'latest',
         sourceType: 'module',
     },
+
     settings: {
         'import/resolver': {
             node: {
                 extensions: ['.ts', '.js'],
             },
         },
+        linterOptions: {
+            noInlineConfig: true,
+        },
     },
     rules: {
         '@typescript-eslint/no-explicit-any': 2,
+        'no-shadow': 'off',
         'import/extensions': [
             'error',
             'ignorePackages',
@@ -41,6 +46,5 @@ module.exports = {
                 tsx: 'never',
             },
         ],
-        noInlineConfig: true,
     },
 };
