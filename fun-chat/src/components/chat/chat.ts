@@ -9,19 +9,15 @@ export default class Chat extends BaseComponent {
 
     dialog: Dialog;
 
-    constructor() {
+    constructor(contact: thirdPartyUser[]) {
         super({
             tag: 'div',
             classes: ['chat'],
         });
         this.dialog = new Dialog();
 
-        this.contact = new Contact();
+        this.contact = new Contact(contact);
 
         this.addChild([this.contact, this.dialog]);
-    }
-
-    createContact(contact: thirdPartyUser[]) {
-        this.contact.drawContacts(contact);
     }
 }

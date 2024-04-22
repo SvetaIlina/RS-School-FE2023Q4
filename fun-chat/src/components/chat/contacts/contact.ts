@@ -15,20 +15,23 @@ export default class Contact extends BaseComponent {
         classes: ['contacts_list'],
     });
 
-    constructor() {
+    contact: thirdPartyUser[];
+
+    constructor(contact: thirdPartyUser[]) {
         super({
             tag: 'div',
             classes: ['contacts'],
         });
-
-        this.init();
+        this.contact = contact;
+        this.init(this.contact);
         this.searchInput.setCallback((e) => searchUser(e, this.contactList.getElement()), 'keyup');
         this.contactList.setCallback((e) => {
             getSelectedContact(e);
         }, 'click');
     }
 
-    init() {
+    init(contact: thirdPartyUser[]) {
+        this.drawContacts(contact);
         this.addChild([this.searchInput, this.contactList]);
     }
 

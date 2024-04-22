@@ -2,7 +2,7 @@ import ChatData from './components/chat/chatData';
 import Router from './router';
 import { checkServerData, isNotNull } from './servise/servise';
 import { ConnectMessage, PageIds, messageType } from './type/type';
-import { generalRequest, errorResponse, thirdPartyUser } from './type/typeAPI';
+import { generalRequest, errorResponse, thirdPartyUser, currentUser } from './type/typeAPI';
 import MainView from './view';
 import MyWebSocket from './webSocket';
 
@@ -29,22 +29,12 @@ export default class Controller {
     }
 
     init() {
-        let hash: string;
-        const isUserLogin = this.model.checkUser();
-        if (isUserLogin) {
-            hash = PageIds.MainPage;
-        } else {
-            hash = PageIds.LoginPage;
-        }
-
-        this.router.route(hash);
         this.view.showModal(ConnectMessage.InProcess);
         this.ws.initWebSocket();
     }
 
     handleWebSocketOnopen(isOpen: boolean, message: string): void {
-        this.getUsers.call(this, messageType.ActiveUser);
-        this.getUsers.call(this, messageType.InactiveUser);
+        this.goToPage();
         this.view.showModal(message, isOpen);
     }
 
@@ -58,10 +48,8 @@ export default class Controller {
 
         switch (type) {
             case messageType.Login: {
-                this.model.isLogined = true;
                 this.model.setMyUser();
                 this.router.route(PageIds.MainPage);
-
                 break;
             }
             case messageType.Logout: {
@@ -70,11 +58,11 @@ export default class Controller {
                 break;
             }
             case messageType.ActiveUser: {
+                this.getUsers.call(this, messageType.InactiveUser);
                 const data = checkServerData(dataFromServer, 'users');
                 if (Array.isArray(data)) {
                     const users = data as thirdPartyUser[];
                     this.model.ActiveUser = users;
-                    this.view.addContactList(users);
                 }
 
                 break;
@@ -83,8 +71,9 @@ export default class Controller {
                 const data = checkServerData(dataFromServer, 'users');
                 if (Array.isArray(data)) {
                     const users = data as thirdPartyUser[];
-                    this.model.ActiveUser = users;
-                    this.view.addContactList(users);
+                    this.model.inActiveUser = users;
+                    isNotNull(this.model.myUser);
+                    this.authorizeUser(this.model.myUser);
                 }
 
                 break;
@@ -107,8 +96,9 @@ export default class Controller {
         switch (action) {
             case 'login': {
                 isNotNull(data);
-
-                this.authorizeUser(data);
+                const user = JSON.parse(data);
+                this.model.myUser = user;
+                this.getUsers.call(this, messageType.ActiveUser);
 
                 break;
             }
@@ -129,17 +119,17 @@ export default class Controller {
     displayContent(hash: string) {
         if (this.model.myUser) {
             const name = this.model.myUser.login;
-            this.view.createPage(hash, name);
-            this.view.addContactList(this.model.getAllContact());
+
+            const contact = this.model.getAllContact();
+
+            this.view.createPage(hash, name, contact);
         } else {
             this.view.createPage(hash);
         }
     }
 
-    authorizeUser(data: string) {
-        const user = JSON.parse(data);
-        this.model.myUser = user;
-        const alreadyLogined = Boolean(this.model.checkLogginedUser());
+    authorizeUser(user: currentUser) {
+        const alreadyLogined = this.model.checkLogginedUser();
         if (!alreadyLogined) {
             const serverRequest: generalRequest = {
                 id: crypto.randomUUID(),
@@ -183,5 +173,14 @@ export default class Controller {
             },
         };
         this.ws.sendRequest(serverRequest);
+    }
+
+    goToPage() {
+        const UserLogin = this.model.checkSavedUser();
+        if (UserLogin) {
+            this.getUsers.call(this, messageType.ActiveUser);
+        } else {
+            this.router.route(PageIds.LoginPage);
+        }
     }
 }

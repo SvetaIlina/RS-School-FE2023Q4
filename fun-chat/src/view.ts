@@ -63,14 +63,15 @@ export default class MainView extends BasePage {
         }
     }
 
-    createPage(idPage: string, name?: string): void {
+    createPage(idPage: string, name?: string, contact?: thirdPartyUser[]): void {
         let content: HTMLElement | null = null;
         let page: LoginPage | MainPage | InfoPage | NotFound | null = null;
         if (idPage === PageIds.LoginPage) {
             page = new LoginPage();
         } else if (idPage === PageIds.MainPage) {
             isNotNull(name);
-            this.mainPage = new MainPage(name);
+            isNotNull(contact);
+            this.mainPage = new MainPage(name, contact);
             page = this.mainPage;
         } else if (idPage === PageIds.InfoPage) {
             page = new InfoPage();
@@ -106,12 +107,6 @@ export default class MainView extends BasePage {
         if (connectionStatus) {
             this.modalIsOpen = false;
             setTimeout(() => modal.closeModal(), 1000);
-        }
-    }
-
-    addContactList(contacts: thirdPartyUser[]) {
-        if (this.mainPage) {
-            this.mainPage.addContact(contacts);
         }
     }
 }

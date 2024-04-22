@@ -44,7 +44,7 @@ export default class ChatData {
         this.isLogined = true;
     }
 
-    checkUser(): boolean {
+    checkSavedUser(): boolean {
         if (sessionStorage.getItem(this.storageKey)) {
             this.isLogined = true;
             this.myUser = this.getUser();
@@ -53,13 +53,11 @@ export default class ChatData {
         return false;
     }
 
-    checkLogginedUser(): thirdPartyUser | undefined {
-        const logginedUser = this.myUser;
+    checkLogginedUser(): boolean {
         const allLogginedUsers = this.ActiveUser;
+        const index = this.findUserIndex(allLogginedUsers);
 
-        isNotNull(logginedUser);
-        const user = allLogginedUsers.find((item) => item.login === logginedUser.login);
-        return user;
+        return index !== -1;
     }
 
     getUser(): currentUser {
@@ -76,12 +74,15 @@ export default class ChatData {
 
     getAllContact(): thirdPartyUser[] {
         const allUsers = [...this.ActiveUser, ...this.inActiveUser];
-        const { myUser } = this;
-        isNotNull(myUser);
-        const index = allUsers.findIndex((item) => item.login === myUser.login);
-
-        allUsers.slice(index, 1);
-
+        const index = this.findUserIndex(allUsers);
+        allUsers.splice(index, 1);
         return allUsers;
+    }
+
+    findUserIndex(array: thirdPartyUser[]): number {
+        isNotNull(this.myUser);
+        const logginedUserName = this.myUser.login;
+        const index = array.findIndex((user) => user.login === logginedUserName);
+        return index;
     }
 }

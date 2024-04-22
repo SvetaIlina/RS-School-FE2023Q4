@@ -11,7 +11,7 @@ export default class MainPage extends BasePage {
 
     chat: Chat;
 
-    constructor(userName: string) {
+    constructor(userName: string, contact: thirdPartyUser[]) {
         super();
         this.header = new Header(
             `${userName}`,
@@ -21,12 +21,8 @@ export default class MainPage extends BasePage {
         );
         this.footer = new Footer();
 
-        this.chat = new Chat();
+        this.chat = new Chat(contact);
 
         this.addChild([this.header, this.chat, this.footer]);
-    }
-
-    addContact(contact: thirdPartyUser[]) {
-        this.chat.createContact(contact);
     }
 }
