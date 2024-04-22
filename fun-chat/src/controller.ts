@@ -119,6 +119,13 @@ export default class Controller {
                 this.userLogout();
                 break;
             }
+            case 'contactSelected': {
+                isNotNull(data);
+                this.model.setCurrentContact(data);
+                isNotNull(this.model.currentContact);
+                this.view.setUserContact(this.model.currentContact);
+                break;
+            }
             default: {
                 console.log('nothing');
             }

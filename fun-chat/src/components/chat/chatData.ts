@@ -29,16 +29,6 @@ export default class ChatData {
         this.isLogined = false;
     }
 
-    // updateSelectedContact(contactName: string | null) {
-    //     isNotNull(contactName);
-    //     isNotNull(this.contacts);
-    //     isNotNull(this.dialog);
-    //     const contact = this.contacts.find((item) => item.login === contactName);
-    //     isNotNull(contact);
-    //     this.currentContact = contact;
-    //     this.dialog.updateHeader(contact);
-    // }
-
     setMyUser() {
         sessionStorage.setItem(this.storageKey, JSON.stringify(this.myUser));
         this.isLogined = true;
@@ -92,6 +82,14 @@ export default class ChatData {
                 const index = findUserIndex(this.ActiveUser, user);
                 this.ActiveUser.splice(index, 1);
             }
+        }
+    }
+
+    setCurrentContact(userName: string) {
+        const contacts = this.getAllContact();
+        const contact = contacts.find((user) => user.login === userName);
+        if (contact) {
+            this.currentContact = contact;
         }
     }
 }

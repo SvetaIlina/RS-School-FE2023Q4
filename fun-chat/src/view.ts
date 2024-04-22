@@ -49,6 +49,11 @@ export default class MainView extends BasePage {
                 break;
             }
 
+            case 'contactSelected': {
+                this.notifyObservers(action, data);
+                break;
+            }
+
             default: {
                 console.log('nothing');
             }
@@ -113,5 +118,10 @@ export default class MainView extends BasePage {
     updateUserStatus(user: thirdPartyUser) {
         isNotNull(this.mainPage);
         this.mainPage.updateContactList(user);
+    }
+
+    setUserContact(user: thirdPartyUser) {
+        isNotNull(this.mainPage);
+        this.mainPage.setHeaderContact(user);
     }
 }

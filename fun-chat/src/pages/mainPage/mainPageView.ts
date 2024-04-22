@@ -21,12 +21,16 @@ export default class MainPage extends BasePage {
         );
         this.footer = new Footer();
 
-        this.chat = new Chat(contact);
+        this.chat = new Chat(contact, (name: string) => this.notifyObservers('contactSelected', name));
 
         this.addChild([this.header, this.chat, this.footer]);
     }
 
     updateContactList(user: thirdPartyUser) {
         this.chat.updateContact(user);
+    }
+
+    setHeaderContact(user: thirdPartyUser) {
+        this.chat.setHeader(user);
     }
 }

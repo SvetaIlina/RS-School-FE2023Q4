@@ -9,19 +9,23 @@ export default class Chat extends BaseComponent {
 
     dialog: Dialog;
 
-    constructor(contact: thirdPartyUser[]) {
+    constructor(contact: thirdPartyUser[], contactListCallback: (name: string) => void) {
         super({
             tag: 'div',
             classes: ['chat'],
         });
         this.dialog = new Dialog();
 
-        this.contact = new Contact(contact);
+        this.contact = new Contact(contact, contactListCallback);
 
         this.addChild([this.contact, this.dialog]);
     }
 
     updateContact(user: thirdPartyUser) {
         this.contact.updateContact(user);
+    }
+
+    setHeader(user: thirdPartyUser) {
+        this.dialog.updateHeader(user);
     }
 }

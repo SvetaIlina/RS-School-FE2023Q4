@@ -10,14 +10,14 @@ export default class Contact extends BaseComponent {
         attributes: [{ key: 'placeholder', value: 'Search...' }],
     });
 
-    private contactList: BaseComponent<HTMLUListElement> = new BaseComponent<HTMLUListElement>({
+    private contactList: BaseComponent = new BaseComponent({
         tag: 'ul',
         classes: ['contacts_list'],
     });
 
     contact: thirdPartyUser[];
 
-    constructor(contact: thirdPartyUser[]) {
+    constructor(contact: thirdPartyUser[], contactListCallback: (name: string) => void) {
         super({
             tag: 'div',
             classes: ['contacts'],
@@ -26,7 +26,10 @@ export default class Contact extends BaseComponent {
         this.init(this.contact);
         this.searchInput.setCallback((e) => searchUser(e, this.contactList.getElement()), 'keyup');
         this.contactList.setCallback((e) => {
-            getSelectedContact(e);
+            const selectedContact = getSelectedContact(e);
+            if (selectedContact) {
+                contactListCallback(selectedContact);
+            }
         }, 'click');
     }
 
@@ -42,7 +45,7 @@ export default class Contact extends BaseComponent {
     }
 
     addNewContact(contact: thirdPartyUser) {
-        const listItem = new BaseComponent<HTMLUListElement>({
+        const listItem = new BaseComponent({
             tag: 'li',
             classes: ['list_item'],
             textContent: contact.login,
@@ -56,8 +59,8 @@ export default class Contact extends BaseComponent {
 
     updateContact(contact: thirdPartyUser) {
         const userStatus: boolean = contact.isLogined;
-        const listElement = this.contactList.getElement();
-        const currentContact: Element | null = listElement.querySelector(`#${contact.login}`);
+
+        const currentContact: Element | null = document.getElementById(`${contact.login}`);
 
         if (currentContact) {
             if (userStatus) {
