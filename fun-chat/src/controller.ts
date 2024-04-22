@@ -31,6 +31,7 @@ export default class Controller {
     init() {
         this.view.showModal(ConnectMessage.InProcess);
         this.ws.initWebSocket();
+        document.body.append(this.view.getElement());
     }
 
     handleWebSocketOnopen(isOpen: boolean, message: string): void {
