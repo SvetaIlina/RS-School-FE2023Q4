@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const CopyPlugin = require('copy-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
@@ -54,15 +54,15 @@ module.exports = ({ develop }) => ({
         new MiniCssExtractPlugin({
             filename: 'styles.css',
         }),
-        // new CopyPlugin({
-        //     patterns: [
-        //         {
-        //             from: path.resolve(__dirname, './src/images'),
-        //             to: path.resolve(__dirname, 'dist'),
-        //             noErrorOnMissing: true,
-        //         },
-        //     ],
-        // }),
+        new CopyPlugin({
+            patterns: [
+                {
+                    from: path.resolve(__dirname, 'src/assets'),
+                    to: path.resolve(__dirname, 'dist/assets'),
+                    noErrorOnMissing: true,
+                },
+            ],
+        }),
     ],
     ...devServer(develop),
 });

@@ -1,6 +1,6 @@
 import BaseComponent from '../baseComponent';
 import './footer.css';
-import img from '../../assets/image/rs_school_js.svg';
+import img from '../../assets/rs_school_js.svg';
 import MyLink from '../myLink';
 
 export default class Footer extends BaseComponent {
