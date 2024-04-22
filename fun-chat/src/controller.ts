@@ -78,6 +78,15 @@ export default class Controller {
 
                 break;
             }
+            case messageType.AnotherUserLogin:
+            case messageType.AnotherUserLogout: {
+                const user = checkServerData(dataFromServer, 'user') as thirdPartyUser;
+                this.model.changeUserStatus(user);
+
+                this.view.updateUserStatus(user);
+
+                break;
+            }
             case messageType.Error: {
                 const errorMessage = checkServerData(dataFromServer, 'error');
                 if (typeof errorMessage === 'string') {

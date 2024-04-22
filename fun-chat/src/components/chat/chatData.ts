@@ -1,4 +1,4 @@
-import { isNotNull } from '../../servise/servise';
+import { findUserIndex, isNotNull } from '../../servise/servise';
 import Dialog from './dialog/dialog';
 import { thirdPartyUser, currentUser } from '../../type/typeAPI';
 
@@ -54,8 +54,9 @@ export default class ChatData {
     }
 
     checkLogginedUser(): boolean {
+        isNotNull(this.myUser);
         const allLogginedUsers = this.ActiveUser;
-        const index = this.findUserIndex(allLogginedUsers);
+        const index = findUserIndex(allLogginedUsers, this.myUser);
 
         return index !== -1;
     }
@@ -74,15 +75,23 @@ export default class ChatData {
 
     getAllContact(): thirdPartyUser[] {
         const allUsers = [...this.ActiveUser, ...this.inActiveUser];
-        const index = this.findUserIndex(allUsers);
+        isNotNull(this.myUser);
+        const index = findUserIndex(allUsers, this.myUser);
         allUsers.splice(index, 1);
         return allUsers;
     }
 
-    findUserIndex(array: thirdPartyUser[]): number {
-        isNotNull(this.myUser);
-        const logginedUserName = this.myUser.login;
-        const index = array.findIndex((user) => user.login === logginedUserName);
-        return index;
+    changeUserStatus(user: thirdPartyUser) {
+        if (user.isLogined) {
+            this.ActiveUser.push(user);
+            const index = findUserIndex(this.inActiveUser, user);
+            if (index !== -1) {
+                this.inActiveUser.splice(index, 1);
+            } else {
+                this.inActiveUser.push(user);
+                const index = findUserIndex(this.ActiveUser, user);
+                this.ActiveUser.splice(index, 1);
+            }
+        }
     }
 }

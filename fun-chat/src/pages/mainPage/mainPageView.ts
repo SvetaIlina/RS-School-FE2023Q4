@@ -25,4 +25,8 @@ export default class MainPage extends BasePage {
 
         this.addChild([this.header, this.chat, this.footer]);
     }
+
+    updateContactList(user: thirdPartyUser) {
+        this.chat.updateContact(user);
+    }
 }

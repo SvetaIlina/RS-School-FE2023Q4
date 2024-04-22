@@ -20,4 +20,8 @@ export default class Chat extends BaseComponent {
 
         this.addChild([this.contact, this.dialog]);
     }
+
+    updateContact(user: thirdPartyUser) {
+        this.contact.updateContact(user);
+    }
 }

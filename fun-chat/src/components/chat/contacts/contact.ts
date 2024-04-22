@@ -1,4 +1,4 @@
-import { getSelectedContact, isNotNullElement, searchUser } from '../../../servise/servise';
+import { getSelectedContact, searchUser } from '../../../servise/servise';
 import { thirdPartyUser } from '../../../type/typeAPI';
 import BaseComponent from '../../baseComponent';
 import './contact.css';
@@ -54,15 +54,19 @@ export default class Contact extends BaseComponent {
         this.contactList.addChild([listItem]);
     }
 
-    updateContactStatus(contact: thirdPartyUser) {
+    updateContact(contact: thirdPartyUser) {
         const userStatus: boolean = contact.isLogined;
         const listElement = this.contactList.getElement();
         const currentContact: Element | null = listElement.querySelector(`#${contact.login}`);
-        isNotNullElement<HTMLElement>(currentContact);
-        if (userStatus) {
-            currentContact.classList.add('active');
+
+        if (currentContact) {
+            if (userStatus) {
+                currentContact.classList.add('active');
+            } else {
+                currentContact.classList.remove('active');
+            }
         } else {
-            currentContact.classList.remove('active');
+            this.addNewContact(contact);
         }
     }
 }

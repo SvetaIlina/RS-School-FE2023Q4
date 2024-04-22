@@ -109,4 +109,9 @@ export default class MainView extends BasePage {
             setTimeout(() => modal.closeModal(), 1000);
         }
     }
+
+    updateUserStatus(user: thirdPartyUser) {
+        isNotNull(this.mainPage);
+        this.mainPage.updateContactList(user);
+    }
 }
