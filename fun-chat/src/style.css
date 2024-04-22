@@ -15,6 +15,7 @@ html {
     box-sizing: inherit;
     margin: 0;
     padding: 0;
+    scrollbar-width: thin;
 }
 
 ul {
@@ -44,4 +45,28 @@ body {
 
 input {
     background-color: var(--bg-color);
+}
+
+@media (max-width: 600px) {
+    html {
+        font-size: 8px;
+    }
+    .page {
+        width: auto;
+    }
+}
+
+@media (max-width: 450px) {
+    .chat {
+        flex-direction: column;
+        justify-content: start;
+    }
+    .contacts {
+        width: 100%;
+        max-height: 150px;
+    }
+    .dialog {
+        width: 100%;
+        flex-grow: 1;
+    }
 }
