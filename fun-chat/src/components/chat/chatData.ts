@@ -80,11 +80,11 @@ export default class ChatData {
             const index = findUserIndex(this.inActiveUser, user);
             if (index !== -1) {
                 this.inActiveUser.splice(index, 1);
-            } else {
-                this.inActiveUser.push(user);
-                const index = findUserIndex(this.ActiveUser, user);
-                this.ActiveUser.splice(index, 1);
             }
+        } else {
+            this.inActiveUser.push(user);
+            const index = findUserIndex(this.ActiveUser, user);
+            this.ActiveUser.splice(index, 1);
         }
     }
 
