@@ -68,7 +68,9 @@ export default class ChatData {
         const allUsers = [...this.ActiveUser, ...this.inActiveUser];
         isNotNull(this.myUser);
         const index = findUserIndex(allUsers, this.myUser);
-        allUsers.splice(index, 1);
+        if (index !== -1) {
+            allUsers.splice(index, 1);
+        }
         return allUsers;
     }
 
