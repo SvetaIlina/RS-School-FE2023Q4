@@ -3,6 +3,7 @@ import Button from '../../components/buttons/button';
 import LoginInput from '../../components/loginForm/input/inputField';
 import BasePage from '../basePage';
 import { userLoginData } from '../../type/type';
+import { infoCallback, isNotNull } from '../../servise/servise';
 
 export default class LoginPage extends BasePage {
     form: LoginForm;
@@ -19,13 +20,13 @@ export default class LoginPage extends BasePage {
             'Login',
             (e) => {
                 e.preventDefault();
-                this.notifyObservers('login', this.getUser());
+                this.loginCallback(e);
             },
             'submit'
         );
         const infoBtn = new Button(['form_btn'], 'About', (e) => {
             e.preventDefault();
-            this.notifyObservers('showInfo');
+            infoCallback(this.getElement());
         });
         const login = new LoginInput('User name', 3, 'login', 'text');
 
@@ -38,6 +39,16 @@ export default class LoginPage extends BasePage {
             'Password must contain at least one capital letter and a digit'
         );
         return new LoginForm([login, password], [loginBtn, infoBtn]);
+    }
+
+    loginCallback(e: Event) {
+        // eslint-disable-next-line no-debugger
+        debugger;
+        const btn = e.target;
+        const user: string = this.getUser();
+        const myEvent = new CustomEvent('login', { bubbles: true, detail: user });
+        isNotNull(btn);
+        btn.dispatchEvent(myEvent);
     }
 
     clear() {

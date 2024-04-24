@@ -34,32 +34,14 @@ export default class MainView extends BasePage {
         this.element.addEventListener('contactSelected', ((event: CustomEvent) => {
             this.notifyObservers('contactSelected', event.detail);
         }) as EventListener);
+        this.element.addEventListener('login', ((event: CustomEvent) => {
+            this.notifyObservers('login', event.detail);
+        }) as EventListener);
     }
 
     // notify() {
 
     // }
-
-    update(action: string, data?: string) {
-        switch (action) {
-            case 'login': {
-                isNotNull(data);
-
-                this.notifyObservers(action, data);
-
-                break;
-            }
-
-            case 'back': {
-                window.history.back();
-                break;
-            }
-
-            default: {
-                console.log('nothing');
-            }
-        }
-    }
 
     setContent(content: HTMLElement | null) {
         this.removeChild();
@@ -84,7 +66,7 @@ export default class MainView extends BasePage {
         } else {
             page = new NotFound();
         }
-        page.subscribe(this);
+
         content = page.getElement();
 
         this.setContent(content);

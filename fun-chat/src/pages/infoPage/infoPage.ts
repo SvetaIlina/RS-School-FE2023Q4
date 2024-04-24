@@ -29,7 +29,7 @@ export default class InfoPage extends BasePage {
         });
 
         const backBtn = new Button(['backBtn'], 'Back', () => {
-            this.notifyObservers('back');
+            window.history.back();
         });
 
         wrapper.addChild([title, text, new MyLink(), backBtn]);

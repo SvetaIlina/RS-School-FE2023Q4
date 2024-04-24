@@ -77,3 +77,8 @@ export function findUserIndex(array: thirdPartyUser[], user: currentUser | third
     const index = array.findIndex((user) => user.login === logginedUserName);
     return index;
 }
+
+export function infoCallback(target: HTMLElement) {
+    const myEvent = new CustomEvent('showInfo', { bubbles: true });
+    target.dispatchEvent(myEvent);
+}

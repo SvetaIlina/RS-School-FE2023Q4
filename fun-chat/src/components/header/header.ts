@@ -1,3 +1,4 @@
+import { infoCallback } from '../../servise/servise';
 import BaseComponent from '../baseComponent';
 import Button from '../buttons/button';
 import './header.css';
@@ -19,7 +20,7 @@ export default class Header extends BaseComponent {
         this.userName = userName;
         this.appName = appName;
         this.logOutBtn = new Button(['header_btn'], 'Log Out', this.logOutCallback.bind(this));
-        this.infoBtn = new Button(['header_btn'], 'About', this.infoCallback.bind(this));
+        this.infoBtn = new Button(['header_btn'], 'About', () => infoCallback(this.getElement()));
         this.configView();
     }
 
@@ -39,10 +40,5 @@ export default class Header extends BaseComponent {
     logOutCallback() {
         const myEvent = new CustomEvent('logOut', { bubbles: true });
         this.logOutBtn.getElement().dispatchEvent(myEvent);
-    }
-
-    infoCallback() {
-        const myEvent = new CustomEvent('showInfo', { bubbles: true });
-        this.infoBtn.getElement().dispatchEvent(myEvent);
     }
 }
