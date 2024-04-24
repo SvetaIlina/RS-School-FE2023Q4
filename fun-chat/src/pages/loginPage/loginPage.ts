@@ -1,15 +1,19 @@
 import LoginForm from '../../components/loginForm/loginForm';
 import Button from '../../components/buttons/button';
 import LoginInput from '../../components/loginForm/input/inputField';
-import BasePage from '../basePage';
+
 import { userLoginData } from '../../type/type';
 import { infoCallback, isNotNull } from '../../servise/servise';
+import BaseComponent from '../../components/baseComponent';
 
-export default class LoginPage extends BasePage {
+export default class LoginPage extends BaseComponent {
     form: LoginForm;
 
     constructor() {
-        super();
+        super({
+            tag: 'div',
+            classes: ['page'],
+        });
         this.form = this.createForm();
         this.addChild([this.form]);
     }
@@ -42,8 +46,6 @@ export default class LoginPage extends BasePage {
     }
 
     loginCallback(e: Event) {
-        // eslint-disable-next-line no-debugger
-        debugger;
         const btn = e.target;
         const user: string = this.getUser();
         const myEvent = new CustomEvent('login', { bubbles: true, detail: user });

@@ -1,12 +1,15 @@
 import BaseComponent from '../../components/baseComponent';
 import Button from '../../components/buttons/button';
-import BasePage from '../basePage';
+
 import './infoPage.css';
 import MyLink from '../../components/myLink';
 
-export default class InfoPage extends BasePage {
+export default class InfoPage extends BaseComponent {
     constructor() {
-        super();
+        super({
+            tag: 'div',
+            classes: ['page'],
+        });
         this.configView();
     }
 

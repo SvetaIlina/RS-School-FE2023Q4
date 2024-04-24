@@ -7,9 +7,11 @@ import MainPage from './pages/mainPage/mainPageView';
 
 import Modal from './components/modal/modal';
 import { isNotNull } from './servise/servise';
-import BasePage from './pages/basePage';
+
 import { thirdPartyUser } from './type/typeAPI';
 import Message from './components/chat/message/message';
+
+import BasePage from './pages/basePage';
 
 export default class MainView extends BasePage {
     private modalIsOpen: boolean;
@@ -18,8 +20,6 @@ export default class MainView extends BasePage {
 
     constructor() {
         super();
-        this.element = document.createElement('main');
-        this.setStyles(['main']);
         this.mainPage = null;
         this.modalIsOpen = false;
         this.element.addEventListener('sendMessage', ((event: CustomEvent) => {

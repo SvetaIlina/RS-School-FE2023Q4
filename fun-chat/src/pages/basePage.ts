@@ -1,19 +1,19 @@
 import BaseComponent from '../components/baseComponent';
 import Controller from '../controller';
-import MainView from '../view';
+
 import './page.css';
 
-export default class BasePage extends BaseComponent {
-    private observers: Array<MainView | Controller> = [];
+export default abstract class BasePage extends BaseComponent {
+    private observers: Controller[] = [];
 
     constructor() {
         super({
-            tag: 'div',
-            classes: ['page'],
+            tag: 'main',
+            classes: ['main'],
         });
     }
 
-    subscribe(observer: MainView | Controller) {
+    subscribe(observer: Controller) {
         this.observers.push(observer);
     }
 
