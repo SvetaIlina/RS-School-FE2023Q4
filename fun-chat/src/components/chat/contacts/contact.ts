@@ -17,20 +17,16 @@ export default class Contact extends BaseComponent {
 
     contact: thirdPartyUser[];
 
-    listCallback: (name: string) => void;
-
-    constructor(contact: thirdPartyUser[], contactListCallback: (name: string) => void) {
+    constructor(contact: thirdPartyUser[]) {
         super({
             tag: 'div',
             classes: ['contacts'],
         });
-        this.listCallback = contactListCallback;
+
         this.contact = contact;
         this.init(this.contact);
         this.searchInput.setCallback((e) => searchUser(e, this.contactList.getElement()), 'keyup');
-        this.contactList.setCallback((e) => {
-            this.handleListEvent(e);
-        }, 'click');
+        this.contactList.setCallback((e) => this.contactListCallback(e), 'click');
     }
 
     init(contact: thirdPartyUser[]) {
@@ -38,11 +34,10 @@ export default class Contact extends BaseComponent {
         this.addChild([this.searchInput, this.contactList]);
     }
 
-    handleListEvent(e: Event) {
+    contactListCallback(e: Event) {
         const selectedContact = getSelectedContact(e);
-        if (selectedContact) {
-            this.listCallback(selectedContact);
-        }
+        const myEvent = new CustomEvent('contactSelected', { bubbles: true, detail: selectedContact });
+        this.contactList.getElement().dispatchEvent(myEvent);
     }
 
     drawContacts(contactList: Array<thirdPartyUser>) {

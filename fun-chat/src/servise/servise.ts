@@ -53,12 +53,21 @@ export function checkServerData(dataFromServer: generalRequest | errorResponse, 
     return null;
 }
 
-export function getSelectedContact(e: Event): string | null {
-    let contactLogin: string | null = null;
+export function getSelectedContact(e: Event): string {
+    let contactLogin: string;
     const { target } = e;
+
     isNotNullElement<HTMLElement>(target);
     if (target.classList.contains('list_item-name')) {
+        isNotNull(target.textContent);
         contactLogin = target.textContent;
+    } else if (target.classList.contains('list_item')) {
+        const name = target.firstChild;
+        isNotNull(name);
+        isNotNull(name.textContent);
+        contactLogin = name.textContent;
+    } else {
+        contactLogin = '';
     }
     return contactLogin;
 }

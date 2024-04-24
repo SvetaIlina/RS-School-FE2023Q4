@@ -18,7 +18,7 @@ export default class MainPage extends BasePage {
         this.header = new Header(`${userName}`, 'fun Chat');
         this.footer = new Footer();
 
-        this.chat = new Chat(contact, (name: string) => this.notifyObservers('contactSelected', name));
+        this.chat = new Chat(contact);
 
         this.addChild([this.header, this.chat, this.footer]);
     }

@@ -31,6 +31,9 @@ export default class MainView extends BasePage {
         this.element.addEventListener('showInfo', () => {
             this.notifyObservers('showInfo');
         });
+        this.element.addEventListener('contactSelected', ((event: CustomEvent) => {
+            this.notifyObservers('contactSelected', event.detail);
+        }) as EventListener);
     }
 
     // notify() {
@@ -47,24 +50,8 @@ export default class MainView extends BasePage {
                 break;
             }
 
-            case 'showInfo': {
-                this.notifyObservers(action);
-
-                break;
-            }
-
-            case 'logOut': {
-                this.notifyObservers(action);
-
-                break;
-            }
             case 'back': {
                 window.history.back();
-                break;
-            }
-
-            case 'contactSelected': {
-                this.notifyObservers(action, data);
                 break;
             }
 
