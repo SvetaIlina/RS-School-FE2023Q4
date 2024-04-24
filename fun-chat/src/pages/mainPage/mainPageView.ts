@@ -15,12 +15,7 @@ export default class MainPage extends BasePage {
 
     constructor(userName: string, contact: thirdPartyUser[]) {
         super();
-        this.header = new Header(
-            `${userName}`,
-            'fun Chat',
-            () => this.notifyObservers('logOut'),
-            () => this.notifyObservers('showInfo')
-        );
+        this.header = new Header(`${userName}`, 'fun Chat');
         this.footer = new Footer();
 
         this.chat = new Chat(contact, (name: string) => this.notifyObservers('contactSelected', name));

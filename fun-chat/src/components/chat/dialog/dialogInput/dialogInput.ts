@@ -28,7 +28,7 @@ export default class DialogInput extends BaseComponent {
         const input = this.messageInput.getElement();
         const message = input.value;
         if (message) {
-            const myEv = new CustomEvent('sendMes', { bubbles: true, detail: message });
+            const myEv = new CustomEvent('sendMessage', { bubbles: true, detail: message });
             btn.dispatchEvent(myEv);
         }
 

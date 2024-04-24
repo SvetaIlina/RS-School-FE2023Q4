@@ -22,10 +22,20 @@ export default class MainView extends BasePage {
         this.setStyles(['main']);
         this.mainPage = null;
         this.modalIsOpen = false;
-        this.element.addEventListener('sendMes', ((event: CustomEvent) => {
+        this.element.addEventListener('sendMessage', ((event: CustomEvent) => {
             this.notifyObservers('sendMessage', event.detail);
         }) as EventListener);
+        this.element.addEventListener('logOut', () => {
+            this.notifyObservers('logOut');
+        });
+        this.element.addEventListener('showInfo', () => {
+            this.notifyObservers('showInfo');
+        });
     }
+
+    // notify() {
+
+    // }
 
     update(action: string, data?: string) {
         switch (action) {

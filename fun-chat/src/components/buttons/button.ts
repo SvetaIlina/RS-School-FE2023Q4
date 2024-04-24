@@ -1,8 +1,9 @@
+import { Callback } from '../../type/type';
 import BaseComponent from '../baseComponent';
 import './btn.css';
 
 export default class Button extends BaseComponent {
-    constructor(btnClasses: Array<string>, btnText: string, btnCallback: (event: Event) => void, btnType?: string) {
+    constructor(btnClasses: Array<string>, btnText: string, btnCallback: Callback<Event>, btnType?: string) {
         super({
             tag: 'button',
             classes: btnClasses,
