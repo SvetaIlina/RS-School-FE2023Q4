@@ -22,26 +22,16 @@ export default class MainView extends BasePage {
         super();
         this.mainPage = null;
         this.modalIsOpen = false;
-        this.element.addEventListener('sendMessage', ((event: CustomEvent) => {
-            this.notifyObservers('sendMessage', event.detail);
-        }) as EventListener);
-        this.element.addEventListener('logOut', () => {
-            this.notifyObservers('logOut');
-        });
-        this.element.addEventListener('showInfo', () => {
-            this.notifyObservers('showInfo');
-        });
-        this.element.addEventListener('contactSelected', ((event: CustomEvent) => {
-            this.notifyObservers('contactSelected', event.detail);
-        }) as EventListener);
-        this.element.addEventListener('login', ((event: CustomEvent) => {
-            this.notifyObservers('login', event.detail);
-        }) as EventListener);
+        this.handleEvent(['sendMessage', 'logOut', 'showInfo', 'contactSelected', 'login']);
     }
 
-    // notify() {
-
-    // }
+    handleEvent(events: string[]) {
+        events.forEach((eventItem) => {
+            this.element.addEventListener(eventItem, ((event: CustomEvent) => {
+                this.notifyObservers(eventItem, event.detail);
+            }) as EventListener);
+        });
+    }
 
     setContent(content: HTMLElement | null) {
         this.removeChild();
