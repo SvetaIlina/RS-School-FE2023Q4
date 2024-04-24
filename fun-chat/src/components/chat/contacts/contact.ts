@@ -1,4 +1,4 @@
-import { getSelectedContact, searchUser } from '../../../servise/servise';
+import { getSelectedContact, isNotNull, searchUser } from '../../../servise/servise';
 import { thirdPartyUser } from '../../../type/typeAPI';
 import BaseComponent from '../../baseComponent';
 import './contact.css';
@@ -15,16 +15,13 @@ export default class Contact extends BaseComponent {
         classes: ['contacts_list'],
     });
 
-    contact: thirdPartyUser[];
-
     constructor(contact: thirdPartyUser[]) {
         super({
             tag: 'div',
             classes: ['contacts'],
         });
 
-        this.contact = contact;
-        this.init(this.contact);
+        this.init(contact);
         this.searchInput.setCallback((e) => searchUser(e, this.contactList.getElement()), 'keyup');
         this.contactList.setCallback((e) => this.contactListCallback(e), 'click');
     }
@@ -36,6 +33,7 @@ export default class Contact extends BaseComponent {
 
     contactListCallback(e: Event) {
         const selectedContact = getSelectedContact(e);
+        this.displayUnreadMessage(selectedContact, 'remove');
         const myEvent = new CustomEvent('contactSelected', { bubbles: true, detail: selectedContact });
         this.contactList.getElement().dispatchEvent(myEvent);
     }
@@ -83,6 +81,22 @@ export default class Contact extends BaseComponent {
             }
         } else {
             this.addNewContact(contact);
+        }
+    }
+
+    displayUnreadMessage(sender: string, action: string) {
+        isNotNull(this.contactList);
+        const contact = document.getElementById(`${sender}`);
+        isNotNull(contact);
+        const messageContainer = contact.querySelector('.list_item-mes');
+        isNotNull(messageContainer);
+        let messageCount = Number(messageContainer.textContent);
+
+        if (action === 'add') {
+            messageContainer.textContent = `${(messageCount += 1)}`;
+        }
+        if (action === 'remove') {
+            messageContainer.textContent = null;
         }
     }
 }

@@ -1,6 +1,5 @@
 import BaseComponent from '../../components/baseComponent';
 import Chat from '../../components/chat/chat';
-import Message from '../../components/chat/message/message';
 
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
@@ -24,18 +23,5 @@ export default class MainPage extends BaseComponent {
         this.chat = new Chat(contact);
 
         this.addChild([this.header, this.chat, this.footer]);
-    }
-
-    updateContactList(user: thirdPartyUser) {
-        this.chat.updateContact(user);
-    }
-
-    updateChat(user: thirdPartyUser) {
-        this.chat.setHeader(user);
-        this.chat.updateDialog();
-    }
-
-    addNewMessage(message: Message) {
-        this.chat.drawNewMessage(message);
     }
 }

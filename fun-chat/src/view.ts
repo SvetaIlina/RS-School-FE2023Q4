@@ -33,14 +33,6 @@ export default class MainView extends BasePage {
         });
     }
 
-    setContent(content: HTMLElement | null) {
-        this.removeChild();
-
-        if (content) {
-            this.addChild([content]);
-        }
-    }
-
     createPage(idPage: string, name?: string, contact?: thirdPartyUser[]): void {
         let content: HTMLElement | null = null;
         let page: LoginPage | MainPage | InfoPage | NotFound | null = null;
@@ -60,6 +52,13 @@ export default class MainView extends BasePage {
         content = page.getElement();
 
         this.setContent(content);
+    }
+
+    setContent(content: HTMLElement | null) {
+        this.removeChild();
+        if (content) {
+            this.addChild([content]);
+        }
     }
 
     showModal(message: string, connectionStatus?: boolean) {
@@ -88,30 +87,28 @@ export default class MainView extends BasePage {
         }
     }
 
-    updateUserStatus(user: thirdPartyUser) {
+    updateUserStatus(user: thirdPartyUser, isCurrentContact: boolean) {
         isNotNull(this.mainPage);
-        this.mainPage.updateContactList(user);
+        this.mainPage.chat.contact.updateContact(user);
+        if (isCurrentContact) {
+            this.mainPage.chat.dialog.updateHeader(user.isLogined);
+        }
     }
 
     setUserContact(user: thirdPartyUser) {
         isNotNull(this.mainPage);
-        this.mainPage.updateChat(user);
+        this.mainPage.chat.dialog.updateDialog(user);
     }
 
     addMessage(message: checkedMessage) {
         isNotNull(this.mainPage);
         const newMessage = new Message(message);
-        this.mainPage.addNewMessage(newMessage);
+        this.mainPage.chat.dialog.addMessage(newMessage);
     }
 
     setUnreadMessage(sender: string) {
         isNotNull(this.mainPage);
-        const contact = document.getElementById(`${sender}`);
-        isNotNull(contact);
-        const messageContainer = contact.querySelector('.list_item-mes');
-        isNotNull(messageContainer);
-        let messageCount = Number(messageContainer.textContent);
-        isNotNull(messageCount);
-        messageContainer.textContent = `${(messageCount += 1)}`;
+
+        this.mainPage.chat.contact.displayUnreadMessage(sender, 'add');
     }
 }

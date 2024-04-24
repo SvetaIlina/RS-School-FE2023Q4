@@ -24,9 +24,13 @@ export default class DialogHeader extends BaseComponent {
     }
 
     setUserValue(user: thirdPartyUser) {
-        let status: string;
         this.userName.setTextContent(user.login);
-        if (user.isLogined) {
+        this.updateUserStatus(user.isLogined);
+    }
+
+    updateUserStatus(isLogined: boolean) {
+        let status: string;
+        if (isLogined) {
             status = userStatus.OnLine;
             this.setStyles(['active']);
         } else {

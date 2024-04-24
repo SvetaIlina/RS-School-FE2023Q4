@@ -22,8 +22,13 @@ export default class Dialog extends BaseComponent {
         this.addChild([this.header, this.messages, this.messageInput]);
     }
 
-    updateHeader(newUser: thirdPartyUser) {
+    updateDialog(newUser: thirdPartyUser) {
         this.header.setUserValue(newUser);
+        this.messages.init();
+    }
+
+    updateHeader(isLogined: boolean) {
+        this.header.updateUserStatus(isLogined);
     }
 
     addMessage(message: Message) {
@@ -32,9 +37,5 @@ export default class Dialog extends BaseComponent {
             this.messages.removeChild();
         }
         this.messages.addChild([message]);
-    }
-
-    updateDialogMessage() {
-        this.messages.init();
     }
 }

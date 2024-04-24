@@ -83,8 +83,9 @@ export default class Controller {
             case messageType.AnotherUserLogout: {
                 const user = checkServerData(dataFromServer, 'user') as thirdPartyUser;
                 this.model.changeUserStatus(user);
+                const isCurrentUser: boolean = this.model.currentContact?.login === user.login;
 
-                this.view.updateUserStatus(user);
+                this.view.updateUserStatus(user, isCurrentUser);
 
                 break;
             }
@@ -154,20 +155,21 @@ export default class Controller {
                 break;
             }
             case 'contactSelected': {
-                isNotNull(data);
-                this.model.setCurrentContact(data);
-                isNotNull(this.model.currentContact);
-                const serverRequest: generalRequest = {
-                    id: crypto.randomUUID(),
-                    type: 'MSG_FROM_USER',
-                    payload: {
-                        user: {
-                            login: data,
+                if (data) {
+                    this.model.setCurrentContact(data);
+                    isNotNull(this.model.currentContact);
+                    const serverRequest: generalRequest = {
+                        id: crypto.randomUUID(),
+                        type: 'MSG_FROM_USER',
+                        payload: {
+                            user: {
+                                login: data,
+                            },
                         },
-                    },
-                };
-                this.ws.sendRequest(serverRequest);
-                this.view.setUserContact(this.model.currentContact);
+                    };
+                    this.ws.sendRequest(serverRequest);
+                    this.view.setUserContact(this.model.currentContact);
+                }
                 break;
             }
             case 'sendMessage': {
