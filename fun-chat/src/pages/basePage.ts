@@ -1,5 +1,5 @@
 import BaseComponent from '../components/baseComponent';
-import Controller from '../controller';
+import Controller from '../app/controller';
 
 import './page.css';
 

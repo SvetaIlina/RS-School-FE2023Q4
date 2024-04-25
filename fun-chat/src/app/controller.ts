@@ -1,21 +1,21 @@
-import ChatData from './components/chat/chatData';
+import ChatData from './chatData';
 import Router from './router';
-import { checkServerData, isNotNull } from './servise/servise';
-import { ConnectMessage, PageIds, messageType } from './type/type';
-import { generalRequest, errorResponse, thirdPartyUser, currentUser, receivedMessage } from './type/typeAPI';
-import MainView from './view';
+import { checkServerData, isNotNull } from '../servise/servise';
+import { ConnectMessage, PageIds, messageType } from '../type/type';
+import { generalRequest, errorResponse, thirdPartyUser, currentUser, receivedMessage } from '../type/typeAPI';
+import View from './view';
 import MyWebSocket from './webSocket';
 
 export default class Controller {
     private model: ChatData;
 
-    private view: MainView;
+    private view: View;
 
     private router: Router;
 
     private ws: MyWebSocket;
 
-    constructor(url: string, model: ChatData, view: MainView) {
+    constructor(url: string, model: ChatData, view: View) {
         this.model = model;
         this.view = view;
         this.view.subscribe(this);
@@ -83,7 +83,10 @@ export default class Controller {
             case messageType.AnotherUserLogout: {
                 const user = checkServerData(dataFromServer, 'user') as thirdPartyUser;
                 this.model.changeContactStatus(user);
-                const isCurrentUser: boolean = this.model.currentContact?.login === user.login;
+                let isCurrentUser: boolean = false;
+                if (this.model.currentContact) {
+                    isCurrentUser = this.model.currentContact.login === user.login;
+                }
 
                 this.view.updateUserStatus(user, isCurrentUser);
 

@@ -1,7 +1,7 @@
-import { findUserIndex, isNotNull } from '../../servise/servise';
-import Dialog from './dialog/dialog';
-import { thirdPartyUser, currentUser, receivedMessage } from '../../type/typeAPI';
-import { checkedMessage } from '../../type/type';
+import { findUserIndex, isNotNull } from '../servise/servise';
+import Dialog from '../components/chat/dialog/dialog';
+import { thirdPartyUser, currentUser, receivedMessage } from '../type/typeAPI';
+import { checkedMessage } from '../type/type';
 
 export default class ChatData {
     dialog: Dialog | null;

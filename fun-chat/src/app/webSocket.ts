@@ -1,6 +1,6 @@
-import { isNotNull } from './servise/servise';
-import { ConnectMessage } from './type/type';
-import { generalRequest } from './type/typeAPI';
+import { isNotNull } from '../servise/servise';
+import { ConnectMessage } from '../type/type';
+import { generalRequest } from '../type/typeAPI';
 
 export default class MyWebSocket {
     url: string;

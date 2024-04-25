@@ -1,19 +1,19 @@
-import LoginPage from './pages/loginPage/loginPage';
-import InfoPage from './pages/infoPage/infoPage';
-import { PageIds, checkedMessage } from './type/type';
+import LoginPage from '../pages/loginPage/loginPage';
+import InfoPage from '../pages/infoPage/infoPage';
+import { PageIds, checkedMessage } from '../type/type';
 
-import NotFound from './pages/notFound/notFound';
-import MainPage from './pages/mainPage/mainPageView';
+import NotFound from '../pages/notFound/notFound';
+import MainPage from '../pages/mainPage/mainPageView';
 
-import Modal from './components/modal/modal';
-import { isNotNull } from './servise/servise';
+import Modal from '../components/modal/modal';
+import { isNotNull } from '../servise/servise';
 
-import { thirdPartyUser } from './type/typeAPI';
-import Message from './components/chat/message/message';
+import { thirdPartyUser } from '../type/typeAPI';
+import Message from '../components/chat/message/message';
 
-import BasePage from './pages/basePage';
+import BasePage from '../pages/basePage';
 
-export default class MainView extends BasePage {
+export default class View extends BasePage {
     private modalIsOpen: boolean;
 
     private mainPage: MainPage | null;

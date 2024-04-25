@@ -1,6 +1,6 @@
-import ChatData from './components/chat/chatData';
+import ChatData from './chatData';
 import Controller from './controller';
-import { PageIds } from './type/type';
+import { PageIds } from '../type/type';
 
 export default class Router {
     private manager: Controller;
