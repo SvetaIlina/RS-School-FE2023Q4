@@ -1,10 +1,7 @@
-import MainView from './view';
+import App from './app/app';
 import './style.css';
-import Controller from './controller';
-import ChatData from './components/chat/chatData';
 
-const data = new ChatData();
-const view = new MainView();
-const controller = new Controller('ws://localhost:4000', data, view);
+const url = 'ws://localhost:4000';
+const app = new App(url);
 
-controller.init();
+app.init();
