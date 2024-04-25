@@ -1,3 +1,4 @@
+import { customEvent } from '../type/type';
 import { generalRequest, errorResponse, thirdPartyUser, currentUser } from '../type/typeAPI';
 
 export function isNotNull<T>(value: unknown): asserts value is NonNullable<T> {
@@ -79,6 +80,6 @@ export function findUserIndex(array: thirdPartyUser[], user: currentUser | third
 }
 
 export function infoCallback(target: HTMLElement) {
-    const myEvent = new CustomEvent('showInfo', { bubbles: true });
+    const myEvent = new CustomEvent(customEvent.ShowInfoPage, { bubbles: true });
     target.dispatchEvent(myEvent);
 }

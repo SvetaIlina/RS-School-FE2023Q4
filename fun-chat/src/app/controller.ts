@@ -1,7 +1,7 @@
 import ChatData from './chatData';
 import Router from './router';
 import { checkServerData, isNotNull } from '../servise/servise';
-import { ConnectMessage, PageIds, messageType } from '../type/type';
+import { ConnectMessage, PageIds, customEvent, messageType } from '../type/type';
 import { generalRequest, errorResponse, thirdPartyUser, currentUser, receivedMessage } from '../type/typeAPI';
 import View from './view';
 import MyWebSocket from './webSocket';
@@ -141,7 +141,7 @@ export default class Controller {
 
     update(action: string, data?: string) {
         switch (action) {
-            case 'login': {
+            case customEvent.LogIn: {
                 isNotNull(data);
                 const user = JSON.parse(data);
                 this.model.myUser = user;
@@ -149,21 +149,21 @@ export default class Controller {
 
                 break;
             }
-            case 'showInfo': {
+            case customEvent.ShowInfoPage: {
                 this.router.route(PageIds.InfoPage);
                 break;
             }
-            case 'logOut': {
+            case customEvent.LogOut: {
                 this.userLogout();
                 break;
             }
-            case 'contactSelected': {
+            case customEvent.SelectContact: {
                 if (data) {
                     this.model.setCurrentContact(data);
                     isNotNull(this.model.currentContact);
                     const serverRequest: generalRequest = {
                         id: crypto.randomUUID(),
-                        type: 'MSG_FROM_USER',
+                        type: messageType.MsgHistory,
                         payload: {
                             user: {
                                 login: data,
@@ -175,12 +175,12 @@ export default class Controller {
                 }
                 break;
             }
-            case 'sendMessage': {
+            case customEvent.SendMes: {
                 isNotNull(data);
                 if (this.model.currentContact) {
                     const serverRequest: generalRequest = {
                         id: crypto.randomUUID(),
-                        type: 'MSG_SEND',
+                        type: messageType.SendMSG,
                         payload: {
                             message: {
                                 to: this.model.currentContact.login,

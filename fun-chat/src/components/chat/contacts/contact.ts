@@ -1,4 +1,5 @@
 import { getSelectedContact, isNotNull, searchUser } from '../../../servise/servise';
+import { customEvent } from '../../../type/type';
 import { thirdPartyUser } from '../../../type/typeAPI';
 import BaseComponent from '../../baseComponent';
 import './contact.css';
@@ -34,7 +35,7 @@ export default class Contact extends BaseComponent {
     contactListCallback(e: Event) {
         const selectedContact = getSelectedContact(e);
         this.displayUnreadMessage(selectedContact, 'remove');
-        const myEvent = new CustomEvent('contactSelected', { bubbles: true, detail: selectedContact });
+        const myEvent = new CustomEvent(customEvent.SelectContact, { bubbles: true, detail: selectedContact });
         this.contactList.getElement().dispatchEvent(myEvent);
         const messageInput = document.querySelector('.message_input');
         isNotNull(messageInput);

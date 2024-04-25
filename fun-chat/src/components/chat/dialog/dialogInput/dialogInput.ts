@@ -1,4 +1,5 @@
 import { isNotNullElement } from '../../../../servise/servise';
+import { customEvent } from '../../../../type/type';
 import BaseComponent from '../../../baseComponent';
 import Button from '../../../buttons/button';
 import './dialogInput.css';
@@ -49,7 +50,7 @@ export default class DialogInput extends BaseComponent {
             message = target.value;
         }
         if (message) {
-            const myEvent = new CustomEvent('sendMessage', { bubbles: true, detail: message });
+            const myEvent = new CustomEvent(customEvent.SendMes, { bubbles: true, detail: message });
             target.dispatchEvent(myEvent);
         }
         this.resetInput();

@@ -1,6 +1,6 @@
 import LoginPage from '../pages/loginPage/loginPage';
 import InfoPage from '../pages/infoPage/infoPage';
-import { PageIds, checkedMessage } from '../type/type';
+import { PageIds, checkedMessage, customEvent } from '../type/type';
 
 import NotFound from '../pages/notFound/notFound';
 import MainPage from '../pages/mainPage/mainPageView';
@@ -22,7 +22,13 @@ export default class View extends BasePage {
         super();
         this.mainPage = null;
         this.modalIsOpen = false;
-        this.handleEvent(['sendMessage', 'logOut', 'showInfo', 'contactSelected', 'login']);
+        this.handleEvent([
+            customEvent.SendMes,
+            customEvent.LogOut,
+            customEvent.ShowInfoPage,
+            customEvent.SelectContact,
+            customEvent.LogIn,
+        ]);
     }
 
     handleEvent(events: string[]) {

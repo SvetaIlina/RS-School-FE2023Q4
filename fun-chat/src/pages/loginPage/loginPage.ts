@@ -2,7 +2,7 @@ import LoginForm from '../../components/loginForm/loginForm';
 import Button from '../../components/buttons/button';
 import LoginInput from '../../components/loginForm/input/inputField';
 
-import { userLoginData } from '../../type/type';
+import { customEvent, userLoginData } from '../../type/type';
 import { infoCallback, isNotNull } from '../../servise/servise';
 import BaseComponent from '../../components/baseComponent';
 
@@ -48,7 +48,7 @@ export default class LoginPage extends BaseComponent {
     loginCallback(e: Event) {
         const btn = e.target;
         const user: string = this.getUser();
-        const myEvent = new CustomEvent('login', { bubbles: true, detail: user });
+        const myEvent = new CustomEvent(customEvent.LogIn, { bubbles: true, detail: user });
         isNotNull(btn);
         btn.dispatchEvent(myEvent);
     }

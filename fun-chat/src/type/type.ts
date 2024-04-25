@@ -44,6 +44,14 @@ export enum messageType {
     MsgEdit = 'MSG_EDIT',
 }
 
+export enum customEvent {
+    LogIn = 'login',
+    LogOut = 'logout',
+    SelectContact = 'contactSelected',
+    SendMes = 'sendMessage',
+    ShowInfoPage = 'showInfo',
+}
+
 export type checkedMessage = {
     text: string;
     sender: string;

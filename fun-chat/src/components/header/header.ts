@@ -1,4 +1,5 @@
 import { infoCallback } from '../../servise/servise';
+import { customEvent } from '../../type/type';
 import BaseComponent from '../baseComponent';
 import Button from '../buttons/button';
 import './header.css';
@@ -38,7 +39,7 @@ export default class Header extends BaseComponent {
     }
 
     logOutCallback() {
-        const myEvent = new CustomEvent('logOut', { bubbles: true });
+        const myEvent = new CustomEvent(customEvent.LogOut, { bubbles: true });
         this.logOutBtn.getElement().dispatchEvent(myEvent);
     }
 }
