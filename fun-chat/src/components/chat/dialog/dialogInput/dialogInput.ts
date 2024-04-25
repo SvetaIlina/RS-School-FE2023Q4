@@ -9,7 +9,10 @@ export default class DialogInput extends BaseComponent {
     private messageInput: BaseComponent<HTMLInputElement> = new BaseComponent<HTMLInputElement>({
         tag: 'input',
         classes: ['message_input'],
-        attributes: [{ key: 'placeholder', value: 'message...' }],
+        attributes: [
+            { key: 'placeholder', value: 'message...' },
+            { key: 'disabled', value: 'true' },
+        ],
     });
 
     constructor() {
@@ -18,22 +21,43 @@ export default class DialogInput extends BaseComponent {
             classes: ['dialog_input'],
         });
         this.sendBtn = new Button(['send_btn', 'inactive'], 'send', (e) => this.sendedMessage(e));
-        this.messageInput.setCallback(() => this.enableBtn(), 'keyup');
+        this.messageInput.setCallback((e) => this.handleInputCallback(e), 'keyup');
+
         this.addChild([this.messageInput, this.sendBtn]);
     }
 
+    handleInputCallback(e: Event) {
+        if (e instanceof KeyboardEvent) {
+            if (e.keyCode === 13) {
+                this.sendedMessage(e);
+            } else {
+                this.enableBtn();
+            }
+        }
+    }
+
     sendedMessage(e: Event) {
-        const btn = e.target;
-        isNotNullElement<HTMLElement>(btn);
-        const input = this.messageInput.getElement();
-        const message = input.value;
+        const { target } = e;
+        let message: string = '';
+
+        isNotNullElement<HTMLElement>(target);
+
+        if (target.classList.contains('send_btn')) {
+            const input = this.messageInput.getElement();
+            message = input.value;
+        } else if (target.classList.contains('message_input') && target instanceof HTMLInputElement) {
+            message = target.value;
+        }
         if (message) {
             const myEvent = new CustomEvent('sendMessage', { bubbles: true, detail: message });
-            btn.dispatchEvent(myEvent);
+            target.dispatchEvent(myEvent);
         }
+        this.resetInput();
+    }
 
-        input.value = '';
-        btn.classList.add('inactive');
+    resetInput() {
+        this.messageInput.getElement().value = '';
+        this.sendBtn.getElement().classList.add('inactive');
     }
 
     enableBtn() {

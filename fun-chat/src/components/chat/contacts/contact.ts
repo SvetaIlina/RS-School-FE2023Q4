@@ -36,6 +36,9 @@ export default class Contact extends BaseComponent {
         this.displayUnreadMessage(selectedContact, 'remove');
         const myEvent = new CustomEvent('contactSelected', { bubbles: true, detail: selectedContact });
         this.contactList.getElement().dispatchEvent(myEvent);
+        const messageInput = document.querySelector('.message_input');
+        isNotNull(messageInput);
+        messageInput.removeAttribute('disabled');
     }
 
     drawContacts(contactList: Array<thirdPartyUser>) {
