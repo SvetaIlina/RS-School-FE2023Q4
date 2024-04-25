@@ -74,7 +74,7 @@ export default class ChatData {
         return allUsers;
     }
 
-    changeUserStatus(user: thirdPartyUser) {
+    changeContactStatus(user: thirdPartyUser) {
         if (user.isLogined) {
             this.ActiveUser.push(user);
             const index = findUserIndex(this.inActiveUser, user);

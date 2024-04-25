@@ -82,7 +82,7 @@ export default class Controller {
             case messageType.AnotherUserLogin:
             case messageType.AnotherUserLogout: {
                 const user = checkServerData(dataFromServer, 'user') as thirdPartyUser;
-                this.model.changeUserStatus(user);
+                this.model.changeContactStatus(user);
                 const isCurrentUser: boolean = this.model.currentContact?.login === user.login;
 
                 this.view.updateUserStatus(user, isCurrentUser);
@@ -96,7 +96,7 @@ export default class Controller {
                     const contact = this.model.currentContact.login;
                     isNotNull(this.model.myUser);
                     if (contact === message.from || message.from === this.model.myUser.login) {
-                        this.view.addMessage(messageDraft);
+                        this.view.showMessage(messageDraft);
                     } else {
                         this.view.setUnreadMessage(message.from);
                     }
@@ -116,7 +116,7 @@ export default class Controller {
                     messages.forEach((message) => {
                         const messageDraft = this.model.checkMessage(message);
 
-                        this.view.addMessage(messageDraft);
+                        this.view.showMessage(messageDraft);
                     });
                 }
 

@@ -100,7 +100,7 @@ export default class MainView extends BasePage {
         this.mainPage.chat.dialog.updateDialog(user);
     }
 
-    addMessage(message: checkedMessage) {
+    showMessage(message: checkedMessage) {
         isNotNull(this.mainPage);
         const newMessage = new Message(message);
         this.mainPage.chat.dialog.addMessage(newMessage);
