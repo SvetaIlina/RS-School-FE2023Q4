@@ -4,7 +4,7 @@ export async function getCars(parametrs: apiParams): Promise<CarsResponse> {
     const limit: string = `&_limit=${parametrs.limit}`;
     const page: string = `?_page=${parametrs.page}`;
     try {
-        const response: Response = await fetch(`http://127.0.0.1:3000/garage${page}${limit}`);
+        const response: Response = await fetch(`http://async-race-api-production-e1d2.up.railway.app/garage${page}${limit}`);
 
         const info: Array<carInfo> = await response.json();
 
@@ -19,7 +19,7 @@ export async function getAllWinners(parametrs: apiParams): Promise<WinnerRespons
     const limit: string = `&_limit=${parametrs.limit}`;
     const page: string = `?_page=${parametrs.page}`;
     try {
-        const response: Response = await fetch(`http://127.0.0.1:3000/winners${page}${limit}`);
+        const response: Response = await fetch(`http://async-race-api-production-e1d2.up.railway.app/winners${page}${limit}`);
 
         const info: Array<winnerCar> = await response.json();
 
@@ -32,7 +32,7 @@ export async function getAllWinners(parametrs: apiParams): Promise<WinnerRespons
 }
 
 export async function getCar(id: number): Promise<carInfo> {
-    const response: Response = await fetch(`http://127.0.0.1:3000/garage/${id}`);
+    const response: Response = await fetch(`http://async-race-api-production-e1d2.up.railway.app/garage/${id}`);
     const car: carInfo = await response.json();
 
     if (!response.ok) {
@@ -43,7 +43,7 @@ export async function getCar(id: number): Promise<carInfo> {
 
 export async function deleteCar(carId: number): Promise<void> {
     try {
-        const response: Response = await fetch(`http://127.0.0.1:3000/garage/${carId}`, {
+        const response: Response = await fetch(`http://async-race-api-production-e1d2.up.railway.app/garage/${carId}`, {
             method: 'DELETE',
         });
 
@@ -58,7 +58,7 @@ export async function deleteCar(carId: number): Promise<void> {
 }
 
 export async function addCar(carParametrs: { name: string; color: string }): Promise<carInfo> {
-    const response: Response = await fetch(`http://127.0.0.1:3000/garage/`, {
+    const response: Response = await fetch(`http://async-race-api-production-e1d2.up.railway.app/garage/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ export async function addCar(carParametrs: { name: string; color: string }): Pro
 }
 
 export async function updateCar(carParametrs: carData, id: number): Promise<carInfo> {
-    const response: Response = await fetch(`http://127.0.0.1:3000/garage/${id}`, {
+    const response: Response = await fetch(`http://async-race-api-production-e1d2.up.railway.app/garage/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -85,7 +85,7 @@ export async function updateCar(carParametrs: carData, id: number): Promise<carI
 }
 
 export async function startStopEngine(id: number, status: string): Promise<raceParams> {
-    const response: Response = await fetch(`http://127.0.0.1:3000/engine?id=${id}&status=${status}`, {
+    const response: Response = await fetch(`http://async-race-api-production-e1d2.up.railway.app/engine?id=${id}&status=${status}`, {
         method: 'PATCH',
     });
     if (!response.ok) {
@@ -98,7 +98,7 @@ export async function startStopEngine(id: number, status: string): Promise<raceP
 }
 
 export function switchToDriveMode(id: number, status: string): Promise<void> {
-    return fetch(`http://127.0.0.1:3000/engine?id=${id}&status=${status}`, {
+    return fetch(`http://async-race-api-production-e1d2.up.railway.app/engine?id=${id}&status=${status}`, {
         method: 'PATCH',
     })
         .then(async (response) => {
@@ -113,7 +113,7 @@ export function switchToDriveMode(id: number, status: string): Promise<void> {
 }
 
 export async function createWinner(winnerCarinfo: winnerCar): Promise<winnerCar> {
-    const response: Response = await fetch(`http://127.0.0.1:3000/winners/`, {
+    const response: Response = await fetch(`http://async-race-api-production-e1d2.up.railway.app/winners/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -129,7 +129,7 @@ export async function createWinner(winnerCarinfo: winnerCar): Promise<winnerCar>
     return result;
 }
 export async function updateWinner(winnerCarinfo: winnerCar): Promise<winnerCar> {
-    const response: Response = await fetch(`http://127.0.0.1:3000/winners/${winnerCarinfo.id}`, {
+    const response: Response = await fetch(`http://async-race-api-production-e1d2.up.railway.app/winners/${winnerCarinfo.id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -144,7 +144,7 @@ export async function updateWinner(winnerCarinfo: winnerCar): Promise<winnerCar>
     return result;
 }
 export async function getWinner(id: number): Promise<winnerCar> {
-    const response = await fetch(`http://127.0.0.1:3000/winners/${id}`);
+    const response = await fetch(`http://async-race-api-production-e1d2.up.railway.app/winners/${id}`);
     const winner: winnerCar = await response.json();
     if (response.status === 404) {
         throw new Error(`${response.statusText}`);
