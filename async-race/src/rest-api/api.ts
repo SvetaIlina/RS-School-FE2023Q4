@@ -22,7 +22,7 @@ export async function getAllWinners(parametrs: apiParams): Promise<WinnerRespons
     const page: string = `?_page=${parametrs.page}`;
     try {
         const response: Response = await fetch(
-            `http://async-race-api-production-e1d2.up.railway.app/winners/${page}${limit}`
+            `https://async-race-api-production-e1d2.up.railway.app/winners/${page}${limit}`
         );
 
         const info: Array<winnerCar> = await response.json();
@@ -120,7 +120,7 @@ export function switchToDriveMode(id: number, status: string): Promise<void> {
 }
 
 export async function createWinner(winnerCarinfo: winnerCar): Promise<winnerCar> {
-    const response: Response = await fetch(`http://async-race-api-production-e1d2.up.railway.app/winners/`, {
+    const response: Response = await fetch(`https://async-race-api-production-e1d2.up.railway.app/winners/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -137,7 +137,7 @@ export async function createWinner(winnerCarinfo: winnerCar): Promise<winnerCar>
 }
 export async function updateWinner(winnerCarinfo: winnerCar): Promise<winnerCar> {
     const response: Response = await fetch(
-        `http://async-race-api-production-e1d2.up.railway.app/winners/${winnerCarinfo.id}`,
+        `https://async-race-api-production-e1d2.up.railway.app/winners/${winnerCarinfo.id}`,
         {
             method: 'PUT',
             headers: {
@@ -154,7 +154,7 @@ export async function updateWinner(winnerCarinfo: winnerCar): Promise<winnerCar>
     return result;
 }
 export async function getWinner(id: number): Promise<winnerCar> {
-    const response = await fetch(`http://async-race-api-production-e1d2.up.railway.app/winners/${id}`);
+    const response = await fetch(`https://async-race-api-production-e1d2.up.railway.app/winners/${id}`);
     const winner: winnerCar = await response.json();
     if (response.status === 404) {
         throw new Error(`${response.statusText}`);
