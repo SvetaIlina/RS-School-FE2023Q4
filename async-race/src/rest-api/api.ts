@@ -5,7 +5,7 @@ export async function getCars(parametrs: apiParams): Promise<CarsResponse> {
     const page: string = `?_page=${parametrs.page}`;
     try {
         const response: Response = await fetch(
-            `http://async-race-api-production-e1d2.up.railway.app/garage/${page}${limit}`
+            `https://async-race-api-production-e1d2.up.railway.app/garage/${page}${limit}`
         );
 
         const info: Array<carInfo> = await response.json();
@@ -36,7 +36,7 @@ export async function getAllWinners(parametrs: apiParams): Promise<WinnerRespons
 }
 
 export async function getCar(id: number): Promise<carInfo> {
-    const response: Response = await fetch(`http://async-race-api-production-e1d2.up.railway.app/garage/${id}`);
+    const response: Response = await fetch(`https://async-race-api-production-e1d2.up.railway.app/garage/${id}`);
     const car: carInfo = await response.json();
 
     if (!response.ok) {
@@ -47,9 +47,12 @@ export async function getCar(id: number): Promise<carInfo> {
 
 export async function deleteCar(carId: number): Promise<void> {
     try {
-        const response: Response = await fetch(`http://async-race-api-production-e1d2.up.railway.app/garage/${carId}`, {
-            method: 'DELETE',
-        });
+        const response: Response = await fetch(
+            `https://async-race-api-production-e1d2.up.railway.app/garage/${carId}`,
+            {
+                method: 'DELETE',
+            }
+        );
 
         if (!response.ok) {
             throw new Error(`${response.status}`);
@@ -62,7 +65,7 @@ export async function deleteCar(carId: number): Promise<void> {
 }
 
 export async function addCar(carParametrs: { name: string; color: string }): Promise<carInfo> {
-    const response: Response = await fetch(`http://async-race-api-production-e1d2.up.railway.app/garage/`, {
+    const response: Response = await fetch(`https://async-race-api-production-e1d2.up.railway.app/garage/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -74,7 +77,7 @@ export async function addCar(carParametrs: { name: string; color: string }): Pro
 }
 
 export async function updateCar(carParametrs: carData, id: number): Promise<carInfo> {
-    const response: Response = await fetch(`http://async-race-api-production-e1d2.up.railway.app/garage/${id}`, {
+    const response: Response = await fetch(`https://async-race-api-production-e1d2.up.railway.app/garage/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -90,7 +93,7 @@ export async function updateCar(carParametrs: carData, id: number): Promise<carI
 
 export async function startStopEngine(id: number, status: string): Promise<raceParams> {
     const response: Response = await fetch(
-        `http://async-race-api-production-e1d2.up.railway.app/engine?id=${id}&status=${status}`,
+        `https://async-race-api-production-e1d2.up.railway.app/engine?id=${id}&status=${status}`,
         {
             method: 'PATCH',
         }
@@ -105,7 +108,7 @@ export async function startStopEngine(id: number, status: string): Promise<raceP
 }
 
 export function switchToDriveMode(id: number, status: string): Promise<void> {
-    return fetch(`http://async-race-api-production-e1d2.up.railway.app/engine?id=${id}&status=${status}`, {
+    return fetch(`https://async-race-api-production-e1d2.up.railway.app/engine?id=${id}&status=${status}`, {
         method: 'PATCH',
     })
         .then(async (response) => {
