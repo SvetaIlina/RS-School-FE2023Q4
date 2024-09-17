@@ -4,7 +4,9 @@ export async function getCars(parametrs: apiParams): Promise<CarsResponse> {
     const limit: string = `&_limit=${parametrs.limit}`;
     const page: string = `?_page=${parametrs.page}`;
     try {
-        const response: Response = await fetch(`http://async-race-api-production-e1d2.up.railway.app/garage${page}${limit}`);
+        const response: Response = await fetch(
+            `http://async-race-api-production-e1d2.up.railway.app/garage/${page}${limit}`
+        );
 
         const info: Array<carInfo> = await response.json();
 
@@ -19,7 +21,9 @@ export async function getAllWinners(parametrs: apiParams): Promise<WinnerRespons
     const limit: string = `&_limit=${parametrs.limit}`;
     const page: string = `?_page=${parametrs.page}`;
     try {
-        const response: Response = await fetch(`http://async-race-api-production-e1d2.up.railway.app/winners${page}${limit}`);
+        const response: Response = await fetch(
+            `http://async-race-api-production-e1d2.up.railway.app/winners/${page}${limit}`
+        );
 
         const info: Array<winnerCar> = await response.json();
 
@@ -85,9 +89,12 @@ export async function updateCar(carParametrs: carData, id: number): Promise<carI
 }
 
 export async function startStopEngine(id: number, status: string): Promise<raceParams> {
-    const response: Response = await fetch(`http://async-race-api-production-e1d2.up.railway.app/engine?id=${id}&status=${status}`, {
-        method: 'PATCH',
-    });
+    const response: Response = await fetch(
+        `http://async-race-api-production-e1d2.up.railway.app/engine?id=${id}&status=${status}`,
+        {
+            method: 'PATCH',
+        }
+    );
     if (!response.ok) {
         const text: string = await response.text();
 
@@ -129,16 +136,19 @@ export async function createWinner(winnerCarinfo: winnerCar): Promise<winnerCar>
     return result;
 }
 export async function updateWinner(winnerCarinfo: winnerCar): Promise<winnerCar> {
-    const response: Response = await fetch(`http://async-race-api-production-e1d2.up.railway.app/winners/${winnerCarinfo.id}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            wins: winnerCarinfo.wins,
-            time: winnerCarinfo.time,
-        }),
-    });
+    const response: Response = await fetch(
+        `http://async-race-api-production-e1d2.up.railway.app/winners/${winnerCarinfo.id}`,
+        {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                wins: winnerCarinfo.wins,
+                time: winnerCarinfo.time,
+            }),
+        }
+    );
 
     const result: winnerCar = await response.json();
     return result;
